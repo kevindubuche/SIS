@@ -9,6 +9,12 @@
           </button>
         </div>
         <div class="modal-body">
+
+<input type="hidden" name="username" id="username" >
+<input type="hidden" name="password" id="password" >
+<input type="hidden"  value="{{Auth::id()}}" name="user_id" id="user_id" >
+<input type="hidden" value="{{date('Y-m-d)}}'" name="dateregistered" id="dateregistered" >
+
 <!-- Batch Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('batch', 'Batch:') !!}

@@ -16,9 +16,18 @@
 </div>
 
 <!-- Course Id Field -->
-<div class="form-group col-sm-6">
+{{-- <div class="form-group col-sm-6">
     {!! Form::label('course_id', 'Course Id:') !!}
     {!! Form::number('course_id', null, ['class' => 'form-control']) !!}
+</div> --}}
+<div class="form-group col-sm-4">
+  {!! Form::label('course_id', 'Course Id:') !!}
+  <select class="form-control" name="course_id" id="course_id">
+      <option value="">Select course</option>
+      @foreach($allCourses as $course)
+      <option value="{{$course->course_id}}">{{$course->course_name}}</option>
+      @endforeach
+  </select>
 </div>
 
 <!-- Level Description Field -->

@@ -81,7 +81,7 @@ class ClassScheduling extends Model
         'batch_id' => 'required',
         'day_id' => 'required',
         'time_id' => 'required',
-        'teacher_id' => 'required',
+        // 'teacher_id' => 'required',
         'start_time' => 'required',
         'end_time' => 'required',
         'status' => 'required'

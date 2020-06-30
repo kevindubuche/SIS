@@ -10,6 +10,11 @@ use Illuminate\Http\Request;
 use Flash;
 use Response;
 
+use App\Models\Admissions;
+use App\Models\Roll;
+use App\Models\Faculty;
+use App\Models\Departement;
+use App\Models\Batch;
 class AdmissionController extends AppBaseController
 {
     /** @var  AdmissionRepository */
@@ -29,10 +34,17 @@ class AdmissionController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $admissions = $this->admissionRepository->all();
+        // $admissions = $this->admissionRepository->all();
+        $admissions = Admission::all();
+        $student_id = Roll::max('roll_id');
+        $faculties = Faculty::all();
+        $departements = Depatement::all();
+        $batches = Batch::all();
 
-        return view('admissions.index')
-            ->with('admissions', $admissions);
+        return view('admissions.index',
+            compact('admissions', 'student_id',
+        'faculties','departements',
+    'batches'));
     }
 
     /**

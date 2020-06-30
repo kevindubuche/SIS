@@ -20,6 +20,8 @@ use App\Models\Semester;
 use App\Models\Shift;
 use App\Models\Time; 
 
+use App\App\ClassScheduling;
+
 use DB;
 class ClassSchedulingController extends AppBaseController
 {
@@ -40,20 +42,22 @@ class ClassSchedulingController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $batch = Batch::all();
-        $class = Classes::all();
-        $course = Course::all();
-        $day = Day::all();
-        $level = Level::all();
-        $semester = Semester::all();
-        $shift = Shift::all();
-        $time = Time::all();
+        
+        $allClasses = Classes::all();
+        $allCourses = Course::all();
+        $allLevels = Level::all();
+        $allShifts = Shift::all();
+        $allClassrooms = Classroom::all();
+        $allBatches = Batch::all();
+        $allDays = Day::all();
+        $allTimes = Time::all();
+        $allSemesters = Semester::all();
 
 
         $classSchedulings = $this->classSchedulingRepository->all();
 
         //////////////////////////////////////
-
+        //AL DEYE TOUT TOUT SCHEDULE AK AK INFO KORESPONDAN YO
          $classSchedule = DB::table('class_schedulings')
             ->select(
                 'class_schedulings.*',
@@ -79,8 +83,8 @@ class ClassSchedulingController extends AppBaseController
            
            ->get();
             //   dd($classSchedule);
-
-        return view('class_schedulings.index',
+                //  dd($allCourses);
+            return view('class_schedulings.index',
         compact('classSchedule',
                 'batch',
                 // 'class',
@@ -90,16 +94,26 @@ class ClassSchedulingController extends AppBaseController
                 // 'semester',
                 'shift',
                 'time',
-                'classrooms'))
+                'classrooms',
+                //all the elements
+                'allCourses',
+                'allClasses',
+                'allLevels',
+                'allShifts',
+                'allClassrooms',
+                'allBatches',
+                'allDays',
+                'allTimes',
+                'allSemesters'))
             ->with('classSchedulings', $classSchedulings);
     }
 
     public function DynamicLevel(Request $request){
         $course_id = $request->get('course_id');
 
-        $levels = Levels::where('course_id', '=',$course_id)->get();
+        $levels = Level::where('course_id', '=',$course_id)->get();
        
-        return  response::json($levels);
+        return  Response::json($levels);
     }
     /**
      * Show the form for creating a new ClassScheduling.
@@ -156,17 +170,23 @@ class ClassSchedulingController extends AppBaseController
      *
      * @return Response
      */
-    public function edit($id)
+    public function edit(Request $request)
     {
-        $classScheduling = $this->classSchedulingRepository->find($id);
-
-        if (empty($classScheduling)) {
-            Flash::error('Class Scheduling not found');
-
-            return redirect(route('classSchedulings.index'));
+        $data=$this->classSchedulingRepository->find($request->id);
+        // dd($data);
+        if($request->ajax()){
+            return response($data);
         }
+        
+        // $classScheduling = $this->classSchedulingRepository->find($id);
 
-        return view('class_schedulings.edit')->with('classScheduling', $classScheduling);
+        // if (empty($classScheduling)) {
+        //     Flash::error('Class Scheduling not found');
+
+        //     return redirect(route('classSchedulings.index'));
+        // }
+
+        // return view('class_schedulings.edit')->with('classScheduling', $classScheduling);
     }
 
     /**
@@ -177,21 +197,47 @@ class ClassSchedulingController extends AppBaseController
      *
      * @return Response
      */
-    public function update($id, UpdateClassSchedulingRequest $request)
+    public function update( Request $request)
     {
-        $classScheduling = $this->classSchedulingRepository->find($id);
+        $classSchedule = array(
+            'class_id'=> $request->class_id3,
+            'course_id' => $request->course_id3,
+            'level_id' => $request->level_id3,
+            'shift_id' => $request->shift_id3, 
+            'classroom_id'=> $request->classroom_id3,
+            'batch_id' => $request->batch_id3,
+            'day_id' => $request->day_id3,
+            'time_id' => $request->time_id3,
+            'semester_id'=> $request->semester_id3,
+            'start_time'=> $request->start_time3,
+            'end_time' => $request->end_time3,
+            'status' => $request->status3
 
-        if (empty($classScheduling)) {
-            Flash::error('Class Scheduling not found');
 
-            return redirect(route('classSchedulings.index'));
+        );
+
+        // echo "<pre>"; print_r($classSchedule); die;
+        $this->classSchedulingRepository->update($classSchedule, $request->schedule_id3);
+
+        if(empty($classSchedule)){
+            Flash::error('Class schedule update failed');
         }
-
-        $classScheduling = $this->classSchedulingRepository->update($request->all(), $id);
-
         Flash::success('Class Scheduling updated successfully.');
+        return redirect()->route('classSchedulings.index');
 
-        return redirect(route('classSchedulings.index'));
+        // $classScheduling = $this->classSchedulingRepository->find($id);
+
+        // if (empty($classScheduling)) {
+        //     Flash::error('Class Scheduling not found');
+
+        //     return redirect(route('classSchedulings.index'));
+        // }
+
+        // $classScheduling = $this->classSchedulingRepository->update($request->all(), $id);
+
+        // Flash::success('Class Scheduling updated successfully.');
+
+        // return redirect(route('classSchedulings.index'));
     }
 
     /**

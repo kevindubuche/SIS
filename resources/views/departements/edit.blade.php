@@ -3,7 +3,7 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Semester
+            Departement
         </h1>
    </section>
    <div class="content">
@@ -11,9 +11,9 @@
        <div class="box box-primary">
            <div class="box-body">
                <div class="row">
-                   {!! Form::model($semester, ['route' => ['semesters.update', $semester->id], 'method' => 'patch']) !!}
+                   {!! Form::model($departement, ['route' => ['departements.update', $departement->departement_id], 'method' => 'patch']) !!}
 
-                        @include('semesters.fields')
+                        @include('departements.fields')
 
                    {!! Form::close() !!}
                </div>

@@ -8,7 +8,7 @@ use App\Repositories\BaseRepository;
 /**
  * Class SemesterRepository
  * @package App\Repositories
- * @version June 21, 2020, 11:07 pm UTC
+ * @version June 29, 2020, 4:38 pm UTC
 */
 
 class SemesterRepository extends BaseRepository
@@ -22,7 +22,7 @@ class SemesterRepository extends BaseRepository
         'semester_duration',
         'semester_description'
     ];
-    protected $primaryKey ="semester_id";
+
     /**
      * Return searchable fields
      *

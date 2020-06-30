@@ -68,3 +68,11 @@ Route::resource('semesters', 'SemesterController');
 //////////////////////////////////
 Route::get('/dynamicLevel', ['as'=> 'dynamicLevel','uses'=>
 'ClassSchedulingController@DynamicLevel']); 
+
+Route::get('/classSchedulingsEdit', ['as'=> 'edit','uses'=>
+'ClassSchedulingController@edit']); 
+
+// Route::post('/classSchedulings/update', ['as'=>'update', 'uses'=>
+// 'ClassSchedulingController@update']); 
+
+Route::resource('departements', 'DepartementController');

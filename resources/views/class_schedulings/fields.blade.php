@@ -13,82 +13,83 @@
 <!-- Course Id Field -->
 <div class="form-group col-sm-4">
     <select class="form-control" name="course_id" id="course_id">
-        <option value="">Select course</option>
-        <option value=""></option>
+        
+        @foreach($allCourses as $course)
+        <option value="{{$course->course_id}}">{{$course->course_name}}</option>
+        @endforeach
     </select>
 </div>
 
 <!-- Level Id Field -->
 <div class="form-group col-sm-4">
     <select class="form-control" name="level_id" id="level_id">
-        <option value="">Select level</option>
-        <option value=""></option>
+        
     </select>
 </div>
 
 <!-- Shift Id Field -->
 <div class="form-group col-sm-4">
     <select class="form-control" name="shift_id" id="shift_id">
-        <option value="">Select shift</option>
-        <option value=""></option>
+        @foreach($allShifts as $shift)
+        <option value="{{$shift->shift_id}}">{{$shift->shift}}</option>
+        @endforeach
     </select>
  </div>
 
 <!-- Classwoom Id Field -->
 <div class="form-group col-sm-4">
     <select class="form-control" name="classwoom_id" id="classwoom_id">
-        <option value="">Select classwoom</option>
-        <option value=""></option>
+        @foreach($allClassrooms as $classroom)
+        <option value="{{$classroom->classroom_id}}">{{$classroom->classroom_name}}</option>
+        @endforeach
     </select>
 </div>
 
 <!-- Batch Id Field -->
 <div class="form-group col-sm-4">
     <select class="form-control" name="batch_id" id="batch_id">
-        <option value="">Select batch</option>
-        <option value=""></option>
+        @foreach($allBatches as $batch)
+        <option value="{{$batch->batch_id}}">{{$batch->batch}}</option>
+        @endforeach
     </select>
 </div>
 
 <!-- Day Id Field -->
 <div class="form-group col-sm-4">
     <select class="form-control" name="day_id" id="day_id">
-        <option value="">Select day</option>
-        <option value=""></option>
+        @foreach($allDays as $day)
+        <option value="{{$day->day_id}}">{{$day->name}}</option>
+        @endforeach
     </select>
  </div>
 
 <!-- Time Id Field -->
 <div class="form-group col-sm-4">
     <select class="form-control" name="time_id" id="time_id">
-        <option value="">Select time</option>
-        <option value=""></option>
+        @foreach($allTimes as $time)
+        <option value="{{$time->time_id}}">{{$time->time}}</option>
+        @endforeach
     </select>
 </div>
 
-<!-- Teacher Id Field -->
-<div class="form-group col-sm-4">
-    <select class="form-control" name="teacher_id" id="teacher_id">
-        <option value="">Select teacher</option>
-        <option value=""></option>
-    </select>
-</div>
+
 
 <!-- Start Time Field -->
-<div class="form-group col-sm-4">
-    <select class="form-control" name="start_time" id="start_time">
-        <option value="">Select start time</option>
-        <option value=""></option>
-    </select>
-</div>
+
+    <div class="form-group col-sm-6">
+        {!! Form::label('start_time', 'Start time:') !!}
+        <input type="text" name="start_time" id="start_time" >
+    </div>
+
 
 <!-- End Time Field -->
-<div class="form-group col-sm-4">
-    <select class="form-control" name="end_time" id="end_time">
-        <option value="">Select start end time</option>
-        <option value=""></option>
-    </select>
- </div>
+
+<div class="form-group col-sm-6">
+    {!! Form::label('end_time', 'end time:') !!}
+    <input type="text" name="end_time" id="end_time" >
+</div>
+
+
 
 <!-- Status Field -->
 <div class="form-group col-sm-6">
@@ -109,20 +110,21 @@
 </div>
 </div>
 
-@section('script')
+@push('scripts')
     <script>
         $('#course_id').on('change', function(e){
             console.log(e);
             var course_id = e.target.value;
-
-            $('#level').empty();
-            $.get('dynamicLevel?course_id' + course_id, function(data){
-                console.log(data); 
+            // alert(course_id);
+            $('#level_id').empty();
+            //get related levels to the specific course with ajax
+            $.get('dynamicLevel?course_id=' + course_id, function(data){
+                // alert(data[0]); 
 
                 $.each(data, function(index, lev){
-                    $('#level_id').append('<option value='+lev.level_id+'>'+lev.level+'</option>')
-                })
-            })
-        })
+                    $('#level_id').append('<option value="'+lev.level_id+'">'+lev.level+'</option>')
+                });
+            });
+        });
     </script>
-@endsection
+@endpush

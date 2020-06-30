@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class Semester
  * @package App\Models
- * @version June 21, 2020, 11:07 pm UTC
+ * @version June 29, 2020, 4:38 pm UTC
  *
  * @property string $semester_name
  * @property string $semester_code
@@ -27,7 +27,7 @@ class Semester extends Model
 
     protected $dates = ['deleted_at'];
 
-    protected $primaryKey ="semester_id";
+
 
     public $fillable = [
         'semester_name',

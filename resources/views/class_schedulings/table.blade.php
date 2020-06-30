@@ -51,14 +51,20 @@
                             data-day_id="{{ $classScheduling->day_id }}"
                             data-time_id="{{ $classScheduling->time }}"
                             {{-- data-teacher_id="{{ $classScheduling->teacher_id }}" --}}
-                            {{-- data-start_time="{{ $classScheduling->start_time }}"
-                            data-end_time="{{ $classScheduling->end_time }}" --}}
+                          
+                            data-start_time="{{ $classScheduling->start_time }}"
+                            data-end_time="{{ $classScheduling->end_time }}"
                             data-status="{{ $classScheduling->status }}"
                              data-created_at="{{ $classScheduling->created_at }}"
                             data-updated_at="{{ $classScheduling->updated_at }}"
                          class='btn btn-default btn-xs'>
+
                          <i class="glyphicon glyphicon-eye-open"></i></a>
-                        <a href="{{ route('classSchedulings.edit', [$classScheduling->schedule_id]) }}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>
+                        <a data-toggle="modal"
+                         data-target="#edit-classScheduling-modal" 
+                         id="Edit"
+                    data-id="{{$classScheduling->schedule_id }}"
+                         class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>
                         {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
                     </div>
                     {!! Form::close() !!}
@@ -87,38 +93,38 @@
                             
                 <!-- Course Id Field -->
                 <div class="form-group col-sm-6">
-                    {!! Form::label('course_id', 'Course Id:') !!}
-                    <input type="text" name="course_id" id="course_id" readonly>
+                    {!! Form::label('course_id2', 'Course Id:') !!}
+                    <input type="text" name="course_id2" id="course_id2" readonly>
                 </div>
 
                 <!-- Level Id Field -->
                 <div class="form-group col-sm-6">
-                    {!! Form::label('level_id', 'Level Id:') !!}
-                    <input type="text" name="level_id" id="level_id" readonly>
+                    {!! Form::label('level_id2', 'Level Id:') !!}
+                    <input type="text" name="level_id2" id="level_id2" readonly>
                 </div>
 
                 <!-- Shift Id Field -->
                 <div class="form-group col-sm-6">
-                    {!! Form::label('shift_id', 'Shift Id:') !!}
-                    <input type="text" name="shift_id" id="shift_id" readonly>
+                    {!! Form::label('shift_id2', 'Shift Id:') !!}
+                    <input type="text" name="shift_id2" id="shift_id2" readonly>
                 </div>
 
                 <!-- Classwoom Id Field -->
                 <div class="form-group col-sm-6">
-                    {!! Form::label('classwoom_id', 'Classwoom Id:') !!}
-                    <input type="text" name="classwoom_id" id="classwoom_id" readonly>
+                    {!! Form::label('classwoom_id2', 'Classwoom Id:') !!}
+                    <input type="text" name="classwoom_id2" id="classwoom_id2" readonly>
                 </div>
 
                 <!-- Batch Id Field -->
                 <div class="form-group col-sm-6">
-                    {!! Form::label('batch_id', 'Batch Id:') !!}
-                    <input type="text" name="batch_id" id="batch_id" readonly>
+                    {!! Form::label('batch_id2', 'Batch Id:') !!}
+                    <input type="text" name="batch_id2" id="batch_id2" readonly>
                 </div>
 
                 <!-- Day Id Field -->
                 <div class="form-group col-sm-6">
-                    {!! Form::label('day_id', 'Day Id:') !!}
-                    <input type="text" name="day_id" id="day_id" readonly>
+                    {!! Form::label('day_id2', 'Day Id:') !!}
+                    <input type="text" name="day_id2" id="day_id2" readonly>
                 </div>
 
                 <!-- Time Id Field -->
@@ -127,22 +133,22 @@
                     <input type="text" name="time_id" id="time_id" readonly>
                 </div>
 
-                <!-- Teacher Id Field -->
+                {{-- <!-- Teacher Id Field -->
                 <div class="form-group col-sm-6">
-                    {!! Form::label('teacher_id', 'Teacher Id:') !!}
-                    <input type="text" name="teacher_id" id="teacher_id" readonly>
-                 </div>
+                    {!! Form::label('teacher_id2', 'Teacher Id:') !!}
+                    <input type="text" name="teacher_id2" id="teacher_id2" readonly>
+                 </div> --}}
 
                 <!-- Start Time Field -->
                 <div class="form-group col-sm-6">
-                    {!! Form::label('start_time', 'Start Time:') !!}
-                    <input type="text" name="start_time" id="start_time" readonly>
+                    {!! Form::label('start_time2', 'Start Time:') !!}
+                    <input type="text" name="start_time2" id="start_time2" readonly>
                 </div>
 
                 <!-- End Time Field -->
                 <div class="form-group col-sm-6">
-                    {!! Form::label('end_time', 'End Time:') !!}
-                    <input type="text" name="start_time" id="start_time" readonly>
+                    {!! Form::label('end_time2', 'End Time:') !!}
+                    <input type="text" name="start_time2" id="start_time2" readonly>
                </div>
 
                 <!-- Status Field -->
@@ -157,13 +163,13 @@
 
 
                   <div class="form-group">
-                    {!! Form::label('created_at', 'Created At:') !!}
-                   <input type="text" name="created_at" id="created_at" readonly>
+                    {!! Form::label('created_at2', 'Created At:') !!}
+                   <input type="text" name="created_at2" id="created_at2" readonly>
                   </div>
 
                   <div class="form-group">
-                    {!! Form::label('updated_at', 'Updated At:') !!}
-                   <input type="text" name="updated_at" id="updated_at" readonly>
+                    {!! Form::label('updated_at2', 'Updated At:') !!}
+                   <input type="text" name="updated_at2" id="updated_at2" readonly>
                   </div>
                   
 
@@ -203,20 +209,20 @@
             var modal =$(this)
 
             modal.find('.modal-title').text('VIEW BATCH INFORMATION');
-            modal.find('.modal-body #course_id').val(course_id);
-            modal.find('.modal-body #level_id').val(level_id);
-            modal.find('.modal-body #shift_id').val(shift_id);
-            modal.find('.modal-body #classwoom_id').val(classwoom_id);
-            modal.find('.modal-body #batch_id').val(batch_id);
-            modal.find('.modal-body #day_id').val(day_id);
-            modal.find('.modal-body #time_id').val(time_id);
-            modal.find('.modal-body #teacher_id').val(teacher_id);
-            modal.find('.modal-body #start_time').val(start_time);
-            modal.find('.modal-body #end_time').val(end_time);
-            modal.find('.modal-body #status').val(status);
-          modal.find('.modal-body #created_at').val(created_at);
-            modal.find('.modal-body #updated_at').val(updated_at);
-            modal.find('.modal-body #schedule_id').val(schedule_id);
+            modal.find('.modal-body #course_id2').val(course_id);
+            modal.find('.modal-body #level_id2').val(level_id);
+            modal.find('.modal-body #shift_id2').val(shift_id);
+            modal.find('.modal-body #classwoom_id2').val(classwoom_id);
+            modal.find('.modal-body #batch_id2').val(batch_id);
+            modal.find('.modal-body #day_id2').val(day_id);
+            modal.find('.modal-body #time_id2').val(time_id);
+            modal.find('.modal-body #teacher_id2').val(teacher_id);
+            modal.find('.modal-body #start_time2').val(start_time);
+            modal.find('.modal-body #end_time2').val(end_time);
+            modal.find('.modal-body #status2').val(status);
+            modal.find('.modal-body #created_at2').val(created_at);
+            modal.find('.modal-body #updated_at2').val(updated_at);
+            modal.find('.modal-body #schedule_id2').val(schedule_id);
 
         });
 

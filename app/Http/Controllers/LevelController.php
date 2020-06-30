@@ -10,6 +10,9 @@ use Illuminate\Http\Request;
 use Flash;
 use Response;
 
+use App\Models\Course; 
+use DB;
+
 class LevelController extends AppBaseController
 {
     /** @var  LevelRepository */
@@ -29,10 +32,31 @@ class LevelController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $levels = $this->levelRepository->all();
+        // $levels = $this->levelRepository->all();
 
-        return view('levels.index')
-            ->with('levels', $levels);
+        // //we will send all the course already created so that the
+        // //user can choose one of them
+        // $allCourses = Course::all();
+
+        // return view('levels.index')
+        //     ->with(['levels'=> $levels, 'allCourses'=>$allCourses]);
+
+
+
+
+            $levels = DB::table('levels')
+            ->select(
+                'levels.*',
+                 'courses.*'
+            )
+            ->join('courses','courses.course_id','=','levels.course_id')
+           
+           ->get();
+
+           return view('levels.index',
+           compact('levels'
+                   ))
+               ->with('allCourses', $levels);
     }
 
     /**

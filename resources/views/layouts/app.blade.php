@@ -35,7 +35,9 @@
 
             <!-- Logo -->
             <a href="#" class="logo">
-                <b>InfyOm</b>
+                <b>I.F.A</b>
+                <img src="{{asset('logo.jpg')}}"
+                                    style="width: 40px; height:40px; border-radius:20px;" alt="User Image"/>
             </a>
 
             <!-- Header Navbar -->

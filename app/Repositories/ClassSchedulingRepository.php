@@ -24,7 +24,7 @@ class ClassSchedulingRepository extends BaseRepository
         'batch_id',
         'day_id',
         'time_id',
-        'teacher_id',
+        // 'teacher_id',
         'start_time',
         'end_time',
         'status'

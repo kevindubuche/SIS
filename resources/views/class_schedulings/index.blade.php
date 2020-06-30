@@ -19,8 +19,11 @@
                     {!! Form::open(['route' => 'classSchedulings.store']) !!}
 
                     @include('class_schedulings.fields')
+                    {!! Form::close() !!}
+                    
+                    @include('class_schedulings.edit')
 
-                {!! Form::close() !!}
+               
             </div>
         </div>
         <div class="text-center">
