@@ -15,7 +15,7 @@ class CreateAdmissioonsTable extends Migration
     {
         Schema::create('admissions', function (Blueprint $table) {
             $table->bigIncrements('student_id');
-            $table->string('roll_no');
+            $table->string('roll_id');
             $table->string('first_name');
             $table->string('last_name');
             $table->string('father_name');
@@ -27,10 +27,13 @@ class CreateAdmissioonsTable extends Migration
             $table->date('dob');
             $table->string('phone');
             $table->longText('adress');
-            $table->tinyInteger('status');
+            // $table->tinyInteger('status');
             $table->date('dateRegistered');
             $table->integer('user_id');
-            $table->integer('class_id');
+            // $table->integer('class_id');
+            $table->integer('batch_id');
+            $table->integer('departement_id');
+            $table->integer('faculty_id');
             $table->string('image')->nullable();
             $table->softDeletes();
             $table->timestamps();

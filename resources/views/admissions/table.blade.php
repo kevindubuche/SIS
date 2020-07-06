@@ -2,9 +2,13 @@
     <table class="table" id="admissions-table">
         <thead>
             <tr>
-                <th>Roll No</th>
-        <th>First Name</th>
-        <th>Last Name</th>
+                <th>Image</th>
+        <th> Name</th>
+        {{-- <th>Last Name</th> --}}
+        <th>Faculty</th>
+        <th>Departement</th>
+        <th>Batch</th>
+
         <th>Father Name</th>
         <th>Father Phone</th>
         <th>Mother Name</th>
@@ -24,29 +28,41 @@
         </thead>
         <tbody>
         @foreach($admissions as $admission)
-            <tr>
-                <td>{{ $admission->roll_no }}</td>
-            <td>{{ $admission->first_name }}</td>
-            <td>{{ $admission->last_name }}</td>
+            <tr>  
+            <td><img src="{{asset('student_images/'.$admission->image)}}"
+                alt="prof image"
+                class="rounded-circle"
+                width="50" 
+                height="50"
+                style="border-radius:50%"/></td>
+                {{-- <td>{{ $admission->roll_no }}</td> --}}
+            <td>{{ $admission->first_name }} {{ $admission->last_name }}</td>
+            {{-- <td>{{ $admission->last_name }}</td> --}}
+            <td>{{ $admission->InfoFaculty->faculty_name }}</td>
+            <td>{{ $admission->InfoDepartement->departement_name }}</td>
+            <td>{{ $admission->InfoBatch->batch }}</td>
+
             <td>{{ $admission->father_name }}</td>
             <td>{{ $admission->father_phone }}</td>
             <td>{{ $admission->mother_name }}</td>
             <td>{{ $admission->mother_phone }}</td>
-            <td>{{ $admission->gender }}</td>
+            <td>@if($admission->gender ==0) Male @else Female @endif</td>
             <td>{{ $admission->email }}</td>
             <td>{{ $admission->dob }}</td>
             <td>{{ $admission->phone }}</td>
             <td>{{ $admission->adress }}</td>
-            <td>{{ $admission->status }}</td>
+            <td>@if($admission->status ==0) Active @else Inactive @endif</td>
             <td>{{ $admission->dateRegistered }}</td>
             <td>{{ $admission->user_id }}</td>
             <td>{{ $admission->class_id }}</td>
-            <td>{{ $admission->image }}</td>
+            {{-- <td>{{ $admission->image }}</td> --}}
+          
                 <td>
-                    {!! Form::open(['route' => ['admissions.destroy', $admission->id], 'method' => 'delete']) !!}
+                <td>
+                    {!! Form::open(['route' => ['admissions.destroy', $admission->student_id], 'method' => 'delete']) !!}
                     <div class='btn-group'>
-                        <a href="{{ route('admissions.show', [$admission->id]) }}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a>
-                        <a href="{{ route('admissions.edit', [$admission->id]) }}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>
+                        <a href="{{ route('admissions.show', [$admission->student_id]) }}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a>
+                        <a href="{{ route('admissions.edit', [$admission->student_id]) }}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>
                         {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
                     </div>
                     {!! Form::close() !!}

@@ -36,6 +36,7 @@ class AdmissionRepository extends BaseRepository
         'image'
     ];
 
+    protected $primaryKey ='student_id';
     /**
      * Return searchable fields
      *

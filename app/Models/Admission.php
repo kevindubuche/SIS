@@ -40,6 +40,7 @@ class Admission extends Model
 
     protected $dates = ['deleted_at'];
 
+    protected $primaryKey ='student_id';
 
 
     public $fillable = [
@@ -113,4 +114,17 @@ class Admission extends Model
     ];
 
     
+
+    public function InfoFaculty()
+    {
+        return $this->belongsTo('App\Models\Faculty','faculty_id');
+    }
+    public function InfoDepartement()
+    {
+        return $this->belongsTo('App\Models\Departement','departement_id');
+    }
+    public function InfoBatch()
+    {
+        return $this->belongsTo('App\Models\Batch','batch_id');
+    }
 }

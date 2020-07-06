@@ -35,22 +35,25 @@
 <body class="hold-transition login-page">
 <div class="login-box">
     <div class="login-logo">
-        <a href="{{ url('/home') }}"><b>Admin / Teacher </b>Generator</a>
+        @include('flash::message')
+        @include('adminlte-templates::common.errors')
+       
+        <a href="{{ url('/home') }}"><b>Student Login </b>Page</a>
     </div>
 
     <!-- /.login-logo -->
     <div class="login-box-body">
         <p class="login-box-msg">Sign in to start your session</p>
 
-        <form method="post" action="{{ url('/login') }}">
+        <form method="post" action="{{ url('/student-login') }}">
             @csrf
 
-            <div class="form-group has-feedback {{ $errors->has('email') ? ' has-error' : '' }}">
-                <input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Email">
+            <div class="form-group has-feedback {{ $errors->has('username') ? ' has-error' : '' }}">
+                <input type="text" class="form-control" name="username" value="{{ old('username') }}" placeholder="Username">
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-                @if ($errors->has('email'))
+                @if ($errors->has('username'))
                     <span class="help-block">
-                    <strong>{{ $errors->first('email') }}</strong>
+                    <strong>{{ $errors->first('username') }}</strong>
                 </span>
                 @endif
             </div>

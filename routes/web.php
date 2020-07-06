@@ -17,6 +17,27 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::group(['middleware' => ['studentSession']], function(){
+    //we pass all our student routes
+    //if the student is login he will see all this
+    Route::match(['get','post'], 'account','StudentController@account');
+
+    Route::match(['get','post'], 'account','StudentController@account');
+    Route::match(['get','post'], 'student-biodata','StudentController@studentBiodata');
+    Route::match(['get','post'], 'student-lecture-calendar','StudentController@studentLectureCalendar');
+    Route::match(['get','post'], 'student-lecture-activity','StudentController@studentLectureActivity');
+    Route::match(['get','post'], 'student-exam-marks','StudentController@studentExamMarks');
+   
+    Route::match(['get','post'], '/verify-password','StudentController@verifyPassword');
+    Route::match(['get', 'post'], '/student-update-password', 'StudentController@changePassword');
+});
+
+Route::get('/student','StudentController@studentLogin');
+
+Route::get('/logout','StudentController@studentLogout');
+
+Route::post('/student-login', 'StudentController@LoginStudent');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

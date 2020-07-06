@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use Flash;
 use Response;
 
-use App\Models\Admissions;
+use App\Models\Admission;
 use App\Models\Roll;
 use App\Models\Faculty;
 use App\Models\Departement;
@@ -36,15 +36,19 @@ class AdmissionController extends AppBaseController
     {
         // $admissions = $this->admissionRepository->all();
         $admissions = Admission::all();
-        $student_id = Roll::max('roll_id');
+        $student_id = Admission::max('student_id');
+        $roll_id = Roll::max('roll_id');
         $faculties = Faculty::all();
-        $departements = Depatement::all();
+        $departements = Departement::all();
         $batches = Batch::all();
+        $rand_username_password = mt_rand(111609300011 .$student_id+ 1, 
+                             111609300011 .$student_id+ 1);
 
         return view('admissions.index',
             compact('admissions', 'student_id',
-        'faculties','departements',
-    'batches'));
+           'faculties','departements',
+            'batches', 'roll_id',
+        'rand_username_password'));
     }
 
     /**
@@ -64,13 +68,57 @@ class AdmissionController extends AppBaseController
      *
      * @return Response
      */
-    public function store(CreateAdmissionRequest $request)
+    public function store(Request $request)
     {
         $input = $request->all();
+// dd($input);
+        $file = $request->file('image');
+        $extension = $file->getClientOriginalExtension();
+        $new_image_name = time().'.'.$extension;
+        $file->move(public_path('student_images'), $new_image_name);
 
-        $admission = $this->admissionRepository->create($input);
 
-        Flash::success('Admission saved successfully.');
+        $student = new Admission;
+        $student->first_name = $request->first_name;
+        $student->last_name = $request->last_name;
+        $student->father_name = $request->father_name;
+        $student->father_phone = $request->father_phone;
+        $student->mother_name = $request->mother_name;
+        $student->mother_phone = $request->mother_phone;
+        $student->gender = $request->gender;
+        $student->phone = $request->phone;
+        $student->dob = $request->dob;
+        $student->email = $request->email;
+        $student->adress = $request->adress;
+        $student->departement_id = $request->departement_id;
+        $student->faculty_id = $request->faculty_id;
+        $student->batch_id = $request->batch_id;
+        $student->user_id = $request->user_id;
+        $student->dateregistered = date('Y-m-d');
+        $student->image = $new_image_name;
+
+
+        if($student->save()){
+            $student_id = $student->student_id;
+            $username =$student->username;
+            $password = $student->password;
+
+            Roll::insert(['student_id'=> $student_id,
+                'username'=>$request->username,
+                'password'=>$request->password]);
+
+                // dump($request->all()); die;
+        }
+    //    dd($input); die;
+    //    $roll = new Roll;
+    //    $roll->username = $request->username;
+    //    $roll->password = $request->password;
+    //    $roll->student_id = $request->student_id;
+    //    $roll->save();
+
+        // $admission = $this->admissionRepository->create($input);
+
+        Flash::success('Admission'.$request->first_name.' '.$request->last_name.' saved successfully.');
 
         return redirect(route('admissions.index'));
     }
@@ -104,6 +152,14 @@ class AdmissionController extends AppBaseController
      */
     public function edit($id)
     {
+        $roll_id = Roll::max('roll_id');
+        $faculties = Faculty::all();
+        $departements = Departement::all();
+        $batches = Batch::all();
+        // $rand_username_password = mt_rand(111609300011 .$student_id+ 1, 
+        //                      111609300011 .$student_id+ 1);
+
+
         $admission = $this->admissionRepository->find($id);
 
         if (empty($admission)) {
@@ -112,7 +168,9 @@ class AdmissionController extends AppBaseController
             return redirect(route('admissions.index'));
         }
 
-        return view('admissions.edit')->with('admission', $admission);
+        return view('admissions.edit',
+        compact('faculties', 'departements', 'batches'))
+        ->with('admission', $admission);
     }
 
     /**
@@ -123,19 +181,53 @@ class AdmissionController extends AppBaseController
      *
      * @return Response
      */
-    public function update($id, UpdateAdmissionRequest $request)
+    public function update($id, Request $request)
     {
-        $admission = $this->admissionRepository->find($id);
+        $input = $request->all();
+//   dd($request->batch_id);
 
-        if (empty($admission)) {
-            Flash::error('Admission not found');
+        $file = $request->file('image');
+        $extension = $file->getClientOriginalExtension();
+        $new_image_name = time().'.'.$extension;
+        $file->move(public_path('student_images'), $new_image_name);
+
+
+        $student = array(
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'father_name' => $request->father_name,
+            'father_phone' => $request->father_phone,
+            'mother_name' => $request->mother_name,
+            'mother_phone' => $request->mother_phone,
+            'gender' => $request->gender,
+            'phone' => $request->phone,
+            'dob' => $request->dob,
+            'email' => $request->email,
+            'adress' => $request->adress,
+            'departement_id' => $request->departement_id,
+            'faculty_id' => $request->faculty_id,
+            'batch_id' => $request->batch_id,
+            'user_id' => $request->user_id,
+            'dateregistered' => date('Y-m-d'),
+            'image' => $new_image_name
+        );
+       
+
+        // var_dump($student); die;
+        // echo "<pre>"; print_r($student); die;
+        // $admission = $this->admissionRepository->find($id);
+
+        if (empty($student)) {
+            Flash::error($request->first_name. ' '. $request->last_name.'Admission not found');
 
             return redirect(route('admissions.index'));
         }
 
-        $admission = $this->admissionRepository->update($request->all(), $id);
+        // $admission = $this->admissionRepository->update($request->all(), $id);
+        // dd($student['batch_id']);
+        Admission::findOrFail($id)->update($student);
 
-        Flash::success('Admission updated successfully.');
+        Flash::success($request->first_name. ' '. $request->last_name.'Admission updated successfully.');
 
         return redirect(route('admissions.index'));
     }
