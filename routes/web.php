@@ -38,6 +38,10 @@ Route::get('/logout','StudentController@studentLogout');
 
 Route::post('/student-login', 'StudentController@LoginStudent');
 
+//forgot password routes
+Route::get('/student-forget-password', 'StudentController@getForgotPassword');
+Route::post('/forgot-password', 'StudentController@ForgotPassword');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

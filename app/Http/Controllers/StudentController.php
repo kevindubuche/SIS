@@ -8,6 +8,8 @@ use App\Models\Roll;
 use Flash;
 use App\Models\Admission;
 use Session;
+use Str;
+use Mail;
 
 class StudentController extends Controller
 {
@@ -118,6 +120,52 @@ class StudentController extends Controller
             return redirect()->back();
         }
     }
+
+    public function getForgotPassword(){
+
+        return view('students.forget-password');
+    }
+
+    //this id is for the post
+    public function  ForgotPassword(Request $request){
+
+        $data = $request->all();
+        $studentCount = Admission::where('email', $data['email'])->count();
+        
+        if($studentCount == 0){
+            Flash::error('We can\'t find student with that email address...');
+            return redirect()->back();
+        }
+        //mal chache username nan
+        $student = Admission::where('email', $data['email'])->first();
+$roll = Roll::where('student_id', $student->student_id)->first();
+
+        Session::put('studentSession',$roll->username);
+        // dd( Session::get('studentSession'));
+        $students = Admission::where('email', $data['email'])->first();
+        $rand_password = Str::random(12);
+
+        $new_password =$rand_password;
+
+   $ok=     Roll::where('username',
+         Session::get('studentSession'))->update(['password'=>$new_password]);
+
+         $email = $data['email'];
+         $student_name = $students->first_name;
+         $message =[
+              'email'=>$email,
+              'first_name' => $student_name,
+              'password' =>$rand_password
+         ];
+
+         Mail::send('emails.forgot-password', $message,function($message)use($email){
+           $message->to($email)->subject('Reset Passord - S I S');
+         });
+
+         Flash::success('We have e-mailed your password Reset Link to '.$data['email']);
+         return redirect()->back(); 
+    }
+
     public function account()
     {
         if(Session::has('studentSession')){

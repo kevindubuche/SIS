@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>InfyOm Laravel Generator</title>
+    <title>S I S</title>
 
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -35,57 +35,45 @@
 <body class="hold-transition login-page">
 <div class="login-box">
     <div class="login-logo">
-        @include('flash::message')
-        @include('adminlte-templates::common.errors')
-       
-        <a href="{{ url('/home') }}"><b>Student Login </b>Page</a>
+        <a href="{{ url('/home') }}"><b>Forgot </b>Password</a>
     </div>
 
     <!-- /.login-logo -->
     <div class="login-box-body">
-        <p class="login-box-msg">Sign in to start your session</p>
+        <p class="login-box-msg">Enter Email to reset password</p>
 
-        <form method="post" action="{{ url('/student-login') }}">
+        @if (session('status'))
+            <div class="alert alert-success">
+                {{ session('status') }}
+            </div>
+        @endif
+
+        @include('flash::message')
+        @include('adminlte-templates::common.errors')
+      
+
+        <form method="post" action="{{ url('/forgot-password') }}">
             @csrf
 
-            <div class="form-group has-feedback {{ $errors->has('username') ? ' has-error' : '' }}">
-                <input type="text" class="form-control" name="username" value="{{ old('username') }}" placeholder="Username">
+            <div class="form-group has-feedback {{ $errors->has('email') ? ' has-error' : '' }}">
+                <input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Email">
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-                @if ($errors->has('username'))
+                @if ($errors->has('email'))
                     <span class="help-block">
-                    <strong>{{ $errors->first('username') }}</strong>
+                    <strong>{{ $errors->first('email') }}</strong>
                 </span>
                 @endif
             </div>
 
-            <div class="form-group has-feedback{{ $errors->has('password') ? ' has-error' : '' }}">
-                <input type="password" class="form-control" placeholder="Password" name="password">
-                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-                @if ($errors->has('password'))
-                    <span class="help-block">
-                    <strong>{{ $errors->first('password') }}</strong>
-                </span>
-                @endif
-
-            </div>
             <div class="row">
-                <div class="col-xs-8">
-                    <div class="checkbox icheck">
-                        <label>
-                            <input type="checkbox" name="remember"> Remember Me
-                        </label>
-                    </div>
+                <div class="col-md-12">
+                    <button type="submit" class="btn btn-primary pull-right">
+                        <i class="fa fa-btn fa-envelope"></i> Send Password Reset Link
+                    </button>
                 </div>
-                <!-- /.col -->
-                <div class="col-xs-4">
-                    <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
-                </div>
-                <!-- /.col -->
             </div>
-        </form>
 
-        <a href="{{ url('/student-forget-password') }}">I forgot my password</a><br>
-        <a href="{{ url('/register') }}" class="text-center">Register a new membership</a>
+        </form>
 
     </div>
     <!-- /.login-box-body -->
@@ -99,16 +87,5 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.4.3/js/adminlte.min.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/icheck.min.js"></script>
-<script>
-    $(function () {
-        $('input').iCheck({
-            checkboxClass: 'icheckbox_square-blue',
-            radioClass: 'iradio_square-blue',
-            increaseArea: '20%' // optional
-        });
-    });
-</script>
-
-
 </body>
 </html>
