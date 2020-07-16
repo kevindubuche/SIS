@@ -52,7 +52,8 @@ class StudentController extends Controller
     }
     public function studentLogout()
     {
-        // return view('students.login');
+        Session::end('studentSession');
+         return route('/');
     }
     public function LoginStudent(Request $request)
     {

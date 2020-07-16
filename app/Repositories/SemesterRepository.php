@@ -22,7 +22,7 @@ class SemesterRepository extends BaseRepository
         'semester_duration',
         'semester_description'
     ];
-
+    protected $primaryKey = 'semester_id';
     /**
      * Return searchable fields
      *

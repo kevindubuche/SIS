@@ -2,24 +2,32 @@
     <table class="table" id="teachers-table">
         <thead>
             <tr>
-                <th>First Name</th>
-        <th>Last Name</th>
-        <th>Gender</th>
+         <th></th>
+         <th>Prenom</th>
+        <th>Nom</th>
+        <th>Sexe</th>
         <th>Email</th>
-        <th>Dob</th>
-        <th>Phone</th>
-        <th>Adress</th>
+        <th>Date de naissance</th>
+        <th>Telephone</th>
+        <th>Adresse</th>
         <th>Status</th>
-        <th>Dateregistered</th>
-        <th>User Id</th>
-        <th>Image</th>
-                <th colspan="3">Action</th>
+        {{-- <th>Datere enregistre</th> --}}
+        {{-- <th>User Id</th> --}}
+
+                <th colspan="3">Actions</th>
             </tr>
         </thead>
         <tbody>
         @foreach($teachers as $teacher)
             <tr>
-                <td>{{ $teacher->first_name }}</td>
+            <td><img src="{{asset('teacher_images/'.$teacher->image)}}"
+                alt="prof image"
+                class="rounded-circle"
+                width="50" 
+                height="50"
+                style="border-radius:50%"/>
+            </td>
+            <td>{{ $teacher->first_name }}</td>
             <td>{{ $teacher->last_name }}</td>
             <td>{{ $teacher->gender }}</td>
             <td>{{ $teacher->email }}</td>
@@ -27,15 +35,10 @@
             <td>{{ $teacher->phone }}</td>
             <td>{{ $teacher->adress }}</td>
             <td>{{ $teacher->status }}</td>
-            <td>{{ $teacher->dateRegistered }}</td> 
-            <td>{{ $teacher->user_id }}</td>
-            <td><img src="{{asset('teacher_images/'.$teacher->image)}}"
-                alt="prof image"
-                class="rounded-circle"
-                width="50" 
-                height="50"
-                style="border-radius:50%"/></td>
-                <td>
+            {{-- <td>{{ $teacher->dateRegistered }}</td>  --}}
+            {{-- <td>{{ $teacher->user_id }}</td> --}}
+          
+            <td>
                     {!! Form::open(['route' => ['teachers.destroy', $teacher->teacher_id], 'method' => 'delete']) !!}
                   
                         <a href="{{ route('teachers.show', [$teacher->teacher_id]) }}" target="_blank" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a>
@@ -208,4 +211,4 @@
 
 
     </script>
-@endsection --}}
+@endsection 

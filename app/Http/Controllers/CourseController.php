@@ -10,6 +10,11 @@ use Illuminate\Http\Request;
 use Flash;
 use Response;
 
+use Session;
+use App\Models\User;
+use App\Models\Course;
+use App\Models\Admission;
+use DB;
 class CourseController extends AppBaseController
 {
     /** @var  CourseRepository */
@@ -29,10 +34,44 @@ class CourseController extends AppBaseController
      */
     public function index(Request $request)
     {
+       
         $courses = $this->courseRepository->all();
+        // $user = User::where(['id'=> auth()->user()->id ])->first();
+        $user = User::find(auth()->user()->id);
+        //  dd($user);
 
-        return view('courses.index')
+        
+        //ADM SEE ALL COURSES
+        if($user->role == 1 ){
+            // dd('role 1');
+            return view('courses.index')
             ->with('courses', $courses);
+        }
+           //teachers SEE only his courses
+         else  if($user->role == 2 ){
+            // dd('role 2');
+            $courses = Course::where(['created_by'=> $user->id])->get();
+            return view('courses.index')
+            ->with('courses', $courses);
+        }
+           //by default student see courses he is asigned to
+           else  {
+            // dd('role default');
+            $student = Admission::where(['user_id'=> $user->id])->first();
+
+            $courses = DB::table('courses')//on pprend tous les cours
+            ->select(
+                'courses.*'
+            )            
+            ->join('class_schedulings','class_schedulings.course_id','=','courses.course_id')//qui sont dans l'horaire de l'etudiant
+            ->where('class_id',$student->class_id)
+           ->get();
+
+        //    dd($courses);
+           return view('courses.index')
+            ->with('courses', $courses);
+        }
+       
     }
 
     /**
@@ -52,11 +91,30 @@ class CourseController extends AppBaseController
      *
      * @return Response
      */
-    public function store(CreateCourseRequest $request)
+    public function store(Request $request)
     {
         $input = $request->all();
+        // dd($input);
+        //GESTION DU FICHIER
+        $file = $request->file('filename');
+        $extension = $file->getClientOriginalExtension();
+        $filename = time().'.'.$extension;
+        $fullPath = $filename;
 
-        $course = $this->courseRepository->create($input);
+        $request->file('filename')->move(
+            base_path() . '/public/course_files/', $filename
+        );
+
+        $cours = new Course;
+        $cours->course_name = $request->course_name;
+        $cours->course_code = $request->course_code;
+        $cours->description = $request->description;
+        $cours->created_by = $request->created_by;
+        $cours->filename = $fullPath;
+//  dd($input);
+        $cours->save();
+       
+        // $course = $this->courseRepository->create($input);
 
         Flash::success('Course saved successfully.');
 

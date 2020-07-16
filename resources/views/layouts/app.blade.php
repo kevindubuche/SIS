@@ -46,6 +46,20 @@
                 <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
                     <span class="sr-only">Toggle navigation</span>
                 </a>
+                @switch(Auth::user()->role)
+                    @case(1)
+                        <h5>Administrateur</h5>
+                        @break
+                    @case(2)
+                         <h5>Professeurs</h5>
+                        @break
+                        @case(3)
+                        <h5>Etudiant(e)</h5>
+                       @break
+                       <h5>Etudiant(e)</h5>
+                    @default
+                        
+                @endswitch
                 <!-- Navbar Right Menu -->
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
@@ -54,16 +68,29 @@
                             <!-- Menu Toggle Button -->
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <!-- The user image in the navbar-->
-                                <img src="http://infyom.com/images/logo/blue_logo_150x150.jpg"
-                                     class="user-image" alt="User Image"/>
+                                @if (Auth::user()->role ==2)
+                                <img src="{{asset('teacher_images/'.Auth::user()->GetTeacher()->image)}}" class="user-image" alt="User Image">
+                                @elseif( Auth::user()->role == 3)
+                                <img src="{{asset('student_images/'.Auth::user()->GetStudent()->image)}}" class="user-image" alt="User Image">
+                                @else
+                                <img src="{{asset('logo.jpg')}}" class="user-image"
+                                alt="User Image"/>
+                                @endif
+                             
                                 <!-- hidden-xs hides the username on small devices so only the image appears. -->
                                 <span class="hidden-xs">{{ Auth::user()->name }}</span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- The user image in the menu -->
                                 <li class="user-header">
-                                    <img src="http://infyom.com/images/logo/blue_logo_150x150.jpg"
-                                         class="img-circle" alt="User Image"/>
+                                    @if (Auth::user()->role ==2)
+                                    <img src="{{asset('teacher_images/'.Auth::user()->GetTeacher()->image)}}" class="user-image" alt="User Image">
+                                    @elseif( Auth::user()->role == 3)
+                                    <img src="{{asset('student_images/'.Auth::user()->GetStudent()->image)}}" class="user-image" alt="User Image">
+                                    @else
+                                    <img src="{{asset('logo.jpg')}}" class="img-circle"
+                                    alt="User Image"/>
+                                    @endif
                                     <p>
                                         {{ Auth::user()->name }}
                                         <small>Member since {{ Auth::user()->created_at->format('M. Y') }}</small>
@@ -72,12 +99,12 @@
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
                                     <div class="pull-left">
-                                        <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                        <a href="{{ url('/profile/'.Auth::user()->id)}}" class="btn btn-default btn-flat">Profile</a>
                                     </div>
                                     <div class="pull-right">
                                         <a href="{{ url('/logout') }}" class="btn btn-default btn-flat"
                                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                            Sign out
+                                            Se deconnecter
                                         </a>
                                         <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                                             @csrf
@@ -100,7 +127,7 @@
 
         <!-- Main Footer -->
         <footer class="main-footer" style="max-height: 100px;text-align: center">
-            <strong>Copyright © 2020 <a href="#">Company</a>.</strong> All rights reserved.
+            <strong>Copyright © 2020 <a href="#">Institution Frere Andre _ Foyer Eveil</a>.</strong> Tout droit reserve.
         </footer>
 
     </div>
@@ -162,6 +189,18 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/icheck.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.min.js"></script>
+
+
+    {{-- data table --}}
+    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('css/jquery.datatables.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/dataTables.bootstrap.min.css') }}"> 
+    <script type="text/javascript" charset="utf8" src="{{ asset('js/jquery.dataTables.js') }}"></script>
+    <script type="text/javascript" charset="utf8" src="{{ asset('js/dataTables.bootstrap.min.js') }}"></script> --}}
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap.min.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap.min.js"></script>
+    
+ 
     @yield('scripts')
     @stack('scripts')
 </body>

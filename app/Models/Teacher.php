@@ -88,5 +88,8 @@ class Teacher extends Model
         'user_id' => 'required'
     ];
 
-    
+    // public function classAssigning()
+    // {
+    //     return $this->belongsTo('App\Models\ClassAssigning','teacher_id');
+    // }
 }

@@ -27,7 +27,7 @@ class Semester extends Model
 
     protected $dates = ['deleted_at'];
 
-
+    protected $primaryKey = 'semester_id';
 
     public $fillable = [
         'semester_name',

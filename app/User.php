@@ -36,4 +36,17 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    
+    public  function GetTeacher(){
+        $student = User::join('teachers', 'teachers.user_id','=', 'users.id')
+                    ->first();
+                    return $student;
+    }
+
+    public  function GetStudent(){
+        $student = User::join('admissions', 'admissions.user_id','=', 'users.id')
+                    ->first();
+                    return $student;
+    }
 }

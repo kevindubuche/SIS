@@ -44,12 +44,18 @@ Route::post('/forgot-password', 'StudentController@ForgotPassword');
 
 Auth::routes();
 
+
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+
 
 
 Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->middleware('verified');
+
+Route::group(['middleware' => ['ifLogin']], function(){
 
 Route::resource('classes', 'ClassesController');
 
@@ -86,6 +92,7 @@ Route::resource('teachers', 'TeacherController');
 Route::resource('roles', 'RoleController');
 
 Route::resource('users', 'UserController');
+Route::get('/profile/{id}', 'UserController@profile');
 
 
 Route::resource('semesters', 'SemesterController');
@@ -101,3 +108,15 @@ Route::get('/classSchedulingsEdit', ['as'=> 'edit','uses'=>
 // 'ClassSchedulingController@update']); 
 
 Route::resource('departements', 'DepartementController');
+
+Route::post('/insert', array('as'=>'insert', 'uses'=>'ClassAssigningController@insert') );
+
+Route::resource('statuses', 'StatusController');
+
+// --------------PDF class assigning-----------
+Route::get('/pdf-download-class-assign', 'ClassAssigningController@PDFGenerator');
+
+Route::post('/userUpdatePassword','UserController@userUpdatePassword');
+
+});
+

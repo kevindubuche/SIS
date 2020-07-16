@@ -15,6 +15,9 @@ use App\Models\Roll;
 use App\Models\Faculty;
 use App\Models\Departement;
 use App\Models\Batch;
+use App\Models\Classes;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 class AdmissionController extends AppBaseController
 {
     /** @var  AdmissionRepository */
@@ -41,6 +44,7 @@ class AdmissionController extends AppBaseController
         $faculties = Faculty::all();
         $departements = Departement::all();
         $batches = Batch::all();
+        $allClasses = Classes::all();
         $rand_username_password = mt_rand(111609300011 .$student_id+ 1, 
                              111609300011 .$student_id+ 1);
 
@@ -48,7 +52,8 @@ class AdmissionController extends AppBaseController
             compact('admissions', 'student_id',
            'faculties','departements',
             'batches', 'roll_id',
-        'rand_username_password'));
+        'rand_username_password',
+    'allClasses'));
     }
 
     /**
@@ -71,7 +76,7 @@ class AdmissionController extends AppBaseController
     public function store(Request $request)
     {
         $input = $request->all();
-// dd($input);
+// dd($input); 
         $file = $request->file('image');
         $extension = $file->getClientOriginalExtension();
         $new_image_name = time().'.'.$extension;
@@ -94,28 +99,37 @@ class AdmissionController extends AppBaseController
         $student->faculty_id = $request->faculty_id;
         $student->batch_id = $request->batch_id;
         $student->user_id = $request->user_id;
+        $student->class_id = $request->class_id;
         $student->dateregistered = date('Y-m-d');
         $student->image = $new_image_name;
 
 
-        if($student->save()){
-            $student_id = $student->student_id;
-            $username =$student->username;
-            $password = $student->password;
+            //ADD HIM AS A USER IN THE DB
+            if($student->save()){
+                $user = new User;
+                $user->name = $request->first_name .' '.$request->last_name;
+                $user->role = 3;
+                $user->email = $request->email;
+                $password = 'qwerty123';//nou ka genere yon ran si nou vle
+                $user->password = Hash::make( $password);
+    
+                $user->save();
+    
+            }
 
-            Roll::insert(['student_id'=> $student_id,
-                'username'=>$request->username,
-                'password'=>$request->password]);
+            //SEND THE PASSWORD VIA EMAIL
 
-                // dump($request->all()); die;
-        }
-    //    dd($input); die;
-    //    $roll = new Roll;
-    //    $roll->username = $request->username;
-    //    $roll->password = $request->password;
-    //    $roll->student_id = $request->student_id;
-    //    $roll->save();
+        // if($student->save()){ 
+        //     $student_id = $student->student_id;
+        //     $username =$student->username;
+        //     $password = $student->password;
 
+        //     Roll::insert(['student_id'=> $student_id,
+        //         'username'=>$request->username,
+        //         'password'=>$request->password]);
+
+        //         // dump($request->all()); die;
+        // }
         // $admission = $this->admissionRepository->create($input);
 
         Flash::success('Admission'.$request->first_name.' '.$request->last_name.' saved successfully.');

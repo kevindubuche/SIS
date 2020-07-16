@@ -2,19 +2,19 @@
     <table class="table" id="classSchedulings-table">
         <thead>
             <tr>
-         <th>Course </th>
-         <th>Class</th>
-        <th>Level </th>
+         <th>Cours </th>
+         <th>Classe</th>
+        {{-- <th>Level </th> --}}
         <th>Shift </th>
         <th>Classroom </th>
         <th>Batch </th>
         <th>Day </th>
         <th>Time </th>
-        <th>Semester</th>
-        <th>Start Time</th>
-        <th>End Time</th>
+        <th>Semestre</th>
+        <th>Date debut</th>
+        <th>Date fin</th>
         <th>Status</th>
-                <th colspan="3">Action</th>
+        <th colspan="3">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -22,7 +22,7 @@
             <tr>
             <td>{{ $classScheduling->course_name }}</td>
             <td>{{ $classScheduling->class_name }}</td>
-            <td>{{ $classScheduling->level }}</td>
+            {{-- <td>{{ $classScheduling->level }}</td> --}}
             <td>{{ $classScheduling->shift }}</td>
             <td>{{ $classScheduling->classroom_name }}</td>
             <td>{{ $classScheduling->batch }}</td>
@@ -35,7 +35,7 @@
             <td>@if( $classScheduling->status == 1)
                     <div style="color:green">Active</div>
                     @else
-                    <div style="color:red">In Active</div>
+                    <div style="color:red">Inactive</div>
                 @endif
             </td>
                 <td>
@@ -44,7 +44,7 @@
                         <a data-toggle="modal" data-target="#view-classScheduling-modal" 
                             data-schedule_id="{{ $classScheduling->schedule_id }}"
                             data-course_id="{{ $classScheduling->course_id }}"
-                            data-level_id="{{ $classScheduling->level_id }}"
+                            {{-- data-level_id="{{ $classScheduling->level_id }}" --}}
                             data-shift_id="{{ $classScheduling->shift_id }}"
                             data-classwoom_id="{{ $classScheduling->classroom_id }}"
                             data-batch_id="{{ $classScheduling->batch_id }}"
@@ -82,7 +82,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+          <h5 class="modal-title" id="exampleModalLongTitle">Horaire</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -97,11 +97,11 @@
                     <input type="text" name="course_id2" id="course_id2" readonly>
                 </div>
 
-                <!-- Level Id Field -->
+                {{-- <!-- Level Id Field -->
                 <div class="form-group col-sm-6">
                     {!! Form::label('level_id2', 'Level Id:') !!}
                     <input type="text" name="level_id2" id="level_id2" readonly>
-                </div>
+                </div> --}}
 
                 <!-- Shift Id Field -->
                 <div class="form-group col-sm-6">
@@ -192,7 +192,7 @@
     
             var button = $(event.relatedTarget)
             var course_id = button.data('course_id')
-            var level_id = button.data('level_id')
+            // var level_id = button.data('level_id')
             var shift_id = button.data('shift_id')
             var classwoom_id = button.data('classwoom_id')
             var batch_id = button.data('batch_id')
@@ -210,7 +210,7 @@
 
             modal.find('.modal-title').text('VIEW BATCH INFORMATION');
             modal.find('.modal-body #course_id2').val(course_id);
-            modal.find('.modal-body #level_id2').val(level_id);
+            // modal.find('.modal-body #level_id2').val(level_id);
             modal.find('.modal-body #shift_id2').val(shift_id);
             modal.find('.modal-body #classwoom_id2').val(classwoom_id);
             modal.find('.modal-body #batch_id2').val(batch_id);

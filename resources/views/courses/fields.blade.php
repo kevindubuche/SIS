@@ -5,21 +5,23 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+          <h5 class="modal-title" id="exampleModalLongTitle">Ajouter un nouveau cours</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
+
+        <input type="hidden" name="created_by" id="created_by" value=" {{ Auth::user()->id }}" >
 <!-- Course Name Field -->
 <div class="form-group ">
-    {!! Form::label('course_name', 'Course Name:') !!}
+    {!! Form::label('course_name', 'Nom du cours:') !!}
     {!! Form::text('course_name', null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Course Code Field -->
 <div class="form-group ">
-    {!! Form::label('course_code', 'Course Code:') !!}
+    {!! Form::label('course_code', 'Code du cours:') !!}
     {!! Form::text('course_code', null, ['class' => 'form-control']) !!}
 </div>
 
@@ -38,10 +40,14 @@
     </label>
 </div>
 
+
+<input type="file" name="filename" id="filename">
+
+
 </div>
 <div class="modal-footer">
-  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-  {!! Form::submit('Save Course', ['class' => 'btn btn-primary']) !!}
+  <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+  {!! Form::submit('Enregistrer le cours', ['class' => 'btn btn-primary']) !!}
 </div>
 </div>
 </div>

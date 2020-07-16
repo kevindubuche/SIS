@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+          <h5 class="modal-title" id="exampleModalLongTitle">Ajouter un nouveau professeur</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -19,7 +19,7 @@
         name="first_name"
         id="first_name" 
         class="form-control text-capitalize"
-        placeholder="Enter first name here"
+        placeholder="Prenom"
         >
 </div>
 
@@ -29,7 +29,7 @@
         name="last_name"
         id="last_name" 
         class="form-control text-capitalize"
-        placeholder="Enter first name here"
+        placeholder="Nom"
         >
 </div>
 
@@ -37,19 +37,19 @@
 <div class="col-sm-12">
     <div class="form-group ">
         <fieldset>
-            <legend for="gender">Gender</legend>
+            <legend for="gender">Sexe</legend>
             <table style="width: 100%; margin-top:14px;">
                 <tr style="border-bottom: 1px solid #ccc">
                     <td>
                         <label>
                             <input type="radio" name="gender" id="gender" value="0">
-                            Male
+                            Masculin
                         </label>
                     </td>
                     <td>
                         <label>
                             <input type="radio" name="gender" id="gender" value="1">
-                            Female
+                            Feminin
                         </label>
                     </td>
                 </tr>
@@ -62,19 +62,31 @@
 <div class="col-sm-12">
     <div class="form-group ">
         <fieldset>
-            <legend for="gender">Status</legend>
+            <legend for="gender">Status matrimonial</legend>
             <table style="width: 100%; margin-top:14px;">
                 <tr style="border-bottom: 1px solod #ccc">
                     <td>
                         <label>
                             <input type="radio" name="status" id="status" value="0" required checked>
-                            Single
+                            Celibataire
                         </label>
                     </td>
                     <td>
                         <label>
                             <input type="radio" name="status" id="status" value="1" required>
-                            Maried
+                            Marie(e)
+                        </label>
+                    </td>
+                    <td>
+                        <label>
+                            <input type="radio" name="status" id="status" value="1" required>
+                            Divorce(e)
+                        </label>
+                    </td>
+                    <td>
+                        <label>
+                            <input type="radio" name="status" id="status" value="1" required>
+                            Veuf(ve)
                         </label>
                     </td>
                 </tr>
@@ -97,7 +109,7 @@
                  name="dob"
                  id="dob"
                   class="form-control text-capitalize"
-                  placeholder="YY-MM-DD"
+                  placeholder="Date de naissance"
                   >
         </div>
     </div>
@@ -123,7 +135,7 @@
         name="phone"
         id="phone" 
         class="form-control text-capitalize"
-        placeholder="Enter phone here"
+        placeholder="Telephone"
         >
 </div>
 
@@ -133,8 +145,8 @@
     <input type="text" 
         name="email"
         id="email" 
-        class="form-control text-capitalize"
-        placeholder="Enter email here"
+        class="form-control"
+        placeholder="Email"
         >
 </div>
 
@@ -173,9 +185,9 @@
 
 <!-- Adress Field -->
 <div class="form-group col-sm-12">
-   <b><i class="fa fa-map-marker"></i>Address</b>
+   <b><i class="fa fa-map-marker"></i>Adresse</b>
         
-            <textarea placeholder="Enter address here"
+            <textarea placeholder="Entrer l'adresse"
             name="adress"
             id="adress"
             cols="40" rows="2"
@@ -185,6 +197,7 @@
     
 </div>
    
+
 
 {{-- <!-- Dateregistered Field -->
 <div class="form-group col-sm-6">
@@ -211,8 +224,8 @@
 
 </div>
 <div class="modal-footer ">
-  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-  {!! Form::submit('Register Teacher', ['class' => 'btn btn-primary']) !!}
+  <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+  {!! Form::submit('Enregistrer professeur', ['class' => 'btn btn-primary']) !!}
 </div>
 </div>
 </div>

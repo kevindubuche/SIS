@@ -10,8 +10,11 @@ use Illuminate\Http\Request;
 use Flash;
 use Response;
 
+use App\Models\User;
 use App\Models\Teacher;
 use File;
+use Str;
+use Illuminate\Support\Facades\Hash;
 class TeacherController extends AppBaseController
 {
     /** @var  TeacherRepository */
@@ -79,7 +82,20 @@ class TeacherController extends AppBaseController
         // dd($teacher);
         $teacher->save();
  
+        //ADD HIM AS A USER IN THE DB
+        if($teacher->save()){
+            $user = new User;
+            $user->name = $request->first_name .' '.$request->last_name;
+            $user->role = 2;
+            $user->email = $request->email;
+            $password = 'qwerty123';//nou ka genere yon ran si nou vle
+            $user->password = Hash::make( $password);
 
+            $user->save();
+
+        }
+
+        //SEND MAIL WITH PASSWORD TO THE TEACHER
 
         Flash::success('Teacher saved successfully.');
 

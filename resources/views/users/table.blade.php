@@ -2,13 +2,13 @@
     <table class="table" id="users-table">
         <thead>
             <tr>
-                <th>Name</th>
-        <th>Role</th>
-        <th>Email</th>
-        <th>Email Verified At</th>
-        <th>Password</th>
-        <th>Remember Token</th>
-                <th colspan="3">Action</th>
+                <th>Nom complet</th>
+        <th>Droit d'access</th>
+        <th>Adresse Email</th>
+        {{-- <th>Email Verified At</th> --}}
+        <th>Mot de passe</th>
+        {{-- <th>Remember Token</th> --}}
+                <th colspan="3">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -17,9 +17,9 @@
                 <td>{{ $user->name }}</td>
             <td>{{ $user->role }}</td>
             <td>{{ $user->email }}</td>
-            <td>{{ $user->email_verified_at }}</td>
+            {{-- <td>{{ $user->email_verified_at }}</td> --}}
             <td>{{ $user->password }}</td>
-            <td>{{ $user->remember_token }}</td>
+            {{-- <td>{{ $user->remember_token }}</td> --}}
                 <td>
                     {!! Form::open(['route' => ['users.destroy', $user->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>

@@ -25,7 +25,7 @@ class ClassAssigningRepository extends BaseRepository
         'day_id',
         'time_id'
     ];
-
+    protected $primaryKey ='class_assign_id';
     /**
      * Return searchable fields
      *

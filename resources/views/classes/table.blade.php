@@ -2,9 +2,9 @@
     <table class="table" id="classes-table">
         <thead>
             <tr>
-                <th>Class Name</th>
-        <th>Class Code</th>
-                <th colspan="3">Action</th>
+                <th>Nom de la classe</th>
+        <th>Code de la classe</th>
+                <th colspan="3">Actions</th>
             </tr>
         </thead>
         <tbody>

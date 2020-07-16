@@ -1,9 +1,13 @@
-  <!-- Modal -->
+
+
+              <!-- Modal -->
   <div class="modal fade" id="add-admission-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-dialog-centered" 
+    style="width:90%"
+    role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+          <h5 class="modal-title" id="exampleModalLongTitle">Ajouter un nouvel etudiant</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -11,101 +15,111 @@
         <div class="modal-body">
 
             {{-- AUTO GENERATED USERNAME AND PASSWORD --}}
-        <input type="text" name="username" id="username" value="{{  $rand_username_password }}">
-        <input type="text" name="password" id="password" value="{{  $rand_username_password }}" >
+        {{-- <input type="text" name="username" id="username" value="{{  $rand_username_password }}">
+        <input type="text" name="password" id="password" value="{{  $rand_username_password }}" > --}}
         {{-- <input type="text" name="student_id" id="student_id" value="{{ $student_id}}" > --}}
             
 
             <input type="hidden" name="user_id" id="user_id" 
             value="{{Auth::id()}}" required>
 <!-- First Name Field -->
-<div class="form-group col-sm-12">
+<div class="form-group col-sm-4">
     <input type="text" 
         name="first_name"
         id="first_name" 
         class="form-control text-capitalize"
-        placeholder="Enter first name here"
+        placeholder="Prenom"
         >
 </div>
 
 
 <!-- Last fater name Field -->
-<div class="form-group col-sm-12">
+<div class="form-group col-sm-4">
     <input type="text" 
         name="last_name"
         id="last_name" 
         class="form-control text-capitalize"
-        placeholder="Enter first name here"
+        placeholder="Nom"
         >
 </div>
 
+<!-- Class Id Field -->
+<div class="form-group col-sm-4">
+    <select class="form-control" name="class_id" id="class_id">
+        <option value="0" selected="true" disabled="true">Choisir classe<option>
+        @foreach($allClasses as $class)
+        <option value="{{$class->class_id}}">{{$class->class_name}}</option>
+        @endforeach
+    </select>
+</div>
+
 <!-- email phone Field -->
-<div class="form-group col-sm-12">
+<div class="form-group col-sm-4">
     <input type="email" 
         name="email"
         id="email" 
         class="form-control text-capitalize"
-        placeholder="Enter the email phone here"
+        placeholder="Email"
         >
 </div>
 
 
 <!-- fathter Name Field -->
-<div class="form-group col-sm-12">
+<div class="form-group col-sm-4">
     <input type="text" 
         name="father_name"
         id="father_name" 
         class="form-control text-capitalize"
-        placeholder="Enter the father name here"
+        placeholder="Nom du pere"
         >
 </div>
 
 <!-- father phone Field -->
-<div class="form-group col-sm-12">
+<div class="form-group col-sm-4">
     <input type="text" 
         name="father_phone"
         id="father_phone" 
         class="form-control text-capitalize"
-        placeholder="Enter the father phone here"
+        placeholder="Telephone du pere"
         >
 </div>
 
 <!-- mother Name Field -->
-<div class="form-group col-sm-12">
+<div class="form-group col-sm-4">
     <input type="text" 
         name="mother_name"
         id="mother_name" 
         class="form-control text-capitalize"
-        placeholder="Enter the mother name here"
+        placeholder="Nom de la mere"
         >
 </div>
 <!-- mother phone Field -->
-<div class="form-group col-sm-12">
+<div class="form-group col-sm-4">
     <input type="text" 
         name="mother_phone"
         id="mother_phone" 
         class="form-control text-capitalize"
-        placeholder="Enter the mother phone here"
+        placeholder="Telephone de la mere"
         >
 </div>
 
 <!-- Gender Field -->
-<div class="col-sm-12">
+<div class="col-sm-4">
     <div class="form-group ">
         <fieldset>
-            <legend for="gender">Gender</legend>
+            <legend for="gender">Sexe</legend>
             <table style="width: 100%; margin-top:14px;">
                 <tr style="border-bottom: 1px solid #ccc">
                     <td>
                         <label>
                             <input type="radio" name="gender" id="gender" value="0">
-                            Male
+                            Masculin
                         </label>
                     </td>
                     <td>
                         <label>
                             <input type="radio" name="gender" id="gender" value="1">
-                            Female
+                            Feminin
                         </label>
                     </td>
                 </tr>
@@ -143,7 +157,7 @@
 
 
 <!-- Dob Field -->
-<div class="col-md-12">
+<div class="col-md-4">
     <div class="form-group">
         <div class="input-group">
             <div class="form-group-addon">
@@ -153,7 +167,7 @@
                  name="dob"
                  id="dob"
                   class="form-control text-capitalize"
-                  placeholder="YY-MM-DD"
+                  placeholder="Date de naissance"
                   >
         </div>
     </div>
@@ -176,20 +190,20 @@
 
  
 <!-- Phone Field -->
-<div class="form-group col-sm-12">
+<div class="form-group col-sm-4">
     <input type="text" 
         name="phone"
         id="phone" 
         class="form-control text-capitalize"
-        placeholder="Enter phone here"
+        placeholder="Telephone"
         >
 </div>
 
 <!-- departement_id Field -->
-<div class="form-group col-sm-12">
+<div class="form-group col-sm-4">
     <select class="form-control" name="departement_id" id="departement_id">
         <option value="0" selected="true"
-            disabled="true">Choose Departement</option>
+            disabled="true">Departement</option>
             @foreach ($departements as $dep)
                  <option value="{{$dep->departement_id}}">{{$dep->departement_name}}</option>
             @endforeach
@@ -199,7 +213,7 @@
 </div>
 
 <!-- Batch Field -->
-<div class="form-group col-sm-12">
+<div class="form-group col-sm-4">
     <select class="form-control" name="batch_id" id="batch_id">
         <option value="0" selected="true"
             disabled="true">Choose Batch</option>
@@ -212,7 +226,7 @@
 </div>
 
 <!-- Faculty Field -->
-<div class="form-group col-sm-12">
+<div class="form-group col-sm-4">
     <select class="form-control" name="faculty_id" id="faculty_id">
         <option value="0" selected="true"
             disabled="true">Choose Faculty</option>
@@ -224,7 +238,7 @@
 </div>
 
 <!-- Image Field -->
-<div class="col-lg-12 col-md-12 col-sm-12">
+<div class="col-lg-12 col-md-12 col-sm-4">
     <div class="from-group form-group-login">
         <table style="margin:0 auto;">
             <thead>
@@ -257,8 +271,8 @@
 </div>
 
 <!-- Adress Field -->
-<div class="form-group col-sm-12">
-   <b><i class="fa fa-map-marker"></i>Address</b>
+<div class="form-group col-sm-4">
+   <b><i class="fa fa-map-marker"></i>Adresse</b>
         
             <textarea placeholder="Enter address here"
             name="adress"
@@ -294,10 +308,10 @@
 </div> --}}
 
 
-</div>
+
 <div class="modal-footer ">
-  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-  {!! Form::submit('Register Admission', ['class' => 'btn btn-primary']) !!}
+  <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+  {!! Form::submit('Enregistrer etudiant', ['class' => 'btn btn-primary']) !!}
 </div>
 </div>
 </div>

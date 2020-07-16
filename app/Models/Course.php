@@ -33,6 +33,7 @@ class Course extends Model
         'course_name',
         'course_code',
         'description',
+        'created_by',
         'status'
     ];
 
@@ -46,6 +47,7 @@ class Course extends Model
         'course_name' => 'string',
         'course_code' => 'string',
         'description' => 'string',
+        'created_by' => 'integer',
         'status' => 'boolean'
     ];
 
@@ -58,6 +60,7 @@ class Course extends Model
         'course_name' => 'required',
         'course_code' => 'required',
         'description' => 'required',
+        'created_by' => 'required',
         'status' => 'required'
     ];
 

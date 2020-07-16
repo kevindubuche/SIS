@@ -10,6 +10,11 @@ use Illuminate\Http\Request;
 use Flash;
 use Response;
 
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use App\Models\Teacher;
+use App\Models\Admission;
+
 class UserController extends AppBaseController
 {
     /** @var  UserRepository */
@@ -115,14 +120,19 @@ class UserController extends AppBaseController
     {
         $user = $this->userRepository->find($id);
 
+        $newUser = $request;
         if (empty($user)) {
             Flash::error('User not found');
 
             return redirect(route('users.index'));
         }
-
-        $user = $this->userRepository->update($request->all(), $id);
-
+        
+        $newPassword =Hash::make( $request->password);
+        $request->password = $newPassword;
+        // dd( $request->all() );
+        //  dd($request->all());
+        $user = $this->userRepository->update([$request->all(),'password'=>$newPassword], $id);
+       
         Flash::success('User updated successfully.');
 
         return redirect(route('users.index'));
@@ -152,5 +162,56 @@ class UserController extends AppBaseController
         Flash::success('User deleted successfully.');
 
         return redirect(route('users.index'));
+    }
+
+    public function profile($id){
+
+        //CHECK IF IT IS A TEACHER , A STUDENT OR AN ADMIN
+        $testUser = User::where(['id'=> $id])->first(); 
+         //IF ADMIN
+         if($testUser->role == 1){
+            $user = User::where('id', $id)->first();
+        // dd($student);
+        return view('users.profile', compact('user'));
+        }
+        //IF TEACHER
+        if($testUser->role == 2){
+            $user = Teacher::where('user_id', $id)->first();
+        // dd($student);
+        return view('users.profile', compact('user'));
+        }
+           //IF STUDENT
+        elseif($testUser->role == 3){
+            $user = Admission::where('user_id', $id)->first();
+            // dd($student);
+        // dd($student);
+        return view('users.profile', compact('user'));
+        }
+        
+
+    }
+
+    public function userUpdatePassword(Request $request){
+        $newData = $request->all();
+        
+        //nap teste si ancien password la bon
+        $user = User::where(['id'=> $newData['user_id'] ])->first(); 
+        // dd($user->password);
+        if ( Hash::check($newData['old_password'], $user->password) ){
+            // valid password and send msg update password
+            
+            $new_password = Hash::make( $newData['new_password']);//this is the new password
+            User::where('id', $newData['user_id'])
+            ->update(['password'=>$new_password]);
+          
+            Flash::success('Votre mot de passe a ete moidifie avec success');
+            return redirect()->back();
+  
+        }else{
+            // send invalid msg or email not found
+            Flash::error('Echec de la modification du mot de passe');
+            return redirect()->back();
+        }
+
     }
 }

@@ -2,7 +2,7 @@
     <table class="table" id="admissions-table">
         <thead>
             <tr>
-                <th>Image</th>
+        <th></th>
         <th> Name</th>
         {{-- <th>Last Name</th> --}}
         <th>Faculty</th>

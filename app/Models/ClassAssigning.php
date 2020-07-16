@@ -29,7 +29,7 @@ class ClassAssigning extends Model
 
 
     protected $dates = ['deleted_at'];
-
+    protected $primaryKey ='class_assign_id';
 
 
     public $fillable = [
@@ -72,6 +72,46 @@ class ClassAssigning extends Model
         'day_id' => 'required',
         'time_id' => 'required'
     ];
+    // public function InfoTeacher()
+    // {
+    //     return $this->belongsTo('App\Models\Teacher','teacher_id');
+    // }
 
+    // public function InfoTeacher()
+    // {
+    //     return $this->hasOne('App\Models\Teacher','teacher_id');
+    // }
+    public function InfoTeacher()
+    {
+        return $this->belongsTo('App\Models\Teacher','teacher_id');
+    }
+
+    public  function InfoClassSchedule(){
+        return $this->belongsTo('App\Models\ClassScheduling','schedule_id');
+     }
+
+    // public function InfoSemester()
+    // {
+    //     $semester_id = $this->belongsTo('App\Models\Semester','semester_id');
+    //     return $this->belongsTo('App\Models\Semester','semester_id');
+    // }
+
+    // public static function InfoTeacher(){
+    //     return  ClassAssigning::join('teachers', 'teachers.teacher_id','=', 'class_assignings.teacher_id')->first();
+    // }
+
+
+    //   public  function InfoSemester(){
+    //     return  ClassScheduling::join('semesters', 'semesters.semester_id','=', 'class_schedulings.semester_id')  ->first();
+    // }
+
+    // public static function InfoCourse(){
+    //     return  ClassScheduling::join('courses', 'courses.course_id','=', 'class_schedulings.course_id')   ->first();
+    // }
+
+    // public static function InfoLevel(){
+    //     return  ClassScheduling::join('levels', 'levels.level_id','=', 'class_schedulings.level_id')   ->first();
+    // }
+    
     
 }

@@ -1,3 +1,4 @@
+
 <aside class="main-sidebar" id="sidebar-wrapper">
 
     <!-- sidebar: style can be found in sidebar.less -->
@@ -6,8 +7,15 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="http://infyom.com/images/logo/blue_logo_150x150.jpg" class="img-circle"
-                     alt="User Image"/>
+                @if (Auth::user()->role ==2)
+                <img src="{{asset('teacher_images/'.Auth::user()->GetTeacher()->image)}}" class="img-circle" alt="User Image">
+                @elseif( Auth::user()->role == 3)
+                <img src="{{asset('student_images/'.Auth::user()->GetStudent()->image)}}" class="img-circle" alt="User Image">
+                @else
+                <img src="{{asset('logo.jpg')}}" class="img-circle"
+                alt="User Image"/>
+                @endif
+            
             </div>
             <div class="pull-left info">
                 @if (Auth::guest())

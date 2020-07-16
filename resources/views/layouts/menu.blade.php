@@ -1,3 +1,7 @@
+<li >
+    <a href="{{ url('/home') }}"><i class="fa fa-home"></i><span>Accueil</span></a>
+</li>
+
 
 <li class="treeview">
     <a href="#">
@@ -28,7 +32,7 @@
     </li>
 
     <li class="{{ Request::is('courses*') ? 'active' : '' }}">
-        <a href="{{ route('courses.index') }}"><i class="fa fa-edit"></i><span>Courses</span></a>
+        <a href="{{ route('courses.index') }}"><i class="fa fa-edit"></i><span>Cours</span></a>
     </li>
 
     <li class="{{ Request::is('times*') ? 'active' : '' }}">
@@ -51,7 +55,7 @@
 
 <li class="treeview">
     <a href="#">
-        <i class=" fa fa-dashboard"></i><span>Schedule</span>
+        <i class=" fa fa-dashboard"></i><span>Horaire</span>
         <span class="pull-right-container">
             <i class="fa fa-angle-left pull-right"></i>
         </span>
@@ -63,7 +67,7 @@
 </li>
 
 <li class="{{ Request::is('classSchedulings*') ? 'active' : '' }}">
-    <a href="{{ route('classSchedulings.index') }}"><i class="fa fa-edit"></i><span>Class Schedulings</span></a>
+    <a href="{{ route('classSchedulings.index') }}"><i class="fa fa-edit"></i><span>Horaire</span></a>
 </li>
 
 </ul>
@@ -100,9 +104,7 @@
     <a href="{{ route('admissions.index') }}"><i class="fa fa-user"></i><span>Admissions</span></a>
 </li>
 
-<li class="{{ Request::is('teachers*') ? 'active' : '' }}">
-    <a href="{{ route('teachers.index') }}"><i class="fa fa-user-circle"></i><span>Teachers</span></a>
-</li>
+
 
 @if(Auth::user()->role < 4)
 <li class="{{ Request::is('attendances*') ? 'active' : '' }}">
@@ -113,12 +115,32 @@
     <a href="{{ route('roles.index') }}"><i class="fa fa-edit"></i><span>Roles</span></a>
 </li>
 
-<li class="{{ Request::is('users*') ? 'active' : '' }}">
-    <a href="{{ route('users.index') }}"><i class="fa fa-user"></i><span>Users</span></a>
-</li>
 
 <li class="{{ Request::is('semesters*') ? 'active' : '' }}">
     <a href="{{ route('semesters.index') }}"><i class="fa fa-edit"></i><span>Semesters</span></a>
 </li>
 
 
+<li class="{{ Request::is('statuses*') ? 'active' : '' }}">
+    <a href="{{ route('statuses.index') }}"><i class="fa fa-edit"></i><span>Statuses</span></a>
+</li>
+
+
+{{-- FOR ADMIN ONLY --}}
+
+    @if(Auth::user()->role < 2)
+    {{-- CAN CRUD PROFS --}}
+    <li class="{{ Request::is('teachers*') ? 'active' : '' }}">
+        <a href="{{ route('teachers.index') }}"><i class="fa fa-user-circle"></i><span>Professeurs</span></a>
+    </li>
+    {{-- CAN CRUD USERS --}}
+    <li class="{{ Request::is('users*') ? 'active' : '' }}">
+        <a href="{{ route('users.index') }}"><i class="fa fa-group"></i><span>Utilisateurs</span></a>
+    </li>
+    @endif
+
+    {{-- PROFILE VIEW--}}
+    <li class="{{ Request::is('users*') ? 'active' : '' }}">
+        <a href="{{ url('/profile/'.Auth::user()->id)}}"><i class="fa fa-user-circle"></i><span>Profile</span></a>
+    </li>
+  

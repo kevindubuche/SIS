@@ -39,6 +39,7 @@ class ClassScheduling extends Model
     public $fillable = [
         'course_id',
         'level_id',
+        'class_id',
         'shift_id',
         'classwoom_id',
         'batch_id',
@@ -46,6 +47,7 @@ class ClassScheduling extends Model
         'time_id',
         'teacher_id',
         'start_time',
+        'semester_id',
         'end_time',
         'status'
     ];
@@ -58,10 +60,12 @@ class ClassScheduling extends Model
     protected $casts = [
         'schedule_id' => 'integer',
         'course_id' => 'integer',
+        'class_id' => 'integer',
         'level_id' => 'integer',
         'shift_id' => 'integer',
         'classwoom_id' => 'integer',
         'batch_id' => 'integer',
+        'semester_id' =>'integer',
         'day_id' => 'integer',
         'time_id' => 'integer',
         'teacher_id' => 'integer',
@@ -75,17 +79,47 @@ class ClassScheduling extends Model
      */
     public static $rules = [
         'course_id' => 'required',
-        'level_id' => 'required',
-        'shift_id' => 'required',
-        'classwoom_id' => 'required',
-        'batch_id' => 'required',
+        'class_id'=>'required',
+        // 'level_id' => 'required',
+        // 'shift_id' => 'required',
+        // 'classwoom_id' => 'required',
+        // 'batch_id' => 'required',
         'day_id' => 'required',
         'time_id' => 'required',
+        'semester_id'=>'required',
         // 'teacher_id' => 'required',
         'start_time' => 'required',
         'end_time' => 'required',
         'status' => 'required'
     ];
+    // public static function getCourseInfo(){
+    //     $course = ClassScheduling::join('courses', 'courses.course_id','=', 'class_schedulings.course_id')
+    //                 ->first();
+    //                 return $course;
+    // }
 
+    // public  function InfoCourse(){
+    //                 return $this->belongsTo('App\Models\Course','course_id');
+    // }
+
+
+    // public  function InfoCourse(){
+    //     $course = ClassScheduling::join('courses', 'courses.course_id','=', 'class_schedulings.course_id')
+    //     ->first();
+                    
+    //                 return $course;
+    // }
+    public function InfoCourse()
+    {
+        return $this->belongsTo('App\Models\Course','course_id');
+    }
+
+    public  function InfoSemester(){
+        return $this->hasOne('App\Models\Semester','semester_id');
+     }
+     
+     public  function InfoClass(){
+        return $this->hasOne('App\Models\Classes','class_id');
+     }
     
 }

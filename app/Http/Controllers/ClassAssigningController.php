@@ -10,6 +10,15 @@ use Illuminate\Http\Request;
 use Flash;
 use Response;
 
+use App\Models\Teacher;
+use App\Models\ClassScheduling;
+use App\Models\Status;
+use DB;
+use Validator;
+use App\Models\ClassAssigning;
+use PDF;
+
+
 class ClassAssigningController extends AppBaseController
 {
     /** @var  ClassAssigningRepository */
@@ -31,10 +40,58 @@ class ClassAssigningController extends AppBaseController
     {
         $classAssignings = $this->classAssigningRepository->all();
 
-        return view('class_assignings.index')
+        $allTeacher = Teacher::get();
+        $classSchedules = ClassScheduling::all();
+        return view('class_assignings.index', compact('allTeacher','classSchedules'))
             ->with('classAssignings', $classAssignings);
+
+    }
+    
+    public function insert(Request $request)
+    {
+        // dd($request);
+        $validator = Validator::make($request->all(),[
+            'teacher_id'=>'required'
+        ]);
+
+        if($validator->fails()) {
+            Flash::error('Teacher can not be empty');
+               
+            return redirect(route('classAssignings.index'));
+        }
+        $input = $request->all();
+        
+        $teacher = new Status;
+        $teacher->teacher_id = $request->teacher_id;
+        $status_id = $teacher->save();
+        if($status_id !=0){
+            foreach($request->multiclass as $key => $teach){
+                $data2 = array('teacher_id'=> $request->teacher_id,
+                'schedule_id'=> $request->multiclass[$key]);
+                // dd( $request->multiclass[$key]);
+
+            $checkExist = ClassAssigning::where('teacher_id', $request->teacher_id)
+                            ->where('schedule_id', $request->multiclass[$key])
+                            ->first();
+
+            if($checkExist){
+                Flash::error('Class Assigning for this Teacher already exist');
+                return redirect(route('classAssignings.index'));
+            }
+            ClassAssigning::insert($data2);
+
+            }
+        }
+        Flash::success('Class Assigning Generate successfully');
+        return redirect(route('classAssignings.index'));
+
     }
 
+    // public function classassingin_validation(){
+    //     $rules = [
+    //         'teacher_id'=> 'required'
+    //     ];
+    // }
     /**
      * Show the form for creating a new ClassAssigning.
      *
@@ -152,5 +209,22 @@ class ClassAssigningController extends AppBaseController
         Flash::success('Class Assigning deleted successfully.');
 
         return redirect(route('classAssignings.index'));
+    }
+    
+    public function PDFGenerator(Request $request){
+        $classAssignings = ClassAssigning::join('class_schedulings','class_schedulings.schedule_id',
+        '=','class_assignings.schedule_id')
+        ->join('teachers', 'teachers.teacher_id','=','class_assignings.teacher_id')
+        ->join('courses', 'courses.course_id','=','class_schedulings.course_id')
+        ->join('classes', 'classes.class_id','=','class_schedulings.class_id')
+        ->join('semesters', 'semesters.semester_id','=','class_schedulings.semester_id')
+        ->get();
+
+        $dompdf = PDF::loadview('class_assignings.pdf', ['classAssignings' => $classAssignings]);
+        $dompdf->setPaper('A4','landscape');
+        $dompdf->stream();
+
+        return $dompdf->download('Assignations.pdf');
+
     }
 }

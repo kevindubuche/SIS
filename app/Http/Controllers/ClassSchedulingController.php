@@ -19,6 +19,7 @@ use App\Models\Level;
 use App\Models\Semester;
 use App\Models\Shift;
 use App\Models\Time; 
+use App\Models\Teacher;
 
 use App\App\ClassScheduling;
 
@@ -52,6 +53,7 @@ class ClassSchedulingController extends AppBaseController
         $allDays = Day::all();
         $allTimes = Time::all();
         $allSemesters = Semester::all();
+        $allTeachers = Teacher::all();
 
 
         $classSchedulings = $this->classSchedulingRepository->all();
@@ -65,7 +67,7 @@ class ClassSchedulingController extends AppBaseController
                  'classes.*',
                 'courses.*',
                  'days.*',
-                 'levels.*',
+                //  'levels.*',
                  'semesters.*',
                  'shifts.*',
                  'times.*',
@@ -75,7 +77,7 @@ class ClassSchedulingController extends AppBaseController
              ->join('batches','batches.batch_id','=','class_schedulings.batch_id')
              ->join('classes','classes.class_id','=','class_schedulings.class_id')
              ->join('days','days.day_id','=','class_schedulings.day_id')
-             ->join('levels','levels.level_id','=','class_schedulings.level_id')
+            //  ->join('levels','levels.level_id','=','class_schedulings.level_id')
              ->join('semesters','semesters.semester_id','=','class_schedulings.semester_id')
              ->join('shifts','shifts.shift_id','=','class_schedulings.shift_id')
              ->join('times','times.time_id','=','class_schedulings.time_id')
@@ -90,7 +92,7 @@ class ClassSchedulingController extends AppBaseController
                 // 'class',
                 'course',
                 'day',
-                'level',
+                // 'level',
                 // 'semester',
                 'shift',
                 'time',
@@ -104,7 +106,8 @@ class ClassSchedulingController extends AppBaseController
                 'allBatches',
                 'allDays',
                 'allTimes',
-                'allSemesters'))
+                'allSemesters',
+                'allTeachers'))
             ->with('classSchedulings', $classSchedulings);
     }
 
@@ -135,6 +138,7 @@ class ClassSchedulingController extends AppBaseController
     public function store(CreateClassSchedulingRequest $request)
     {
         $input = $request->all();
+        //  dd($request->all());
 
         $classScheduling = $this->classSchedulingRepository->create($input);
 
