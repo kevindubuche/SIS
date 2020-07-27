@@ -32,24 +32,24 @@ class ClassScheduling extends Model
     const UPDATED_AT = 'updated_at';
 
 
-    protected $dates = ['deleted_at'];
+    protected $dates = ['deleted_at', 'start_time','end_time'];
     protected $primaryKey= "schedule_id";
-
 
     public $fillable = [
         'course_id',
         'level_id',
         'class_id',
-        'shift_id',
-        'classwoom_id',
-        'batch_id',
-        'day_id',
-        'time_id',
-        'teacher_id',
-        'start_time',
+        // 'shift_id',
+        // 'classwoom_id',
+        // 'batch_id',
+        // 'day_id',
+        // 'time_id',
+        // 'teacher_id',
         'semester_id',
+        'start_time',
         'end_time',
-        'status'
+        'created_by'
+        // 'status'
     ];
 
     /**
@@ -61,15 +61,16 @@ class ClassScheduling extends Model
         'schedule_id' => 'integer',
         'course_id' => 'integer',
         'class_id' => 'integer',
-        'level_id' => 'integer',
-        'shift_id' => 'integer',
-        'classwoom_id' => 'integer',
-        'batch_id' => 'integer',
+        // 'level_id' => 'integer',
+        // 'shift_id' => 'integer',
+        // 'classwoom_id' => 'integer',
+        // 'batch_id' => 'integer',
         'semester_id' =>'integer',
         'day_id' => 'integer',
         'time_id' => 'integer',
         'teacher_id' => 'integer',
-        'status' => 'boolean'
+        'created_by' => 'integer'
+        // 'status' => 'boolean'
     ];
 
     /**
@@ -84,13 +85,14 @@ class ClassScheduling extends Model
         // 'shift_id' => 'required',
         // 'classwoom_id' => 'required',
         // 'batch_id' => 'required',
-        'day_id' => 'required',
-        'time_id' => 'required',
-        'semester_id'=>'required',
+        // 'day_id' => 'required',
+        // 'time_id' => 'required',
+        // 'semester_id'=>'required',
         // 'teacher_id' => 'required',
         'start_time' => 'required',
         'end_time' => 'required',
-        'status' => 'required'
+        'created_by' => 'required',
+        // 'status' => 'required'
     ];
     // public static function getCourseInfo(){
     //     $course = ClassScheduling::join('courses', 'courses.course_id','=', 'class_schedulings.course_id')
@@ -115,11 +117,11 @@ class ClassScheduling extends Model
     }
 
     public  function InfoSemester(){
-        return $this->hasOne('App\Models\Semester','semester_id');
+        return $this->belongsTo('App\Models\Semester','semester_id');
      }
      
      public  function InfoClass(){
-        return $this->hasOne('App\Models\Classes','class_id');
+        return $this->belongsTo('App\Models\Classes','class_id');
      }
     
 }

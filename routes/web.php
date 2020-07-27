@@ -83,6 +83,10 @@ Route::resource('classAssignings', 'ClassAssigningController');
 
 Route::resource('classSchedulings', 'ClassSchedulingController');
 
+Route::get('/calendar', function () {
+    return view('class_schedulings.calendar');
+});
+
 Route::resource('transactions', 'TransactionsController');
 
 Route::resource('admissions', 'AdmissionController');
@@ -120,3 +124,10 @@ Route::post('/userUpdatePassword','UserController@userUpdatePassword');
 
 });
 
+
+
+Route::resource('actuses', 'ActusController');
+
+Route::resource('comments', 'CommentsController');
+
+Route::resource('exams', 'ExamController');

@@ -3,7 +3,7 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Teacher
+            Professeur
         </h1>
    </section>
    <div class="content">
@@ -23,22 +23,24 @@
         value="{{date('Y-m-d')}}">
 <!-- First Name Field -->
 <div class="form-group col-sm-12">
+    <label >Nom</label>
 <input type="text" 
     name="first_name"
     id="first_name" 
     class="form-control text-capitalize"
-    placeholder="Enter first name here"
+    placeholder="Prenom"
     value="{{$teacher->first_name}}"
     >
 </div>
 
 <!-- Last Name Field -->
 <div class="form-group col-sm-12">
+    <label >Prenom</label>
 <input type="text" 
     name="last_name"
     id="last_name" 
     class="form-control text-capitalize"
-    placeholder="Enter first name here"
+    placeholder="Nom"
     value="{{$teacher->last_name}}"
     >
 </div>
@@ -47,19 +49,19 @@
 <div class="col-sm-12">
 <div class="form-group ">
     <fieldset>
-        <legend for="gender">Gender</legend>
+        <legend for="gender">Sexe</legend>
         <table style="width: 100%; margin-top:14px;">
             <tr style="border-bottom: 1px solid #ccc">
                 <td>
                     <label>
                         <input type="radio" name="gender" id="gender" value="0" checked>
-                        Male
+                        Masculin
                     </label>
                 </td>
                 <td>
                     <label>
                         <input type="radio" name="gender" id="gender" value="1">
-                        Female
+                        Feminin
                     </label>
                 </td>
             </tr>
@@ -72,19 +74,37 @@
 <div class="col-sm-12">
 <div class="form-group ">
     <fieldset>
-        <legend for="gender">Status</legend>
+        <legend for="gender">Status matrimonial</legend>
         <table style="width: 100%; margin-top:14px;">
             <tr style="border-bottom: 1px solod #ccc">
                 <td>
                     <label>
                         <input type="radio" name="status" id="status" value="0" required checked>
-                        Single
+                        Celibataire
                     </label>
                 </td>
                 <td>
                     <label>
                         <input type="radio" name="status" id="status" value="1" required>
-                        Maried
+                        Fiance(e)
+                    </label>
+                </td>
+                <td>
+                    <label>
+                        <input type="radio" name="status" id="status" value="2" required>
+                        Marie(e)
+                    </label>
+                </td>
+                <td>
+                    <label>
+                        <input type="radio" name="status" id="status" value="3" required>
+                       Divorce(e)
+                    </label>
+                </td>
+                <td>
+                    <label>
+                        <input type="radio" name="status" id="status" value="4" required>
+                        Veuf(ve)
                     </label>
                 </td>
             </tr>
@@ -100,6 +120,7 @@
 <div class="col-md-12">
 <div class="form-group">
     <div class="input-group">
+        <label>Date de naissance</label>
         <div class="form-group-addon">
             <i class="fa fa-calendar teacherdob"></i>
         </div>
@@ -130,6 +151,7 @@
 
 <!-- Phone Field -->
 <div class="form-group col-sm-12">
+    <label>Telephone</label>
 <input type="text" 
     name="phone"
     id="phone" 
@@ -142,6 +164,7 @@
 
 <!-- Email Field -->
 <div class="form-group col-sm-12">
+    <label>Email</label>
 <input type="text" 
     name="email"
     id="email" 
@@ -186,9 +209,9 @@
 
 <!-- Adress Field -->
 <div class="form-group col-sm-12">
-<b><i class="fa fa-map-marker"></i>Address</b>
+<b><i class="fa fa-map-marker"></i>Adresse</b>
     
-        <textarea placeholder="Enter address here"
+        <textarea placeholder="Entrer adresse"
         name="adress"
         id="adress"
         cols="40" rows="2"
@@ -203,7 +226,7 @@
 
                 </div>
                     <div class="modal-footer">
-                        {!! Form::submit('Update Teacher', ['class' => 'btn btn-info']) !!}
+                        {!! Form::submit('Modifier professeur', ['class' => 'btn btn-info']) !!}
                     </div>
 
                    {!! Form::close() !!}

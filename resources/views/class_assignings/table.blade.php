@@ -6,7 +6,7 @@
     role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Assigner un professeur a un coure</h5>
+          <h5 class="modal-title" id="exampleModalLongTitle">Assigner un professeur a un cours</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -126,9 +126,9 @@
               <td>
                   {!! Form::open(['route' => ['classAssignings.destroy', $classAssigning->class_assign_id], 'method' => 'delete']) !!}
                   <div class='btn-group'>
-                      <a href="{{ route('departements.show', [$classAssigning->class_assign_id]) }}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a>
+                      <a href="{{ route('classAssignings.show', [$classAssigning->class_assign_id]) }}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a>
                       <a href="{{ route('classAssignings.edit', [$classAssigning->class_assign_id]) }}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>
-                      {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
+                      {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Etes-vous sur?')"]) !!}
                   </div>
                   {!! Form::close() !!}
               </td>

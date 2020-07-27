@@ -58,7 +58,7 @@ class FacultyController extends AppBaseController
 
         $faculty = $this->facultyRepository->create($input);
 
-        Flash::success('Faculty saved successfully.');
+        Flash::success('Faculte enregistree avec succe.');
 
         return redirect(route('faculties.index'));
     }

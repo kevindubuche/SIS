@@ -21,7 +21,7 @@ use App\Models\Shift;
 use App\Models\Time; 
 use App\Models\Teacher;
 
-use App\App\ClassScheduling;
+use App\Models\ClassScheduling;
 
 use DB;
 class ClassSchedulingController extends AppBaseController
@@ -46,69 +46,31 @@ class ClassSchedulingController extends AppBaseController
         
         $allClasses = Classes::all();
         $allCourses = Course::all();
-        $allLevels = Level::all();
-        $allShifts = Shift::all();
-        $allClassrooms = Classroom::all();
-        $allBatches = Batch::all();
-        $allDays = Day::all();
-        $allTimes = Time::all();
         $allSemesters = Semester::all();
         $allTeachers = Teacher::all();
+        $classSchedule = ClassScheduling::all();
 
 
-        $classSchedulings = $this->classSchedulingRepository->all();
+        // $classSchedulings = $this->classSchedulingRepository->all();
 
         //////////////////////////////////////
         //AL DEYE TOUT TOUT SCHEDULE AK AK INFO KORESPONDAN YO
-         $classSchedule = DB::table('class_schedulings')
-            ->select(
-                'class_schedulings.*',
-                 'batches.*',
-                 'classes.*',
-                'courses.*',
-                 'days.*',
-                //  'levels.*',
-                 'semesters.*',
-                 'shifts.*',
-                 'times.*',
-                 'classrooms.*'
-            )
-            ->join('courses','courses.course_id','=','class_schedulings.course_id')
-             ->join('batches','batches.batch_id','=','class_schedulings.batch_id')
-             ->join('classes','classes.class_id','=','class_schedulings.class_id')
-             ->join('days','days.day_id','=','class_schedulings.day_id')
-            //  ->join('levels','levels.level_id','=','class_schedulings.level_id')
-             ->join('semesters','semesters.semester_id','=','class_schedulings.semester_id')
-             ->join('shifts','shifts.shift_id','=','class_schedulings.shift_id')
-             ->join('times','times.time_id','=','class_schedulings.time_id')
-             ->join('classrooms','classrooms.classroom_id','=','class_schedulings.classwoom_id')
-           
-           ->get();
-            //   dd($classSchedule);
-                //  dd($allCourses);
+        //  $classSchedule = DB::table('class_schedulings')
+        //     ->select(
+        //         'class_schedulings.*',
+        //          'classes.*',
+        //         'courses.*',
+        //          'semesters.*'
+        //     )
+        //     ->where('class_schedulings.deleted_at')
+        //     ->join('courses','courses.course_id','=','class_schedulings.course_id')
+        //     ->join('classes','classes.class_id','=','class_schedulings.class_id')
+        //     ->join('semesters','semesters.semester_id','=','class_schedulings.semester_id')
+        //     ->get();
             return view('class_schedulings.index',
-        compact('classSchedule',
-                'batch',
-                // 'class',
-                'course',
-                'day',
-                // 'level',
-                // 'semester',
-                'shift',
-                'time',
-                'classrooms',
-                //all the elements
-                'allCourses',
-                'allClasses',
-                'allLevels',
-                'allShifts',
-                'allClassrooms',
-                'allBatches',
-                'allDays',
-                'allTimes',
-                'allSemesters',
-                'allTeachers'))
-            ->with('classSchedulings', $classSchedulings);
+            compact('classSchedule', 'allCourses', 'allClasses', 'allSemesters', 'allTeachers'))
+            // ->with('classSchedulings', $classSchedulings)
+            ;
     }
 
     public function DynamicLevel(Request $request){
@@ -138,13 +100,24 @@ class ClassSchedulingController extends AppBaseController
     public function store(CreateClassSchedulingRequest $request)
     {
         $input = $request->all();
-        //  dd($request->all());
+        //   dd($input);
+        $count = ClassScheduling::where('class_id',$input['class_id'])
+        ->where( 'course_id', $input['course_id'])
+        ->where('semester_id',$input['semester_id'])->get()->count();
 
-        $classScheduling = $this->classSchedulingRepository->create($input);
-
-        Flash::success('Class Scheduling saved successfully.');
+        if($count != 0){
+            Flash::error('Evenement deja dans l\'horaire.');
 
         return redirect(route('classSchedulings.index'));
+        }
+        else{
+             $classScheduling = $this->classSchedulingRepository->create($input);
+
+        Flash::success('Opération effectuée avec succes.');
+
+        return redirect(route('classSchedulings.index'));
+        }
+       
     }
 
     /**
@@ -206,16 +179,16 @@ class ClassSchedulingController extends AppBaseController
         $classSchedule = array(
             'class_id'=> $request->class_id3,
             'course_id' => $request->course_id3,
-            'level_id' => $request->level_id3,
-            'shift_id' => $request->shift_id3, 
-            'classroom_id'=> $request->classroom_id3,
-            'batch_id' => $request->batch_id3,
-            'day_id' => $request->day_id3,
-            'time_id' => $request->time_id3,
+            // 'level_id' => $request->level_id3,
+            // 'shift_id' => $request->shift_id3, 
+            // 'classroom_id'=> $request->classroom_id3,
+            // 'batch_id' => $request->batch_id3,
+            // 'day_id' => $request->day_id3,
+            // 'time_id' => $request->time_id3,
             'semester_id'=> $request->semester_id3,
             'start_time'=> $request->start_time3,
-            'end_time' => $request->end_time3,
-            'status' => $request->status3
+            'end_time' => $request->end_time3
+            // 'status' => $request->status3
 
 
         );
@@ -226,7 +199,7 @@ class ClassSchedulingController extends AppBaseController
         if(empty($classSchedule)){
             Flash::error('Class schedule update failed');
         }
-        Flash::success('Class Scheduling updated successfully.');
+        Flash::success('Opération effectuée avec succes.');
         return redirect()->route('classSchedulings.index');
 
         // $classScheduling = $this->classSchedulingRepository->find($id);
@@ -258,14 +231,14 @@ class ClassSchedulingController extends AppBaseController
         $classScheduling = $this->classSchedulingRepository->find($id);
 
         if (empty($classScheduling)) {
-            Flash::error('Class Scheduling not found');
+            Flash::error('Horaire non trouvé');
 
             return redirect(route('classSchedulings.index'));
         }
 
         $this->classSchedulingRepository->delete($id);
 
-        Flash::success('Class Scheduling deleted successfully.');
+        Flash::success('Opération effectuée avec succes.');
 
         return redirect(route('classSchedulings.index'));
     }

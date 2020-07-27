@@ -31,11 +31,11 @@ class Departement extends Model
 
 
     public $fillable = [
-        'faculty_id',
+        // 'faculty_id',
         'departement_name',
         'departement_code',
-        'departement_description',
-        'status'
+        'departement_description'
+        
     ];
 
     /**
@@ -45,11 +45,11 @@ class Departement extends Model
      */
     protected $casts = [
         'departement_id' => 'integer',
-        'faculty_id' => 'integer',
+        // 'faculty_id' => 'integer',
         'departement_name' => 'string',
         'departement_code' => 'string',
-        'departement_description' => 'string',
-        'status' => 'boolean'
+        'departement_description' => 'string'
+      
     ];
     protected $primaryKey ='departement_id';
     /**
@@ -58,15 +58,15 @@ class Departement extends Model
      * @var array
      */
     public static $rules = [
-        'faculty_id' => 'required',
+        // 'faculty_id' => 'required',
         'departement_name' => 'required',
         'departement_code' => 'required',
-        'departement_description' => 'required',
-        'status' => 'required'
+        'departement_description' => 'required'
+       
     ];
 
-    public function InfoFaculty()
-    {
-        return $this->belongsTo('App\Models\Faculty','faculty_id');
-    }
+    // public function InfoFaculty()
+    // {
+    //     return $this->belongsTo('App\Models\Faculty','faculty_id');
+    // }
 }

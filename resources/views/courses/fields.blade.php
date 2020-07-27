@@ -31,14 +31,14 @@
     {!! Form::textarea('description', null, ['class' => 'form-control', 'cols'=>40, 'rows'=>2]) !!}
 </div>
 
-<!-- Status Field -->
+{{-- <!-- Status Field -->
 <div class="form-group ">
     {!! Form::label('status', 'Status:') !!}
     <label class="checkbox-inline">
         {!! Form::hidden('status', 0) !!}
         {!! Form::checkbox('status', '1', null) !!}
     </label>
-</div>
+</div> --}}
 
 
 <input type="file" name="filename" id="filename">

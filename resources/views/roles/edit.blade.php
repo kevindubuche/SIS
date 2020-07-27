@@ -15,12 +15,12 @@
                         
             <!-- Name Field -->
             <div class="form-group col-md-6 ">
-                {!! Form::label('name', 'Name:') !!}
+                {!! Form::label('name', 'Nom:') !!}
                 {!! Form::text('name', null, ['class' => 'form-control']) !!}
             </div>
         </div>
             <div>
-                {!! Form::submit('Update Role', ['class'=> 'btn btn-info']) !!}
+                {!! Form::submit('Modifier Role', ['class'=> 'btn btn-info']) !!}
             </div>
         
                         {{-- @include('roles.fields') --}}

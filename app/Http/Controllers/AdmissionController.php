@@ -18,6 +18,7 @@ use App\Models\Batch;
 use App\Models\Classes;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use DB;
 class AdmissionController extends AppBaseController
 {
     /** @var  AdmissionRepository */
@@ -41,7 +42,7 @@ class AdmissionController extends AppBaseController
         $admissions = Admission::all();
         $student_id = Admission::max('student_id');
         $roll_id = Roll::max('roll_id');
-        $faculties = Faculty::all();
+        // $faculties = Faculty::all();
         $departements = Departement::all();
         $batches = Batch::all();
         $allClasses = Classes::all();
@@ -50,7 +51,7 @@ class AdmissionController extends AppBaseController
 
         return view('admissions.index',
             compact('admissions', 'student_id',
-           'faculties','departements',
+           'departements',
             'batches', 'roll_id',
         'rand_username_password',
     'allClasses'));
@@ -77,43 +78,51 @@ class AdmissionController extends AppBaseController
     {
         $input = $request->all();
 // dd($input); 
-        $file = $request->file('image');
-        $extension = $file->getClientOriginalExtension();
-        $new_image_name = time().'.'.$extension;
-        $file->move(public_path('student_images'), $new_image_name);
+
+        $user = new User;
+        $user->name = $request->first_name .' '.$request->last_name;
+        $user->role = 3;
+        $user->email = $request->email;
+        $password = 'qwerty123';//nou ka genere yon ran si nou vle
+        $user->password = Hash::make( $password);
+
+        $user->save();
 
 
-        $student = new Admission;
-        $student->first_name = $request->first_name;
-        $student->last_name = $request->last_name;
-        $student->father_name = $request->father_name;
-        $student->father_phone = $request->father_phone;
-        $student->mother_name = $request->mother_name;
-        $student->mother_phone = $request->mother_phone;
-        $student->gender = $request->gender;
-        $student->phone = $request->phone;
-        $student->dob = $request->dob;
-        $student->email = $request->email;
-        $student->adress = $request->adress;
-        $student->departement_id = $request->departement_id;
-        $student->faculty_id = $request->faculty_id;
-        $student->batch_id = $request->batch_id;
-        $student->user_id = $request->user_id;
-        $student->class_id = $request->class_id;
-        $student->dateregistered = date('Y-m-d');
-        $student->image = $new_image_name;
 
+
+        $save =$user->save();
+        $user_id =DB::getPdo()->lastInsertId(); 
 
             //ADD HIM AS A USER IN THE DB
-            if($student->save()){
-                $user = new User;
-                $user->name = $request->first_name .' '.$request->last_name;
-                $user->role = 3;
-                $user->email = $request->email;
-                $password = 'qwerty123';//nou ka genere yon ran si nou vle
-                $user->password = Hash::make( $password);
-    
-                $user->save();
+            if($save){
+                $file = $request->file('image');
+                $extension = $file->getClientOriginalExtension();
+                $new_image_name = time().'.'.$extension;
+                $file->move(public_path('user_images'), $new_image_name);
+        
+        
+                $student = new Admission;
+                $student->first_name = $request->first_name;
+                $student->last_name = $request->last_name;
+                $student->father_name = $request->father_name;
+                $student->father_phone = $request->father_phone;
+                $student->mother_name = $request->mother_name;
+                $student->mother_phone = $request->mother_phone;
+                $student->gender = $request->gender;
+                $student->phone = $request->phone;
+                $student->dob = $request->dob;
+                $student->email = $request->email;
+                $student->adress = $request->adress;
+                $student->departement_id = $request->departement_id;
+                // $student->faculty_id = $request->faculty_id;
+                // $student->batch_id = $request->batch_id;
+                $student->user_id = $user_id;
+                $student->class_id = $request->class_id;
+                $student->dateregistered = date('Y-m-d');
+                $student->image = $new_image_name;
+
+                $student->save();
     
             }
 
@@ -203,7 +212,7 @@ class AdmissionController extends AppBaseController
         $file = $request->file('image');
         $extension = $file->getClientOriginalExtension();
         $new_image_name = time().'.'.$extension;
-        $file->move(public_path('student_images'), $new_image_name);
+        $file->move(public_path('user_images'), $new_image_name);
 
 
         $student = array(
@@ -219,8 +228,8 @@ class AdmissionController extends AppBaseController
             'email' => $request->email,
             'adress' => $request->adress,
             'departement_id' => $request->departement_id,
-            'faculty_id' => $request->faculty_id,
-            'batch_id' => $request->batch_id,
+            // 'faculty_id' => $request->faculty_id,
+            // 'batch_id' => $request->batch_id,
             'user_id' => $request->user_id,
             'dateregistered' => date('Y-m-d'),
             'image' => $new_image_name

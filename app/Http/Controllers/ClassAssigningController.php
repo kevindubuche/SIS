@@ -82,7 +82,7 @@ class ClassAssigningController extends AppBaseController
 
             }
         }
-        Flash::success('Class Assigning Generate successfully');
+        Flash::success('Assignation faite avec succes');
         return redirect(route('classAssignings.index'));
 
     }

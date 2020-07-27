@@ -75,7 +75,7 @@ class SemesterController extends AppBaseController
         $semester = $this->semesterRepository->find($id);
 
         if (empty($semester)) {
-            Flash::error('Semester not found');
+            Flash::error('Semestre non trouve');
 
             return redirect(route('semesters.index'));
         }
@@ -116,14 +116,14 @@ class SemesterController extends AppBaseController
         $semester = $this->semesterRepository->find($id);
 
         if (empty($semester)) {
-            Flash::error('Semester not found');
+            Flash::error('Semestre non trouve');
 
             return redirect(route('semesters.index'));
         }
 
         $semester = $this->semesterRepository->update($request->all(), $id);
 
-        Flash::success('Semester updated successfully.');
+        Flash::success('Semestre modifie avec succes.');
 
         return redirect(route('semesters.index'));
     }

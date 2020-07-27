@@ -31,12 +31,13 @@ class DepartementController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $faculties = Faculty::all();
+        // $faculties = Faculty::all();
 
         $departements = $this->departementRepository->all();
 
-        return view('departements.index',
-            compact('faculties'))
+        return view('departements.index'
+        // ,            compact('faculties')
+            )
             ->with('departements', $departements);
     }
 
@@ -63,7 +64,7 @@ class DepartementController extends AppBaseController
 
         $departement = $this->departementRepository->create($input);
 
-        Flash::success('Departement saved successfully.');
+        Flash::success('Departement enregistré avec succes.');
 
         return redirect(route('departements.index'));
     }

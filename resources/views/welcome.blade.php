@@ -9,7 +9,7 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title -->
-    <title>Academy - Education Course Template</title>
+    <title>I.F.A</title>
 
     <!-- Favicon -->
     <link rel="icon" href="img/core-img/favicon.ico">
@@ -38,15 +38,15 @@
                                 <a href="index.html"><img src="img/core-img/logo.png" alt="logo" style="width: 100px; height: 100px"></a>
                             </div>
                             <div class="login-content">
-                                {{-- @if(Session::has('studentSession'))
-                            <a href="{{url('/account')}}">Account </a>
+                                @if(Session::has('studentSession'))
+                            <a href="{{url('/account')}}">Compte </a>
                         <span> | </span>
-                                <a href="{{url('/logout')}}"> Logout</a>
+                                <a href="{{url('/logout')}}"> Se dconecter</a>
                             
                                 @else
-                                 <a href="{{url('/student')}}"> Login</a>
+                                 <a href="{{url('/login')}}"> Se connecter</a>
                                
-                                @endif --}}
+                                @endif
 
                                 
                             </div>
@@ -79,7 +79,7 @@
                             <!-- Nav Start -->
                             <div class="classynav">
                                 <ul>
-                                    <li><a href="index.html">Home</a></li>
+                                    <li><a href="index.html">Accueil</a></li>
                                     {{-- <li><a href="#">Pages</a>
                                         <ul class="dropdown">
                                             <li><a href="index.html">Home</a></li>
@@ -118,10 +118,10 @@
                                             </div>
                                         </div>
                                     </li>
-                                    <li><a href="about-us.html">About Us</a></li>
-                                    <li><a href="course.html">Course</a></li>
+                                    <li><a href="about-us.html">A Propos</a></li>
+                                    <li><a href="course.html">Cours</a></li>
                                     <li><a href="contact.html">Contact</a></li>
-                                    <li><a href="#">Se connecter</a>
+                                    {{-- <li><a href="#">Se connecter</a>
                                         <ul class="dropdown">
                                             @if(Session::has('studentSession'))
                                                 <a href="{{url('/account')}}">Compte</a>
@@ -132,7 +132,7 @@
                                                  <a href="{{url('/login')}}">Professeur/Adm</a>                                             
                                             @endif
                                         </ul>
-                                    </li>
+                                    </li> --}}
                                 </ul>
                             </div>
                             <!-- Nav End -->
@@ -141,7 +141,7 @@
                         <!-- Calling Info -->
                         <div class="calling-info">
                             <div class="call-center">
-                                <a href="tel:+654563325568889"><i class="icon-telephone-2"></i> <span>(+65) 456 332 5568 889</span></a>
+                                <a href="tel:+654563325568889"><i class="icon-telephone-2"></i> <span>(+509) 46305413</span></a>
                             </div>
                         </div>
                     </nav>

@@ -4,6 +4,8 @@
 <div class="container">
    <br>
 
+   @include('flash::message')
+   @include('adminlte-templates::common.errors')
 
         <div class="col-md-4">
             <div class="row">
@@ -11,7 +13,7 @@
                     <!-- small box -->
                     <div class="small-box bg-aqua">
                         <div class="inner">
-                            <h3>150</h3>
+                            <h3>{{$totalStudents}}</h3>
                             <p>Total Etudiants</p>
                         </div>
                     </div>
@@ -25,7 +27,7 @@
                     <!-- small box -->
                     <div class="small-box bg-yellow">
                         <div class="inner">
-                            <h3>79</h3>
+                            <h3>{{$totalTeachers}}</h3>
                             <p>Total Professeurs</p>
                         </div>
                     </div>
@@ -39,7 +41,7 @@
                     <!-- small box -->
                     <div class="small-box bg-green">
                         <div class="inner">
-                            <h3>123</h3>
+                        <h3>{{$totalCourses}}</h3>
                             <p>Total Cours</p>
                         </div>
                     </div>
@@ -57,125 +59,200 @@
             <!-- Application buttons -->
             <div class="box">
               <div class="box-header">
-                <h3 class="box-title">Faculte Des Sciences : Access rapide</h3>
+                <h3 class="box-title">Institution Frere Andre : Access rapide</h3>
               </div>
               <div class="box-body">
-                    <p><code>La Faculte des Siences de L'Universite d'Etat d'Haiti</code> FDS-UEH </p>
-                    <a class="btn btn-app">
-                    <i class="fa fa-edit"></i> Edit
+                    <p><code>Institution Frere Andre _ Foyer Eveil</code> I.F.A</p>
+                 
+                         {{-- EVERYBODY CAN ACCESS --}}
+                  <a class="btn btn-app col-md-2" href="{{ url('/home') }}">
+                  <i class="fa fa-home"></i> Accueil
+                  </a>
+                  <a class="btn btn-app col-md-2" href="{{ route('actuses.index') }}">
+                    <i class="fa fa-tags"></i> Actualites
                     </a>
-                    <a class="btn btn-app">
-                    <i class="fa fa-play"></i> Play
-                    </a>
-                    <a class="btn btn-app">
-                    <i class="fa fa-repeat"></i> Repeat
-                    </a>
-                    <a class="btn btn-app">
-                    <i class="fa fa-pause"></i> Pause
-                    </a>
-                    <a class="btn btn-app">
-                    <i class="fa fa-save"></i> Save
-                    </a>
-                    <a class="btn btn-app">
-                    <span class="badge bg-yellow">3</span>
-                    <i class="fa fa-bullhorn"></i> Notifications
-                    </a>
-                    <a class="btn btn-app">
-                    <span class="badge bg-green">300</span>
-                    <i class="fa fa-barcode"></i> Products
-                    </a>
-                    <a class="btn btn-app">
-                    <span class="badge bg-purple">891</span>
-                    <i class="fa fa-users"></i> Users
-                    </a>
-                    <a class="btn btn-app">
+                  <a class="btn btn-app col-md-2" href="{{ route('courses.index') }}">
+                    <span class="badge bg-purple">{{$totalCourses}}</span>
+                  <i class="fa fa-book"></i> Cours
+                  </a>
+                    <a class="btn btn-app col-md-2" href="{{ route('classSchedulings.index') }}">
                     <span class="badge bg-teal">67</span>
-                    <i class="fa fa-inbox"></i> Orders
+                    <i class="fa fa-calendar"></i> Horaire
                     </a>
-                    <a class="btn btn-app">
-                    <span class="badge bg-aqua">12</span>
-                    <i class="fa fa-envelope"></i> Inbox
+                    
+                    <a class="btn btn-app col-md-2" href="{{ route('teachers.index') }}">
+                      <span class="badge bg-red">{{$totalTeachers}}</span>
+                      <i class="fa fa-user-circle"></i> Professeurs
+                      </a>
+                  
+                    <a class="btn btn-app col-md-2" href="{{ url('/profile/'.Auth::user()->id)}}">
+                      <i class="fa fa-user-circle"></i> Profile
                     </a>
-                    <a class="btn btn-app">
-                    <span class="badge bg-red">531</span>
-                    <i class="fa fa-heart-o"></i> Likes
+                    <a class="btn btn-app col-md-2" href="{{ route('exams.index') }}">
+                      <span class="badge bg-red">531</span>
+                      <i class="fa fa-book"></i> Examens
                     </a>
+              {{-- END EVERYBODY CAN ACCESS --}}
+                        {{-- ONLY ADM CAN ACCESS --}}
+                        @if (Auth::user()->role==1)
+                        <a class="btn btn-app col-md-2 "href="{{ route('classes.index') }}">
+                          <i class="fa fa-graduation-cap"></i> Classes
+                          </a>
+                          {{-- <a class="btn btn-app col-md-2" href="{{ route('levels.index') }}">
+                            <i class="fa fa-bar-chart-o"></i> Niveaux
+                            </a> --}}
+                            <a class="btn btn-app col-md-2" href="{{ route('semesters.index') }}">
+                            <i class="fa fa-calendar-times-o"></i> Semestres
+                            </a>
+                            <a class="btn btn-app col-md-2" href="{{ route('faculties.index') }}">
+                              <i class="fa  fa-university"></i> Facultes
+                              </a>
+                              <a class="btn btn-app col-md-2" href="{{ route('departements.index') }}">
+                              <span class="badge bg-yellow">3</span>
+                              <i class="fa fa-code-fork"></i> Departements
+                              </a>
+                              {{-- <a class="btn btn-app col-md-2" href="{{ route('academics.index') }}">
+                              <span class="badge bg-green">300</span>
+                              <i class="fa  fa-clock-o"></i> Annee Academique
+                              </a> --}}
+                              <a class="btn btn-app col-md-2" href="{{ route('roles.index') }}">
+                                <span class="badge bg-red">531</span>
+                                <i class="fa fa-heart-o"></i> Roles
+                                </a>
+                                <a class="btn btn-app col-md-2" href="{{ route('users.index') }}">
+                                  <span class="badge bg-red">531</span>
+                                  <i class="fa fa-group"></i> Utilisateurs
+                                </a>
+                        @endif
+                        {{-- END ONLY ADM CAN ACCESS --}}
+                    
+                  
+            {{-- ONLY ADM AND TEACHERS CAN ACCESS --}}
+             @if (Auth::user()->role < 3)
+             {{-- <a class="btn btn-app col-md-2" href="{{ route('classAssignings.index') }}">
+              <span class="badge bg-purple">891</span>
+              <i class="fa fa-exchange"></i> Affectations
+              </a> --}}
+              <a class="btn btn-app col-md-2" href="{{ route('admissions.index') }}">
+                <span class="badge bg-aqua">{{$totalStudents}}</span>
+                <i class="fa fa-user"></i> Etudiants
+                </a>
+             @endif
+             {{-- END ONLY ADM AND TEACHERS CAN ACCESS --}}
+                  
+            
              </div>
             </div>
         </div>
+        
         <div class="col-md-4">
+          
             <div class="col-md-12">
+           
                 <!-- Box Comment -->
                 <div class="box box-widget">
                   <div class="box-header with-border">
+                    <h3 class="box-title">Actualites</h3>
+                    <hr>
+                    <?php $countActu = 0; ?>
+                    @foreach ($allActus as $actu)
+                    <?php if($countActu == 2) break; ?>
                     <div class="user-block">
-                      <img class="img-circle" src="{{asset('teacher_images/defaultAvatar.png')}}" alt="User Image">
-                      <span class="username"><a href="#">Jonathan Burke Jr.</a></span>
-                      <span class="description">Shared publicly - 7:30 PM Today</span>
+                      @if ($actu->GetUser($actu->created_by)->image)
+                      <img class="img-circle" src="{{asset('user_images/'.$actu->GetUser($actu->created_by)->image)}}" alt="User Image">
+                     @else
+                     <img class="img-circle" src="{{asset('user_images/defaultAvatar.png')}}" alt="User Image">
+                   
+                      @endif
+                    <span class="username"><a href="#">{{$actu->GetUser($actu->created_by)->first_name}} {{$actu->GetUser($actu->created_by)->last_name}}</a></span>
+                    <span class="description">Publie le {{$actu->created_at->format('D M. Y')}} a {{$actu->created_at->format('h:m')}}</span>
                     </div>
+
+                    <div class="box-body">
+                      <!-- post text -->
+                       <p>{{$actu->body}}</p>
+                       <a href="{{ route('actuses.show', [$actu->actu_id]) }}" >Plus</a>
+                       
+                    </div>
+                    <?php $count = 0; ?>
+                 @foreach ($actu->AllComments as $comment)
+                 <?php if($count == 2) break; ?>
+                    <div class="box-footer box-comments">
+                      <div class="box-comment">
+                        <!-- User image -->
+                        {{-- si comment la te creer par yon adm --}}
+                        @if ($comment->GetUser($comment->created_by)->role ==1)
+                        <img class="img-circle img-sm" src="{{asset('user_images/defaultAvatar.png')}}" alt="User Image">
+                        <span class="username">
+                          {{ $comment->GetUser($comment->created_by)->name}} 
+                        @else
+                        <img class="img-circle img-sm" src="{{asset('user_images/'.$comment->GetUser($comment->created_by)->image)}}" alt="User Image">
+                     
+                        <div class="comment-text">
+                              <span class="username">
+                                   {{ $comment->GetUser($comment->created_by)->first_name}} {{ $comment->GetUser($comment->created_by)->last_name}}
+                                                   
+                               
+                        </div>
+                        @endif
+                        <span class="text-muted pull-right">{{$comment->created_at->format('d M. Y')}} a {{$comment->created_at->format('h:m')}}</span>
+                      </span>
+                       {{ $comment->body}} 
+
+                       @if ($comment->created_by == Auth::user()->id  || Auth::user()->role ==1 )
+                        {!! Form::open(['route' => ['comments.destroy', $comment->id_comment], 'method' => 'delete']) !!}
+                        <div class='btn-group'>
+                            <a href="{{ route('comments.edit', [$comment->id_comment]) }}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>
+                            {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn  btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
+                        </div>
+                        {!! Form::close() !!} 
+                       @endif
+                      
+                       
+                        <hr>
+                      
+                        <!-- /.comment-text -->
+                      </div>
+                    </div>
+                    
+                    <?php $count++; ?>
+                    @endforeach
+                      <!-- /.box-comment -->
+                    
+                      <div class="box-footer">
+                       
+                          @if (Auth::user()->role !=1)
+                          <img src="{{asset('user_images/'.Auth::user()->GetUser(Auth::user()->role ,Auth::user()->id )->image)}}" class="img-responsive img-circle img-sm" alt="User Image">
+                         @else
+                          <img src="{{asset('user_images/defaultAvatar.png')}}" class="img-responsive img-circle img-sm"
+                          alt="User Image">
+                          @endif
+                          <!-- .img-push is used to add margin to elements next to floating images -->
+                          <form 
+                           action="{{route('comments.store')}}" method="post"                       
+                            >
+                             @csrf
+                          <input type="hidden" name="created_by" id="created_by" 
+                            value="{{Auth::id()}}" required>
+                            <input type="hidden" name="actu_id" id="actu_id" 
+                            value="{{$actu->actu_id}}" required>
+                          <div class="input-group">
+                            <input type="text" class="form-control input-sm" name="body" id="body" placeholder="Entrez votre commentaire" required>
+                            <span class="input-group-btn">
+                              <button type="submit" class="btn btn-primary btn-flat">Publier</button>
+                            </span>
+                          </div>
+                        </form>
+                      </div>
+                      <!-- /.box-footer -->
+                      <hr>
+                      <?php $countActu++; ?>
+                    @endforeach
+                   
                     <!-- /.user-block -->
-                    <div class="box-tools">
-                      <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="Mark as read">
-                        <i class="fa fa-circle-o"></i></button>
-                      <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                      </button>
-                      <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                    </div>
+                  
                     <!-- /.box-tools -->
                   </div>
-                  <!-- /.box-header -->
-                  <div class="box-body">
-                    <!-- post text -->
-                    <p>Far far away, behind the word mountains, far from the
-                      countries Vokalia and Consonantia, there live the blind
-                      texts. Separated they live in Bookmarksgrove right at</p>
-      
-                    <p>the coast of the Semantics, a large language ocean.
-                      A small river named Duden flows by their place and supplies
-                      it with the necessary regelialia. It is a paradisematic
-                      country, in which roasted parts of sentences fly into
-                      your mouth.</p>
-      
-                   
-      
-                    <!-- Social sharing buttons -->
-                    <button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i> Share</button>
-                    <button type="button" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-up"></i> Like</button>
-                    <span class="pull-right text-muted">45 likes - 2 comments</span>
-                  </div>
-                  <!-- /.box-body -->
-                  <div class="box-footer box-comments">
-                    <div class="box-comment">
-                      <!-- User image -->
-                      <img class="img-circle img-sm" src="{{asset('teacher_images/defaultAvatar.png')}}" alt="User Image">
-      
-                      <div class="comment-text">
-                            <span class="username">
-                              Maria Gonzales
-                              <span class="text-muted pull-right">8:03 PM Today</span>
-                            </span><!-- /.username -->
-                        It is a long established fact that a reader will be distracted
-                        by the readable content of a page when looking at its layout.
-                      </div>
-                      <!-- /.comment-text -->
-                    </div>
-                    <!-- /.box-comment -->
-                    <div class="box-comment">
-                      <!-- User image -->
-                      <img class="img-circle img-sm" src="{{asset('teacher_images/defaultAvatar.png')}}" alt="User Image">
-      
-                      <div class="comment-text">
-                            <span class="username">
-                              Nora Havisham
-                              <span class="text-muted pull-right">8:03 PM Today</span>
-                            </span><!-- /.username -->
-                        The point of using Lorem Ipsum is that it has a more-or-less
-                        normal distribution of letters, as opposed to using
-                        'Content here, content here', making it look like readable English.
-                      </div>
-                      <!-- /.comment-text -->
-                    </div>
-                    <!-- /.box-comment -->
                   </div>
         </div>
 

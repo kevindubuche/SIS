@@ -17,11 +17,11 @@ class DepartementRepository extends BaseRepository
      * @var array
      */
     protected $fieldSearchable = [
-        'faculty_id',
+        // 'faculty_id',
         'departement_name',
         'departement_code',
-        'departement_description',
-        'status'
+        'departement_description'
+        
     ];
 
     protected $primaryKey ='departement_id';

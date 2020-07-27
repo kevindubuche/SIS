@@ -2,8 +2,10 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>InfyOm Generator</title>
+    <title>I.F.A</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    
+<link rel="shortcut icon" href="{{asset('logo.jpg')}}" />
 
     <!-- Bootstrap 3.3.7 -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -27,7 +29,10 @@
     @yield('css')
 </head>
 
-<body class="skin-blue sidebar-mini">
+<body class="
+{{-- skin-blue --}}
+sidebar-mini"
+style="background-color: rgb(219, 219, 223);">
 @if (!Auth::guest())
     <div class="wrapper">
         <!-- Main Header -->
@@ -35,7 +40,7 @@
 
             <!-- Logo -->
             <a href="#" class="logo">
-                <b>I.F.A</b>
+                <b>IFA</b>
                 <img src="{{asset('logo.jpg')}}"
                                     style="width: 40px; height:40px; border-radius:20px;" alt="User Image"/>
             </a>
@@ -66,34 +71,31 @@
                         <!-- User Account Menu -->
                         <li class="dropdown user user-menu">
                             <!-- Menu Toggle Button -->
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                            style="margin-top: -40px;">
                                 <!-- The user image in the navbar-->
-                                @if (Auth::user()->role ==2)
-                                <img src="{{asset('teacher_images/'.Auth::user()->GetTeacher()->image)}}" class="user-image" alt="User Image">
-                                @elseif( Auth::user()->role == 3)
-                                <img src="{{asset('student_images/'.Auth::user()->GetStudent()->image)}}" class="user-image" alt="User Image">
-                                @else
-                                <img src="{{asset('logo.jpg')}}" class="user-image"
+                                @if (Auth::user()->role !=1)
+                                <img src="{{asset('user_images/'.Auth::user()->GetUser(Auth::user()->role,Auth::user()->id)->image)}}" class="user-image" alt="User Image">
+                                  @else
+                                <img src="{{asset('user_images/defaultAvatar.png')}}" class="user-image"
                                 alt="User Image"/>
                                 @endif
                              
                                 <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                                <span class="hidden-xs">{{ Auth::user()->name }}</span>
+                                <span class="hidden-xs" style="color:black;">{{ Auth::user()->name }}</span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- The user image in the menu -->
                                 <li class="user-header">
-                                    @if (Auth::user()->role ==2)
-                                    <img src="{{asset('teacher_images/'.Auth::user()->GetTeacher()->image)}}" class="user-image" alt="User Image">
-                                    @elseif( Auth::user()->role == 3)
-                                    <img src="{{asset('student_images/'.Auth::user()->GetStudent()->image)}}" class="user-image" alt="User Image">
-                                    @else
-                                    <img src="{{asset('logo.jpg')}}" class="img-circle"
+                                    @if (Auth::user()->role !=1)
+                                    <img src="{{asset('user_images/'.Auth::user()->GetUser(Auth::user()->role,Auth::user()->id)->image)}}" class="user-image" alt="User Image">
+                                     @else
+                                    <img src="{{asset('user_images/defaultAvatar.png')}}" class="img-circle"
                                     alt="User Image"/>
                                     @endif
-                                    <p>
+                                    <p style="color:black;">
                                         {{ Auth::user()->name }}
-                                        <small>Member since {{ Auth::user()->created_at->format('M. Y') }}</small>
+                                        <small style="color:black;">Membre depuis {{ Auth::user()->created_at->format('M. Y') }}</small>
                                     </p>
                                 </li>
                                 <!-- Menu Footer-->
@@ -147,7 +149,7 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    InfyOm Generator
+                    I.F.A
                 </a>
             </div>
 

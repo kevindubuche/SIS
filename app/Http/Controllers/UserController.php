@@ -14,6 +14,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Teacher;
 use App\Models\Admission;
+use App\Models\ClassScheduling;
 
 class UserController extends AppBaseController
 {
@@ -79,8 +80,9 @@ class UserController extends AppBaseController
     {
         $user = $this->userRepository->find($id);
 
+      
         if (empty($user)) {
-            Flash::error('User not found');
+            Flash::error('Utilisateur non trouve(e)');
 
             return redirect(route('users.index'));
         }
@@ -166,26 +168,29 @@ class UserController extends AppBaseController
 
     public function profile($id){
 
+        $schedules =ClassScheduling::where('created_by', $id)->get();
+        // dd($schedules);
         //CHECK IF IT IS A TEACHER , A STUDENT OR AN ADMIN
         $testUser = User::where(['id'=> $id])->first(); 
          //IF ADMIN
          if($testUser->role == 1){
             $user = User::where('id', $id)->first();
         // dd($student);
-        return view('users.profile', compact('user'));
+        return view('users.profile', compact('user', 'schedules'));
         }
         //IF TEACHER
         if($testUser->role == 2){
             $user = Teacher::where('user_id', $id)->first();
         // dd($student);
-        return view('users.profile', compact('user'));
+        return view('users.profile', compact('user', 'schedules'));
         }
            //IF STUDENT
         elseif($testUser->role == 3){
+            $cours =ClassScheduling::all();
             $user = Admission::where('user_id', $id)->first();
             // dd($student);
         // dd($student);
-        return view('users.profile', compact('user'));
+        return view('users.profile', compact('user', 'cours'));
         }
         
 

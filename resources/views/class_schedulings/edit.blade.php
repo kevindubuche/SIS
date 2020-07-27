@@ -24,10 +24,10 @@
                 @csrf
                 @method('PUT')
 <!-- Course Id Field -->
-<input type="text" name="schedule_id3" id="schedule_id3">
+<input type="hidden" name="schedule_id3" id="schedule_id3">
 <div class="form-group col-sm-6">
     <select class="form-control" name="course_id3" id="course_id3">
-        <option value="">Select Course</option>
+        <option  disabled="true" selected="false" value="">Cours</option>
         @foreach ($allCourses as $course)
             <option value="{{$course->course_id}}">{{$course->course_name}}</option>
         @endforeach
@@ -37,7 +37,7 @@
 <!-- Class Id Field -->
 <div class="form-group col-sm-6">
     <select class="form-control" name="class_id3" id="class_id3">
-        <option value="">Select CLass</option>
+        <option disabled="true" selected="false" value="">Classe</option>
         @foreach ($allClasses as $class)
             <option value="{{$class->class_id}}">{{$class->class_name}}</option>
         @endforeach
@@ -45,73 +45,11 @@
 </div>
 
 
-<!-- Level Id Field -->
-<div class="form-group col-sm-6">
-    <select class="form-control" name="level_id3" id="level_id3">
-        <option value="">Select Level</option>
-        @foreach ($allLevels as $level)
-            <option value="{{$level->level_id}}">{{$level->level}}</option>
-        @endforeach
-    </select>
-</div>
-
-<!-- Shift Id Field -->
-<div class="form-group col-sm-6">
-    <select class="form-control" name="shift_id3" id="shift_id3">
-        <option value="">Select Shift</option>
-        @foreach ($allShifts as $shift)
-            <option value="{{$shift->shift_id}}">{{$shift->shift}}</option>
-        @endforeach
-    </select>
-</div>
-
-
-<!-- Classwoom Id Field -->
-<div class="form-group col-sm-6">
-    <select class="form-control" name="classroom_id3" id="classroom_id3">
-        <option value="">Select Classroom</option>
-        @foreach ($allClassrooms as $classroom)
-            <option value="{{$classroom->classroom_id}}">{{$classroom->classroom_name}}__{{$classroom->classroom_code}}</option>
-        @endforeach
-    </select>
-</div>
-
-
-<!-- Batch Id Field -->
-<div class="form-group col-sm-6">
-    <select class="form-control" name="batch_id3" id="batch_id3">
-        <option value="">Select Batch</option>
-        @foreach ($allBatches as $batch)
-            <option value="{{$batch->batch_id}}">{{$batch->batch}}</option>
-        @endforeach
-    </select>
-</div>
-
-
-<!-- Day Id Field -->
-<div class="form-group col-sm-6">
-    <select class="form-control" name="day_id3" id="day_id3">
-        <option value="">Select Day</option>
-        @foreach ($allDays as $day)
-            <option value="{{$day->day_id}}">{{$day->name}}</option>
-        @endforeach
-    </select>
-</div>
-
-<!-- Time Id Field -->
-<div class="form-group col-sm-6">
-    <select class="form-control" name="time_id3" id="time_id3">
-        <option value="">Select Time</option>
-        @foreach ($allTimes as $time)
-            <option value="{{$time->time_id}}">{{$time->time}}</option>
-        @endforeach
-    </select>
-</div>
 
 <!-- Semester Id Field -->
 <div class="form-group col-sm-6">
     <select class="form-control" name="semester_id3" id="semester_id3">
-        <option value="">Select Semester</option>
+        <option disabled="true" selected="false" value="">Semestre</option>
         @foreach ($allSemesters as $semester)
             <option value="{{$semester->semester_id}}">{{$semester->semester_name}}</option>
         @endforeach
@@ -121,7 +59,7 @@
 
 <!-- Start Time Field -->
 <div class="form-group col-sm-6">
-    <label>Start Date</label>
+    <label>Date debut</label>
     <input type="text"
         class="form-control"
         name="start_time3"
@@ -131,7 +69,7 @@
 
 <!-- End Time Field -->
 <div class="form-group col-sm-6">
-    <label>End Date</label>
+    <label>Date fin</label>
     <input type="text"
         class="form-control"
         name="end_time3"
@@ -139,21 +77,11 @@
         >
 </div>
 
-<!-- Status Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('status', 'Status:') !!}
-    <label class="checkbox-inline">
-        {!! Form::hidden('status3', 0) !!}
-        {!! Form::checkbox('status3', '1', null) !!}
-    </label>
-</div>
-
-
 
 
 </div>
 <div class="modal-footer">
-    <button type="submit" class="btn btn-secondary">Update</button>
+    <button type="submit" class="btn btn-secondary">Modifier</button>
 </div>
 </form>
 </div>
@@ -169,12 +97,12 @@
 @push('scripts')
     <script>
          $('#start_time3').datetimepicker({
-       format:'YYYY-MM-DD',
+       format:'YYYY-MM-DD HH:mm:ss',
        useCurrent: false
    });
 
    $('#end_time3').datetimepicker({
-       format:'YYYY-MM-DD',
+       format:'YYYY-MM-DD HH:mm:ss',
        useCurrent: false
    });
 

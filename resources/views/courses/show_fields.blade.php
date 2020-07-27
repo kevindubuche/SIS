@@ -1,12 +1,12 @@
 <!-- Course Name Field -->
 <div class="form-group">
-    {!! Form::label('course_name', 'Course Name:') !!}
+    {!! Form::label('course_name', 'Nom du cours:') !!}
     <p>{{ $course->course_name }}</p>
 </div>
 
 <!-- Course Code Field -->
 <div class="form-group">
-    {!! Form::label('course_code', 'Course Code:') !!}
+    {!! Form::label('course_code', 'Code du code:') !!}
     <p>{{ $course->course_code }}</p>
 </div>
 
@@ -16,9 +16,9 @@
     <p>{{ $course->description }}</p>
 </div>
 
-<!-- Status Field -->
+{{-- <!-- Status Field -->
 <div class="form-group">
     {!! Form::label('status', 'Status:') !!}
     <p>{{ $course->status }}</p>
 </div>
-
+ --}}

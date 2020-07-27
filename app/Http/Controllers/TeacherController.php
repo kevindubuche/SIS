@@ -14,6 +14,8 @@ use App\Models\User;
 use App\Models\Teacher;
 use File;
 use Str;
+use DB;
+use App\Models\ClassScheduling;
 use Illuminate\Support\Facades\Hash;
 class TeacherController extends AppBaseController
 {
@@ -34,7 +36,9 @@ class TeacherController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $teachers = $this->teacherRepository->all();
+        
+        $teachers = Teacher::orderBy('last_name', 'asc')->get();
+        // $teachers = $this->teacherRepository->all();
 
         return view('teachers.index')
             ->with('teachers', $teachers);
@@ -63,41 +67,45 @@ class TeacherController extends AppBaseController
 
         // $teacher = $this->teacherRepository->create($input);
 
-        $image = $request->file('image');
-        $image_name = rand(1111,9999).'.'.$image->getClientOriginalExtension();
-        $image->move(public_path('teacher_images'), $image_name);
+        //NAP ADD USER A AVAN
 
-        $teacher = new Teacher;
-        $teacher->first_name = $request->first_name;
-        $teacher->last_name = $request->last_name;
-        $teacher->gender = $request->gender;
-        $teacher->email = $request->email;
-        $teacher->dob = $request->dob;
-        $teacher->phone = $request->phone;
-        $teacher->adress = $request->adress;
-        $teacher->status = $request->status;
-        $teacher->dateRegistered = $request->dateRegistered;
-        $teacher->user_id = $request->user_id;
-        $teacher->image = $image_name;
-        // dd($teacher);
-        $teacher->save();
+        $user = new User;
+        $user->name = $request->first_name .' '.$request->last_name;
+        $user->role = 2;
+        $user->email = $request->email;
+        $password = 'qwerty123';//nou ka genere yon ran si nou vle
+        $user->password = Hash::make( $password);
+
+        $save =$user->save();
+        $user_id =DB::getPdo()->lastInsertId(); 
+     
  
-        //ADD HIM AS A USER IN THE DB
-        if($teacher->save()){
-            $user = new User;
-            $user->name = $request->first_name .' '.$request->last_name;
-            $user->role = 2;
-            $user->email = $request->email;
-            $password = 'qwerty123';//nou ka genere yon ran si nou vle
-            $user->password = Hash::make( $password);
-
-            $user->save();
+        //AND NAP ADD TEACHER A AK ID USER A AS user_id
+        if($save){
+            $image = $request->file('image');
+            $image_name = rand(1111,9999).'.'.$image->getClientOriginalExtension();
+            $image->move(public_path('user_images'), $image_name);
+    
+            $teacher = new Teacher;
+            $teacher->first_name = $request->first_name;
+            $teacher->last_name = $request->last_name;
+            $teacher->gender = $request->gender;
+            $teacher->email = $request->email;
+            $teacher->dob = $request->dob;
+            $teacher->phone = $request->phone;
+            $teacher->adress = $request->adress;
+            $teacher->status = $request->status;
+            $teacher->dateRegistered = $request->dateRegistered;
+            $teacher->user_id = $user_id;
+            $teacher->image = $image_name;
+            // dd($teacher);
+            $teacher->save();
 
         }
 
         //SEND MAIL WITH PASSWORD TO THE TEACHER
 
-        Flash::success('Teacher saved successfully.');
+        Flash::success('Professeur enregistre avec succes');
 
         return redirect(route('teachers.index'));
     }
@@ -113,13 +121,15 @@ class TeacherController extends AppBaseController
     {
         $teacher = $this->teacherRepository->find($id);
 
+        $schedules =ClassScheduling::where('created_by', $teacher->user_id)->get();
+        // dd($schedules);
         if (empty($teacher)) {
-            Flash::error('Teacher not found');
+            Flash::error('Professeur non trouve(e)');
 
             return redirect(route('teachers.index'));
         }
 
-        return view('teachers.show')->with('teacher', $teacher);
+        return view('teachers.show', compact('schedules'))->with('teacher', $teacher);
     }
 
     /**
@@ -165,14 +175,14 @@ class TeacherController extends AppBaseController
         //CHECK IF THE IMAGE HAS CHANGED
         if($request->image != $teacher->image){
             //DELETE OLD IMAGE
-             File::delete(public_path().'/teacher_images/'.$teacher->image);
+             File::delete(public_path().'/user_images/'.$teacher->image);
         }
 
         
 
         $image = $request->file('image');
         $image_name = rand(1111,9999).'.'.$image->getClientOriginalExtension();
-        $image->move(public_path('teacher_images'), $image_name);
+        $image->move(public_path('user_images'), $image_name);
 
 
         $teacher->fill($request->except(['token','image']));
@@ -205,7 +215,7 @@ class TeacherController extends AppBaseController
             return redirect(route('teachers.index'));
         }
         //REMOVE THE IMAGE FROM THE teacher_images FOLDER
-        File::delete(public_path().'/teacher_images/'.$teacher->image);
+        File::delete(public_path().'/user_images/'.$teacher->image);
         
         $this->teacherRepository->delete($id);
 

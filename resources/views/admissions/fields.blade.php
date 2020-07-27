@@ -212,7 +212,7 @@
    
 </div>
 
-<!-- Batch Field -->
+{{-- <!-- Batch Field -->
 <div class="form-group col-sm-4">
     <select class="form-control" name="batch_id" id="batch_id">
         <option value="0" selected="true"
@@ -223,8 +223,8 @@
           
     </select>
    
-</div>
-
+</div> --}}
+{{-- 
 <!-- Faculty Field -->
 <div class="form-group col-sm-4">
     <select class="form-control" name="faculty_id" id="faculty_id">
@@ -235,7 +235,7 @@
             @endforeach
           
     </select>
-</div>
+</div> --}}
 
 <!-- Image Field -->
 <div class="col-lg-12 col-md-12 col-sm-4">

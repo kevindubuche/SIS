@@ -19,8 +19,8 @@ class FacultyRepository extends BaseRepository
     protected $fieldSearchable = [
         'faculty_name',
         'faculty_code',
-        'faculty_description',
-        'status'
+        'faculty_description'
+        // 'status'
     ];
     protected $primaryKey = 'faculty_id';
     /**

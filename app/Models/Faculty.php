@@ -32,8 +32,8 @@ class Faculty extends Model
     public $fillable = [
         'faculty_name',
         'faculty_code',
-        'faculty_description',
-        'status'
+        'faculty_description'
+        // 'status'
     ];
 
     /**
@@ -45,8 +45,8 @@ class Faculty extends Model
         'faculty_id' => 'integer',
         'faculty_name' => 'string',
         'faculty_code' => 'string',
-        'faculty_description' => 'string',
-        'status' => 'boolean'
+        'faculty_description' => 'string'
+        // 'status' => 'boolean'
     ];
 
     /**
@@ -57,8 +57,8 @@ class Faculty extends Model
     public static $rules = [
         'faculty_name' => 'required',
         'faculty_code' => 'required',
-        'faculty_description' => 'required',
-        'status' => 'required'
+        'faculty_description' => 'required'
+        // 'status' => 'required'
     ];
 
     

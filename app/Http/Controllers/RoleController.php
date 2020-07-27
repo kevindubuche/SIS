@@ -123,7 +123,7 @@ class RoleController extends AppBaseController
 
         $role = $this->roleRepository->update($request->all(), $id);
 
-        Flash::success('Role updated successfully.');
+        Flash::success('Operation effectuee avec succes');
 
         return redirect(route('roles.index'));
     }

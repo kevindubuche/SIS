@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>InfyOm Laravel Generator</title>
+    <title>I.F.A</title>
 
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -35,12 +35,12 @@
 <body class="hold-transition login-page">
 <div class="login-box">
     <div class="login-logo">
-        <a href="{{ url('/home') }}"><b>InfyOm </b>Generator</a>
+        <a href="{{ url('/home') }}"><b>Reinitialisation </b>I.F.A</a>
     </div>
 
     <!-- /.login-logo -->
     <div class="login-box-body">
-        <p class="login-box-msg">Enter Email to reset password</p>
+        <p class="login-box-msg">Entrer votre email</p>
 
         @if (session('status'))
             <div class="alert alert-success">
@@ -52,7 +52,7 @@
             @csrf
 
             <div class="form-group has-feedback {{ $errors->has('email') ? ' has-error' : '' }}">
-                <input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Email">
+                <input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Email" style="border-radius: 25px">
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                 @if ($errors->has('email'))
                     <span class="help-block">
@@ -63,8 +63,8 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <button type="submit" class="btn btn-primary pull-right">
-                        <i class="fa fa-btn fa-envelope"></i> Send Password Reset Link
+                    <button type="submit" class="btn btn-primary pull-right" style="border-radius: 25px">
+                        <i class="fa fa-btn fa-envelope"></i> Envoyer lien de reainitialisation de mot de passe
                     </button>
                 </div>
             </div>

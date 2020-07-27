@@ -116,14 +116,14 @@ class ClassesController extends AppBaseController
         $classes = $this->classesRepository->find($id);
 
         if (empty($classes)) {
-            Flash::error('Classes not found');
+            Flash::error('Classe introuvable');
 
             return redirect(route('classes.index'));
         }
 
         $classes = $this->classesRepository->update($request->all(), $id);
 
-        Flash::success('Classes updated successfully.');
+        Flash::success('Classe modifie avec succes.');
 
         return redirect(route('classes.index'));
     }

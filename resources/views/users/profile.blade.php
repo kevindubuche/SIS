@@ -10,7 +10,7 @@
     <section class="content-header">
         <h1>
           @if(Auth::user()->role == 1)
-          Admin
+          Administrateur
          @elseif(Auth::user()->role == 2)
           Professeur
          @elseif(Auth::user()->role == 3)
@@ -29,12 +29,11 @@
       <h1>
         @include('flash::message')
         @include('adminlte-templates::common.errors')
-        User Profile
+        Profil de l'utilisateur
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Examples</a></li>
-        <li class="active">User profile</li>
+        <li><a href="#"><i class="fa fa-dashboard"></i> Accueil</a></li>
+        <li class="active">Profile de l'utilisateur</li>
       </ol>
     </section>
 
@@ -48,14 +47,15 @@
           <div class="box box-primary">
             <div class="box-body box-profile">
               <img class="profile-user-img img-responsive img-circle" 
-              @if (Auth::user()->role == 1)
-                  src="{{asset('teacher_images/defaultAvatar.png')}}"
-              @elseif (Auth::user()->role == 2)
-                   src="{{asset('teacher_images/'.$user->image)}}"
-              @elseif(Auth::user()->role == 3)
-                   src="{{asset('student_images/'.$user->image)}}"
-              @endif
-            src="{{asset('teacher_images/'.$user->image)}}" 
+              
+
+            @if (Auth::user()->role !=1)
+           src="{{asset('user_images/'.Auth::user()->GetUser(Auth::user()->role,Auth::user()->id)->image)}}" 
+              @else
+           src="{{asset('user_images/defaultAvatar.png')}}" 
+          
+            @endif
+         
             width="50" height="50"
             style="border-radius: 50%;
             width:150px; height:150px;
@@ -69,27 +69,30 @@
 
               <p class="text-muted text-center">
                @if(Auth::user()->role == 1)
-                Admin
+                Administrateur
                @elseif(Auth::user()->role == 2)
-                Professeur
+                Professeur(e)
                @elseif(Auth::user()->role == 3)
-               Etudiant
+               Etudiant(e)
                @endif
               </p>
 
               <ul class="list-group list-group-unbordered">
                 <li class="list-group-item">
-                  <b>Followers</b> <a class="pull-right">1,322</a>
+                <b>Email</b> <a class="pull-right">{{$user->email}}</a>
                 </li>
                 <li class="list-group-item">
-                  <b>Following</b> <a class="pull-right">543</a>
+                  <b>Telephone</b> <a class="pull-right">{{$user->phone}}</a>
                 </li>
                 <li class="list-group-item">
-                  <b>Friends</b> <a class="pull-right">13,287</a>
+                  <b>Membre depuis</b> <a class="pull-right"> 
+    {{ date('Y')-$user->created_at->format('Y') }}
+                    ans
+                     </a>
                 </li>
               </ul>
 
-              <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
+              <a href="#timeline" data-toggle="tab" class="btn btn-primary btn-block"><b>Plus</b></a>
             </div>
             <!-- /.box-body -->
           </div>
@@ -98,39 +101,35 @@
           <!-- About Me Box -->
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">About Me</h3>
+              <h3 class="box-title">A propos</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <strong><i class="fa fa-book margin-r-5"></i> Education</strong>
+              <strong><i class="fa fa-user margin-r-5"></i>Status matrimonial</strong>
 
               <p class="text-muted">
-                B.S. in Computer Science from the University of Tennessee at Knoxville
+                {{$user->status}}
               </p>
 
               <hr>
 
-              <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
+              <strong><i class="fa fa-map-marker margin-r-5"></i> Adresse</strong>
 
-              <p class="text-muted">Malibu, California</p>
+              <p class="text-muted">{{$user->adress}}</p>
 
               <hr>
 
-              <strong><i class="fa fa-pencil margin-r-5"></i> Skills</strong>
+              <strong><i class="fa fa-pencil margin-r-5"></i> Identifiant</strong>
 
               <p>
-                <span class="label label-danger">UI Design</span>
-                <span class="label label-success">Coding</span>
-                <span class="label label-info">Javascript</span>
-                <span class="label label-warning">PHP</span>
-                <span class="label label-primary">Node.js</span>
-              </p>
+                <span class="label label-success">{{Auth::user()->id}}</span>
+                
 
               <hr>
 
-              <strong><i class="fa fa-file-text-o margin-r-5"></i> Notes</strong>
+              <strong><i class="fa fa-birthday-cake margin-r-5"></i> Date de naissance</strong>
 
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
+            <p>{{$user->dob}}</p>
             </div>
             <!-- /.box-body -->
           </div>
@@ -140,22 +139,57 @@
         <div class="col-md-9">
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
-              <li class="active"><a href="#activity" data-toggle="tab">student Timetable</a></li>
-              <li><a href="#timeline" data-toggle="tab">Full details</a></li>
-              <li><a href="#settings" data-toggle="tab">Settings</a></li>
+              <li class="active"><a href="#activity" data-toggle="tab">Cours</a></li>
+              <li><a href="#timeline" data-toggle="tab">Details</a></li>
+              <li><a href="#settings" data-toggle="tab">Reglages</a></li>
             </ul>
             <div class="tab-content">
               <div class="active tab-pane" id="activity">
                 <section class="content-header">
-                  <h1>
-                    Class time table
-                  </h1>
+                  <h1>Mes cours</h1>
               </section>
               <div class="content">
                   @include('adminlte-templates::common.errors')
                   <div class="box box-primary">
                       <div class="box-body"><br><br>
-                         <h1>Class time table</h1>
+                         @if (Auth::user()->role != 3)
+                         
+                        <div class="container">
+                          <div class="row">
+                            <div class="col-md-8">
+                                  @foreach ($schedules as $schedule)
+                                    <div  class="btn  col-md-12" >
+                                      <div style="background-color: rgb(172, 172, 172); border-radius:25px;" >
+                                        <i class="fa fa-book"></i> {{$schedule->InfoCourse->course_name}} <br>en 
+                                        <b style="color: red">{{$schedule->InfoClass->class_name}}</b>
+                                        <hr>
+                                      </div>
+                                    </div>
+                                  @endforeach
+                            </div>
+                          </div>
+                    </div>
+                             
+                         @elseif(Auth::user()->role == 3)
+                             
+                         <div class="container">
+                          <div class="row">
+                            <div class="col-md-8">
+                                  @foreach ($cours as $schedule)
+                                    @if($schedule->InfoCourse->course_id == Auth::user()->GetUser(Auth::user()->role,Auth::user()->id)->class_id)
+                                    <div  class="btn  col-md-12" >
+                                      <div style="background-color: rgb(172, 172, 172); border-radius:25px;" >
+                                        <i class="fa fa-book"></i> {{$schedule->InfoCourse->course_name}} <br>en 
+                                        <b style="color: red">{{$schedule->InfoClass->class_name}}</b>
+                                        <hr>
+                                      </div>
+                                    </div>
+                                    @endif
+                                  @endforeach
+                            </div>
+                          </div>
+                    </div>
+                         @endif
                       </div>
                     </div>
                </div>
@@ -163,7 +197,7 @@
               <div class="tab-pane" id="settings">
                   <section class="content-header">
                     <h1>
-                        Change password
+                        Changer mot de passe
                     </h1>
                 </section>
                 <div class="content">
@@ -185,24 +219,24 @@
                   <input type="hidden" name="user_role" id="" 
                   value="{{Auth::user()->role}}"
                   >
-                    <label for="inputName" class="col-sm-2 control-label">Old password</label>
+                    <label for="inputName" class="col-sm-2 control-label">Ancien mot de passe</label>
 
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" name="old_password" id="oldpassword" placeholder="Old password">
+                      <input type="text" class="form-control" name="old_password" id="oldpassword" placeholder="Entrer ancien mot de passe">
                       <i class="input-icon" id="messageError"></i>
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="inputEmail" class="col-sm-2 control-label">New password</label>
+                    <label for="inputEmail" class="col-sm-2 control-label">Nouveau mot de passe</label>
 
                     <div class="col-sm-10">
-                      <input type="text " class="form-control" name="new_password"id="newpassword" placeholder="New password">
+                      <input type="text " class="form-control" name="new_password"id="newpassword" placeholder="Entrer nouveau mot de passe">
                     </div>
                   </div>
          
                   <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                      <button type="submit" class="btn btn-info">Update password</button>
+                      <button type="submit" class="btn btn-info">Changer mot de passe</button>
                     </div>
                   </div>
                 </form>
@@ -216,7 +250,7 @@
                 {{-- ALL THE DETAILS ABOUT THE student --}}
                     <section class="content-header">
                       <h1>
-                          Student Biodata / Profile
+                         Profile
                       </h1>
                   </section>
                   <div class="content">
@@ -226,7 +260,7 @@
                     <form class="form-horizontal">
                         <div class="form-group">
                             <label for="inputName"
-                                class="col-sm-3 control-label">Full Name</label>
+                                class="col-sm-3 control-label">Nom complet</label>
                                 <div class="col-sm-9">
                                     <input type="email"
                                         class="form-control"
@@ -256,13 +290,19 @@
                                 <div class="form-group ">
                                     
                                         <label for="inputName"
-                                        class="col-sm-3 control-label">Gender</label>
+                                        class="col-sm-3 control-label">Sexe</label>
                                       <div class="col-sm-9 ">
-                                            @if ($user->gender==0)
-                                                <span>Male</span>
+                                        <input type="email"
+                                        class="form-control"
+                                        id="inputName"
+                                        @if ($user->gender==0)
+                                        value="Masculin"  
                                             @else
-                                                <span>Female</span>
+                                            value="Feminin"  
                                             @endif
+                                        
+                                readonly>
+                                            
                                       </div>
                                   
                                 </div>
@@ -270,20 +310,26 @@
                                 <div class="form-group ">
                                 
                                         <label for="inputName"
-                                        class="col-sm-3 control-label">Status</label>
+                                        class="col-sm-3 control-label">Status matrimonial</label>
                                       <div class="col-sm-9">
-                                            @if ($user->gender==0)
-                                                Single
+                                        <input type="email"
+                                        class="form-control"
+                                        id="inputName"
+                                        @if ($user->gender==0)
+                                        value="Celibataire"  
                                             @else
-                                                Maried
+                                            value=" Marie(e)"  
                                             @endif
+                                        
+                                readonly>
+                                            
                                       </div>
                                   
                                 </div>
 
                                 <div class="form-group">
                                     <label for="inputName"
-                                        class="col-sm-3 control-label">Date of birth</label>
+                                        class="col-sm-3 control-label">Date de naissance</label>
                                         <div class="col-sm-9">
                                             <input type="email"
                                                 class="form-control"
@@ -295,7 +341,7 @@
 
                                     <div class="form-group">
                                         <label for="inputName"
-                                            class="col-sm-3 control-label">Phone</label>
+                                            class="col-sm-3 control-label">Telephone</label>
                                             <div class="col-sm-9">
                                                 <input type="email"
                                                     class="form-control"
@@ -307,20 +353,22 @@
 
                                         <div class="form-group">
                                             <label for="inputName"
-                                                class="col-sm-3 control-label">Address</label>
+                                                class="col-sm-3 control-label">Adresse</label>
                                                 <div class="col-sm-9">
-                                                    <textarea 
+                                                    <input 
                                                         class="form-control"
                                                         id="inputExperience"
-                                                        readonly>
-                                                  {{$user->adress}}
-                                                    </textarea>
+                                                        readonly
+                                                        value="{{$user->adress}}"
+                                                        >
+                                                  
+                                                   
                                                 </div>
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="inputName"
-                                                    class="col-sm-3 control-label">Register Date</label>
+                                                    class="col-sm-3 control-label">Date d'enregistrement</label>
                                                     <div class="col-sm-9">
                                                         <input type="email"
                                                             class="form-control"

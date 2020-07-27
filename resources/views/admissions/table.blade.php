@@ -1,35 +1,23 @@
-<div class="table-responsive">
-    <table class="table" id="admissions-table">
+<div class="container table-responsive">
+    <table id='myTable' class=' display   table table-bordered table-striped table-condensed'>
         <thead>
             <tr>
         <th></th>
-        <th> Name</th>
-        {{-- <th>Last Name</th> --}}
-        <th>Faculty</th>
+        <th> Nom</th>
         <th>Departement</th>
-        <th>Batch</th>
-
-        <th>Father Name</th>
-        <th>Father Phone</th>
-        <th>Mother Name</th>
-        <th>Mother Phone</th>
-        <th>Gender</th>
+        <th>Classe</th>
+        <th>Sexe</th>
         <th>Email</th>
-        <th>Dob</th>
-        <th>Phone</th>
-        <th>Adress</th>
-        <th>Status</th>
-        <th>Dateregistered</th>
-        <th>User Id</th>
-        <th>Class Id</th>
-        <th>Image</th>
-                <th colspan="3">Action</th>
+        <th>Telephone</th>
+        <th>Adresse</th>
+        
+                <th >Action</th>
             </tr>
         </thead>
         <tbody>
         @foreach($admissions as $admission)
             <tr>  
-            <td><img src="{{asset('student_images/'.$admission->image)}}"
+            <td><img src="{{asset('user_images/'.$admission->image)}}"
                 alt="prof image"
                 class="rounded-circle"
                 width="50" 
@@ -37,27 +25,14 @@
                 style="border-radius:50%"/></td>
                 {{-- <td>{{ $admission->roll_no }}</td> --}}
             <td>{{ $admission->first_name }} {{ $admission->last_name }}</td>
-            {{-- <td>{{ $admission->last_name }}</td> --}}
-            <td>{{ $admission->InfoFaculty->faculty_name }}</td>
             <td>{{ $admission->InfoDepartement->departement_name }}</td>
-            <td>{{ $admission->InfoBatch->batch }}</td>
-
-            <td>{{ $admission->father_name }}</td>
-            <td>{{ $admission->father_phone }}</td>
-            <td>{{ $admission->mother_name }}</td>
-            <td>{{ $admission->mother_phone }}</td>
-            <td>@if($admission->gender ==0) Male @else Female @endif</td>
+            <td>{{ $admission->InfoClass->class_name }}</td>
+            <td>@if($admission->gender ==0) Masculin @else Feminin @endif</td>
             <td>{{ $admission->email }}</td>
-            <td>{{ $admission->dob }}</td>
             <td>{{ $admission->phone }}</td>
             <td>{{ $admission->adress }}</td>
-            <td>@if($admission->status ==0) Active @else Inactive @endif</td>
-            <td>{{ $admission->dateRegistered }}</td>
-            <td>{{ $admission->user_id }}</td>
-            <td>{{ $admission->class_id }}</td>
-            {{-- <td>{{ $admission->image }}</td> --}}
-          
-                <td>
+            
+           
                 <td>
                     {!! Form::open(['route' => ['admissions.destroy', $admission->student_id], 'method' => 'delete']) !!}
                     <div class='btn-group'>
@@ -72,3 +47,39 @@
         </tbody>
     </table>
 </div>
+
+
+
+@push('scripts')
+<script>
+//     $(document).ready( function () {
+//     $('#myTable').DataTable();
+// } );
+    
+    $(document).ready(function()
+    {
+        
+        $('#myTable').DataTable({  
+            // alert('okokok');
+            select:true,
+            "language": {
+            "lengthMenu": "Voir _MENU_ lignes par page",
+            "zeroRecords": "Aucune information - desole",
+            "info": "_PAGE_ sur _PAGES_",
+            "infoEmpty": "Aucun resultat trouve",
+            "infoFiltered": "(filtre de _MAX_ total resultats)",
+            "search": "Rechercher",
+            "paginate":{
+            "previous":"Precedent",
+            "next":"Suivant"
+            }
+
+
+        },
+        buttons:['selectRows']
+    }
+
+        );
+    });
+</script>
+@endpush

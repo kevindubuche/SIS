@@ -115,16 +115,16 @@ class Admission extends Model
 
     
 
-    public function InfoFaculty()
-    {
-        return $this->belongsTo('App\Models\Faculty','faculty_id');
-    }
+    // public function InfoFaculty()
+    // {
+    //     return $this->belongsTo('App\Models\Faculty','faculty_id');
+    // }
     public function InfoDepartement()
     {
         return $this->belongsTo('App\Models\Departement','departement_id');
     }
-    public function InfoBatch()
+    public function InfoClass()
     {
-        return $this->belongsTo('App\Models\Batch','batch_id');
+        return $this->belongsTo('App\Models\Classes','class_id');
     }
 }

@@ -1,55 +1,51 @@
 <div class="table-responsive">
     <table class="table" id="teachers-table">
-        <thead>
-            <tr>
-         <th></th>
-         <th>Prenom</th>
-        <th>Nom</th>
-        <th>Sexe</th>
-        <th>Email</th>
-        <th>Date de naissance</th>
-        <th>Telephone</th>
-        <th>Adresse</th>
-        <th>Status</th>
-        {{-- <th>Datere enregistre</th> --}}
-        {{-- <th>User Id</th> --}}
-
-                <th colspan="3">Actions</th>
-            </tr>
-        </thead>
+     
         <tbody>
-        @foreach($teachers as $teacher)
-            <tr>
-            <td><img src="{{asset('teacher_images/'.$teacher->image)}}"
-                alt="prof image"
-                class="rounded-circle"
-                width="50" 
-                height="50"
-                style="border-radius:50%"/>
-            </td>
-            <td>{{ $teacher->first_name }}</td>
-            <td>{{ $teacher->last_name }}</td>
-            <td>{{ $teacher->gender }}</td>
-            <td>{{ $teacher->email }}</td>
-            <td>{{ $teacher->dob }}</td>
-            <td>{{ $teacher->phone }}</td>
-            <td>{{ $teacher->adress }}</td>
-            <td>{{ $teacher->status }}</td>
-            {{-- <td>{{ $teacher->dateRegistered }}</td>  --}}
-            {{-- <td>{{ $teacher->user_id }}</td> --}}
-          
-            <td>
-                    {!! Form::open(['route' => ['teachers.destroy', $teacher->teacher_id], 'method' => 'delete']) !!}
-                  
-                        <a href="{{ route('teachers.show', [$teacher->teacher_id]) }}" target="_blank" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a>
-                        <a href="{{ route('teachers.edit', [$teacher->teacher_id]) }}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>
-                       
-                        {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
+       
+
+
+        <div class="container">
+            <!-- /.col -->
+            <div class="row">
+              <div class="col-md-12">
+                <!-- Application buttons -->
+                    <div class="box">
+                        
+                        <div class="box-body">
+                        
+                            @foreach($teachers as $teacher)
+                            <div class="btn  col-md-3" >
+                            <a href="{{ route('teachers.show', [$teacher->teacher_id]) }}" target="_blank"  >
+                                <img src="{{asset('user_images/'.$teacher->image)}}"
+                                alt="prof image"
+                                class="rounded-circle"
+                                width="100" 
+                                height="100"
+                                style="border-radius:50%"/>
+                                <hr>
+                             <p>    {{ $teacher->last_name }} {{ $teacher->first_name }} </p>
+                            </a>
+                          
+                                
+                                {!! Form::open(['route' => ['teachers.destroy', $teacher->teacher_id], 'method' => 'delete']) !!}
+                        
+                                {{-- <a href="{{ route('teachers.show', [$teacher->teacher_id]) }}" target="_blank" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a> --}}
+                                <a href="{{ route('teachers.edit', [$teacher->teacher_id]) }}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>
+                            
+                                {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Etes-vous sur?')"]) !!}
+                            
+                            {!! Form::close() !!}
+                            </div>
+                            @endforeach
+                        </div>
                     </div>
-                    {!! Form::close() !!}
-                </td>
-            </tr>
-        @endforeach
+                </div>
+            </div>
+       </div>
+
+
+
         </tbody>
     </table>
 </div>

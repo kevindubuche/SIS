@@ -22,7 +22,7 @@
                         class='btn btn-default btn-xs'>
                         <i class="glyphicon glyphicon-eye-open"></i></a>
                         <a href="{{ route('classes.edit', [$classes->class_id]) }}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>
-                        {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
+                        {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Etes-vous sur ?')"]) !!}
                     </div>
                     {!! Form::close() !!}
                 </td>
@@ -39,7 +39,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+          <h5 class="modal-title" id="exampleModalLongTitle">Classe</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -49,22 +49,22 @@
             <input type="hidden" name="batch_id" id="batch_id">
                 <!-- Batch Field -->
                 <div class="form-group">
-                    {!! Form::label('class_name', 'Class Name:') !!}
+                    {!! Form::label('class_name', 'Nom de classe:') !!}
                    <input type="text" name="class_name" id="class_name" readonly>
                   </div>
 
                   <div class="form-group">
-                    {!! Form::label('class_code', 'Class Code:') !!}
+                    {!! Form::label('class_code', 'Code de la classe:') !!}
                    <input type="text" name="class_code" id="class_code" readonly>
                   </div>
 
                   <div class="form-group">
-                    {!! Form::label('created_at', 'Created At:') !!}
+                    {!! Form::label('created_at', 'Creer le:') !!}
                    <input type="text" name="created_at" id="created_at" readonly>
                   </div>
 
                   <div class="form-group">
-                    {!! Form::label('updated_at', 'Updated At:') !!}
+                    {!! Form::label('updated_at', 'Modifier le:') !!}
                    <input type="text" name="updated_at" id="updated_at" readonly>
                   </div>
                   
@@ -72,8 +72,8 @@
 
 </div>
 <div class="modal-footer">
-  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-  {!! Form::submit('Save Class', ['class' => 'btn btn-primary']) !!}
+  <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+
 </div>
 </div>
 </div>
@@ -96,7 +96,7 @@
 
             var modal =$(this)
 
-            modal.find('.modal-title').text('VIEW CLASS INFORMATION');
+            modal.find('.modal-title').text('VOIR CLASSE');
             modal.find('.modal-body #class_name').val(class_name);
             modal.find('.modal-body #class_code').val(class_code);
              modal.find('.modal-body #created_at').val(created_at);

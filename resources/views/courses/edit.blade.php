@@ -3,7 +3,7 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Course
+            Cours
         </h1>
    </section>
    <div class="content">
@@ -14,14 +14,15 @@
                    {!! Form::model($course, ['route' => ['courses.update', $course->course_id], 'method' => 'patch']) !!}
 
                         <!-- Course Name Field -->
+                        <input type="hidden" id="created_by" name="created_by" value="{{$course->created_by}}">
 <div class="form-group col-md-6 ">
-    {!! Form::label('course_name', 'Course Name:') !!}
+    {!! Form::label('course_name', 'Nom du cours:') !!}
     {!! Form::text('course_name', null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Course Code Field -->
 <div class="form-group col-md-6 ">
-    {!! Form::label('course_code', 'Course Code:') !!}
+    {!! Form::label('course_code', 'Code du cours:') !!}
     {!! Form::text('course_code', null, ['class' => 'form-control']) !!}
 </div>
 
@@ -32,18 +33,18 @@
 </div>
 
 <!-- Status Field -->
-<div class="form-group col-md-6">
+{{-- <div class="form-group col-md-6">
     {!! Form::label('status', 'Status:') !!}
     <label class="checkbox-inline">
         {!! Form::hidden('status', 0) !!}
         {!! Form::checkbox('status', '1', null) !!}
     </label>
-</div>
+</div> --}}
 </div>
 
 <div class="modal-footer">
-  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-  {!! Form::submit('Update Course', ['class' => 'btn btn-primary']) !!}
+  <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+  {!! Form::submit('Modifier Cours', ['class' => 'btn btn-primary']) !!}
 </div>
 </div>
 </div>

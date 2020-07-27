@@ -58,7 +58,7 @@ class CourseController extends AppBaseController
            else  {
             // dd('role default');
             $student = Admission::where(['user_id'=> $user->id])->first();
-
+            // dd($user->id);
             $courses = DB::table('courses')//on pprend tous les cours
             ->select(
                 'courses.*'

@@ -3,7 +3,7 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Admission
+            Etudiant(e)
         </h1>
    </section>
    <div class="content">
@@ -30,11 +30,12 @@
             value="{{Auth::id()}}" required>
 <!-- First Name Field -->
 <div class="form-group col-sm-12">
+    <label>Prenom</label>
     <input type="text" 
         name="first_name"
         id="first_name" 
         class="form-control text-capitalize"
-        placeholder="Enter first name here"
+        placeholder="Prenom"
         value="{{$admission->first_name}}"
         >
 </div>
@@ -42,22 +43,24 @@
 
 <!-- Last fater name Field -->
 <div class="form-group col-sm-12">
+    <label>Nom</label>
     <input type="text" 
         name="last_name"
         id="last_name" 
         class="form-control text-capitalize"
-        placeholder="Enter first name here"
+        placeholder="Nom"
         value="{{$admission->last_name}}"
         >
 </div>
 
 <!-- email phone Field -->
 <div class="form-group col-sm-12">
+    <label>Email</label>
     <input type="email" 
         name="email"
         id="email" 
         class="form-control text-capitalize"
-        placeholder="Enter the email  here"
+        placeholder="Email"
         value="{{$admission->email}}"
         >
 </div>
@@ -65,43 +68,47 @@
 
 <!-- fathter Name Field -->
 <div class="form-group col-sm-12">
+    <label>Nom complet du pere</label>
     <input type="text" 
         name="father_name"
         id="father_name" 
         class="form-control text-capitalize"
-        placeholder="Enter the father name here"
+        placeholder="Nom complet du pere"
         value="{{$admission->father_name}}"
         >
 </div>
 
 <!-- father phone Field -->
 <div class="form-group col-sm-12">
+    <label>Telephone du pere</label>
     <input type="text" 
         name="father_phone"
         id="father_phone" 
         class="form-control text-capitalize"
-        placeholder="Enter the father phone here"
+        placeholder="Telephone du pere"
         value="{{$admission->father_phone}}"
         >
 </div>
 
 <!-- mother Name Field -->
 <div class="form-group col-sm-12">
+    <label>Nom complet de la mere</label>
     <input type="text" 
         name="mother_name"
         id="mother_name" 
         class="form-control text-capitalize"
-        placeholder="Enter the mother name here"
+        placeholder="Nom complet de la mere"
         value="{{$admission->mother_name}}"
         >
 </div>
 <!-- mother phone Field -->
 <div class="form-group col-sm-12">
+    <label>Telephone de la mere</label>
     <input type="text" 
         name="mother_phone"
         id="mother_phone" 
         class="form-control text-capitalize"
-        placeholder="Enter the mother phone here"
+        placeholder="Telephone de la mere"
         value="{{$admission->mother_phone}}"
         >
 </div>
@@ -110,7 +117,7 @@
 <div class="col-sm-12">
     <div class="form-group ">
         <fieldset>
-            <legend for="gender">Gender</legend>
+            <legend for="gender">Sexe</legend>
             <table style="width: 100%; margin-top:14px;">
                 <tr style="border-bottom: 1px solid #ccc">
                     <td>
@@ -118,7 +125,7 @@
                             <input type="radio" name="gender" id="gender" value="0"
                             {{$admission->gender ==0 ? 'checked' :''}}  >
                             
-                            Male
+                            Masculin
                         </label>
                     </td>
                     <td>
@@ -126,7 +133,7 @@
                             <input type="radio" name="gender" id="gender" value="1"
                             {{$admission->gender ==1 ? 'checked' :''}} >
                             
-                               Female
+                               Feminin
                         </label>
                     </td>
                 </tr>
@@ -166,6 +173,7 @@
 <!-- Dob Field -->
 <div class="col-md-12">
     <div class="form-group">
+        <label>Date de naissance</label>
         <div class="input-group">
             <div class="form-group-addon">
                 <i class="fa fa-calendar teacherdob"></i>
@@ -211,7 +219,7 @@
 <div class="form-group col-sm-12">
     <select class="form-control" name="departement_id" id="departement_id">
         <option value="0" selected="true"
-            disabled="true">Choose Departement</option>
+            disabled="true">Departement</option>
             @foreach ($departements as $dep)
                  <option value="{{$dep->departement_id}}"
                     {{$dep->departement_id == $admission->departement_id ? 'selected' : ''}}
@@ -222,26 +230,11 @@
    
 </div>
 
-<!-- Batch Field -->
-<div class="form-group col-sm-12">
-    <select class="form-control" name="batch_id" id="batch_id">
-        <option value="0" selected="true"
-            disabled="true">Choose Batch </option>
-            @foreach ($batches as $batch)
-                 <option value="{{$batch->batch_id}}"
-                    {{$batch->batch_id === $admission->batch_id ? 'selected' : ''}}>
-                    {{$batch->batch}} </option>
-            @endforeach
-          
-    </select>
-   
-</div>
-
 <!-- Faculty Field -->
 <div class="form-group col-sm-12">
     <select class="form-control" name="faculty_id" id="faculty_id">
         <option value="0" selected="true"
-            disabled="true">Choose Faculty</option>
+            disabled="true">Faculte</option>
             @foreach ($faculties as $fac)
                  <option value="{{$fac->faculty_id}}"
                     {{$fac->faculty_id == $admission->faculty_id ? 'selected' : ''}}
@@ -261,7 +254,7 @@
             <tbody>
                 <tr>
                     <td class="image" >
-                        {!!Html::image('student_images/'.$admission->image,
+                        {!!Html::image('user_images/'.$admission->image,
                         null,
                         ['class'=>'student.image', 'id'=>'showImage' , 'style'=>'width:200px; height:200px;'])!!}                       
                         <input type="file" name="image" id="image"
@@ -286,9 +279,9 @@
 
 <!-- Adress Field -->
 <div class="form-group col-sm-12">
-   <b><i class="fa fa-map-marker"></i>Address</b>
+   <b><i class="fa fa-map-marker"></i>Adresse</b>
         
-            <textarea placeholder="Enter address here"
+            <textarea placeholder="Adresse"
             name="adress"
             id="adress"
             cols="40" rows="2"
@@ -299,34 +292,10 @@
     
 </div>
    
-
-{{-- <!-- Dateregistered Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('dateRegistered', 'Dateregistered:') !!}
-    {!! Form::text('dateRegistered', null, ['class' => 'form-control','id'=>'dateRegistered']) !!}
-</div>
-
-@push('scripts')
-    <script type="text/javascript">
-        $('#dateRegistered').datetimepicker({
-            format: 'YYYY-MM-DD HH:mm:ss',
-            useCurrent: true,
-            sideBySide: true
-        })
-    </script>
-@endpush --}}
-
-{{-- <!-- User Id Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('user_id', 'User Id:') !!}
-    {!! Form::number('user_id', null, ['class' => 'form-control']) !!}
-</div> --}}
-
-
 </div>
 <div class="modal-footer ">
-  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-  {!! Form::submit('Update Admission', ['class' => 'btn btn-primary']) !!}
+  <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+  {!! Form::submit('Modifier etudiant', ['class' => 'btn btn-primary']) !!}
 </div>
 
 

@@ -18,7 +18,7 @@
 
 <!-- Name Field -->
 <div class="form-group ">
-    {!! Form::label('name', 'Name:') !!}
+    {!! Form::label('name', 'Nom:') !!}
     {!! Form::text('name', null, ['class' => 'form-control']) !!}
 </div>
 
@@ -33,8 +33,8 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
-                {!! Form::submit('Create Role', ['class'=> 'btn btn-succes']) !!}
+                <button type="button" class="btn btn-warning" data-dismiss="modal">Fermer</button>
+                {!! Form::submit('Creer Role', ['class'=> 'btn btn-succes']) !!}
             </div>
         </div>
     </div>
