@@ -9,19 +9,27 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel">
             <div class="pull-left image">
+                
                 @if (Auth::user()->role !=1)
+             
                 <img src="{{asset('user_images/'.Auth::user()->GetUser(Auth::user()->role,Auth::user()->id)->image)}}" class="img-circle" alt="User Image">
-                  @else
+           
+              @else
                 <img src="{{asset('user_images/defaultAvatar.png')}}" class="img-circle"
-                alt="User Image"/>
+                alt="User Image"> 
+           
                 @endif
+               
             
             </div>
             <div class="pull-left info">
                 @if (Auth::guest())
                 <p>S I S</p>
                 @else
-                    <p>{{ Auth::user()->name}}</p>
+                <a href="{{ url('/profile/'.Auth::user()->id)}}"
+                    style="color: black; font-weight :bold; font-size:15px;">
+                    <p>{{ Auth::user()->first_name}} {{ Auth::user()->last_name}}</p>
+                </a>
                 @endif
                 <!-- Status -->
                 <a href="#"><i class="fa fa-circle text-success"></i> En Ligne</a>

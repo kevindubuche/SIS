@@ -46,7 +46,7 @@
 <!-- Class Id Field -->
 <div class="form-group col-sm-4">
     <select class="form-control" name="class_id" id="class_id">
-        <option value="0" selected="true" disabled="true">Choisir classe<option>
+        <option value="0" selected="true" disabled="true">Choisir classe</option>
         @foreach($allClasses as $class)
         <option value="{{$class->class_id}}">{{$class->class_name}}</option>
         @endforeach
@@ -168,6 +168,7 @@
                  id="dob"
                   class="form-control text-capitalize"
                   placeholder="Date de naissance"
+                  autocomplete="off"
                   >
         </div>
     </div>

@@ -13,6 +13,7 @@ use Response;
 use App\Models\Teacher;
 use App\Models\ClassScheduling;
 use App\Models\Status;
+use App\Models\Classes;
 use DB;
 use Validator;
 use App\Models\ClassAssigning;
@@ -41,46 +42,53 @@ class ClassAssigningController extends AppBaseController
         $classAssignings = $this->classAssigningRepository->all();
 
         $allTeacher = Teacher::get();
-        $classSchedules = ClassScheduling::all();
-        return view('class_assignings.index', compact('allTeacher','classSchedules'))
+        // $classSchedules = ClassScheduling::all();
+        $classes = Classes::all();
+        return view('class_assignings.index', compact('allTeacher','classes'))
             ->with('classAssignings', $classAssignings);
 
     }
     
     public function insert(Request $request)
     {
-        // dd($request);
+    //  dd($request->all());
         $validator = Validator::make($request->all(),[
             'teacher_id'=>'required'
         ]);
 
         if($validator->fails()) {
-            Flash::error('Teacher can not be empty');
+            Flash::error('Professeur incorrect');
                
             return redirect(route('classAssignings.index'));
         }
         $input = $request->all();
         
-        $teacher = new Status;
-        $teacher->teacher_id = $request->teacher_id;
-        $status_id = $teacher->save();
-        if($status_id !=0){
+        // $teacher = new Status;
+        // $teacher->teacher_id = $request->teacher_id;
+        // $status_id = $teacher->save();
+        // if($status_id !=0){
+            if( ! $request->multiclass){
+                Flash::error('Classe incorecte');
+               
+                return redirect(route('classAssignings.index'));
+            }
+            
             foreach($request->multiclass as $key => $teach){
                 $data2 = array('teacher_id'=> $request->teacher_id,
-                'schedule_id'=> $request->multiclass[$key]);
+                'class_id'=> $request->multiclass[$key]);
                 // dd( $request->multiclass[$key]);
 
             $checkExist = ClassAssigning::where('teacher_id', $request->teacher_id)
-                            ->where('schedule_id', $request->multiclass[$key])
+                            ->where('class_id', $request->multiclass[$key])
                             ->first();
 
             if($checkExist){
-                Flash::error('Class Assigning for this Teacher already exist');
+                Flash::error('Une ou plusieurs assignations existaient deja pour cette classe.');
                 return redirect(route('classAssignings.index'));
             }
             ClassAssigning::insert($data2);
 
-            }
+            // }
         }
         Flash::success('Assignation faite avec succes');
         return redirect(route('classAssignings.index'));
@@ -111,6 +119,7 @@ class ClassAssigningController extends AppBaseController
      */
     public function store(CreateClassAssigningRequest $request)
     {
+       
         $input = $request->all();
 
         $classAssigning = $this->classAssigningRepository->create($input);
@@ -206,7 +215,7 @@ class ClassAssigningController extends AppBaseController
 
         $this->classAssigningRepository->delete($id);
 
-        Flash::success('Class Assigning deleted successfully.');
+        Flash::success('Assignation suprimmee avec succes.');
 
         return redirect(route('classAssignings.index'));
     }

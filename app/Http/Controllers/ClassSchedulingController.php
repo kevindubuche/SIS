@@ -20,6 +20,7 @@ use App\Models\Semester;
 use App\Models\Shift;
 use App\Models\Time; 
 use App\Models\Teacher;
+use App\Models\ClassAssigning;
 
 use App\Models\ClassScheduling;
 
@@ -44,7 +45,8 @@ class ClassSchedulingController extends AppBaseController
     public function index(Request $request)
     {
         
-        $allClasses = Classes::all();
+        //class keu prof sa assigner a
+        $allClassAssignins = ClassAssigning::all();
         $allCourses = Course::all();
         $allSemesters = Semester::all();
         $allTeachers = Teacher::all();
@@ -52,6 +54,7 @@ class ClassSchedulingController extends AppBaseController
 
 
         // $classSchedulings = $this->classSchedulingRepository->all();
+
 
         //////////////////////////////////////
         //AL DEYE TOUT TOUT SCHEDULE AK AK INFO KORESPONDAN YO
@@ -68,7 +71,7 @@ class ClassSchedulingController extends AppBaseController
         //     ->join('semesters','semesters.semester_id','=','class_schedulings.semester_id')
         //     ->get();
             return view('class_schedulings.index',
-            compact('classSchedule', 'allCourses', 'allClasses', 'allSemesters', 'allTeachers'))
+            compact('classSchedule', 'allCourses', 'allClassAssignins', 'allSemesters', 'allTeachers'))
             // ->with('classSchedulings', $classSchedulings)
             ;
     }
@@ -179,12 +182,7 @@ class ClassSchedulingController extends AppBaseController
         $classSchedule = array(
             'class_id'=> $request->class_id3,
             'course_id' => $request->course_id3,
-            // 'level_id' => $request->level_id3,
-            // 'shift_id' => $request->shift_id3, 
-            // 'classroom_id'=> $request->classroom_id3,
-            // 'batch_id' => $request->batch_id3,
-            // 'day_id' => $request->day_id3,
-            // 'time_id' => $request->time_id3,
+           
             'semester_id'=> $request->semester_id3,
             'start_time'=> $request->start_time3,
             'end_time' => $request->end_time3

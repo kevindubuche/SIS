@@ -16,7 +16,7 @@
 <!-- Course Name Field -->
 <div class="form-group ">
     {!! Form::label('course_name', 'Nom du cours:') !!}
-    {!! Form::text('course_name', null, ['class' => 'form-control']) !!}
+    {!! Form::text('course_name', null, ['class' => 'form-control', 'required']) !!}
 </div>
 
 <!-- Course Code Field -->
@@ -27,7 +27,7 @@
 
 <!-- Description Field -->
 <div class="form-group ">
-    {!! Form::label('description', 'Description:') !!}
+    {!! Form::label('description', 'Description:', 'required') !!}
     {!! Form::textarea('description', null, ['class' => 'form-control', 'cols'=>40, 'rows'=>2]) !!}
 </div>
 
@@ -41,7 +41,7 @@
 </div> --}}
 
 
-<input type="file" name="filename" id="filename">
+<input type="file" name="filename" id="filename" required>
 
 
 </div>

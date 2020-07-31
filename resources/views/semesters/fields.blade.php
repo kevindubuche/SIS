@@ -10,6 +10,17 @@
     {!! Form::text('semester_code', null, ['class' => 'form-control']) !!}
 </div>
 
+<div class="form-group col-sm-6">
+    <label>Annee academique</label>
+    <select class="form-control" name="semester_year" id="semester_year">
+        <option value="0" selected="false" disabled="true">Annee academique</option>
+        @foreach($annees as $annee)
+        <option value="{{$annee->title}}">{{$annee->title}}</option>
+        @endforeach
+    </select>
+</div>
+
+
 <!-- Semester Duration Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('semester_duration', 'Duree:') !!}

@@ -70,7 +70,8 @@ class TeacherController extends AppBaseController
         //NAP ADD USER A AVAN
 
         $user = new User;
-        $user->name = $request->first_name .' '.$request->last_name;
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
         $user->role = 2;
         $user->email = $request->email;
         $password = 'qwerty123';//nou ka genere yon ran si nou vle

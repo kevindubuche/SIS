@@ -1,8 +1,8 @@
 <!-- Faculty Id Field -->
-<div class="form-group">
+{{-- <div class="form-group">
     {!! Form::label('faculty_id', 'Faculty Id:') !!}
     <p>{{ $departement->faculty_id }}</p>
-</div>
+</div> --}}
 
 <!-- Departement Name Field -->
 <div class="form-group">

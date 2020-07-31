@@ -2,10 +2,12 @@
 
 @section('content')
     <section class="content-header">
-        <h1 class="pull-left">Affectations</h1>
+        <h1 class="pull-left">Assignations</h1>
         <h1 class="pull-right">
-           <a data-toggle="modal" data-target="#add-class_ass-modal" class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" ><i class="fa fa-plus-circle">Ajouter affectation</i></a>
-        </h1>
+            @if(Auth::user()->role==1)
+           <a data-toggle="modal" data-target="#add-class_ass-modal" class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" ><i class="fa fa-plus-circle">Ajouter assignation</i></a>
+       @endif
+     </h1>
 
         {{-- Bouton PDF --}}
         <div class="btn btn-group" style="margin-top:20px, float:left; margin-right:25px">

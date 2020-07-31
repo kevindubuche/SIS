@@ -33,13 +33,15 @@ class ClassAssigning extends Model
 
 
     public $fillable = [
-        'course_id',
-        'level_id',
-        'shift_id',
-        'classwoom_id',
-        'batch_id',
-        'day_id',
-        'time_id'
+        // 'course_id',
+        // 'level_id',
+        // 'shift_id',
+        // 'classwoom_id',
+        // 'batch_id',
+        // 'day_id',
+        // 'time_id'
+        'teacher_id',
+        'class_id'
     ];
 
     /**
@@ -48,14 +50,17 @@ class ClassAssigning extends Model
      * @var array
      */
     protected $casts = [
+        // 'class_assign_id' => 'integer',
+        // 'course_id' => 'integer',
+        // 'level_id' => 'integer',
+        // 'shift_id' => 'integer',
+        // 'classwoom_id' => 'integer',
+        // 'batch_id' => 'integer',
+        // 'day_id' => 'integer',
+        // 'time_id' => 'integer'
         'class_assign_id' => 'integer',
-        'course_id' => 'integer',
-        'level_id' => 'integer',
-        'shift_id' => 'integer',
-        'classwoom_id' => 'integer',
-        'batch_id' => 'integer',
-        'day_id' => 'integer',
-        'time_id' => 'integer'
+        'teacher_id' => 'integer',
+        'class_id' => 'integer',
     ];
 
     /**
@@ -64,54 +69,33 @@ class ClassAssigning extends Model
      * @var array
      */
     public static $rules = [
-        'course_id' => 'required',
-        'level_id' => 'required',
-        'shift_id' => 'required',
-        'classwoom_id' => 'required',
-        'batch_id' => 'required',
-        'day_id' => 'required',
-        'time_id' => 'required'
+        // 'course_id' => 'required',
+        // 'level_id' => 'required',
+        // 'shift_id' => 'required',
+        // 'classwoom_id' => 'required',
+        // 'batch_id' => 'required',
+        // 'day_id' => 'required',
+        // 'time_id' => 'required'
+        'teacher_id' => 'required',
+        'class_id' => 'required',
     ];
-    // public function InfoTeacher()
-    // {
-    //     return $this->belongsTo('App\Models\Teacher','teacher_id');
-    // }
 
     // public function InfoTeacher()
     // {
-    //     return $this->hasOne('App\Models\Teacher','teacher_id');
+    //     return $this->belongsTo('App\Models\Teacher','user_id');
     // }
-    public function InfoTeacher()
-    {
-        return $this->belongsTo('App\Models\Teacher','teacher_id');
+
+    public  function InfoTeacher( $id){
+        $user = User::where('users.id',$id)
+                    ->first();
+       
+       return $user;
     }
-
-    public  function InfoClassSchedule(){
-        return $this->belongsTo('App\Models\ClassScheduling','schedule_id');
+    public  function InfoClass(){
+        return $this->belongsTo('App\Models\Classes','class_id');
      }
 
-    // public function InfoSemester()
-    // {
-    //     $semester_id = $this->belongsTo('App\Models\Semester','semester_id');
-    //     return $this->belongsTo('App\Models\Semester','semester_id');
-    // }
-
-    // public static function InfoTeacher(){
-    //     return  ClassAssigning::join('teachers', 'teachers.teacher_id','=', 'class_assignings.teacher_id')->first();
-    // }
-
-
-    //   public  function InfoSemester(){
-    //     return  ClassScheduling::join('semesters', 'semesters.semester_id','=', 'class_schedulings.semester_id')  ->first();
-    // }
-
-    // public static function InfoCourse(){
-    //     return  ClassScheduling::join('courses', 'courses.course_id','=', 'class_schedulings.course_id')   ->first();
-    // }
-
-    // public static function InfoLevel(){
-    //     return  ClassScheduling::join('levels', 'levels.level_id','=', 'class_schedulings.level_id')   ->first();
-    // }
+ 
     
     
 }

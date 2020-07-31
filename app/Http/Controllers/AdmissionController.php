@@ -17,6 +17,7 @@ use App\Models\Departement;
 use App\Models\Batch;
 use App\Models\Classes;
 use App\Models\User;
+use App\Models\ClassScheduling;
 use Illuminate\Support\Facades\Hash;
 use DB;
 class AdmissionController extends AppBaseController
@@ -80,7 +81,8 @@ class AdmissionController extends AppBaseController
 // dd($input); 
 
         $user = new User;
-        $user->name = $request->first_name .' '.$request->last_name;
+        $user->first_name = $request->first_name ;
+        $user->last_name =$request->last_name;
         $user->role = 3;
         $user->email = $request->email;
         $password = 'qwerty123';//nou ka genere yon ran si nou vle
@@ -141,7 +143,7 @@ class AdmissionController extends AppBaseController
         // }
         // $admission = $this->admissionRepository->create($input);
 
-        Flash::success('Admission'.$request->first_name.' '.$request->last_name.' saved successfully.');
+        Flash::success($request->first_name.' '.$request->last_name.' ajoute avec succes.');
 
         return redirect(route('admissions.index'));
     }
@@ -157,13 +159,16 @@ class AdmissionController extends AppBaseController
     {
         $admission = $this->admissionRepository->find($id);
 
+        $schedules =ClassScheduling::where('class_id', $admission->class_id)->get();
+        
+        // dd($schedules);
         if (empty($admission)) {
-            Flash::error('Admission not found');
+            Flash::error('Etudiant non trouve');
 
             return redirect(route('admissions.index'));
         }
 
-        return view('admissions.show')->with('admission', $admission);
+        return view('admissions.show',compact('schedules'))->with('admission', $admission);
     }
 
     /**

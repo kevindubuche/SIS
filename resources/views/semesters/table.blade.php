@@ -3,6 +3,7 @@
         <thead>
             <tr>
                 <th>Nom du semestre</th>
+                <th>Annee academique</th>
         <th>Code du semestre</th>
         <th>Duree</th>
         <th>Description</th>
@@ -13,6 +14,7 @@
         @foreach($semesters as $semester)
             <tr>
             <td>{{ $semester->semester_name }}</td>
+            <td>{{ $semester->semester_year }}</td>
             <td>{{ $semester->semester_code }}</td>
             <td>{{ $semester->semester_duration }}</td>
             <td>{{ $semester->semester_description }}</td>

@@ -32,14 +32,17 @@
     <![endif]-->
 
 </head>
-<body class="hold-transition login-page">
+<body 
+style="background-image: linear-gradient(#B3FFAB, #12fff7);"
+class="hold-transition login-page"
+>
 <div class="login-box">
     <div class="login-logo">
         <a href="{{ url('/home') }}"><b>Connection</b> <br>I.F.A</a>
     </div>
 
     <!-- /.login-logo -->
-    <div class="login-box-body">
+    <div class="login-box-body" style="  box-shadow: 5px 10px #f5eded;">
         <p class="login-box-msg">Connectez-vous pour commencer une session</p>
 
         <form method="post" action="{{ url('/login') }}">

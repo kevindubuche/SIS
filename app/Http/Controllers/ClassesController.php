@@ -58,7 +58,7 @@ class ClassesController extends AppBaseController
 
         $classes = $this->classesRepository->create($input);
 
-        Flash::success('Classes saved successfully.');
+        Flash::success('Classe ajoutee avec succes.');
 
         return redirect(route('classes.index'));
     }
@@ -75,7 +75,7 @@ class ClassesController extends AppBaseController
         $classes = $this->classesRepository->find($id);
 
         if (empty($classes)) {
-            Flash::error('Classes not found');
+            Flash::error('Classe non trouvee');
 
             return redirect(route('classes.index'));
         }
@@ -149,7 +149,7 @@ class ClassesController extends AppBaseController
 
         $this->classesRepository->delete($id);
 
-        Flash::success('Classes deleted successfully.');
+        Flash::success('Classe supprimee avec succes');
 
         return redirect(route('classes.index'));
     }

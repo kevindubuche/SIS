@@ -61,10 +61,10 @@ class UserController extends AppBaseController
     public function store(CreateUserRequest $request)
     {
         $input = $request->all();
-
+//  dd($input);
         $user = $this->userRepository->create($input);
 
-        Flash::success('User saved successfully.');
+        Flash::success('Utilisateur ajoute avec succes.');
 
         return redirect(route('users.index'));
     }
@@ -102,7 +102,7 @@ class UserController extends AppBaseController
         $user = $this->userRepository->find($id);
 
         if (empty($user)) {
-            Flash::error('User not found');
+            Flash::error('Utilisateur non trouve');
 
             return redirect(route('users.index'));
         }
@@ -118,24 +118,43 @@ class UserController extends AppBaseController
      *
      * @return Response
      */
-    public function update($id, UpdateUserRequest $request)
+    public function update($id, Request $request)
     {
-        $user = $this->userRepository->find($id);
+        $input = $request->all();
+        // $user = $this->userRepository->find($id);
 
-        $newUser = $request;
+     
+        // $newUser = $request;
+        // if (empty($user)) {
+        //     Flash::error('Utilisateur non trouve');
+
+        //     return redirect(route('users.index'));
+        // }
+        
+        $newPassword =Hash::make( $request->password);
+        
+         //dd( $request->all() );
+        //  dd($request->all());
+
+        $user = array(
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'role' => $request->role,
+            'email' => $request->email,
+            'password' => $newPassword
+            
+        );
         if (empty($user)) {
-            Flash::error('User not found');
+            Flash::error($request->first_name. ' '. $request->last_name.'Utilisateur non trouve');
 
             return redirect(route('users.index'));
         }
-        
-        $newPassword =Hash::make( $request->password);
-        $request->password = $newPassword;
-        // dd( $request->all() );
-        //  dd($request->all());
-        $user = $this->userRepository->update([$request->all(),'password'=>$newPassword], $id);
-       
-        Flash::success('User updated successfully.');
+
+    //     $user = $this->userRepository->update([$request->all(),'password'=>$newPassword], $id);
+    //    dd($user);
+    User::findOrFail($id)->update($user);
+
+        Flash::success('Utilisateur modifie avec succes.');
 
         return redirect(route('users.index'));
     }

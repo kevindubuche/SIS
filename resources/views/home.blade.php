@@ -76,31 +76,34 @@
                   <i class="fa fa-book"></i> Cours
                   </a>
                     <a class="btn btn-app col-md-2" href="{{ route('classSchedulings.index') }}">
-                    <span class="badge bg-teal">67</span>
                     <i class="fa fa-calendar"></i> Horaire
                     </a>
                     
                     <a class="btn btn-app col-md-2" href="{{ route('teachers.index') }}">
-                      <span class="badge bg-red">{{$totalTeachers}}</span>
+                      <span class="badge bg-green">{{$totalTeachers}}</span>
                       <i class="fa fa-user-circle"></i> Professeurs
                       </a>
                   
                     <a class="btn btn-app col-md-2" href="{{ url('/profile/'.Auth::user()->id)}}">
-                      <i class="fa fa-user-circle"></i> Profile
+                      <i class="fa fa-user-circle"></i> Mon profil
                     </a>
                     <a class="btn btn-app col-md-2" href="{{ route('exams.index') }}">
-                      <span class="badge bg-red">531</span>
+                      <span class="badge bg-red">{{$totalExamens}}</span>
                       <i class="fa fa-book"></i> Examens
                     </a>
               {{-- END EVERYBODY CAN ACCESS --}}
                         {{-- ONLY ADM CAN ACCESS --}}
                         @if (Auth::user()->role==1)
                         <a class="btn btn-app col-md-2 "href="{{ route('classes.index') }}">
+                          <span class="badge bg-teal">{{$totalClasses}}</span>
                           <i class="fa fa-graduation-cap"></i> Classes
                           </a>
                           {{-- <a class="btn btn-app col-md-2" href="{{ route('levels.index') }}">
                             <i class="fa fa-bar-chart-o"></i> Niveaux
                             </a> --}}
+                            <a class="btn btn-app col-md-2" href="{{ route('annees.index') }}">
+                              <i class="fa fa-calendar-times-o"></i> Annees
+                              </a>
                             <a class="btn btn-app col-md-2" href="{{ route('semesters.index') }}">
                             <i class="fa fa-calendar-times-o"></i> Semestres
                             </a>
@@ -108,7 +111,7 @@
                               <i class="fa  fa-university"></i> Facultes
                               </a>
                               <a class="btn btn-app col-md-2" href="{{ route('departements.index') }}">
-                              <span class="badge bg-yellow">3</span>
+                              <span class="badge bg-yellow">{{$totalDepartements}}</span>
                               <i class="fa fa-code-fork"></i> Departements
                               </a>
                               {{-- <a class="btn btn-app col-md-2" href="{{ route('academics.index') }}">
@@ -116,11 +119,11 @@
                               <i class="fa  fa-clock-o"></i> Annee Academique
                               </a> --}}
                               <a class="btn btn-app col-md-2" href="{{ route('roles.index') }}">
-                                <span class="badge bg-red">531</span>
-                                <i class="fa fa-heart-o"></i> Roles
+                                <span class="badge bg-green">{{$totalRoles}}</span>
+                                <i class="fa  fa-user-secret"></i> Roles
                                 </a>
                                 <a class="btn btn-app col-md-2" href="{{ route('users.index') }}">
-                                  <span class="badge bg-red">531</span>
+                                <span class="badge bg-red">{{$totalUsers}}</span>
                                   <i class="fa fa-group"></i> Utilisateurs
                                 </a>
                         @endif
@@ -129,10 +132,9 @@
                   
             {{-- ONLY ADM AND TEACHERS CAN ACCESS --}}
              @if (Auth::user()->role < 3)
-             {{-- <a class="btn btn-app col-md-2" href="{{ route('classAssignings.index') }}">
-              <span class="badge bg-purple">891</span>
-              <i class="fa fa-exchange"></i> Affectations
-              </a> --}}
+             <a class="btn btn-app col-md-2" href="{{ route('classAssignings.index') }}">
+              <i class="fa fa-exchange"></i> Assignations
+              </a>
               <a class="btn btn-app col-md-2" href="{{ route('admissions.index') }}">
                 <span class="badge bg-aqua">{{$totalStudents}}</span>
                 <i class="fa fa-user"></i> Etudiants
@@ -152,7 +154,7 @@
                 <!-- Box Comment -->
                 <div class="box box-widget">
                   <div class="box-header with-border">
-                    <h3 class="box-title">Actualites</h3>
+                    <a class="box-title"  href="{{ route('actuses.index') }}">Actualites</a>
                     <hr>
                     <?php $countActu = 0; ?>
                     @foreach ($allActus as $actu)
@@ -164,7 +166,12 @@
                      <img class="img-circle" src="{{asset('user_images/defaultAvatar.png')}}" alt="User Image">
                    
                       @endif
-                    <span class="username"><a href="#">{{$actu->GetUser($actu->created_by)->first_name}} {{$actu->GetUser($actu->created_by)->last_name}}</a></span>
+                    <span class="username">
+                      <a href="#">
+                      {{$actu->GetUser($actu->created_by)->first_name}}
+                       {{$actu->GetUser($actu->created_by)->last_name}}
+                      </a>
+                    </span>
                     <span class="description">Publie le {{$actu->created_at->format('D M. Y')}} a {{$actu->created_at->format('h:m')}}</span>
                     </div>
 
@@ -183,18 +190,16 @@
                         {{-- si comment la te creer par yon adm --}}
                         @if ($comment->GetUser($comment->created_by)->role ==1)
                         <img class="img-circle img-sm" src="{{asset('user_images/defaultAvatar.png')}}" alt="User Image">
-                        <span class="username">
-                          {{ $comment->GetUser($comment->created_by)->name}} 
+                       
                         @else
                         <img class="img-circle img-sm" src="{{asset('user_images/'.$comment->GetUser($comment->created_by)->image)}}" alt="User Image">
                      
-                        <div class="comment-text">
-                              <span class="username">
-                                   {{ $comment->GetUser($comment->created_by)->first_name}} {{ $comment->GetUser($comment->created_by)->last_name}}
-                                                   
-                               
-                        </div>
                         @endif
+                        
+                        <div class="comment-text">
+                          <span class="username">
+                               {{ $comment->GetUser($comment->created_by)->first_name}} {{ $comment->GetUser($comment->created_by)->last_name}}
+                        </div>
                         <span class="text-muted pull-right">{{$comment->created_at->format('d M. Y')}} a {{$comment->created_at->format('h:m')}}</span>
                       </span>
                        {{ $comment->body}} 
@@ -203,7 +208,7 @@
                         {!! Form::open(['route' => ['comments.destroy', $comment->id_comment], 'method' => 'delete']) !!}
                         <div class='btn-group'>
                             <a href="{{ route('comments.edit', [$comment->id_comment]) }}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>
-                            {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn  btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
+                            {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn  btn-xs', 'onclick' => "return confirm('Etes-vous sur ?')"]) !!}
                         </div>
                         {!! Form::close() !!} 
                        @endif

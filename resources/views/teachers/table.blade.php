@@ -26,7 +26,7 @@
                                 <hr>
                              <p>    {{ $teacher->last_name }} {{ $teacher->first_name }} </p>
                             </a>
-                          
+                            @if(Auth::user()->role == 1)
                                 
                                 {!! Form::open(['route' => ['teachers.destroy', $teacher->teacher_id], 'method' => 'delete']) !!}
                         
@@ -35,7 +35,8 @@
                             
                                 {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Etes-vous sur?')"]) !!}
                             
-                            {!! Form::close() !!}
+                                {!! Form::close() !!}
+                            @endif
                             </div>
                             @endforeach
                         </div>

@@ -32,7 +32,8 @@ class User extends Model
 
 
     public $fillable = [
-        'name',
+        'first_name',
+        'last_name',
         'role',
         'email',
         'email_verified_at',
@@ -47,7 +48,8 @@ class User extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'name' => 'string',
+        'first_name' => 'string',
+        'last_name' => 'string',
         'role' => 'integer',
         'email' => 'string',
         'email_verified_at' => 'datetime',
@@ -61,7 +63,8 @@ class User extends Model
      * @var array
      */
     public static $rules = [
-        'name' => 'required',
+        'first_name' => 'required',
+        'last_name' => 'required',
         'role' => 'required',
         'email' => 'required',
         'password' => 'required'

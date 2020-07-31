@@ -1,4 +1,4 @@
-<!-- Course Id Field -->
+{{-- <!-- Course Id Field -->
 <div class="form-group">
     {!! Form::label('course_id', 'Course Id:') !!}
     <p>{{ $classScheduling->course_id }}</p>
@@ -63,4 +63,4 @@
     {!! Form::label('status', 'Status:') !!}
     <p>{{ $classScheduling->status }}</p>
 </div>
-
+ --}}

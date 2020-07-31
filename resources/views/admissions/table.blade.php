@@ -9,9 +9,9 @@
         <th>Sexe</th>
         <th>Email</th>
         <th>Telephone</th>
-        <th>Adresse</th>
-        
+        @if(Auth::user()->role == 1)
                 <th >Action</th>
+        @endif
             </tr>
         </thead>
         <tbody>
@@ -30,18 +30,18 @@
             <td>@if($admission->gender ==0) Masculin @else Feminin @endif</td>
             <td>{{ $admission->email }}</td>
             <td>{{ $admission->phone }}</td>
-            <td>{{ $admission->adress }}</td>
             
-           
+           @if(Auth::user()->role == 1)
                 <td>
                     {!! Form::open(['route' => ['admissions.destroy', $admission->student_id], 'method' => 'delete']) !!}
                     <div class='btn-group'>
                         <a href="{{ route('admissions.show', [$admission->student_id]) }}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a>
                         <a href="{{ route('admissions.edit', [$admission->student_id]) }}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>
-                        {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
+                        {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Etes-vous sur?')"]) !!}
                     </div>
                     {!! Form::close() !!}
                 </td>
+            @endif
             </tr>
         @endforeach
         </tbody>

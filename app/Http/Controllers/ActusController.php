@@ -58,7 +58,7 @@ class ActusController extends AppBaseController
 
         $actus = $this->actusRepository->create($input);
 
-        Flash::success('Actus saved successfully.');
+        Flash::success('Actualite plublie avec succes.');
 
         return redirect(route('actuses.index'));
     }

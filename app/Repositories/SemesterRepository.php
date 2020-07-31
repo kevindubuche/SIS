@@ -20,7 +20,8 @@ class SemesterRepository extends BaseRepository
         'semester_name',
         'semester_code',
         'semester_duration',
-        'semester_description'
+        'semester_description',
+        'semester_year'
     ];
     protected $primaryKey = 'semester_id';
     /**

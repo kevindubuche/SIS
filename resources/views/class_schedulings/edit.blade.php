@@ -29,8 +29,10 @@
     <select class="form-control" name="course_id3" id="course_id3">
         <option  disabled="true" selected="false" value="">Cours</option>
         @foreach ($allCourses as $course)
-            <option value="{{$course->course_id}}">{{$course->course_name}}</option>
-        @endforeach
+        @if ($course->created_by == Auth::user()->id || Auth::user()->role==1)
+        <option value="{{$course->course_id}}">{{$course->course_name}}</option>
+  @endif
+ @endforeach
     </select>
 </div>
 
@@ -38,8 +40,10 @@
 <div class="form-group col-sm-6">
     <select class="form-control" name="class_id3" id="class_id3">
         <option disabled="true" selected="false" value="">Classe</option>
-        @foreach ($allClasses as $class)
-            <option value="{{$class->class_id}}">{{$class->class_name}}</option>
+        @foreach ($allClassAssignins as $class)
+        @if ($class->teacher_id == Auth::user()->id || Auth::user()->role==1)
+        <option value="{{$class->InfoClass->class_id}}">{{$class->InfoClass->class_name}}</option>
+        @endif
         @endforeach
     </select>
 </div>

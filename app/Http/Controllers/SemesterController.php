@@ -9,7 +9,7 @@ use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
 use Response;
-
+use App\Models\Annee;
 class SemesterController extends AppBaseController
 {
     /** @var  SemesterRepository */
@@ -42,7 +42,8 @@ class SemesterController extends AppBaseController
      */
     public function create()
     {
-        return view('semesters.create');
+        $annees = Annee::all();
+        return view('semesters.create',compact('annees'));
     }
 
     /**
@@ -58,7 +59,7 @@ class SemesterController extends AppBaseController
 
         $semester = $this->semesterRepository->create($input);
 
-        Flash::success('Semester saved successfully.');
+        Flash::success('Semestre enregistre avec succes.');
 
         return redirect(route('semesters.index'));
     }
@@ -92,15 +93,16 @@ class SemesterController extends AppBaseController
      */
     public function edit($id)
     {
+        $annees = Annee::all();
         $semester = $this->semesterRepository->find($id);
 
         if (empty($semester)) {
-            Flash::error('Semester not found');
+            Flash::error('Semestre non trouve');
 
             return redirect(route('semesters.index'));
         }
 
-        return view('semesters.edit')->with('semester', $semester);
+        return view('semesters.edit',compact('annees'))->with('semester', $semester);
     }
 
     /**

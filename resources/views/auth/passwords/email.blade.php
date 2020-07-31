@@ -32,15 +32,17 @@
     <![endif]-->
 
 </head>
-<body class="hold-transition login-page">
+<body 
+{{-- class="hold-transition login-page"  --}}
+style="background-image: linear-gradient(#B3FFAB, #12fff7);">
 <div class="login-box">
     <div class="login-logo">
         <a href="{{ url('/home') }}"><b>Reinitialisation </b>I.F.A</a>
     </div>
 
     <!-- /.login-logo -->
-    <div class="login-box-body">
-        <p class="login-box-msg">Entrer votre email</p>
+    <div class="login-box-body" style="  box-shadow: 5px 10px #f5eded;">
+        <p class="login-box-msg">Entrez votre email</p>
 
         @if (session('status'))
             <div class="alert alert-success">

@@ -26,20 +26,13 @@
                     <div class='btn-group'>
                         <a data-toggle="modal" data-target="#view-classScheduling-modal" 
                             data-schedule_id="{{ $classScheduling->schedule_id }}"
-                            data-course_id="{{ $classScheduling->course_id }}"
-                            {{-- data-level_id="{{ $classScheduling->level_id }}" --}}
-                            {{-- data-shift_id="{{ $classScheduling->shift_id }}"
-                            data-classwoom_id="{{ $classScheduling->classroom_id }}"
-                            data-batch_id="{{ $classScheduling->batch_id }}"
-                            data-day_id="{{ $classScheduling->day_id }}"
-                            data-time_id="{{ $classScheduling->time }}" --}}
-                            {{-- data-teacher_id="{{ $classScheduling->teacher_id }}" --}}
-                          
+                            data-course_id="{{ $classScheduling->InfoCourse->course_name }}"
+                            data-class_id="{{ $classScheduling->InfoClass->class_name }}"
                             data-start_time="{{ $classScheduling->start_time }}"
                             data-end_time="{{ $classScheduling->end_time }}"
                             {{-- data-status="{{ $classScheduling->status }}" --}}
                              data-created_at="{{ $classScheduling->created_at }}"
-                            data-updated_at="{{ $classScheduling->updated_at }}"
+                            {{-- data-updated_at="{{ $classScheduling->updated_at }}" --}}
                          class='btn btn-default btn-xs'>
                         
                          <i class="glyphicon glyphicon-eye-open"></i></a>
@@ -78,44 +71,41 @@
                             
                 <!-- Course Id Field -->
                 <div class="form-group col-sm-6">
-                    {!! Form::label('course_id2', 'Course Id:') !!}
+                    {!! Form::label('course_id2', 'Cours:') !!}
                     <input type="text" name="course_id2" id="course_id2" readonly>
                 </div>
 
+                <!-- Class Id Field -->
+                <div class="form-group col-sm-6">
+                    {!! Form::label('class_id2', 'Class:') !!}
+                    <input type="text" name="class_id2" id="class_id2" readonly>
+                </div>
 
                 <!-- Start Time Field -->
                 <div class="form-group col-sm-6">
-                    {!! Form::label('start_time2', 'Start Time:') !!}
+                    {!! Form::label('start_time2', 'Date debut:') !!}
                     <input type="text" name="start_time2" id="start_time2" readonly>
                 </div>
 
                 <!-- End Time Field -->
                 <div class="form-group col-sm-6">
-                    {!! Form::label('end_time2', 'End Time:') !!}
+                    {!! Form::label('end_time2', 'Date fin:') !!}
                     <input type="text" name="end_time2" id="end_time2" readonly>
                </div>
 
-                <!-- Status Field -->
-                {{-- <div class="form-group col-sm-6">
-                    {!! Form::label('status', 'Status:') !!}
-                    <label class="checkbox-inline">
-                        {!! Form::hidden('status', 0) !!}
-                        {!! Form::checkbox('status', '1', null) !!}
-                    </label>
-                </div> --}}
-
+        
 
 
                   <div class="form-group">
-                    {!! Form::label('created_at2', 'Created At:') !!}
+                    {!! Form::label('created_at2', 'Cree le:') !!}
                    <input type="text" name="created_at2" id="created_at2" readonly>
                   </div>
-
+{{-- 
                   <div class="form-group">
                     {!! Form::label('updated_at2', 'Updated At:') !!}
                    <input type="text" name="updated_at2" id="updated_at2" readonly>
                   </div>
-                  
+                   --}}
 
 
 </div>
@@ -176,36 +166,24 @@ $('#start_time').datetimepicker({
     
             var button = $(event.relatedTarget)
             var course_id = button.data('course_id')
-            // var level_id = button.data('level_id')
-            // var shift_id = button.data('shift_id')
-            // var classwoom_id = button.data('classwoom_id')
-            // var batch_id = button.data('batch_id')
-            // var day_id = button.data('day_id')
-            // var time_id = button.data('time_id')
-            // var teacher_id = button.data('teacher_id')
+            var class_id = button.data('class_id')
             var start_time = button.data('start_time')
             var end_time = button.data('end_time')
             // var status = button.data('status')
             var created_at = button.data('created_at')
-            var updated_at = button.data('updated_at')
+            // var updated_at = button.data('updated_at')
             var schedule_id = button.data('schedule_id')
 
             var modal =$(this)
 
             modal.find('.modal-title').text('DETAILS DE L\'HORAIRE');
             modal.find('.modal-body #course_id2').val(course_id);
-            // modal.find('.modal-body #level_id2').val(level_id);
-            // modal.find('.modal-body #shift_id2').val(shift_id);
-            // modal.find('.modal-body #classwoom_id2').val(classwoom_id);
-            // modal.find('.modal-body #batch_id2').val(batch_id);
-            // modal.find('.modal-body #day_id2').val(day_id);
-            // modal.find('.modal-body #time_id2').val(time_id);
-            // modal.find('.modal-body #teacher_id2').val(teacher_id);
+            modal.find('.modal-body #class_id2').val(class_id);
             modal.find('.modal-body #start_time2').val(start_time);
             modal.find('.modal-body #end_time2').val(end_time);
             // modal.find('.modal-body #status2').val(status);
             modal.find('.modal-body #created_at2').val(created_at);
-            modal.find('.modal-body #updated_at2').val(updated_at);
+            // modal.find('.modal-body #updated_at2').val(updated_at);
             modal.find('.modal-body #schedule_id2').val(schedule_id);
 
         });

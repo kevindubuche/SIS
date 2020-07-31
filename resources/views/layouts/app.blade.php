@@ -82,7 +82,7 @@ style="background-color: rgb(219, 219, 223);">
                                 @endif
                              
                                 <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                                <span class="hidden-xs" style="color:black;">{{ Auth::user()->name }}</span>
+                                <span class="hidden-xs" style="color:black;">{{ Auth::user()->first_name}} {{ Auth::user()->last_name}}</span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- The user image in the menu -->
@@ -94,7 +94,7 @@ style="background-color: rgb(219, 219, 223);">
                                     alt="User Image"/>
                                     @endif
                                     <p style="color:black;">
-                                        {{ Auth::user()->name }}
+                                        {{ Auth::user()->first_name}} {{ Auth::user()->last_name}}
                                         <small style="color:black;">Membre depuis {{ Auth::user()->created_at->format('M. Y') }}</small>
                                     </p>
                                 </li>

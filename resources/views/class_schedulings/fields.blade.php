@@ -12,7 +12,7 @@
         <input type="hidden" value="{{Auth::user()->id}}" id="created_by" name="created_by">
 <!-- Course Id Field -->
 <div class="form-group col-sm-4">
-    <select class="form-control" name="course_id" id="course_id">
+    <select class="form-control" name="course_id" id="course_id" required>
         <option value="0" selected="false" disabled="true">Cours</option>
         @foreach($allCourses as $course)
         {{-- lap we only cours kel te creer yo sauf adm kap we tout cours yo --}}
@@ -26,17 +26,19 @@
 
 <!-- Class Id Field -->
 <div class="form-group col-sm-4">
-    <select class="form-control" name="class_id" id="class_id">
+    <select class="form-control" name="class_id" id="class_id" required>
         <option value="0" selected="false" disabled="true">Classe</option>
-        @foreach($allClasses as $class)
-        <option value="{{$class->class_id}}">{{$class->class_name}}</option>
+        @foreach($allClassAssignins as $class)
+        @if ($class->teacher_id == Auth::user()->id || Auth::user()->role==1)
+        <option value="{{$class->InfoClass->class_id}}">{{$class->InfoClass->class_name}}</option>
+        @endif
         @endforeach
     </select>
 </div>
 
 <!-- Semester Id Field -->
 <div class="form-group col-sm-4">
-    <select class="form-control" name="semester_id" id="semester_id">
+    <select class="form-control" name="semester_id" id="semester_id" required>
         <option value="0" selected="false" disabled="true">Semestre</option>
         @foreach($allSemesters as $semester)
         <option value="{{$semester->semester_id}}">{{$semester->semester_name}}</option>

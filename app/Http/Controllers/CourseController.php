@@ -15,6 +15,7 @@ use App\Models\User;
 use App\Models\Course;
 use App\Models\Admission;
 use DB;
+use File;
 class CourseController extends AppBaseController
 {
     /** @var  CourseRepository */
@@ -104,7 +105,7 @@ class CourseController extends AppBaseController
         $request->file('filename')->move(
             base_path() . '/public/course_files/', $filename
         );
-
+ 
         $cours = new Course;
         $cours->course_name = $request->course_name;
         $cours->course_code = $request->course_code;
@@ -116,7 +117,7 @@ class CourseController extends AppBaseController
        
         // $course = $this->courseRepository->create($input);
 
-        Flash::success('Course saved successfully.');
+        Flash::success('Coursenregistre avec succes.');
 
         return redirect(route('courses.index'));
     }
@@ -169,19 +170,40 @@ class CourseController extends AppBaseController
      *
      * @return Response
      */
-    public function update($id, UpdateCourseRequest $request)
+    public function update($id, Request $request)
     {
+        
         $course = $this->courseRepository->find($id);
 
+       
         if (empty($course)) {
-            Flash::error('Course not found');
+            Flash::error('Cours non trouve');
 
             return redirect(route('courses.index'));
         }
+        File::delete(public_path().'/course_files/'.$course->filename);
+       
+        $file = $request->file('filename');
+        $extension = $file->getClientOriginalExtension();
+        $filename = time().'.'.$extension;
+        $fullPath = $filename;
 
-        $course = $this->courseRepository->update($request->all(), $id);
+        $request->file('filename')->move(
+            base_path() . '/public/course_files/', $filename
+        );
 
-        Flash::success('Course updated successfully.');
+        $newCourse = array(
+            'course_name' => $request->course_name,
+            'course_code' => $request->course_code,
+            'description' => $request->description,
+            'created_by' => $request->created_by,
+            'filename' => $request->fullPath
+        );
+       
+        Course::findOrFail($id)->update($newCourse);
+        // $course = $this->courseRepository->update($request->all(), $id);
+
+        Flash::success('Cours modifie avec succes.');
 
         return redirect(route('courses.index'));
     }
@@ -207,7 +229,7 @@ class CourseController extends AppBaseController
 
         $this->courseRepository->delete($id);
 
-        Flash::success('Course deleted successfully.');
+        Flash::success('Cours supprimee avec succes.');
 
         return redirect(route('courses.index'));
     }

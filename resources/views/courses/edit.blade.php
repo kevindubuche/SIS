@@ -11,13 +11,15 @@
        <div class="box box-primary">
            <div class="box-body">
                <div class="row">
-                   {!! Form::model($course, ['route' => ['courses.update', $course->course_id], 'method' => 'patch']) !!}
-
+                   {!! Form::model($course, ['route' => ['courses.update', $course->course_id], 'method' => 'patch',     'enctype'=>'multipart/form-data']) !!}
+                   
+                      @csrf
+   
                         <!-- Course Name Field -->
                         <input type="hidden" id="created_by" name="created_by" value="{{$course->created_by}}">
 <div class="form-group col-md-6 ">
     {!! Form::label('course_name', 'Nom du cours:') !!}
-    {!! Form::text('course_name', null, ['class' => 'form-control']) !!}
+    {!! Form::text('course_name', null, ['class' => 'form-control', 'required']) !!}
 </div>
 
 <!-- Course Code Field -->
@@ -40,6 +42,11 @@
         {!! Form::checkbox('status', '1', null) !!}
     </label>
 </div> --}}
+<div class="form-group col-md-6 ">
+<h6>{{$course->filename}}</h6>
+    <input type="file" name="filename" id="filename" required>
+</div>
+
 </div>
 
 <div class="modal-footer">

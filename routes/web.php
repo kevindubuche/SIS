@@ -131,3 +131,5 @@ Route::resource('actuses', 'ActusController');
 Route::resource('comments', 'CommentsController');
 
 Route::resource('exams', 'ExamController');
+
+Route::resource('annees', 'AnneeController');

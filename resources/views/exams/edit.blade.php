@@ -22,21 +22,25 @@
                 <input type="hidden" id="exam_id2" name="exam_id2">
 <div class="form-group col-sm-6">
     <select class="form-control" name="course_id2" id="course_id2">
-    <option value="0" selected="true" disabled="true">Cours <option>
+    <option value="0" selected="true" disabled="true">Cours </option>
 
-      @foreach($allCourses as $cours)
-      <option value="{{$cours->course_id}}">{{$cours->course_name}}</option>
-      @endforeach
+      @foreach($allCourses as $course)
+      @if ($course->created_by == Auth::user()->id || Auth::user()->role==1)
+      <option value="{{$course->course_id}}">{{$course->course_name}}</option>
+@endif
+@endforeach
   </select>
 </div>
 
 <div class="form-group col-sm-6">
     <select class="form-control" name="class_id2" id="class_id2">
-    <option value="0" selected="true" disabled="true">Classe <option>
+    <option value="0" selected="true" disabled="true">Classe </option>
 
-      @foreach($allClasses as $class)
-      <option value="{{$class->class_id}}">{{$class->class_name}}</option>
-      @endforeach
+        @foreach ($allClassAssignins as $class)
+        @if ($class->teacher_id == Auth::user()->id || Auth::user()->role==1)
+        <option value="{{$class->InfoClass->class_id}}">{{$class->InfoClass->class_name}}</option>
+        @endif
+        @endforeach
   </select>
 </div>
 

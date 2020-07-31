@@ -17,7 +17,7 @@
         <div class="clearfix"></div>
         <div class="box box-primary">
             <div class="box-body">
-                    @include('actuses.table')
+             @include('actuses.table')
             </div>
         </div>
         <div class="text-center">

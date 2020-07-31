@@ -23,7 +23,7 @@
             <td>{{ $course->course_code }}</td>
             <td>{{ $course->description }}</td>
             <td>{{ $course->created_at->format('D. m Y') }}</td>
-            <td>{{ $course->GetUser($course->created_by)->name }}</td>
+            <td>{{ $course->GetUser($course->created_by)->first_name }} {{ $course->GetUser($course->created_by)->last_name }}</td>
             {{-- <td> 
                @if($course->status == 1)  
                <div class="btn btn-success">Actif</div>

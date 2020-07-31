@@ -13,7 +13,7 @@
 <!-- Class Name Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('class_name', 'Nom de la classe:') !!}
-    {!! Form::text('class_name', null, ['class' => 'form-control']) !!}
+    {!! Form::text('class_name', null, ['class' => 'form-control', 'required']) !!}
 </div>
 
 <!-- Class Code Field -->
@@ -26,8 +26,8 @@
 
 </div>
 <div class="modal-footer">
-  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-  {!! Form::submit('Save Class', ['class' => 'btn btn-primary']) !!}
+  <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+  {!! Form::submit('Enregistrer classe', ['class' => 'btn btn-primary']) !!}
 </div>
 </div>
 </div>

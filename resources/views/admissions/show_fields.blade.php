@@ -252,7 +252,7 @@
         <div class="col-md-9">
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
-              <li class="active"><a href="#activity" data-toggle="tab">student Timetable</a></li>
+              <li class="active"><a href="#activity" data-toggle="tab">Cours</a></li>
               <li><a href="#timeline" data-toggle="tab">Details</a></li>
               {{-- <li><a href="#settings" data-toggle="tab">Reglages</a></li> --}}
             </ul>
@@ -267,7 +267,20 @@
                   @include('adminlte-templates::common.errors')
                   <div class="box box-primary">
                       <div class="box-body"><br><br>
-                         <h1>shiow cours li yo</h1>
+                        <div class="container">
+                          <div class="row">
+                            <div class="col-md-8">
+                            
+                         @foreach ($schedules as $schedule)
+                          <a class="btn btn-app col-md-2" href="#">
+                          <i class="fa fa-book"></i> {{$schedule->InfoCourse->course_name}} en 
+                          <b style="color: red">{{$schedule->InfoClass->class_name}}</b>
+                          </a>
+                         @endforeach
+                  </div>
+                </div>
+           </div>
+                  
                       </div>
                     </div>
                </div>

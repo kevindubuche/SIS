@@ -14,6 +14,7 @@ use App\Models\Course;
 use App\Models\Classes;
 use App\Models\Exam;
 use File;
+use App\Models\ClassAssigning;
 
 class ExamController extends AppBaseController
 {
@@ -37,10 +38,10 @@ class ExamController extends AppBaseController
         $exams = $this->examRepository->all();
 
         $allCourses = Course::all();
-        $allClasses = Classes::all();
+        $allClassAssignins = ClassAssigning::all();
 
 
-        return view('exams.index', compact('allCourses','allClasses'))
+        return view('exams.index', compact('allCourses','allClassAssignins'))
             ->with('exams', $exams);
     }
 
@@ -172,14 +173,14 @@ class ExamController extends AppBaseController
 
 
         if (empty($exam)) {
-            Flash::error('Exam not found');
+            Flash::error('Examen non trouve');
 
             return redirect(route('exams.index'));
         }
 
         // $exam = $this->examRepository->update($request->all(), $id);
 
-        Flash::success('Exam updated successfully.');
+        Flash::success('Examen modifie avec succes.');
 
         return redirect(route('exams.index'));
     }
@@ -205,7 +206,7 @@ class ExamController extends AppBaseController
 
         $this->examRepository->delete($id);
 
-        Flash::success('Exam deleted successfully.');
+        Flash::success('Examen suprimme avec succes.');
 
         return redirect(route('exams.index'));
     }

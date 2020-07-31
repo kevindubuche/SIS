@@ -1,15 +1,16 @@
-<div class="table-responsive">
-    <table class="table" id="exams-table">
+<div class="container table-responsive">
+    <table id='myTable' class=' display   table table-bordered table-striped table-condensed'>
         <thead>
             <tr>
         <th>Cours</th>
         <th>Classe</th>
         <th>Titre</th>
         <th>Description</th>
+        <th>Date de creation</th>
         <th>Ajoute par</th>
         <th>Document</th>
         
-                <th colspan="3">Action</th>
+                <th >Action</th>
             </tr>
         </thead>
         <tbody>
@@ -19,8 +20,9 @@
             <td>{{ $exam->InfoClass->class_name }}</td>
             <td>{{ $exam->title }}</td>
             <td>{{ $exam->description }}</td>
+            <td>{{ $exam->created_at->format('D. m Y') }}</td>
             {{-- <td>{{ $exam->filename }}</td> --}}
-            <td>{{ $exam->GetUser($exam->created_by)->name }}</td>
+            <td>{{ $exam->GetUser($exam->created_by)->first_name }} {{$exam->GetUser($exam->created_by)->last_name}}</td>
             <td>
                 <a href="/exam_files/{{$exam->filename}}" target='_blank'>   
                         <button  >Afficher</button>
@@ -55,7 +57,36 @@
 @section('scripts')
  <script>
 
+  
+$(document).ready(function()
+    {
+        
+        $('#myTable').DataTable({  
+            // alert('okokok');
+            select:true,
+            "language": {
+            "lengthMenu": "Voir _MENU_ lignes par page",
+            "zeroRecords": "Aucune information - desole",
+            "info": "_PAGE_ sur _PAGES_",
+            "infoEmpty": "Aucun resultat trouve",
+            "infoFiltered": "(filtre de _MAX_ total resultats)",
+            "search": "Rechercher",
+            "paginate":{
+            "previous":"Precedent",
+            "next":"Suivant"
+            }
 
+
+        },
+        buttons:['selectRows']
+    }
+
+        );
+    });
+
+
+
+    
 
         // {{-------batch view side--------}}
         $('#edit-exam-modal').on('show.bs.modal', function(event){

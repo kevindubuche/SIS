@@ -12,7 +12,7 @@
     <title>I.F.A</title>
 
     <!-- Favicon -->
-    <link rel="icon" href="img/core-img/favicon.ico">
+    <link rel="icon" href="{{asset('logo.jpg')}}">
 
     <!-- Core Stylesheet -->
     <link rel="stylesheet" href="style.css">
@@ -38,10 +38,16 @@
                                 <a href="index.html"><img src="img/core-img/logo.png" alt="logo" style="width: 100px; height: 100px"></a>
                             </div>
                             <div class="login-content">
-                                @if(Session::has('studentSession'))
-                            <a href="{{url('/account')}}">Compte </a>
+                                @if(Auth::check())
+                            <a href="{{url('/login')}}">Compte </a>
                         <span> | </span>
-                                <a href="{{url('/logout')}}"> Se dconecter</a>
+                        <a href="{{ url('/logout') }}" class="btn btn-default btn-flat"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        Se deconnecter
+                    </a>
+                    <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
                             
                                 @else
                                  <a href="{{url('/login')}}"> Se connecter</a>
@@ -141,7 +147,7 @@
                         <!-- Calling Info -->
                         <div class="calling-info">
                             <div class="call-center">
-                                <a href="tel:+654563325568889"><i class="icon-telephone-2"></i> <span>(+509) 46305413</span></a>
+                                <a href="tel:+50946305413"><i class="icon-telephone-2"></i> <span>(+509) 46305413</span></a>
                             </div>
                         </div>
                     </nav>
@@ -156,14 +162,15 @@
         <div class="hero-slides owl-carousel">
 
             <!-- Single Hero Slide -->
-            <div class="single-hero-slide bg-img" style="background-image: url(img/bg-img/bg-1.jpg);">
+            <div class="single-hero-slide bg-img" style="background-image: url(https://source.unsplash.com/random);">
+                {{-- <div class="single-hero-slide bg-img" style="background-image: url(img/bg-img/bg-1.jpg);"> --}}
                 <div class="container h-100">
                     <div class="row h-100 align-items-center">
                         <div class="col-12">
                             <div class="hero-slides-content">
-                                <h4 data-animation="fadeInUp" data-delay="100ms">All the courses you need</h4>
-                                <h2 data-animation="fadeInUp" data-delay="400ms">Wellcome to our <br>Online University</h2>
-                                <a href="#" class="btn academy-btn" data-animation="fadeInUp" data-delay="700ms">Read More</a>
+                                <h4 data-animation="fadeInUp" data-delay="100ms">Tous les cours que vous voulez</h4>
+                                <h2 data-animation="fadeInUp" data-delay="400ms">Bienvenue dans notre <br>Universite en ligne</h2>
+                                <a href="#" class="btn academy-btn" data-animation="fadeInUp" data-delay="700ms">Plus</a>
                             </div>
                         </div>
                     </div>
@@ -171,14 +178,15 @@
             </div>
 
             <!-- Single Hero Slide -->
-            <div class="single-hero-slide bg-img" style="background-image: url(img/bg-img/bg-2.jpg);">
+            {{-- <div class="single-hero-slide bg-img" style="background-image: url(img/bg-img/bg-2.jpg);"> --}}
+                <div class="single-hero-slide bg-img" style="background-image: url(https://source.unsplash.com/random);">
                 <div class="container h-100">
                     <div class="row h-100 align-items-center">
                         <div class="col-12">
                             <div class="hero-slides-content">
-                                <h4 data-animation="fadeInUp" data-delay="100ms">All the courses you need</h4>
-                                <h2 data-animation="fadeInUp" data-delay="400ms">Wellcome to our <br>Online University</h2>
-                                <a href="#" class="btn academy-btn" data-animation="fadeInUp" data-delay="700ms">Read More</a>
+                                <h4 data-animation="fadeInUp" data-delay="100ms">Tous les cours que vous voulez</h4>
+                                <h2 data-animation="fadeInUp" data-delay="400ms">Bienvenue dans notre  <br>Universite en ligne</h2>
+                                <a href="#" class="btn academy-btn" data-animation="fadeInUp" data-delay="700ms">Plus</a>
                             </div>
                         </div>
                     </div>
