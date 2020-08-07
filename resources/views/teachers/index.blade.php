@@ -1,37 +1,37 @@
 @extends('layouts.app')
+@if(Auth::user()->role == 1)
+    @section('content')
+        <section class="content-header">
+            <h1 class="pull-left">Professeurs</h1>
+            <h1 class="pull-right">
+            @if(Auth::user()->role == 1)
+            <a data-toggle="modal" data-target="#add-teacher-modal" class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" ><i class="fa fa-plus-circle">Ajouter un professeur</i></a>
+            @endif
+            </h1>
+        </section>
+        <div class="content">
+            <div class="clearfix"></div>
 
-@section('content')
-    <section class="content-header">
-        <h1 class="pull-left">Professeurs</h1>
-        <h1 class="pull-right">
-          @if(Auth::user()->role == 1)
-           <a data-toggle="modal" data-target="#add-teacher-modal" class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" ><i class="fa fa-plus-circle">Ajouter un professeur</i></a>
-          @endif
-        </h1>
-    </section>
-    <div class="content">
-        <div class="clearfix"></div>
+            @include('flash::message')
+            @include('adminlte-templates::common.errors')
+            <div class="clearfix"></div>
+            <div class="box box-primary">
+                <div class="box-body">
+                        @include('teachers.table')
+                        {{-- {!! Form::open(['route' => 'teachers.store']) !!} --}}
+                        <form action="{{route('teachers.store')}}"
+                        method="post"
+                        enctype="multipart/form-data">
+                            @csrf
 
-        @include('flash::message')
-        @include('adminlte-templates::common.errors')
-        <div class="clearfix"></div>
-        <div class="box box-primary">
-            <div class="box-body">
-                    @include('teachers.table')
-                    {{-- {!! Form::open(['route' => 'teachers.store']) !!} --}}
-                    <form action="{{route('teachers.store')}}"
-                     method="post"
-                     enctype="multipart/form-data">
-                        @csrf
-
-                        @include('teachers.fields')
-                    </form>
-                {{-- {!! Form::close() !!} --}}
+                            @include('teachers.fields')
+                        </form>
+                    {{-- {!! Form::close() !!} --}}
+                </div>
+            </div>
+            <div class="text-center">
+            
             </div>
         </div>
-        <div class="text-center">
-        
-        </div>
-    </div>
-@endsection
-
+    @endsection
+@endif

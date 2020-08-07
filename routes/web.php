@@ -133,3 +133,7 @@ Route::resource('comments', 'CommentsController');
 Route::resource('exams', 'ExamController');
 
 Route::resource('annees', 'AnneeController');
+
+Route::resource('actuAssignings', 'Actu_assigningController');
+
+Route::resource('soumissions', 'SoumissionController');

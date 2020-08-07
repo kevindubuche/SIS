@@ -285,18 +285,42 @@
 
                                         <div class="form-group">
                                             <label for="inputName"
-                                                class="col-sm-3 control-label">Adresse</label>
+                                                class="col-sm-3 control-label">Religion</label>
                                                 <div class="col-sm-9">
                                                     <input 
                                                         class="form-control"
                                                         id="inputExperience"
                                                         readonly
-                                                        value="{{$teacher->adress}}"
+                                                        value="{{$teacher->religion}}"
                                                         >
-                                                  
-                                                   
                                                 </div>
                                             </div>
+
+                                            <div class="form-group">
+                                              <label for="inputName"
+                                                  class="col-sm-3 control-label">Option</label>
+                                                  <div class="col-sm-9">
+                                                      <input 
+                                                          class="form-control"
+                                                          id="inputExperience"
+                                                          readonly
+                                                          value="{{$teacher->options}}"
+                                                          >
+                                                  </div>
+                                              </div>
+
+                                            <div class="form-group">
+                                              <label for="inputName"
+                                                  class="col-sm-3 control-label">Adresse</label>
+                                                  <div class="col-sm-9">
+                                                      <input 
+                                                          class="form-control"
+                                                          id="inputExperience"
+                                                          readonly
+                                                          value="{{$teacher->adress}}"
+                                                          >
+                                                  </div>
+                                              </div>
 
                                             <div class="form-group">
                                                 <label for="inputName"

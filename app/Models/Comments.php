@@ -85,7 +85,7 @@ class Comments extends Model
             
             return $teacher;
         } elseif ($user->role == 1){
-            
+          
             return $user;
         }
        

@@ -1,4 +1,4 @@
-<div class="container table-responsive">
+<div class="table-responsive">
     <table id='myTable' class=' display   table table-bordered table-striped table-condensed'>
         <thead>
             <tr>
@@ -9,12 +9,18 @@
         <th>Date de creation</th>
         <th>Ajoute par</th>
         <th>Document</th>
-        
+        @if(Auth::user()->role < 3)
                 <th >Action</th>
+        @endif
             </tr>
         </thead>
         <tbody>
         @foreach($exams as $exam)
+        @if( ($exam->created_by == Auth::user()->id && Auth::user()->role ==2) //si se prof ki kreye l la
+        ||
+        (Auth::user()->role ==3 && $exam->class_id == $exam->GetConnectedStudent(Auth::user()->id)->class_id) //si se elev ki nan klas exam sa pou li a
+        ||
+        (Auth::user()->role == 1))
             <tr>
             <td>{{ $exam->InfoCourse->course_name }}</td>
             <td>{{ $exam->InfoClass->class_name }}</td>
@@ -28,6 +34,7 @@
                         <button  >Afficher</button>
                 </a>
             </td>
+            @if(Auth::user()->role < 3)
                 <td>
                     {!! Form::open(['route' => ['exams.destroy', $exam->exam_id], 'method' => 'delete']) !!}
                     <div class='btn-group'>
@@ -46,7 +53,9 @@
                     </div>
                     {!! Form::close() !!}
                 </td>
+                @endif
             </tr>
+            @endif
         @endforeach
         </tbody>
     </table>

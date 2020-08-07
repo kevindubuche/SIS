@@ -44,9 +44,10 @@ class Teacher extends Model
         'dob',
         'phone',
         'adress',
-        'status',
         'dateRegistered',
         'user_id',
+        'religion',
+        'options',
         'image'
     ];
 
@@ -64,9 +65,10 @@ class Teacher extends Model
         'dob' => 'date',
         'phone' => 'string',
         'adress' => 'string',
-        'status' => 'integer',
         'dateRegistered' => 'date',
         'user_id' => 'integer',
+        'religion' => 'string',
+        'options' => 'string',
         'image' => 'string'
     ];
 

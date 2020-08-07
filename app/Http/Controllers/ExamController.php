@@ -87,7 +87,7 @@ class ExamController extends AppBaseController
         $exam->save();
         // $exam = $this->examRepository->create($input);
 
-        Flash::success('Exam saved successfully.');
+        Flash::success('Examen enregistré avec succès.');
 
         return redirect(route('exams.index'));
     }
@@ -104,7 +104,7 @@ class ExamController extends AppBaseController
         $exam = $this->examRepository->find($id);
 
         if (empty($exam)) {
-            Flash::error('Exam not found');
+            Flash::error('Examen non trouvé');
 
             return redirect(route('exams.index'));
         }
@@ -127,7 +127,7 @@ class ExamController extends AppBaseController
         $allClasses = Classes::all();
 
         if (empty($exam)) {
-            Flash::error('Exam not found');
+            Flash::error('Examen non trouvé');
 
             return redirect(route('exams.index'));
         }
@@ -173,14 +173,14 @@ class ExamController extends AppBaseController
 
 
         if (empty($exam)) {
-            Flash::error('Examen non trouve');
+            Flash::error('Examen non trouvé');
 
             return redirect(route('exams.index'));
         }
 
         // $exam = $this->examRepository->update($request->all(), $id);
 
-        Flash::success('Examen modifie avec succes.');
+        Flash::success('Examen modifié avec succès.');
 
         return redirect(route('exams.index'));
     }
@@ -206,7 +206,7 @@ class ExamController extends AppBaseController
 
         $this->examRepository->delete($id);
 
-        Flash::success('Examen suprimme avec succes.');
+        Flash::success('Examen suprimmé avec succès.');
 
         return redirect(route('exams.index'));
     }

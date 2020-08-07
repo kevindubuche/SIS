@@ -6,7 +6,7 @@
         <!-- Box Comment -->
         <div class="box box-widget">
           <div class="box-header with-border">
-            <h3 class="box-title">Fil d'actualites</h3>
+            <h3 class="box-title">Publications</h3>
             <hr>
 
             @foreach ($actuses as $actu)
@@ -19,12 +19,24 @@
             
               @endif
             <span class="username"><a href="#">{{$actu->GetUser($actu->created_by)->first_name}} {{$actu->GetUser($actu->created_by)->last_name}}</a></span>
-            <span class="description">Publie le {{$actu->created_at->format('D M. Y')}} a {{$actu->created_at->format('h:m')}}</span>
+            <span class="description">Publie le {{$actu->created_at}} </span>
             </div>
 
             <div class="box-body">
               <!-- post text -->
+              <strong>{{$actu->title}}</strong>
                <p>{{$actu->body}}</p>
+
+               @if ($actu->created_by == Auth::user()->id  || Auth::user()->role ==1 )
+               {!! Form::open(['route' => ['actuses.destroy', $actu->actu_id], 'method' => 'delete']) !!}
+               <div class='btn-group'>
+                   <a href="{{ route('actuses.edit', [$actu->actu_id]) }}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>
+                   {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn  btn-xs', 'onclick' => "return confirm('Etes-vous sur?')"]) !!}
+               </div>
+               {!! Form::close() !!} 
+              @endif
+
+
             </div>
             <?php $count = 0; ?>
          @foreach ($actu->AllComments as $comment)

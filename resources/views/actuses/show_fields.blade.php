@@ -54,16 +54,17 @@
                   {{ $comment->GetUser($comment->created_by)->name}} 
                 @else
                 <img class="img-circle img-sm" src="{{asset('user_images/'.$comment->GetUser($comment->created_by)->image)}}" alt="User Image">
-             
+                 @endif
                 <div class="comment-text">
                       <span class="username">
+                        <a href="#">
                            {{ $comment->GetUser($comment->created_by)->first_name}} {{ $comment->GetUser($comment->created_by)->last_name}}
-                                           
-                       
+                        </a>                 
+                      </span>
                 </div>
-                @endif
+            
                 <span class="text-muted pull-right">{{$comment->created_at->format('d M. Y')}} a {{$comment->created_at->format('h:m')}}</span>
-              </span>
+           
                {{ $comment->body}} 
 
                @if ($comment->created_by == Auth::user()->id  || Auth::user()->role ==1 )

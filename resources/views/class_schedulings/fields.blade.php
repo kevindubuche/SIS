@@ -53,7 +53,7 @@
     <div class="form-group col-sm-6">
         <label>Date debut</label>
         {{-- {!! Form::label('start_time', 'Start time:') !!} --}}
-        <input type="text" autocomplete="off" name="start_time" id="start_time" >
+        <input type="text" autocomplete="off" name="start_time" id="start_time" required>
     </div>
 
 
@@ -62,7 +62,7 @@
 <div class="form-group col-sm-6">
     <label>Date fin</label>
     {{-- {!! Form::label('end_time', 'end time:') !!} --}}
-    <input type="text"  autocomplete="off" name="end_time" id="end_time" >
+    <input type="text"  autocomplete="off" name="end_time" id="end_time" required>
 </div>
 
 

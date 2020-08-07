@@ -70,31 +70,32 @@
             <!-- First Name Field -->
             <div class="form-group col-sm-6">
                 {!! Form::label('first_name', 'First Name:') !!}
-                {!! Form::text('first_name', null, ['class' => 'form-control']) !!}
+                {!! Form::text('first_name', null, ['class' => 'form-control', 'required']) !!}
             </div>
 
             <!-- Last Name Field -->
             <div class="form-group col-sm-6">
                 {!! Form::label('last_name', 'Last Name:') !!}
-                {!! Form::text('last_name', null, ['class' => 'form-control']) !!}
+                {!! Form::text('last_name', null, ['class' => 'form-control', 'required']) !!}
             </div>
 
             <!-- Gender Field -->
             <div class="form-group col-sm-6">
                 {!! Form::label('gender', 'Gender:') !!}
-                {!! Form::text('gender', null, ['class' => 'form-control']) !!}
+                {!! Form::text('gender', null, ['class' => 'form-control', 'required']) !!}
             </div>
 
             <!-- Email Field -->
             <div class="form-group col-sm-6">
                 {!! Form::label('email', 'Email:') !!}
-                {!! Form::email('email', null, ['class' => 'form-control']) !!}
+                {!! Form::email('email', null, ['class' => 'form-control', 'required']) !!}
             </div>
 
+           
             <!-- Dob Field -->
             <div class="form-group col-sm-6">
                 {!! Form::label('dob', 'Dob:') !!}
-                {!! Form::text('dob2', null, ['class' => 'form-control','id'=>'dob2']) !!}
+                {!! Form::text('dob2', null, ['class' => 'form-control','id'=>'dob2', 'required']) !!}
             </div>
 
             @push('scripts')
@@ -118,7 +119,7 @@
                 {!! Form::label('adress', 'Adress:') !!}
                 {!! Form::textarea('adress', null, ['class' => 'form-control']) !!}
             </div>
-
+{{-- 
             <!-- Status Field -->
             <div class="form-group col-sm-6">
                 {!! Form::label('status', 'Status:') !!}
@@ -126,7 +127,7 @@
                     {!! Form::hidden('status', 0) !!}
                     {!! Form::checkbox('status', '1', null) !!}
                 </label>
-            </div>
+            </div> --}}
 
 
             <!-- Dateregistered Field -->

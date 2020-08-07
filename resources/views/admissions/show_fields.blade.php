@@ -390,6 +390,19 @@
                                             </div>
                                         </div>
 
+
+                                        <div class="form-group">
+                                          <label for="inputName"
+                                              class="col-sm-3 control-label">Religion</label>
+                                              <div class="col-sm-9">
+                                                  <input type="email"
+                                                      class="form-control"
+                                                      id="inputName"
+                                                      value="{{$admission->religion}}"
+                                              readonly>
+                                              </div>
+                                          </div>
+
                                         <div class="form-group">
                                             <label for="inputName"
                                                 class="col-sm-3 control-label">Adresse</label>

@@ -10,6 +10,13 @@ use Illuminate\Http\Request;
 use Flash;
 use Response;
 
+use App\Models\Classes;
+use App\Models\Actu_assigning;
+use DB;
+use App\Models\Actus;
+use App\Models\User;
+use App\Models\Admission;
+
 class ActusController extends AppBaseController
 {
     /** @var  ActusRepository */
@@ -29,10 +36,67 @@ class ActusController extends AppBaseController
      */
     public function index(Request $request)
     {
+        /// #######  start usefull function
+            function IsAdm($id){
+                $SearchUser = User::find($id);
+                if($SearchUser){
+                    if($SearchUser->role == 1){
+                        return true;
+                    }
+                }
+                return false;
+            }
+       /// #######  end usefull function
+
         $actuses = $this->actusRepository->all();
 
+        $user = User::find(auth()->user()->id);
+              //ADM SEE ALL ACTU
+              if($user->role == 1 ){
+                return view('actuses.index')
+                ->with('actuses', $actuses);
+            }
+         //teachers SEE only MESAJ YO KREYE AK MESAj ADM KREYE
+         else  if($user->role == 2 ){
+           
+            // dd('role 2');
+            $actuAdm = collect();
+            foreach($actuses as $actu){
+                if(IsAdm($actu->created_by)){
+                    $actuAdm->push($actu);
+                }
+            }
+         
+            
+            $actuTeacher = Actus::where(['created_by'=> $user->id])->get();
+            $actuses = $actuAdm->merge($actuTeacher);
+            return view('actuses.index')
+            ->with('actuses', $actuses);
+        }
+
+        //ELEVE we si actu a assigner a classe li
+        else  {
+            // dd('role default');
+            $student = Admission::where(['user_id'=> $user->id])->first();
+            //  dd($student->first_name);
+            $actuTeacher = Actus::join('actu_assignings','actu_assignings.actu_id','=','actus.actu_id')//qui sont dans l'horaire de l'etudiant
+            ->where('class_id',$student->class_id)
+            ->select('actus.*')
+            ->get();
+
+           $actuAdm = collect();
+           foreach($actuses as $actu){
+               if(IsAdm($actu->created_by)){
+                   $actuAdm->push($actu);
+               }
+           }
+
+           $actuses = $actuAdm->merge($actuTeacher);
+
+   
         return view('actuses.index')
             ->with('actuses', $actuses);
+        }
     }
 
     /**
@@ -42,7 +106,8 @@ class ActusController extends AppBaseController
      */
     public function create()
     {
-        return view('actuses.create');
+        $classes = Classes::all();
+        return view('actuses.create', compact('classes'));
     }
 
     /**
@@ -56,9 +121,35 @@ class ActusController extends AppBaseController
     {
         $input = $request->all();
 
-        $actus = $this->actusRepository->create($input);
+        if( ! $request->multiclass){
+            Flash::error('Classe incorecte');
+           
+            return redirect()->back();
+        }
 
-        Flash::success('Actualite plublie avec succes.');
+        $actus = $this->actusRepository->create($input);
+        $actu_id =DB::getPdo()->lastInsertId(); 
+
+        foreach($request->multiclass as $key => $teach){
+            $data2 = array('actu_id'=> $actu_id,
+            'class_id'=> $request->multiclass[$key]);
+
+        $checkExist = Actu_assigning::where('actu_id', $actu_id)
+                        ->where('class_id', $request->multiclass[$key])
+                        ->first();
+
+        if($checkExist){
+            Flash::error('Une ou plusieurs assignations existaient deja pour cette classe.');
+            return redirect()->back();
+        }
+        Actu_assigning::insert($data2);
+    }
+
+        // $actus = $this->actusRepository->create($input);
+
+        // assignation aclasse
+
+        Flash::success('Publication faite avec succes.');
 
         return redirect(route('actuses.index'));
     }
@@ -75,7 +166,7 @@ class ActusController extends AppBaseController
         $actus = $this->actusRepository->find($id);
 
         if (empty($actus)) {
-            Flash::error('Actus not found');
+            Flash::error('Publication non trouvee');
 
             return redirect(route('actuses.index'));
         }
@@ -93,6 +184,7 @@ class ActusController extends AppBaseController
     public function edit($id)
     {
         $actus = $this->actusRepository->find($id);
+        $classes = Classes::all();
 
         if (empty($actus)) {
             Flash::error('Actus not found');
@@ -100,7 +192,7 @@ class ActusController extends AppBaseController
             return redirect(route('actuses.index'));
         }
 
-        return view('actuses.edit')->with('actus', $actus);
+        return view('actuses.edit',compact('classes'))->with('actus', $actus);
     }
 
     /**
@@ -113,17 +205,45 @@ class ActusController extends AppBaseController
      */
     public function update($id, UpdateActusRequest $request)
     {
+
+        $input = $request->all();
+
+        if( ! $request->multiclass){
+            Flash::error('Classe incorecte');
+           
+            return redirect()->back();
+        }
+
+
         $actus = $this->actusRepository->find($id);
 
         if (empty($actus)) {
-            Flash::error('Actus not found');
+            Flash::error('Publication non trouvé');
 
             return redirect(route('actuses.index'));
         }
 
         $actus = $this->actusRepository->update($request->all(), $id);
 
-        Flash::success('Actus updated successfully.');
+        //ann delete actuassigning ki gen rapport avel
+        $oldActuAss = Actu_assigning::where('actu_id', $id)
+                        ->get();
+        foreach($oldActuAss as $ac){
+            $ac->forceDelete();
+        }
+
+        
+        foreach($request->multiclass as $key => $teach){
+            $data2 = array('actu_id'=> $id,
+            'class_id'=> $request->multiclass[$key]);
+
+        $checkExist = Actu_assigning::where('actu_id', $id)
+                        ->where('class_id', $request->multiclass[$key])
+                        ->first();
+        Actu_assigning::insert($data2);
+    }
+
+    Flash::success('Publication modifiée avec succes.');
 
         return redirect(route('actuses.index'));
     }

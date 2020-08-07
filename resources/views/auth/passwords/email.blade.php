@@ -42,7 +42,8 @@ style="background-image: linear-gradient(#B3FFAB, #12fff7);">
 
     <!-- /.login-logo -->
     <div class="login-box-body" style="  box-shadow: 5px 10px #f5eded;">
-        <p class="login-box-msg">Entrez votre email</p>
+        <p class="login-box-msg">Veillez contacter votre administration.<br><br>La Direction</p>
+        {{-- <p class="login-box-msg">Entrez votre email</p>
 
         @if (session('status'))
             <div class="alert alert-success">
@@ -71,7 +72,17 @@ style="background-image: linear-gradient(#B3FFAB, #12fff7);">
                 </div>
             </div>
 
-        </form>
+        </form> --}}
+        <div class="row">
+        <div class="col-md-4">
+            <button type="submit" class="btn btn-primary pull-right" style="border-radius: 25px">
+                <a href="{{url('/login')}}"
+                style="color: white">
+                <i class="fa fa-btn fa-arrow-circle-left"></i> Retour
+            </a>
+            </button>
+        </div>
+    </div>
 
     </div>
     <!-- /.login-box-body -->

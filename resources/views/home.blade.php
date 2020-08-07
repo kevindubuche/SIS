@@ -3,6 +3,7 @@
 @section('content')
 <div class="container">
    <br>
+   
 
    @include('flash::message')
    @include('adminlte-templates::common.errors')
@@ -14,7 +15,7 @@
                     <div class="small-box bg-aqua">
                         <div class="inner">
                             <h3>{{$totalStudents}}</h3>
-                            <p>Total Etudiants</p>
+                            <p>Total Elèves</p>
                         </div>
                     </div>
                 </div>
@@ -52,7 +53,7 @@
     </div>
 <br><br>
 
-        <div class="container">
+        <div class="content">
              <!-- /.col -->
       <div class="row">
         <div class="col-md-8">
@@ -69,7 +70,7 @@
                   <i class="fa fa-home"></i> Accueil
                   </a>
                   <a class="btn btn-app col-md-2" href="{{ route('actuses.index') }}">
-                    <i class="fa fa-tags"></i> Actualites
+                    <i class="fa fa-tags"></i> Publications
                     </a>
                   <a class="btn btn-app col-md-2" href="{{ route('courses.index') }}">
                     <span class="badge bg-purple">{{$totalCourses}}</span>
@@ -79,10 +80,7 @@
                     <i class="fa fa-calendar"></i> Horaire
                     </a>
                     
-                    <a class="btn btn-app col-md-2" href="{{ route('teachers.index') }}">
-                      <span class="badge bg-green">{{$totalTeachers}}</span>
-                      <i class="fa fa-user-circle"></i> Professeurs
-                      </a>
+                    
                   
                     <a class="btn btn-app col-md-2" href="{{ url('/profile/'.Auth::user()->id)}}">
                       <i class="fa fa-user-circle"></i> Mon profil
@@ -90,6 +88,10 @@
                     <a class="btn btn-app col-md-2" href="{{ route('exams.index') }}">
                       <span class="badge bg-red">{{$totalExamens}}</span>
                       <i class="fa fa-book"></i> Examens
+                    </a>
+
+                    <a class="btn btn-app col-md-2" href="{{ route('soumissions.index') }}">
+                      <i class="fa fa-book"></i> Soumissions
                     </a>
               {{-- END EVERYBODY CAN ACCESS --}}
                         {{-- ONLY ADM CAN ACCESS --}}
@@ -122,6 +124,12 @@
                                 <span class="badge bg-green">{{$totalRoles}}</span>
                                 <i class="fa  fa-user-secret"></i> Roles
                                 </a>
+
+                                <a class="btn btn-app col-md-2" href="{{ route('teachers.index') }}">
+                                  <span class="badge bg-green">{{$totalTeachers}}</span>
+                                  <i class="fa fa-user-circle"></i> Professeurs
+                                  </a>
+
                                 <a class="btn btn-app col-md-2" href="{{ route('users.index') }}">
                                 <span class="badge bg-red">{{$totalUsers}}</span>
                                   <i class="fa fa-group"></i> Utilisateurs
@@ -137,7 +145,7 @@
               </a>
               <a class="btn btn-app col-md-2" href="{{ route('admissions.index') }}">
                 <span class="badge bg-aqua">{{$totalStudents}}</span>
-                <i class="fa fa-user"></i> Etudiants
+                <i class="fa fa-user"></i> Elèves
                 </a>
              @endif
              {{-- END ONLY ADM AND TEACHERS CAN ACCESS --}}
@@ -198,10 +206,13 @@
                         
                         <div class="comment-text">
                           <span class="username">
+                            <a href="#">
                                {{ $comment->GetUser($comment->created_by)->first_name}} {{ $comment->GetUser($comment->created_by)->last_name}}
+                            </a>
+                           </span>
                         </div>
                         <span class="text-muted pull-right">{{$comment->created_at->format('d M. Y')}} a {{$comment->created_at->format('h:m')}}</span>
-                      </span>
+       
                        {{ $comment->body}} 
 
                        @if ($comment->created_by == Auth::user()->id  || Auth::user()->role ==1 )
@@ -282,7 +293,7 @@
 
 
 
-
+          </div>
       
 </div>
 @endsection

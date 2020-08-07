@@ -64,7 +64,7 @@ class UserController extends AppBaseController
 //  dd($input);
         $user = $this->userRepository->create($input);
 
-        Flash::success('Utilisateur ajoute avec succes.');
+        Flash::success('Utilisateur ajouté avec succès.');
 
         return redirect(route('users.index'));
     }
@@ -82,7 +82,7 @@ class UserController extends AppBaseController
 
       
         if (empty($user)) {
-            Flash::error('Utilisateur non trouve(e)');
+            Flash::error('Utilisateur non trouvé');
 
             return redirect(route('users.index'));
         }
@@ -102,7 +102,7 @@ class UserController extends AppBaseController
         $user = $this->userRepository->find($id);
 
         if (empty($user)) {
-            Flash::error('Utilisateur non trouve');
+            Flash::error('Utilisateur non trouvé');
 
             return redirect(route('users.index'));
         }
@@ -145,7 +145,7 @@ class UserController extends AppBaseController
             
         );
         if (empty($user)) {
-            Flash::error($request->first_name. ' '. $request->last_name.'Utilisateur non trouve');
+            Flash::error($request->first_name. ' '. $request->last_name.'Utilisateur non trouvé');
 
             return redirect(route('users.index'));
         }
@@ -154,7 +154,7 @@ class UserController extends AppBaseController
     //    dd($user);
     User::findOrFail($id)->update($user);
 
-        Flash::success('Utilisateur modifie avec succes.');
+        Flash::success('Utilisateur modifié avec succès.');
 
         return redirect(route('users.index'));
     }

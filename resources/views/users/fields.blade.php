@@ -17,10 +17,13 @@
 </div> --}}
 
 <div class="form-group col-sm-6">
-    <select class="form-control" name="role" id="role">
+    {!! Form::label('role', 'Role:') !!}
+    <select class="form-control" name="role" id="role" required>
         <option value="0" selected="false" disabled="true">Role</option>
     
-        <option value="1">Administrateur</option>
+        <option value="1" @if($user->role == 1) selected="true" @endif>Administrateur</option>
+        <option value="2" @if($user->role == 2) selected="true" @endif>Professeur</option>
+        <option value="3" @if($user->role == 3) selected="true" @endif>Eleve</option>
       
     </select>
 </div>

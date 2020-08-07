@@ -29,7 +29,7 @@ class AdmissionRepository extends BaseRepository
         'dob',
         'phone',
         'adress',
-        'status',
+        'religion',
         'dateRegistered',
         'user_id',
         'class_id',

@@ -95,7 +95,8 @@ class TeacherController extends AppBaseController
             $teacher->dob = $request->dob;
             $teacher->phone = $request->phone;
             $teacher->adress = $request->adress;
-            $teacher->status = $request->status;
+            $teacher->religion = $request->religion;
+            $teacher->options = $request->options;
             $teacher->dateRegistered = $request->dateRegistered;
             $teacher->user_id = $user_id;
             $teacher->image = $image_name;
@@ -166,7 +167,7 @@ class TeacherController extends AppBaseController
         $teacher = $this->teacherRepository->find($id);
 
         if (empty($teacher)) {
-            Flash::error('Teacher not found');
+            Flash::error('TProfesseur non trouve');
 
             return redirect(route('teachers.index'));
         }
@@ -192,7 +193,7 @@ class TeacherController extends AppBaseController
         $teacher->save();
 
 
-        Flash::success('Teacher updated successfully.');
+        Flash::success('Professeur modifie avec succes.');
 
         return redirect(route('teachers.index'));
     }
@@ -220,7 +221,7 @@ class TeacherController extends AppBaseController
         
         $this->teacherRepository->delete($id);
 
-        Flash::success('Teacher deleted successfully.');
+        Flash::success('Professeur supprime avec succes.');
 
         return redirect(route('teachers.index'));
     }

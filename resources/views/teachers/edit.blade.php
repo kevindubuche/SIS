@@ -136,16 +136,22 @@
 
 </div>
 
-@push('scripts')
-{{-- <script type="text/javascript">
-    $('#dobb').datetimepicker({
-        format: 'YYYY-MM-DD HH:mm:ss',
-        useCurrent: true,
-        sideBySide: true
-    })
-</script> --}}
-@endpush
+<div class="form-group col-sm-12">
+    <label>Religion</label>
+    {{-- {!! Form::label('start_time', 'Start time:') !!} --}}
+    <input type="text" autocomplete="off" class="form-control" name="religion" id="religion"  value="{{$teacher->religion}}" required >
+</div>
 
+<!-- Course Id Field -->
+<div class="form-group col-sm-12">
+    <select class="form-control" name="options" id="options"  required>
+        <option  disabled="true" selected="false" value="">Option</option>
+        <option value="Jardinière" @if ($teacher->options =='Jardinière') selected="true" @endif>Jardinière</option>
+        <option value="Aide-Jardinière" @if ($teacher->options =='Aide-Jardinière') selected="true" @endif>Aide-Jardinière</option>
+        <option value="Fondamental" @if ($teacher->options =='Fondamental') selected="true" @endif>Fondamental</option>
+        <option value="Directrice pédagogique" @if ($teacher->options =='Directrice pédagogique') selected="true" @endif>Directrice pédagogique</option>
+    </select>
+</div>
 
 
 
@@ -171,6 +177,7 @@
     class="form-control text-capitalize"
     placeholder="Enter email here"
     value="{{$teacher->email}}"
+    required
     >
 </div>
 

@@ -89,4 +89,15 @@ class Exam extends Model
        return $user;
     }
 
+    public  function GetConnectedStudent($id){
+
+        $user = Admission::where('admissions.user_id',$id)
+           ->first();
+       
+       return $user;
+    }
+
+
+    
+
 }

@@ -4,7 +4,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Ajouter un nouveau cours</h5>
+          <h5 class="modal-title" id="exampleModalLongTitle">Ajouter un nouveau examen</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -19,7 +19,7 @@
 </div> --}}
 
 <div class="form-group col-sm-6">
-    <select class="form-control" name="course_id" id="course_id">
+    <select class="form-control" name="course_id" id="course_id" required>
     <option value="0" selected="false" disabled="true">Cours </option>
       @foreach($allCourses as $course)
      {{-- lap we only cours kel te creer yo sauf adm kap we tout cours yo --}}
@@ -58,7 +58,7 @@
 <!-- Title Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('title', 'Title:') !!}
-    {!! Form::text('title', null, ['class' => 'form-control']) !!}
+    {!! Form::text('title', null, ['class' => 'form-control', 'required']) !!}
 </div>
 
 <!-- Description Field -->
@@ -80,7 +80,7 @@
 </div> --}}
 
 
-<input type="file" name="filename" id="filename">
+<input type="file" name="filename" id="filename" required>
 
 
 </div>

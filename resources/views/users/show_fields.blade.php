@@ -1,6 +1,6 @@
 <!-- Name Field -->
 <div class="form-group">
-    {!! Form::label('name', 'Prenom:') !!}
+    {!! Form::label('name', 'Prénom:') !!}
     <p>{{ $user->first_name }}</p>
 </div>
 <div class="form-group">
@@ -11,8 +11,14 @@
 
 <!-- Role Field -->
 <div class="form-group">
-    {!! Form::label('role', 'Role:') !!}
-    <p>{{ $user->role }}</p>
+    {!! Form::label('role', 'Droit d\'accès:') !!}
+    @if ( $user->role == 1)
+    <p>Administrateur</p>
+    @elseif( $user->role == 2)
+    <p> Professeur</p>
+    @else
+    <p>Etudiant(e)</p>
+    @endif
 </div>
 
 <!-- Email Field -->
@@ -40,7 +46,7 @@
 </div> --}}
 
 <div class="form-group">
-    {!! Form::label('created_at', 'Date de creaion:') !!}
+    {!! Form::label('created_at', 'Date de créaton:') !!}
     <p>{{ $user->created_at }}</p>
 </div>
 

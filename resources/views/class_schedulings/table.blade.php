@@ -1,4 +1,4 @@
-<div class="container table-responsive">
+<div class="table-responsive">
     <table class="table display   table table-bordered table-striped table-condensed" 
     {{-- id="classSchedulings-table" --}}
     id='myTable'>

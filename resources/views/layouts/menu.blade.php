@@ -4,7 +4,7 @@
 
 
 <li class="{{ Request::is('actuses*') ? 'active' : '' }}">
-    <a href="{{ route('actuses.index') }}"><i class="fa fa-tags"></i><span>Actualites</span></a>
+    <a href="{{ route('actuses.index') }}"><i class="fa fa-tags"></i><span>Publications</span></a>
 </li>
 
 
@@ -120,13 +120,14 @@
     <a href="{{ route('transactions.index') }}"><i class="fa fa-money"></i><span>Transactions</span></a>
 </li>
 @endif --}}
-<li class="{{ Request::is('admissions*') ? 'active' : '' }}">
-    <a href="{{ route('admissions.index') }}"><i class="fa fa-user"></i><span>Etudiants</span></a>
-</li>
 
-<li class="{{ Request::is('teachers*') ? 'active' : '' }}">
-    <a href="{{ route('teachers.index') }}"><i class="fa fa-user-circle"></i><span>Professeurs</span></a>
-</li>
+@if(Auth::user()->role < 3)
+
+    <li class="{{ Request::is('admissions*') ? 'active' : '' }}">
+        <a href="{{ route('admissions.index') }}"><i class="fa fa-user"></i><span>Elèves</span></a>
+    </li>
+
+@endif
 
 {{-- 
 @if(Auth::user()->role < 4)
@@ -145,10 +146,14 @@
 
 {{-- FOR ADMIN ONLY --}}
 
-    @if(Auth::user()->role < 2)
+    @if(Auth::user()->role == 1)
     {{-- CAN CRUD PROFS --}}
   
     {{-- CAN CRUD USERS --}}
+    <li class="{{ Request::is('teachers*') ? 'active' : '' }}">
+        <a href="{{ route('teachers.index') }}"><i class="fa fa-user-circle"></i><span>Professeurs</span></a>
+    </li>
+    
     <li class="{{ Request::is('users*') ? 'active' : '' }}">
         <a href="{{ route('users.index') }}"><i class="fa fa-group"></i><span>Utilisateurs</span></a>
     </li>
@@ -171,8 +176,29 @@
     <a href="{{ route('comments.index') }}"><i class="fa fa-edit"></i><span>Commentaires</span></a>
 </li> --}}
 
+<li class="treeview">
+    <a href="#">
+        <i class=" fa fa-briefcase"></i><span>Examens</span>
+        <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+        </span>
+    </a>
+<ul class="treeview-menu">
 <li class="{{ Request::is('exams*') ? 'active' : '' }}">
-    <a href="{{ route('exams.index') }}"><i class="fa fa-edit"></i><span>Examens</span></a>
+    <a href="{{ route('exams.index') }}"><i class="fa fa-briefcase"></i><span>Examens</span></a>
 </li>
 
+<li class="{{ Request::is('soumissions*') ? 'active' : '' }}">
+    <a href="{{ route('soumissions.index') }}"><i class="fa fa-book"></i><span>Soumissions</span></a>
+</li>
+
+</ul>
+</li>
+
+
+
+
+<li class="{{ Request::is('actuAssignings*') ? 'active' : '' }}">
+    <a href="{{ route('actuAssignings.index') }}"><i class="fa fa-edit"></i><span>Actu Assignings</span></a>
+</li>
 

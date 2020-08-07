@@ -3,8 +3,12 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Actus
+            Publication
         </h1>
+        <p class="{{ Request::is('actuAssignings*') ? 'active' : '' }}">
+            <a href="{{ route('actuAssignings.index') }}"><i class="fa fa-cogs"></i><span>Visibilité</span></a>
+        </p>
+        
    </section>
    <div class="content">
        @include('adminlte-templates::common.errors')

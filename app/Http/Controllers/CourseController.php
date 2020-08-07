@@ -60,15 +60,11 @@ class CourseController extends AppBaseController
             // dd('role default');
             $student = Admission::where(['user_id'=> $user->id])->first();
             // dd($user->id);
-            $courses = DB::table('courses')//on pprend tous les cours
-            ->select(
-                'courses.*'
-            )            
-            ->join('class_schedulings','class_schedulings.course_id','=','courses.course_id')//qui sont dans l'horaire de l'etudiant
+            $courses = Course::join('class_schedulings','class_schedulings.course_id','=','courses.course_id')//qui sont dans l'horaire de l'etudiant
             ->where('class_id',$student->class_id)
            ->get();
 
-        //    dd($courses);
+            //dd($courses);
            return view('courses.index')
             ->with('courses', $courses);
         }
@@ -117,7 +113,7 @@ class CourseController extends AppBaseController
        
         // $course = $this->courseRepository->create($input);
 
-        Flash::success('Coursenregistre avec succes.');
+        Flash::success('Cours enregistre avec succes.');
 
         return redirect(route('courses.index'));
     }

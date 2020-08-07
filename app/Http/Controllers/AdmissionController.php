@@ -118,7 +118,7 @@ class AdmissionController extends AppBaseController
                 $student->adress = $request->adress;
                 $student->departement_id = $request->departement_id;
                 // $student->faculty_id = $request->faculty_id;
-                // $student->batch_id = $request->batch_id;
+                 $student->religion = $request->religion;
                 $student->user_id = $user_id;
                 $student->class_id = $request->class_id;
                 $student->dateregistered = date('Y-m-d');
@@ -191,7 +191,7 @@ class AdmissionController extends AppBaseController
         $admission = $this->admissionRepository->find($id);
 
         if (empty($admission)) {
-            Flash::error('Admission not found');
+            Flash::error('Etudian non trouve');
 
             return redirect(route('admissions.index'));
         }
@@ -234,8 +234,8 @@ class AdmissionController extends AppBaseController
             'adress' => $request->adress,
             'departement_id' => $request->departement_id,
             // 'faculty_id' => $request->faculty_id,
-            // 'batch_id' => $request->batch_id,
-            'user_id' => $request->user_id,
+             'religion' => $request->religion,
+            // 'user_id' => $request->user_id,
             'dateregistered' => date('Y-m-d'),
             'image' => $new_image_name
         );
@@ -255,7 +255,7 @@ class AdmissionController extends AppBaseController
         // dd($student['batch_id']);
         Admission::findOrFail($id)->update($student);
 
-        Flash::success($request->first_name. ' '. $request->last_name.'Admission updated successfully.');
+        Flash::success($request->first_name. ' '. $request->last_name.'modifie avec succes');
 
         return redirect(route('admissions.index'));
     }
@@ -274,14 +274,14 @@ class AdmissionController extends AppBaseController
         $admission = $this->admissionRepository->find($id);
 
         if (empty($admission)) {
-            Flash::error('Admission not found');
+            Flash::error('Etudiant non trouve');
 
             return redirect(route('admissions.index'));
         }
 
         $this->admissionRepository->delete($id);
 
-        Flash::success('Admission deleted successfully.');
+        Flash::success('Etudiant supprime avec succes.');
 
         return redirect(route('admissions.index'));
     }

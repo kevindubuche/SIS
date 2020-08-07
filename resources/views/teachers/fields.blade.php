@@ -49,7 +49,7 @@
                     <td>
                         <label>
                             <input type="radio" name="gender" id="gender" value="1">
-                            Feminin
+                            Féminin
                         </label>
                     </td>
                 </tr>
@@ -68,19 +68,19 @@
                     <td>
                         <label>
                             <input type="radio" name="status" id="status" value="0" required checked>
-                            Celibataire
+                            Célibataire
                         </label>
                     </td>
                     <td>
                         <label>
                             <input type="radio" name="status" id="status" value="1" required>
-                            Marie(e)
+                            Marié(e)
                         </label>
                     </td>
                     <td>
                         <label>
                             <input type="radio" name="status" id="status" value="1" required>
-                            Divorce(e)
+                            Divoré(e)
                         </label>
                     </td>
                     <td>
@@ -102,33 +102,19 @@
 <div class="col-md-12">
     <div class="form-group">
         <div class="input-group">
-            <div class="form-group-addon">
-                <i class="fa fa-calendar teacherdob"></i>
-            </div>
+            <label> Date de naissance</label>
             <input type="text"
                  name="dob"
                  id="dob"
                   class="form-control text-capitalize"
                   placeholder="Date de naissance"
+                  autocomplete="off"
                   >
         </div>
     </div>
 
 </div>
 
-@push('scripts')
-    {{-- <script type="text/javascript">
-        $('#dobb').datetimepicker({
-            format: 'YYYY-MM-DD HH:mm:ss',
-            useCurrent: true,
-            sideBySide: true
-        })
-    </script> --}}
-@endpush
-
-
-
- 
 <!-- Phone Field -->
 <div class="form-group col-sm-12">
     <input type="text" 
@@ -147,9 +133,30 @@
         id="email" 
         class="form-control"
         placeholder="Email"
+        required
         >
 </div>
+ {{-- <!-- Email Field -->
+ <div class="form-group col-sm-12">
+    {!! Form::label('religion', 'Religion:') !!}
+    {!! Form::email('religion', null, ['class' => 'form-control', 'required']) !!}
+</div> --}}
+<div class="form-group col-sm-12">
+    <label>Religion</label>
+    {{-- {!! Form::label('start_time', 'Start time:') !!} --}}
+    <input type="text" autocomplete="off" class="form-control" name="religion" id="religion" required >
+</div>
 
+<!-- Course Id Field -->
+<div class="form-group col-sm-12">
+    <select class="form-control" name="options" id="options" required>
+        <option  disabled="true" selected="false" value="">Option</option>
+        <option value="Jardinière">Jardinière</option>
+        <option value="Aide-Jardinière">Aide-Jardinière</option>
+        <option value="Fondamental">Fondamental</option>
+        <option value="Directrice pédagogique">Directrice pédagogique</option>
+    </select>
+</div>
 <!-- Image Field -->
 <div class="col-lg-12 col-md-12 col-sm-12">
     <div class="from-group form-group-login">

@@ -128,34 +128,6 @@
     </div>  
  </div>
 
- <!-- Status Field -->
-{{-- <div class="col-sm-12">
-    <div class="form-group ">
-        <fieldset>
-            <legend for="gender">Status</legend>
-            <table style="width: 100%; margin-top:14px;">
-                <tr style="border-bottom: 1px solod #ccc">
-                    <td>
-                        <label>
-                            <input type="radio" name="status" id="status" value="0" required checked>
-                            Single
-                        </label>
-                    </td>
-                    <td>
-                        <label>
-                            <input type="radio" name="status" id="status" value="1" required>
-                            Maried
-                        </label>
-                    </td>
-                </tr>
-            </table>
-        </fieldset>
-    </div>  
- </div> --}}
-   
-
-
-
 <!-- Dob Field -->
 <div class="col-md-4">
     <div class="form-group">
@@ -175,20 +147,6 @@
 
 </div>
 
-
-
-@push('scripts')
-    {{-- <script type="text/javascript">
-        $('#dobb').datetimepicker({
-            format: 'YYYY-MM-DD HH:mm:ss',
-            useCurrent: true,
-            sideBySide: true
-        })
-    </script> --}}
-@endpush
-
-
-
  
 <!-- Phone Field -->
 <div class="form-group col-sm-4">
@@ -198,6 +156,12 @@
         class="form-control text-capitalize"
         placeholder="Telephone"
         >
+</div>
+
+<div class="form-group col-sm-12">
+    <label>Religion</label>
+    {{-- {!! Form::label('start_time', 'Start time:') !!} --}}
+    <input type="text" autocomplete="off" class="form-control" name="religion" id="religion" required >
 </div>
 
 <!-- departement_id Field -->
@@ -213,30 +177,7 @@
    
 </div>
 
-{{-- <!-- Batch Field -->
-<div class="form-group col-sm-4">
-    <select class="form-control" name="batch_id" id="batch_id">
-        <option value="0" selected="true"
-            disabled="true">Choose Batch</option>
-            @foreach ($batches as $batch)
-                 <option value="{{$batch->batch_id}}">{{$batch->batch}}</option>
-            @endforeach
-          
-    </select>
-   
-</div> --}}
-{{-- 
-<!-- Faculty Field -->
-<div class="form-group col-sm-4">
-    <select class="form-control" name="faculty_id" id="faculty_id">
-        <option value="0" selected="true"
-            disabled="true">Choose Faculty</option>
-            @foreach ($faculties as $fac)
-                 <option value="{{$fac->faculty_id}}">{{$fac->faculty_name}}</option>
-            @endforeach
-          
-    </select>
-</div> --}}
+
 
 <!-- Image Field -->
 <div class="col-lg-12 col-md-12 col-sm-4">

@@ -24,9 +24,10 @@ class TeacherRepository extends BaseRepository
         'dob',
         'phone',
         'adress',
-        'status',
         'dateRegistered',
         'user_id',
+        'religion',
+        'options',
         'image'
     ];
 protected $primaryKey = "teacher_id";

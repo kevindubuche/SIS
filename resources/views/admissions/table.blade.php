@@ -1,4 +1,4 @@
-<div class="container table-responsive">
+<div class=" table-responsive">
     <table id='myTable' class=' display   table table-bordered table-striped table-condensed'>
         <thead>
             <tr>

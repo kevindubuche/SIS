@@ -59,9 +59,9 @@ style="background-color: rgb(219, 219, 223);">
                          <h5>Professeurs</h5>
                         @break
                         @case(3)
-                        <h5>Etudiant(e)</h5>
+                        <h5>Élève</h5>
                        @break
-                       <h5>Etudiant(e)</h5>
+                       <h5>Élève</h5>
                     @default
                         
                 @endswitch
@@ -129,7 +129,7 @@ style="background-color: rgb(219, 219, 223);">
 
         <!-- Main Footer -->
         <footer class="main-footer" style="max-height: 100px;text-align: center">
-            <strong>Copyright © 2020 <a href="#">Institution Frere Andre _ Foyer Eveil</a>.</strong> Tout droit reserve.
+            <strong>Copyright © 2020 <a href="#">Tout droit reservé | Institution Frère André _ Foyer Eveil</a>.</strong> 
         </footer>
 
     </div>

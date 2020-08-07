@@ -142,33 +142,12 @@
     </div>  
  </div>
 
- <!-- Status Field -->
-{{-- <div class="col-sm-12">
-    <div class="form-group ">
-        <fieldset>
-            <legend for="gender">Status</legend>
-            <table style="width: 100%; margin-top:14px;">
-                <tr style="border-bottom: 1px solod #ccc">
-                    <td>
-                        <label>
-                            <input type="radio" name="status" id="status" value="0" required checked>
-                            Single
-                        </label>
-                    </td>
-                    <td>
-                        <label>
-                            <input type="radio" name="status" id="status" value="1" required>
-                            Maried
-                        </label>
-                    </td>
-                </tr>
-            </table>
-        </fieldset>
-    </div>  
- </div> --}}
-   
-
-
+ 
+ <div class="form-group col-sm-12">
+    <label>Religion</label>
+    {{-- {!! Form::label('start_time', 'Start time:') !!} --}}
+    <input type="text" autocomplete="off" class="form-control" name="religion" id="religion" value="{{$admission->religion}}" required >
+</div>
 
 <!-- Dob Field -->
 <div class="col-md-12">
@@ -257,7 +236,7 @@
                         {!!Html::image('user_images/'.$admission->image,
                         null,
                         ['class'=>'student.image', 'id'=>'showImage' , 'style'=>'width:200px; height:200px;'])!!}                       
-                        <input type="file" name="image" id="image"
+                        <input type="file" name="image" id="image" required
                         accept="image/x-png, image/png,image/jpg,image/jpeg"
                         >
                     </td>
