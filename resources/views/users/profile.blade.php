@@ -121,7 +121,7 @@
 
               <strong><i class="fa fa-pencil margin-r-5"></i> Identifiant</strong>
 
-              <p>
+              <p><br>
                 <span class="label label-success">{{Auth::user()->id}}</span>
                 
 
@@ -298,7 +298,7 @@
                                         @if ($user->gender==0)
                                         value="Masculin"  
                                             @else
-                                            value="Feminin"  
+                                            value="Féminin"  
                                             @endif
                                         
                                 readonly>
@@ -315,10 +315,16 @@
                                         <input type="email"
                                         class="form-control"
                                         id="inputName"
-                                        @if ($user->gender==0)
-                                        value="Celibataire"  
-                                            @else
-                                            value=" Marie(e)"  
+                                        @if ($user->statusmatrimonial==0)
+                                        value="Célibataire"  
+                                            @elseif($user->statusmatrimonial==1)
+                                            value=" Fiancé(e)"  
+                                            @elseif($user->statusmatrimonial==2)
+                                            value=" Marié(e)"  
+                                            @elseif($user->statusmatrimonial==3)
+                                            value=" Divorcé(e)"  
+                                            @elseif($user->statusmatrimonial==4)
+                                            value=" Veuf(ve)"  
                                             @endif
                                         
                                 readonly>

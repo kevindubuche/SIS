@@ -126,7 +126,7 @@
                             <div class="hero-slides-content">
                                 <h4 data-animation="fadeInUp" data-delay="100ms">Institution Frère André _ Foyer Eveil</h4>
                                 <h2 data-animation="fadeInUp" data-delay="400ms">Bienvenue dans votre <br>Ecole en ligne</h2>
-                                <a href="#" class="btn academy-btn" data-animation="fadeInUp" data-delay="700ms">Plus</a>
+                                
                             </div>
                         </div>
                     </div>
@@ -142,7 +142,7 @@
                             <div class="hero-slides-content">
                                 <h4 data-animation="fadeInUp" data-delay="100ms">Institution Frère André _ Foyer Eveil</h4>
                                 <h2 data-animation="fadeInUp" data-delay="400ms">Bienvenue dans votre  <br>Ecole en ligne</h2>
-                                <a href="#" class="btn academy-btn" data-animation="fadeInUp" data-delay="700ms">Plus</a>
+                              
                             </div>
                         </div>
                     </div>

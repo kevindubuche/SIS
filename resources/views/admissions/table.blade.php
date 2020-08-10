@@ -3,12 +3,12 @@
         <thead>
             <tr>
         <th></th>
-        <th> Nom</th>
-        <th>Departement</th>
+        <th>Nom</th>
+        <th>Departément</th>
         <th>Classe</th>
         <th>Sexe</th>
         <th>Email</th>
-        <th>Telephone</th>
+        <th>Téléphone</th>
         @if(Auth::user()->role == 1)
                 <th >Action</th>
         @endif
@@ -27,7 +27,7 @@
             <td>{{ $admission->first_name }} {{ $admission->last_name }}</td>
             <td>{{ $admission->InfoDepartement->departement_name }}</td>
             <td>{{ $admission->InfoClass->class_name }}</td>
-            <td>@if($admission->gender ==0) Masculin @else Feminin @endif</td>
+            <td>@if($admission->gender ==0) Masculin @else Féminin @endif</td>
             <td>{{ $admission->email }}</td>
             <td>{{ $admission->phone }}</td>
             
@@ -64,13 +64,13 @@
             select:true,
             "language": {
             "lengthMenu": "Voir _MENU_ lignes par page",
-            "zeroRecords": "Aucune information - desole",
+            "zeroRecords": "Aucune information",
             "info": "_PAGE_ sur _PAGES_",
-            "infoEmpty": "Aucun resultat trouve",
+            "infoEmpty": "Aucun résultat trouvé",
             "infoFiltered": "(filtre de _MAX_ total resultats)",
             "search": "Rechercher",
             "paginate":{
-            "previous":"Precedent",
+            "previous":"Précedent",
             "next":"Suivant"
             }
 

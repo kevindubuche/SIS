@@ -466,6 +466,33 @@
                                                                         >
                                                                 </div>
                                                             </div>
+
+                                                            
+                                                    <div class="form-group">
+                                                      <label for="inputName"
+                                                          class="col-sm-3 control-label">Autre personne reponsable (Nom)</label>
+                                                          <div class="col-sm-9">
+                                                              <input 
+                                                                  class="form-control"
+                                                                  id="responsable_nom"
+                                                                  readonly
+                                                                  value="{{$admission->responsable_nom}}"
+                                                                  >
+                                                          </div>
+                                                      </div>
+                                                      <div class="form-group">
+                                                          <label for="inputName"
+                                                              class="col-sm-3 control-label">Autre personne reponsable (Téléphone)</label>
+                                                              <div class="col-sm-9">
+                                                                  <input 
+                                                                      class="form-control"
+                                                                      id="responsable_phone"
+                                                                      readonly
+                                                                      value="{{$admission->responsable_phone}}"
+                                                                      >
+                                                              </div>
+                                                          </div>
+          
             
     
 

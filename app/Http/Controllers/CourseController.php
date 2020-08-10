@@ -16,6 +16,7 @@ use App\Models\Course;
 use App\Models\Admission;
 use DB;
 use File;
+use Youtube;
 class CourseController extends AppBaseController
 {
     /** @var  CourseRepository */
@@ -102,14 +103,35 @@ class CourseController extends AppBaseController
             base_path() . '/public/course_files/', $filename
         );
  
+
+
+          //########### start upload to youtube
+                $video = Youtube::upload($request->file('video')->getPathName(), [
+                    'title'       => $request->input('title_video'),
+                    'description' => $request->input('description_video')
+                ]);
+                // dd($video);
+                // return "Video uploaded successfully. Video ID is ". $video->getVideoId();
+         //########### start upload to youtube
+
+
+
+
         $cours = new Course;
         $cours->course_name = $request->course_name;
         $cours->course_code = $request->course_code;
         $cours->description = $request->description;
         $cours->created_by = $request->created_by;
+        $cours->videoID = $video->getVideoId();
         $cours->filename = $fullPath;
+   
 //  dd($input);
         $cours->save();
+
+
+      
+
+
        
         // $course = $this->courseRepository->create($input);
 

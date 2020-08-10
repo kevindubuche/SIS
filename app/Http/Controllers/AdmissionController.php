@@ -40,22 +40,45 @@ class AdmissionController extends AppBaseController
     public function index(Request $request)
     {
         // $admissions = $this->admissionRepository->all();
-        $admissions = Admission::all();
-        $student_id = Admission::max('student_id');
-        $roll_id = Roll::max('roll_id');
+         $admissions = Admission::all();
+        // $student_id = Admission::max('student_id');
+        // $roll_id = Roll::max('roll_id');
+        // $batches = Batch::all();
         // $faculties = Faculty::all();
-        $departements = Departement::all();
-        $batches = Batch::all();
-        $allClasses = Classes::all();
-        $rand_username_password = mt_rand(111609300011 .$student_id+ 1, 
-                             111609300011 .$student_id+ 1);
 
-        return view('admissions.index',
-            compact('admissions', 'student_id',
-           'departements',
-            'batches', 'roll_id',
-        'rand_username_password',
-    'allClasses'));
+        $departements = Departement::all();
+       
+        $allClasses = Classes::all();
+        // $rand_username_password = mt_rand(111609300011 .$student_id+ 1, 
+        //                      111609300011 .$student_id+ 1);
+
+
+
+        $user = User::find(auth()->user()->id);
+
+        if($user->role == 1 ){
+            return view('admissions.index',
+            compact('admissions', 'departements', 'allClasses'));
+            }
+         else  if($user->role == 2 ){
+            $admissions = Admission::join('class_assignings','class_assignings.class_id','=','admissions.class_id')//qui sont dans l'horaire de l'etudiant
+            ->where('teacher_id',$user->id)
+           ->get();
+           return view('admissions.index',
+           compact('admissions', 'departements', 'allClasses'));
+           }
+        
+
+    //     return view('admissions.index',
+    //         compact(
+    //             'admissions',
+    //     //          'student_id',
+           
+    //     //     'batches', 
+    //     //     'roll_id',
+    //     // 'rand_username_password',
+    //     'departements',
+    // 'allClasses'));
     }
 
     /**
@@ -111,6 +134,8 @@ class AdmissionController extends AppBaseController
                 $student->father_phone = $request->father_phone;
                 $student->mother_name = $request->mother_name;
                 $student->mother_phone = $request->mother_phone;
+                $student->responsable_nom = $request->responsable_nom;
+                $student->responsable_phone = $request->responsable_phone;
                 $student->gender = $request->gender;
                 $student->phone = $request->phone;
                 $student->dob = $request->dob;
@@ -227,6 +252,8 @@ class AdmissionController extends AppBaseController
             'father_phone' => $request->father_phone,
             'mother_name' => $request->mother_name,
             'mother_phone' => $request->mother_phone,
+            'responsable_nom' => $request->responsable_nom,
+            'responsable_phone' => $request->responsable_phone,
             'gender' => $request->gender,
             'phone' => $request->phone,
             'dob' => $request->dob,

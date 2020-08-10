@@ -83,31 +83,59 @@ class TeacherController extends AppBaseController
  
         //AND NAP ADD TEACHER A AK ID USER A AS user_id
         if($save){
+
+
+            //GESTION DE L'IMAGE
+            // $profile_picture = $request->image;
             $image = $request->file('image');
-            $image_name = rand(1111,9999).'.'.$image->getClientOriginalExtension();
-            $image->move(public_path('user_images'), $image_name);
+            $image_name = "";
+            if($image==null){
+                $image_name = "defaultAvatar.png";
+            }
+            else{
+                $genarate_name = uniqid()."_".time().date("Ymd")."_IMG";
+                $image_name = $genarate_name.'.'.$image->getClientOriginalExtension();
+                
+            }
+
+
+
+
+
+
+            // $image = $request->file('image');
+            // $image_name = rand(1111,9999).'.'.$image->getClientOriginalExtension();
+            if($image ==null){
+
+            }else{
+                $image->move(public_path('user_images'), $image_name);
+            }
+            
     
             $teacher = new Teacher;
             $teacher->first_name = $request->first_name;
             $teacher->last_name = $request->last_name;
             $teacher->gender = $request->gender;
+            $teacher->statusmatrimonial = $request->statusmatrimonial;
             $teacher->email = $request->email;
             $teacher->dob = $request->dob;
             $teacher->phone = $request->phone;
             $teacher->adress = $request->adress;
             $teacher->religion = $request->religion;
+            $teacher->nif = $request->nif;
+            $teacher->niveau = $request->niveau;
             $teacher->options = $request->options;
             $teacher->dateRegistered = $request->dateRegistered;
             $teacher->user_id = $user_id;
             $teacher->image = $image_name;
-            // dd($teacher);
+            //  dd($teacher);
             $teacher->save();
 
         }
 
         //SEND MAIL WITH PASSWORD TO THE TEACHER
 
-        Flash::success('Professeur enregistre avec succes');
+        Flash::success('Professeur enregistré avec succès');
 
         return redirect(route('teachers.index'));
     }
@@ -126,7 +154,7 @@ class TeacherController extends AppBaseController
         $schedules =ClassScheduling::where('created_by', $teacher->user_id)->get();
         // dd($schedules);
         if (empty($teacher)) {
-            Flash::error('Professeur non trouve(e)');
+            Flash::error('Professeur non trouvé(e)');
 
             return redirect(route('teachers.index'));
         }
@@ -167,7 +195,7 @@ class TeacherController extends AppBaseController
         $teacher = $this->teacherRepository->find($id);
 
         if (empty($teacher)) {
-            Flash::error('TProfesseur non trouve');
+            Flash::error('Professeur non trouvé');
 
             return redirect(route('teachers.index'));
         }
@@ -175,25 +203,48 @@ class TeacherController extends AppBaseController
         // $teacher = $this->teacherRepository->update($request->all(), $id);
 
         //CHECK IF THE IMAGE HAS CHANGED
+        
         if($request->image != $teacher->image){
             //DELETE OLD IMAGE
-             File::delete(public_path().'/user_images/'.$teacher->image);
+            if( $teacher->image !='defaultAvatar.png' 
+          && $request->image != null ){
+                
+            //    dd($request->image);
+                  File::delete(public_path().'/user_images/'.$teacher->image);
+      
+            }
+        }
+
+        $image = $request->file('image');
+        
+        if($image ==null){
+            $image_name = $teacher->image;
+          
+        }else{
+            $image_name = uniqid()."_".time().date("Ymd")."_IMG".'.'.$image->getClientOriginalExtension();
+            $image->move(public_path('user_images'), $image_name);
+
         }
 
         
-
-        $image = $request->file('image');
-        $image_name = rand(1111,9999).'.'.$image->getClientOriginalExtension();
-        $image->move(public_path('user_images'), $image_name);
-
+        
 
         $teacher->fill($request->except(['token','image']));
         
-        $teacher->image= ($request->image == $teacher->image) ? $request->image  : $image_name ;
+        $teacher->image= $image_name ;
         $teacher->save();
 
 
-        Flash::success('Professeur modifie avec succes.');
+        //update User table
+        $user = array(
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            // 'email' => $request->email        adm nan a  odifier nan user table la
+            
+        );
+        User::findOrFail($teacher->user_id)->update($user);
+
+        Flash::success('Professeur modifié avec succès.');
 
         return redirect(route('teachers.index'));
     }
@@ -217,9 +268,10 @@ class TeacherController extends AppBaseController
             return redirect(route('teachers.index'));
         }
         //REMOVE THE IMAGE FROM THE teacher_images FOLDER
+        if( $teacher->image !='defaultAvatar.png' ){
         File::delete(public_path().'/user_images/'.$teacher->image);
-        
-        $this->teacherRepository->delete($id);
+        }
+        $this->teacherRepository->forcedelete($id);
 
         Flash::success('Professeur supprime avec succes.');
 

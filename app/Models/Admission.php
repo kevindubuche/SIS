@@ -60,8 +60,11 @@ class Admission extends Model
         'dateRegistered',
         'user_id',
         'class_id',
-        'image'
+        'image',
+        'responsable_nom',
+        'responsable_phone'
     ];
+    
 
     /**
      * The attributes that should be casted to native types.
@@ -86,7 +89,9 @@ class Admission extends Model
         'dateRegistered' => 'date',
         'user_id' => 'integer',
         'class_id' => 'integer',
-        'image' => 'string'
+        'image' => 'string',
+        'responsable_nom' => 'string',
+        'responsable_phone'=> 'string',
     ];
 
     /**

@@ -6,11 +6,12 @@
         <th>Nom du cours</th>
         <th>Code du cours</th>
         <th>Description</th>
-        <th>Date de creation</th>
+        <th>Date de création</th>
         {{-- <th>Status</th> --}}
-        <th>Ajoute par</th>
+        <th>Ajouté par</th>
         <th>Document</th>
-        @if (Auth::user()->role != 3)
+        <th>Vidéo</th>
+        @if (Auth::user()->role == 2)
             <th >Actions</th>
         @endif
    
@@ -36,7 +37,16 @@
                         <button  >Afficher</button>
                 </a>
             </td>
-            @if (Auth::user()->role != 3)
+            @if( $course->videoID)
+            <td type="button"  data-toggle="modal" data-target="#{{ $course->videoID}}"><button class="btn btn-primary"> Regarder</button></td>
+                
+            @else
+            <td > Pas de vidéo</td>
+            @endif
+
+
+           
+            @if (Auth::user()->role == 2)
         
             <td>
                 {!! Form::open(['route' => ['courses.destroy', $course->course_id], 'method' => 'delete']) !!}
@@ -49,6 +59,35 @@
             </td>
             @endif
                
+            </tr>
+            <tr>
+
+                <td  
+                    class="modal fade" id="{{ $course->videoID }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLongTitle">
+                                  <p><code>Institution Frere Andre _ Foyer Eveil</code> I.F.A</p>
+                                </h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                                <iframe width="100%" height="460" src="https://www.youtube.com/embed/{{$course->videoID}}" frameborder="0" allowfullscreen></iframe> 
+   
+
+                            
+                         </div>
+                         <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                          </div>
+                     </div>
+                 </div>
+   
+                </td>
             </tr>
         @endforeach
         </tbody>
@@ -69,9 +108,9 @@
             select:true,
             "language": {
             "lengthMenu": "Voir _MENU_ lignes par page",
-            "zeroRecords": "Aucune information - desole",
+            "zeroRecords": "Aucune information",
             "info": "_PAGE_ sur _PAGES_",
-            "infoEmpty": "Aucun resultat trouve",
+            "infoEmpty": "Aucun resultat trouvé",
             "infoFiltered": "(filtre de _MAX_ total resultats)",
             "search": "Rechercher",
             "paginate":{

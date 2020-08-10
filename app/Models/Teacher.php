@@ -48,6 +48,8 @@ class Teacher extends Model
         'user_id',
         'religion',
         'options',
+        'nif',
+        'niveau',
         'image'
     ];
 
@@ -69,7 +71,10 @@ class Teacher extends Model
         'user_id' => 'integer',
         'religion' => 'string',
         'options' => 'string',
-        'image' => 'string'
+        'nif' => 'string',
+        'niveau' => 'string',
+        'image' => 'string',
+        'statusmatrimonial' => 'integer'
     ];
 
     /**
@@ -85,9 +90,10 @@ class Teacher extends Model
         'dob' => 'required',
         'phone' => 'required',
         'adress' => 'required',
-        'status' => 'required',
+        // 'status' => 'required',
         // 'dateRegistered' => 'required',
-        'user_id' => 'required'
+        'user_id' => 'required',
+        'statusmatrimonial' => 'required'
     ];
 
     // public function classAssigning()

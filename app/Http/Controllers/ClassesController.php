@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Flash;
 use Response;
 
+use App\Models\Classes;
 class ClassesController extends AppBaseController
 {
     /** @var  ClassesRepository */
@@ -52,15 +53,29 @@ class ClassesController extends AppBaseController
      *
      * @return Response
      */
-    public function store(CreateClassesRequest $request)
+    public function store(Request $request)
     {
-        $input = $request->all();
+        // $input = $request->all();
 
-        $classes = $this->classesRepository->create($input);
+        //verifier si class_code existe
+        $count = Classes::where('class_code',$request->class_code)->count();
+        if($count !=0){
+            Flash::error('Le code de la classe existe deja');
+            return redirect(route('classes.index'));
+        }
 
-        Flash::success('Classe ajoutee avec succes.');
+        
+        $class = new Classes;
+        $class->class_name = $request->class_name;
+        $class->class_code = $request->class_code;
+        
 
-        return redirect(route('classes.index'));
+        $class->save();
+        // $classes = $this->classesRepository->create($input);
+
+        Flash::success('Classe ajoutée avec succès.');
+
+        return redirect(route('classes.index')); 
     }
 
     /**
@@ -75,7 +90,7 @@ class ClassesController extends AppBaseController
         $classes = $this->classesRepository->find($id);
 
         if (empty($classes)) {
-            Flash::error('Classe non trouvee');
+            Flash::error('Classe non trouvée');
 
             return redirect(route('classes.index'));
         }
@@ -95,7 +110,7 @@ class ClassesController extends AppBaseController
         $classes = $this->classesRepository->find($id);
 
         if (empty($classes)) {
-            Flash::error('Classes not found');
+            Flash::error('Classe non trouvée');
 
             return redirect(route('classes.index'));
         }
@@ -120,10 +135,16 @@ class ClassesController extends AppBaseController
 
             return redirect(route('classes.index'));
         }
+        $count = Classes::where('class_code',$request->class_code)->count();
+        if($count !=0){
+            Flash::error('Le code de la classe existe deja');
+            return redirect(route('classes.index'));
+        }
+
 
         $classes = $this->classesRepository->update($request->all(), $id);
 
-        Flash::success('Classe modifie avec succes.');
+        Flash::success('Classe modifiée avec succès.');
 
         return redirect(route('classes.index'));
     }
@@ -142,14 +163,14 @@ class ClassesController extends AppBaseController
         $classes = $this->classesRepository->find($id);
 
         if (empty($classes)) {
-            Flash::error('Classes not found');
+            Flash::error('Classe introuvable');
 
             return redirect(route('classes.index'));
         }
 
         $this->classesRepository->delete($id);
 
-        Flash::success('Classe supprimee avec succes');
+        Flash::success('Classe supprimée avec succès');
 
         return redirect(route('classes.index'));
     }

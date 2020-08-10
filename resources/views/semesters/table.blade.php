@@ -2,10 +2,10 @@
     <table class="table" id="semesters-table">
         <thead>
             <tr>
-                <th>Nom du semestre</th>
-                <th>Annee academique</th>
-        <th>Code du semestre</th>
-        <th>Duree</th>
+                <th>Nom de l'étape</th>
+                <th>Année académique</th>
+        <th>Code de l'étape</th>
+        <th>Durée</th>
         <th>Description</th>
         <th colspan="3">Action</th>
             </tr>

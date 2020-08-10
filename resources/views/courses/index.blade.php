@@ -4,7 +4,7 @@
     <section class="content-header">
         <h1 class="pull-left">Cours</h1>
         <h1 class="pull-right">
-            @if (Auth::user()->role != 3)
+            @if (Auth::user()->role == 2)
             <a data-toggle="modal" data-target="#add-course-modal" class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" ><i class="fa fa-plus-circle">Ajouter un cours</i></a> 
             @endif
         </h1>
@@ -16,7 +16,7 @@
         @include('adminlte-templates::common.errors')
         <div class="clearfix"></div>
         <div class="box box-primary">
-            <div class="box-body">
+            <div class="box-bodyKEVIN">
                     @include('courses.table')
                     {{-- {!! Form::open(['route' => 'courses.store' ,'enctype'=>'multipart/form-data']) !!}
 

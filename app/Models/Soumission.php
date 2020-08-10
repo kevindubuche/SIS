@@ -66,6 +66,9 @@ protected $primaryKey ="soumission_id";
     {
         return $this->belongsTo('App\Models\Exam','exam_id');
     }
-
+    public  function InfoExam(){
+        return $this->belongsTo('App\Models\Exam','exam_id');
+     }
+     
     
 }

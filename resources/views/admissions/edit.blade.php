@@ -113,6 +113,31 @@
         >
 </div>
 
+<!-- mother Name Field -->
+<div class="form-group col-sm-4">
+    <label>Autre personne reponsable (Nom)</label>
+    <input type="text" 
+        name="responsable_nom"
+        id="responsable_nom" 
+        class="form-control "
+        placeholder="Nom de la mere"
+        value="{{$admission->responsable_nom}}"
+        required
+        >
+</div>
+<!-- mother phone Field -->
+<div class="form-group col-sm-4">
+    <label>Autre personne reponsable (Téléphone)</label>
+    <input type="text" 
+        name="responsable_phone"
+        id="responsable_phone" 
+        class="form-control "
+        placeholder="Téléphone de la mere"
+        value="{{$admission->responsable_phone}}"
+        >
+</div>
+
+
 <!-- Gender Field -->
 <div class="col-sm-12">
     <div class="form-group ">

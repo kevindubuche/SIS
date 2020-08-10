@@ -43,6 +43,40 @@
 
 <input type="file" name="filename" id="filename" required>
 
+{{-- <button type="button" class="btn btn-primary" >Ajouter une vidéo</button> --}}
+
+
+<div class="box">
+  <div class="box-header with-border">
+    <h3 class="box-title">Ajouter une vidéo</h3>
+
+    <div class="box-tools pull-right">
+      <button type="button" class="btn btn-box-tool" data-widget="collapse"  title="" data-original-title="Collapse">
+        <i class="fa fa-minus"></i></button>
+      {{-- <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="" data-original-title="Remove"> --}}
+        {{-- <i class="fa fa-times"></i></button> --}}
+    </div>
+  </div>
+  <div class="box-body" style="">
+    <p><input type="text" name="title_video" placeholder="Entrer le titre de la video" /></p>
+    <p><textarea name="description_video" cols="30" rows="5" placeholder="Description de la video"></textarea></p>
+   
+  </div>
+  <!-- /.box-body -->
+  <div class="box-footer" style="">
+    <p><input type="file" name="video" /></p>
+  </div>
+  <!-- /.box-footer-->
+</div>
+
+
+
+
+
+
+
+
+
 
 </div>
 <div class="modal-footer">

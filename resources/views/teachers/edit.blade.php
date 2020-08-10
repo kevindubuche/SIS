@@ -27,7 +27,7 @@
 <input type="text" 
     name="first_name"
     id="first_name" 
-    class="form-control text-capitalize"
+    class="form-control "
     placeholder="Prenom"
     value="{{$teacher->first_name}}"
     >
@@ -35,11 +35,11 @@
 
 <!-- Last Name Field -->
 <div class="form-group col-sm-12">
-    <label >Prenom</label>
+    <label >Prénom</label>
 <input type="text" 
     name="last_name"
     id="last_name" 
-    class="form-control text-capitalize"
+    class="form-control "
     placeholder="Nom"
     value="{{$teacher->last_name}}"
     >
@@ -54,14 +54,21 @@
             <tr style="border-bottom: 1px solid #ccc">
                 <td>
                     <label>
-                        <input type="radio" name="gender" id="gender" value="0" checked>
+                        <input type="radio" name="gender" id="gender" value="0" 
+                        @if($teacher->gender ==0)
+                        checked
+                        @endif
+                        >
                         Masculin
                     </label>
                 </td>
                 <td>
                     <label>
-                        <input type="radio" name="gender" id="gender" value="1">
-                        Feminin
+                        <input type="radio" name="gender" id="gender" value="1"
+                        @if($teacher->gender ==1)
+                        checked
+                        @endif>
+                        Féminin
                     </label>
                 </td>
             </tr>
@@ -79,31 +86,51 @@
             <tr style="border-bottom: 1px solod #ccc">
                 <td>
                     <label>
-                        <input type="radio" name="status" id="status" value="0" required checked>
-                        Celibataire
+                        <input type="radio" name="statusmatrimonial" id="statusmatrimonial" value="0" required 
+                        @if($teacher->statusmatrimonial ==0)
+                        checked
+                        @endif
+                        >
+                        Célibataire
                     </label>
                 </td>
                 <td>
                     <label>
-                        <input type="radio" name="status" id="status" value="1" required>
-                        Fiance(e)
+                        <input type="radio" name="statusmatrimonial" id="statusmatrimonial" value="1"
+                        @if($teacher->statusmatrimonial ==1)
+                        checked
+                        @endif
+                         required>
+                        Fiancé(e)
                     </label>
                 </td>
                 <td>
                     <label>
-                        <input type="radio" name="status" id="status" value="2" required>
-                        Marie(e)
+                        <input type="radio" name="statusmatrimonial" id="statusmatrimonial" value="2" 
+                        @if($teacher->statusmatrimonial ==2)
+                        checked
+                        @endif
+                        required>
+                        Marié(e)
                     </label>
                 </td>
                 <td>
                     <label>
-                        <input type="radio" name="status" id="status" value="3" required>
-                       Divorce(e)
+                        <input type="radio" name="statusmatrimonial" id="statusmatrimonial" value="3" 
+                        @if($teacher->statusmatrimonial ==3)
+                        checked
+                        @endif
+                        required>
+                       Divorcé(e)
                     </label>
                 </td>
                 <td>
                     <label>
-                        <input type="radio" name="status" id="status" value="4" required>
+                        <input type="radio" name="statusmatrimonial" id="statusmatrimonial" value="4" 
+                        @if($teacher->statusmatrimonial ==4)
+                        checked
+                        @endif
+                        required>
                         Veuf(ve)
                     </label>
                 </td>
@@ -127,7 +154,7 @@
         <input type="text"
              name="dob"
              id="dob"
-              class="form-control text-capitalize"
+              class="form-control "
               placeholder="YY-MM-DD"
               value="{{$teacher->dob}}"
               >
@@ -144,6 +171,7 @@
 
 <!-- Course Id Field -->
 <div class="form-group col-sm-12">
+    <label>Option</label>
     <select class="form-control" name="options" id="options"  required>
         <option  disabled="true" selected="false" value="">Option</option>
         <option value="Jardinière" @if ($teacher->options =='Jardinière') selected="true" @endif>Jardinière</option>
@@ -157,11 +185,11 @@
 
 <!-- Phone Field -->
 <div class="form-group col-sm-12">
-    <label>Telephone</label>
+    <label>Téléphone</label>
 <input type="text" 
     name="phone"
     id="phone" 
-    class="form-control text-capitalize"
+    class="form-control "
     placeholder="Enter phone here"
     value="{{$teacher->phone}}"
     >
@@ -174,7 +202,7 @@
 <input type="text" 
     name="email"
     id="email" 
-    class="form-control text-capitalize"
+    class="form-control "
     placeholder="Enter email here"
     value="{{$teacher->email}}"
     required
@@ -191,11 +219,12 @@
         <tbody>
             <tr>
                 <td class="image" >
-                    {!!Html::image('teacher_images/'.$teacher->image,
+                    {!!Html::image('user_images/'.$teacher->image,
                     null,
                     ['class'=>'student.image', 'id'=>'showImage' , 'style'=>'width:200px; height:200px;'])!!}                       
                     <input type="file" name="image" id="image"
                     accept="image/x-png, image/png,image/jpg,image/jpeg"
+                    value="{{$teacher->image}}"
                     >
                 </td>
             </tr>
@@ -222,7 +251,7 @@
         name="adress"
         id="adress"
         cols="40" rows="2"
-        class="form-control text-capitalize"
+        class="form-control "
        >
        {{$teacher->adress}}
         </textarea>

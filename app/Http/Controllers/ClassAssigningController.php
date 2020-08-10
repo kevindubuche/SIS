@@ -221,14 +221,10 @@ class ClassAssigningController extends AppBaseController
     }
     
     public function PDFGenerator(Request $request){
-        $classAssignings = ClassAssigning::join('class_schedulings','class_schedulings.schedule_id',
-        '=','class_assignings.schedule_id')
-        ->join('teachers', 'teachers.teacher_id','=','class_assignings.teacher_id')
-        ->join('courses', 'courses.course_id','=','class_schedulings.course_id')
-        ->join('classes', 'classes.class_id','=','class_schedulings.class_id')
-        ->join('semesters', 'semesters.semester_id','=','class_schedulings.semester_id')
+        $classAssignings = ClassAssigning::join('teachers', 'teachers.user_id','=','class_assignings.teacher_id')
+        ->join('classes', 'classes.class_id','=','class_assignings.class_id')
         ->get();
-
+// dd($classAssignings);
         $dompdf = PDF::loadview('class_assignings.pdf', ['classAssignings' => $classAssignings]);
         $dompdf->setPaper('A4','landscape');
         $dompdf->stream();

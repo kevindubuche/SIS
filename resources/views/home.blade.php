@@ -60,10 +60,10 @@
             <!-- Application buttons -->
             <div class="box">
               <div class="box-header">
-                <h3 class="box-title">Institution Frere Andre : Access rapide</h3>
+                <h3 class="box-title">Institution Frere André : Access rapide</h3>
               </div>
               <div class="box-body">
-                    <p><code>Institution Frere Andre _ Foyer Eveil</code> I.F.A</p>
+                    <p><code>Institution Frere André _ Foyer Eveil</code> I.F.A</p>
                  
                          {{-- EVERYBODY CAN ACCESS --}}
                   <a class="btn btn-app col-md-2" href="{{ url('/home') }}">
@@ -104,17 +104,14 @@
                             <i class="fa fa-bar-chart-o"></i> Niveaux
                             </a> --}}
                             <a class="btn btn-app col-md-2" href="{{ route('annees.index') }}">
-                              <i class="fa fa-calendar-times-o"></i> Annees
+                              <i class="fa fa-calendar-times-o"></i> Années
                               </a>
                             <a class="btn btn-app col-md-2" href="{{ route('semesters.index') }}">
-                            <i class="fa fa-calendar-times-o"></i> Semestres
+                            <i class="fa fa-calendar-times-o"></i> Etapes
                             </a>
-                            <a class="btn btn-app col-md-2" href="{{ route('faculties.index') }}">
-                              <i class="fa  fa-university"></i> Facultes
-                              </a>
                               <a class="btn btn-app col-md-2" href="{{ route('departements.index') }}">
                               <span class="badge bg-yellow">{{$totalDepartements}}</span>
-                              <i class="fa fa-code-fork"></i> Departements
+                              <i class="fa fa-code-fork"></i> Départements
                               </a>
                               {{-- <a class="btn btn-app col-md-2" href="{{ route('academics.index') }}">
                               <span class="badge bg-green">300</span>
@@ -162,7 +159,7 @@
                 <!-- Box Comment -->
                 <div class="box box-widget">
                   <div class="box-header with-border">
-                    <a class="box-title"  href="{{ route('actuses.index') }}">Actualites</a>
+                    <a class="box-title"  href="{{ route('actuses.index') }}">Actualités</a>
                     <hr>
                     <?php $countActu = 0; ?>
                     @foreach ($allActus as $actu)

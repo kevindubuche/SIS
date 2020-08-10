@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@if (Auth::user()->role !=3)
 @section('content')
     <section class="content-header">
         <h1 class="pull-left">Visibilité des publications</h1>
@@ -22,5 +22,6 @@
         
         </div>
     </div>
-@endsection
 
+@endsection
+@endif

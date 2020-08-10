@@ -15,21 +15,25 @@
             value="{{date('Y-m-d')}}">
 <!-- First Name Field -->
 <div class="form-group col-sm-12">
+    <label>Prénom</label>
     <input type="text" 
         name="first_name"
         id="first_name" 
         class="form-control text-capitalize"
         placeholder="Prenom"
+        required
         >
 </div>
 
 <!-- Last Name Field -->
 <div class="form-group col-sm-12">
+    <label>Nom</label>
     <input type="text" 
         name="last_name"
         id="last_name" 
         class="form-control text-capitalize"
         placeholder="Nom"
+        required
         >
 </div>
 
@@ -42,7 +46,7 @@
                 <tr style="border-bottom: 1px solid #ccc">
                     <td>
                         <label>
-                            <input type="radio" name="gender" id="gender" value="0">
+                            <input type="radio" name="gender" id="gender" value="0" checked>
                             Masculin
                         </label>
                     </td>
@@ -62,30 +66,36 @@
 <div class="col-sm-12">
     <div class="form-group ">
         <fieldset>
-            <legend for="gender">Status matrimonial</legend>
+            <legend for="statusmatrimonial">Status matrimonial</legend>
             <table style="width: 100%; margin-top:14px;">
                 <tr style="border-bottom: 1px solod #ccc">
                     <td>
                         <label>
-                            <input type="radio" name="status" id="status" value="0" required checked>
+                            <input type="radio" name="statusmatrimonial" id="statusmatrimonial" value="0" required checked>
                             Célibataire
                         </label>
                     </td>
                     <td>
                         <label>
-                            <input type="radio" name="status" id="status" value="1" required>
+                            <input type="radio" name="statusmatrimonial" id="statusmatrimonial" value="1" required checked>
+                            Fiancé(e)
+                        </label>
+                    </td>
+                    <td>
+                        <label>
+                            <input type="radio" name="statusmatrimonial" id="statusmatrimonial" value="2" required>
                             Marié(e)
                         </label>
                     </td>
                     <td>
                         <label>
-                            <input type="radio" name="status" id="status" value="1" required>
+                            <input type="radio" name="statusmatrimonial" id="statusmatrimonial" value="3" required>
                             Divoré(e)
                         </label>
                     </td>
                     <td>
                         <label>
-                            <input type="radio" name="status" id="status" value="1" required>
+                            <input type="radio" name="statusmatrimonial" id="statusmatrimonial" value="4" required>
                             Veuf(ve)
                         </label>
                     </td>
@@ -109,6 +119,7 @@
                   class="form-control text-capitalize"
                   placeholder="Date de naissance"
                   autocomplete="off"
+                  required
                   >
         </div>
     </div>
@@ -117,17 +128,20 @@
 
 <!-- Phone Field -->
 <div class="form-group col-sm-12">
+    <label> Téléphone</label>
     <input type="text" 
         name="phone"
         id="phone" 
         class="form-control text-capitalize"
-        placeholder="Telephone"
+        placeholder="Téléphone"
+        required
         >
 </div>
 
 
 <!-- Email Field -->
 <div class="form-group col-sm-12">
+    <label>Email</label>
     <input type="text" 
         name="email"
         id="email" 
@@ -136,14 +150,19 @@
         required
         >
 </div>
- {{-- <!-- Email Field -->
- <div class="form-group col-sm-12">
-    {!! Form::label('religion', 'Religion:') !!}
-    {!! Form::email('religion', null, ['class' => 'form-control', 'required']) !!}
-</div> --}}
+
+<div class="form-group col-sm-12">
+    <label>NIF</label>
+    <input type="text" autocomplete="off" class="form-control" name="nif" id="nif"  >
+</div>
+
+<div class="form-group col-sm-12">
+    <label>Niveau académique</label>
+    <input type="text" autocomplete="off" class="form-control" name="niveau" id="niveau"  >
+</div>
+
 <div class="form-group col-sm-12">
     <label>Religion</label>
-    {{-- {!! Form::label('start_time', 'Start time:') !!} --}}
     <input type="text" autocomplete="off" class="form-control" name="religion" id="religion" required >
 </div>
 
@@ -166,12 +185,13 @@
             </thead>
             <tbody>
                 <tr>
-                    <td class="image" >
-                        {!!Html::image('student_images/profile.png',
+                    <td class="image"  >
+                        {!!Html::image('user_images/defaultAvatar.png',
                         null,
-                        ['class'=>'student.image', 'id'=>'showImage' , 'style'=>'width:200px; height:200px;'])!!}                       
+                        ['class'=>'student.image', 'id'=>'showImage' , 'style'=>'width:200px; height:200px;'])!!} 
+
                         <input type="file" name="image" id="image"
-                        accept="image/x-png, image/png,image/jpg,image/jpeg"
+                        accept="image/x-png, image/png,image/jpg,image/jpeg" 
                         >
                     </td>
                 </tr>
@@ -181,7 +201,7 @@
                          name="browse_file"
                           id="browse_file"
                           class="form-control texte-capitalize btn-browse"
-                          class="btn btn-outline-danger" value="Choose">
+                          class="btn btn-outline-danger" value="Choisir image">
                     </td>
                 </tr>
             </tbody>
@@ -194,7 +214,7 @@
 <div class="form-group col-sm-12">
    <b><i class="fa fa-map-marker"></i>Adresse</b>
         
-            <textarea placeholder="Entrer l'adresse"
+            <textarea placeholder="Entrer votre adresse ici"
             name="adress"
             id="adress"
             cols="40" rows="2"
@@ -204,29 +224,6 @@
     
 </div>
    
-
-
-{{-- <!-- Dateregistered Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('dateRegistered', 'Dateregistered:') !!}
-    {!! Form::text('dateRegistered', null, ['class' => 'form-control','id'=>'dateRegistered']) !!}
-</div>
-
-@push('scripts')
-    <script type="text/javascript">
-        $('#dateRegistered').datetimepicker({
-            format: 'YYYY-MM-DD HH:mm:ss',
-            useCurrent: true,
-            sideBySide: true
-        })
-    </script>
-@endpush --}}
-
-{{-- <!-- User Id Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('user_id', 'User Id:') !!}
-    {!! Form::number('user_id', null, ['class' => 'form-control']) !!}
-</div> --}}
 
 
 </div>
@@ -248,6 +245,7 @@
 
 
     $('#browse_file').on('click', function(){
+        //leum klike sou youn mdeklanche sak kache a
         $('#image').click();
     })
     $('#image').on('change', function(e){

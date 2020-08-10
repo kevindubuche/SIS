@@ -59,13 +59,13 @@
             select:true,
             "language": {
             "lengthMenu": "Voir _MENU_ lignes par page",
-            "zeroRecords": "Aucune information - desole",
+            "zeroRecords": "Aucune information",
             "info": "_PAGE_ sur _PAGES_",
-            "infoEmpty": "Aucun resultat trouve",
+            "infoEmpty": "Aucun résultat trouvé",
             "infoFiltered": "(filtre de _MAX_ total resultats)",
             "search": "Rechercher",
             "paginate":{
-            "previous":"Precedent",
+            "previous":"Précedent",
             "next":"Suivant"
             }
 

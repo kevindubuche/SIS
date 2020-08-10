@@ -24,28 +24,33 @@
             value="{{Auth::id()}}" required>
 <!-- First Name Field -->
 <div class="form-group col-sm-4">
+    <label>Prénom</label>
     <input type="text" 
         name="first_name"
         id="first_name" 
         class="form-control text-capitalize"
         placeholder="Prenom"
+        required
         >
 </div>
 
 
 <!-- Last fater name Field -->
 <div class="form-group col-sm-4">
+    <label>Nom</label>
     <input type="text" 
         name="last_name"
         id="last_name" 
         class="form-control text-capitalize"
         placeholder="Nom"
+        required
         >
 </div>
 
 <!-- Class Id Field -->
 <div class="form-group col-sm-4">
-    <select class="form-control" name="class_id" id="class_id">
+    <label>Classe</label>
+    <select class="form-control" name="class_id" id="class_id" required>
         <option value="0" selected="true" disabled="true">Choisir classe</option>
         @foreach($allClasses as $class)
         <option value="{{$class->class_id}}">{{$class->class_name}}</option>
@@ -55,53 +60,84 @@
 
 <!-- email phone Field -->
 <div class="form-group col-sm-4">
+    <label>Email</label>
     <input type="email" 
         name="email"
         id="email" 
-        class="form-control text-capitalize"
+        class="form-control "
         placeholder="Email"
+        required
         >
 </div>
 
 
 <!-- fathter Name Field -->
 <div class="form-group col-sm-4">
+    <label>Nom du père</label>
     <input type="text" 
         name="father_name"
         id="father_name" 
-        class="form-control text-capitalize"
+        class="form-control "
         placeholder="Nom du pere"
+        required
         >
 </div>
 
 <!-- father phone Field -->
 <div class="form-group col-sm-4">
+    <label>Téléphone du père</label>
     <input type="text" 
         name="father_phone"
         id="father_phone" 
         class="form-control text-capitalize"
-        placeholder="Telephone du pere"
+        placeholder="Téléphone du pere"
         >
 </div>
 
 <!-- mother Name Field -->
 <div class="form-group col-sm-4">
+    <label>Nom de la mère</label>
     <input type="text" 
         name="mother_name"
         id="mother_name" 
         class="form-control text-capitalize"
         placeholder="Nom de la mere"
+        required
         >
 </div>
 <!-- mother phone Field -->
 <div class="form-group col-sm-4">
+    <label>Téléphone de la mère</label>
     <input type="text" 
         name="mother_phone"
         id="mother_phone" 
         class="form-control text-capitalize"
-        placeholder="Telephone de la mere"
+        placeholder="Téléphone de la mere"
         >
 </div>
+
+<!-- mother Name Field -->
+<div class="form-group col-sm-4">
+    <label>Autre personne reponsable (Nom)</label>
+    <input type="text" 
+        name="responsable_nom"
+        id="responsable_nom" 
+        class="form-control "
+        placeholder="Nom de la mere"
+        
+        >
+</div>
+<!-- mother phone Field -->
+<div class="form-group col-sm-4">
+    <label>Autre personne reponsable (Téléphone)</label>
+    <input type="text" 
+        name="responsable_phone"
+        id="responsable_phone" 
+        class="form-control "
+        placeholder="Téléphone de la mere"
+        >
+</div>
+
 
 <!-- Gender Field -->
 <div class="col-sm-4">
@@ -112,7 +148,7 @@
                 <tr style="border-bottom: 1px solid #ccc">
                     <td>
                         <label>
-                            <input type="radio" name="gender" id="gender" value="0">
+                            <input type="radio" name="gender" id="gender" value="0" checked>
                             Masculin
                         </label>
                     </td>
@@ -132,6 +168,7 @@
 <div class="col-md-4">
     <div class="form-group">
         <div class="input-group">
+            <label> Date de naissance</label>
             <div class="form-group-addon">
                 <i class="fa fa-calendar teacherdob"></i>
             </div>
@@ -141,6 +178,7 @@
                   class="form-control text-capitalize"
                   placeholder="Date de naissance"
                   autocomplete="off"
+                  required
                   >
         </div>
     </div>
@@ -150,11 +188,12 @@
  
 <!-- Phone Field -->
 <div class="form-group col-sm-4">
+    <label> Téléphone de l'élève</label>
     <input type="text" 
         name="phone"
         id="phone" 
-        class="form-control text-capitalize"
-        placeholder="Telephone"
+        class="form-control "
+        placeholder="Téléphone"
         >
 </div>
 
@@ -166,9 +205,10 @@
 
 <!-- departement_id Field -->
 <div class="form-group col-sm-4">
+    <label> Département</label>
     <select class="form-control" name="departement_id" id="departement_id">
         <option value="0" selected="true"
-            disabled="true">Departement</option>
+            disabled="true">Département</option>
             @foreach ($departements as $dep)
                  <option value="{{$dep->departement_id}}">{{$dep->departement_name}}</option>
             @endforeach
@@ -189,7 +229,7 @@
             <tbody>
                 <tr>
                     <td class="image" >
-                        {!!Html::image('student_images/profile.png',
+                        {!!Html::image('user_images/defaultAvatar.png',
                         null,
                         ['class'=>'student.image', 'id'=>'showImage' , 'style'=>'width:200px; height:200px;'])!!}                       
                         <input type="file" name="image" id="image"
@@ -203,7 +243,7 @@
                          name="browse_file"
                           id="browse_file"
                           class="form-control texte-capitalize btn-browse"
-                          class="btn btn-outline-danger" value="Choose">
+                          class="btn btn-outline-danger" value="Choisir image">
                     </td>
                 </tr>
             </tbody>
@@ -216,7 +256,7 @@
 <div class="form-group col-sm-4">
    <b><i class="fa fa-map-marker"></i>Adresse</b>
         
-            <textarea placeholder="Enter address here"
+            <textarea placeholder="Entrer votre adresse ici"
             name="adress"
             id="adress"
             cols="40" rows="2"
@@ -227,33 +267,10 @@
 </div>
    
 
-{{-- <!-- Dateregistered Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('dateRegistered', 'Dateregistered:') !!}
-    {!! Form::text('dateRegistered', null, ['class' => 'form-control','id'=>'dateRegistered']) !!}
-</div>
-
-@push('scripts')
-    <script type="text/javascript">
-        $('#dateRegistered').datetimepicker({
-            format: 'YYYY-MM-DD HH:mm:ss',
-            useCurrent: true,
-            sideBySide: true
-        })
-    </script>
-@endpush --}}
-
-{{-- <!-- User Id Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('user_id', 'User Id:') !!}
-    {!! Form::number('user_id', null, ['class' => 'form-control']) !!}
-</div> --}}
-
-
 
 <div class="modal-footer ">
   <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-  {!! Form::submit('Enregistrer etudiant', ['class' => 'btn btn-primary']) !!}
+  {!! Form::submit('Enregistrer étudiant', ['class' => 'btn btn-primary']) !!}
 </div>
 </div>
 </div>

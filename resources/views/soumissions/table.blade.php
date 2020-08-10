@@ -2,12 +2,11 @@
     <table id='myTable' class=' display   table table-bordered table-striped table-condensed'>
         <thead>
             <tr>
-                <th>Exam</th>
+                <th>Examen</th>
         <th>Commentaire</th>
-        <th>Date de creation</th>
-        <th>Filename</th>
-        <th>Created By</th>
-        <th>Date de creation</th>
+        <th>Date de création</th>
+        <th>Document</th>
+        <th>Ajouté par</th>
         @if(Auth::user()->role== 3)
                 <th >Action</th>
         @endif
@@ -19,7 +18,7 @@
         @if(Auth::user()->role == 3)
             @if($soumission->created_by == Auth::user()->id)
                 <tr>
-                    <td>{{ $soumission->exam_id }}</td>
+                    <td>{{ $soumission->InfoExam->title }}</td>
                 <td>{{ $soumission->description }}</td> 
                 <td>{{ $soumission->created_at->format('D. m Y') }}</td>
                 <td>
@@ -28,7 +27,6 @@
                     </a>
                 </td>
                 <td>{{ $soumission->created_by }}</td>
-                <td>{{ $soumission->created_at }}</td>
                     <td>
                         {!! Form::open(['route' => ['soumissions.destroy', $soumission->soumission_id], 'method' => 'delete']) !!}
                         <div class='btn-group'>
@@ -45,7 +43,7 @@
             @elseif(Auth::user()->role == 2)
                 @if($soumission->GetExam->created_by == Auth::user()->id)
                 <tr>
-                    <td>{{ $soumission->exam_id }}</td>
+                    <td>{{ $soumission->InfoExamexam_id }}</td>
                 <td>{{ $soumission->description }}</td> 
                 <td>{{ $soumission->created_at->format('D. m Y') }}</td>
                 <td>
@@ -54,7 +52,6 @@
                     </a>
                 </td>
                 <td>{{ $soumission->created_by }}</td>
-                <td>{{ $soumission->created_at }}</td>
                 
                 </tr>
                 @endif  
@@ -62,7 +59,7 @@
                 {{-- si se admin --}}
                 @elseif(Auth::user()->role == 1)
                 <tr>
-                    <td>{{ $soumission->exam_id }}</td>
+                    <td>{{ $soumission->InfoExam->title }}</td>
                 <td>{{ $soumission->description }}</td> 
                 <td>{{ $soumission->created_at->format('D. m Y') }}</td>
                 <td>
@@ -71,7 +68,6 @@
                     </a>
                 </td>
                 <td>{{ $soumission->created_by }}</td>
-                <td>{{ $soumission->created_at }}</td>
                 
                 </tr>
 
@@ -92,13 +88,13 @@
             select:true,
             "language": {
             "lengthMenu": "Voir _MENU_ lignes par page",
-            "zeroRecords": "Aucune information - desole",
+            "zeroRecords": "Aucune information",
             "info": "_PAGE_ sur _PAGES_",
-            "infoEmpty": "Aucun resultat trouve",
+            "infoEmpty": "Aucun résultat trouvé",
             "infoFiltered": "(filtre de _MAX_ total resultats)",
             "search": "Rechercher",
             "paginate":{
-            "previous":"Precedent",
+            "previous":"Précédent",
             "next":"Suivant"
             }
 

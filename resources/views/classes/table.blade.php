@@ -63,12 +63,12 @@
                   </div>
 
                   <div class="form-group">
-                    {!! Form::label('created_at', 'Creer le:') !!}
+                    {!! Form::label('created_at', 'Créée le:') !!}
                    <input type="text" name="created_at" id="created_at" readonly>
                   </div>
 
                   <div class="form-group">
-                    {!! Form::label('updated_at', 'Modifier le:') !!}
+                    {!! Form::label('updated_at', 'Modifiée le:') !!}
                    <input type="text" name="updated_at" id="updated_at" readonly>
                   </div>
                   

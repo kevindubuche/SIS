@@ -41,7 +41,8 @@ class ClassAssigning extends Model
         // 'day_id',
         // 'time_id'
         'teacher_id',
-        'class_id'
+        'class_id',
+        'semester_id'
     ];
 
     /**
@@ -61,6 +62,7 @@ class ClassAssigning extends Model
         'class_assign_id' => 'integer',
         'teacher_id' => 'integer',
         'class_id' => 'integer',
+        'semester_id' => 'integer',
     ];
 
     /**
@@ -77,6 +79,7 @@ class ClassAssigning extends Model
         // 'day_id' => 'required',
         // 'time_id' => 'required'
         'teacher_id' => 'required',
+        'semester_id'=>'required',
         'class_id' => 'required',
     ];
 
@@ -94,8 +97,7 @@ class ClassAssigning extends Model
     public  function InfoClass(){
         return $this->belongsTo('App\Models\Classes','class_id');
      }
-
+     
  
-    
     
 }

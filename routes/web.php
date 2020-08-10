@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//fom ta metel anndan kot lot yo poul ka subi influence middleware la
+Route::resource('video', 'VideoController');
+
 Route::get('/', function () {
     return view('welcome');
 });

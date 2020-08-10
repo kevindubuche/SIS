@@ -2,10 +2,10 @@
 
 @section('content')
     <section class="content-header">
-        <h1 class="pull-left">Annees academiques</h1>
+        <h1 class="pull-left">Années académiques</h1>
         <h1 class="pull-right">
             @if(Auth::user()->role==1)
-           <a class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{{ route('annees.create') }}">Ajouter une annee</a>
+           <a class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{{ route('annees.create') }}">Ajouter une année</a>
         @endif
     </h1>
     </section>

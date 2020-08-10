@@ -23,21 +23,20 @@
         <thead>
             <tr>
                 <th>Professeur</th>
-                <th>Semestre</th>
-                <th>Cours</th>
-                <th>Datails du cours</th>
+                <th>Classe</th>
             </tr>
         </thead>
         <tbody>
             @foreach($classAssignings as $classAssigning)
             <tr class="border">
-                <td class="col-md-3 pull">{{ $classAssigning->InfoTeacher->first_name }} {{ $classAssigning->InfoTeacher->last_name }}</td>
-                <td class="col-md-3 pull">{{ $classAssigning->InfoClassSchedule->InfoSemester['semester_name'] }}</td>
+                <td class="col-md-3 pull">{{ $classAssigning->first_name }} {{ $classAssigning->last_name }}</td>
+                <td class="col-md-3 pull">{{ $classAssigning->class_name }} </td>
+                {{-- <td class="col-md-3 pull">{{ $classAssigning->InfoClassSchedule->InfoSemester['semester_name'] }}</td>
                 <td class="col-md-6 pull">{{ $classAssigning->InfoClassSchedule->InfoCourse['course_name']}}  </td>
                 <td class="col-md-6 pull">
                <span style="font-weight:bold;">Classe:</span> {{ $classAssigning->InfoClassSchedule->InfoClass['class_name'] }} |  
                <span style="font-weight:bold;">Cours:</span>  {{ $classAssigning->course_name }}
-                </td>
+                </td> --}}
             </tr>
         @endforeach
         </tbody>

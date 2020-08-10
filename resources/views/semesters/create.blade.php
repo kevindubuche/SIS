@@ -3,7 +3,7 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Semestre
+            Etape
         </h1>
     </section>
     <div class="content">

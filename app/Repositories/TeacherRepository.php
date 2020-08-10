@@ -28,7 +28,10 @@ class TeacherRepository extends BaseRepository
         'user_id',
         'religion',
         'options',
-        'image'
+        'nif',
+        'niveau',
+        'image',
+        'statusmatrimonial'
     ];
 protected $primaryKey = "teacher_id";
     /**

@@ -95,18 +95,34 @@ style="background-color: rgb(219, 219, 223);">
                                     @endif
                                     <p style="color:black;">
                                         {{ Auth::user()->first_name}} {{ Auth::user()->last_name}}
-                                        <small style="color:black;">Membre depuis {{ Auth::user()->created_at->format('M. Y') }}</small>
+                                        <small style="color:black;">
+                                            {{-- Membre depuis {{ Auth::user()->created_at->format('M. Y') }} --}}
+                                            @switch(Auth::user()->role)
+                                            @case(1)
+                                                <h5>Administrateur</h5>
+                                                @break
+                                            @case(2)
+                                                 <h5>Professeurs</h5>
+                                                @break
+                                                @case(3)
+                                                <h5>Élève</h5>
+                                               @break
+                                               <h5>Élève</h5>
+                                            @default
+                                                
+                                        @endswitch
+                                        </small>
                                     </p>
                                 </li>
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
                                     <div class="pull-left">
-                                        <a href="{{ url('/profile/'.Auth::user()->id)}}" class="btn btn-default btn-flat">Profile</a>
+                                        <a href="{{ url('/profile/'.Auth::user()->id)}}" class="btn btn-default btn-flat">Profil</a>
                                     </div>
                                     <div class="pull-right">
                                         <a href="{{ url('/logout') }}" class="btn btn-default btn-flat"
                                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                            Se deconnecter
+                                            Se déconnecter
                                         </a>
                                         <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                                             @csrf

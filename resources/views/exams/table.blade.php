@@ -6,8 +6,8 @@
         <th>Classe</th>
         <th>Titre</th>
         <th>Description</th>
-        <th>Date de creation</th>
-        <th>Ajoute par</th>
+        <th>Date de création</th>
+        <th>Ajouté par</th>
         <th>Document</th>
         @if(Auth::user()->role < 3)
                 <th >Action</th>
@@ -75,13 +75,13 @@ $(document).ready(function()
             select:true,
             "language": {
             "lengthMenu": "Voir _MENU_ lignes par page",
-            "zeroRecords": "Aucune information - desole",
+            "zeroRecords": "Aucune information",
             "info": "_PAGE_ sur _PAGES_",
-            "infoEmpty": "Aucun resultat trouve",
+            "infoEmpty": "Aucun résultat trouvé",
             "infoFiltered": "(filtre de _MAX_ total resultats)",
             "search": "Rechercher",
             "paginate":{
-            "previous":"Precedent",
+            "previous":"Précédent",
             "next":"Suivant"
             }
 
