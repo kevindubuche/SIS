@@ -100,20 +100,19 @@ class Admission extends Model
      * @var array
      */
     public static $rules = [
-        'roll_no' => 'required',
+        // 'roll_no' => 'required',
         'first_name' => 'required',
         'last_name' => 'required',
         'father_name' => 'required',
-        'father_phone' => 'required',
+        // 'father_phone' => 'required',
         'mother_name' => 'required',
-        'mother_phone' => 'required',
+        // 'mother_phone' => 'required',
         'gender' => 'required',
         'email' => 'required',
         'dob' => 'required',
         'phone' => 'required',
         'adress' => 'required',
-        'status' => 'required',
-        'dateRegistered' => 'required',
+        // 'dateRegistered' => 'required',
         'user_id' => 'required',
         'class_id' => 'required'
     ];

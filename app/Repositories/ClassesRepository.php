@@ -17,8 +17,7 @@ class ClassesRepository extends BaseRepository
      * @var array
      */
     protected $fieldSearchable = [
-        'class_name',
-        'class_code'
+        'class_name'
     ];
     protected $primaryKey ="class_id";
     /**

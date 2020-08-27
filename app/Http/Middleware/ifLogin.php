@@ -22,6 +22,7 @@ class ifLogin
         {
             return back();
         }
+        
         return $next($request);
     }
 }

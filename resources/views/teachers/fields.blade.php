@@ -90,7 +90,7 @@
                     <td>
                         <label>
                             <input type="radio" name="statusmatrimonial" id="statusmatrimonial" value="3" required>
-                            Divoré(e)
+                            Divorcé(e)
                         </label>
                     </td>
                     <td>

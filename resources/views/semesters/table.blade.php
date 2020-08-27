@@ -4,7 +4,6 @@
             <tr>
                 <th>Nom de l'étape</th>
                 <th>Année académique</th>
-        <th>Code de l'étape</th>
         <th>Durée</th>
         <th>Description</th>
         <th colspan="3">Action</th>
@@ -15,7 +14,6 @@
             <tr>
             <td>{{ $semester->semester_name }}</td>
             <td>{{ $semester->semester_year }}</td>
-            <td>{{ $semester->semester_code }}</td>
             <td>{{ $semester->semester_duration }}</td>
             <td>{{ $semester->semester_description }}</td>
                 <td>

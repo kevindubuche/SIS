@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Flash;
 use Response;
 use App\Models\Annee;
+use App\Models\Semester;
 class SemesterController extends AppBaseController
 {
     /** @var  SemesterRepository */
@@ -53,13 +54,22 @@ class SemesterController extends AppBaseController
      *
      * @return Response
      */
-    public function store(CreateSemesterRequest $request)
+    public function store(Request $request)
     {
-        $input = $request->all();
+        // $input = $request->all();
 
-        $semester = $this->semesterRepository->create($input);
+         
 
-        Flash::success('Semestre enregistre avec succes.');
+          $semester = new Semester;
+        $semester->semester_name = $request->semester_name;
+        $semester->semester_duration = $request->semester_duration;
+        $semester->semester_year = $request->semester_year;
+        $semester->semester_description = $request->semester_description;
+        
+        $semester->save();
+        // $semester = $this->semesterRepository->create($input);
+
+        Flash::success('Etape enregistrée avec succès.');
 
         return redirect(route('semesters.index'));
     }
@@ -76,7 +86,7 @@ class SemesterController extends AppBaseController
         $semester = $this->semesterRepository->find($id);
 
         if (empty($semester)) {
-            Flash::error('Semestre non trouve');
+            Flash::error('Etape introuvable');
 
             return redirect(route('semesters.index'));
         }
@@ -97,7 +107,7 @@ class SemesterController extends AppBaseController
         $semester = $this->semesterRepository->find($id);
 
         if (empty($semester)) {
-            Flash::error('Semestre non trouve');
+            Flash::error('Etape introuvable');
 
             return redirect(route('semesters.index'));
         }
@@ -118,14 +128,20 @@ class SemesterController extends AppBaseController
         $semester = $this->semesterRepository->find($id);
 
         if (empty($semester)) {
-            Flash::error('Semestre non trouve');
+            Flash::error('Etape non trouvée');
 
             return redirect(route('semesters.index'));
         }
+        // $count = Semester::where('semester_code',$request->semester_code)->count();
+        // if($count !=0){
+        //     Flash::error('Le code de l\'etape existe deja');
+        //     return redirect(route('semesters.index'));
+        // }
+
 
         $semester = $this->semesterRepository->update($request->all(), $id);
 
-        Flash::success('Semestre modifie avec succes.');
+        Flash::success('Etape modifiée avec succès.');
 
         return redirect(route('semesters.index'));
     }
@@ -144,14 +160,14 @@ class SemesterController extends AppBaseController
         $semester = $this->semesterRepository->find($id);
 
         if (empty($semester)) {
-            Flash::error('Semester not found');
+            Flash::error('Etape introuvable');
 
             return redirect(route('semesters.index'));
         }
 
         $this->semesterRepository->delete($id);
 
-        Flash::success('Semester deleted successfully.');
+        Flash::success('Etape suprimmée avec succès');
 
         return redirect(route('semesters.index'));
     }

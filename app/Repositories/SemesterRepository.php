@@ -18,7 +18,6 @@ class SemesterRepository extends BaseRepository
      */
     protected $fieldSearchable = [
         'semester_name',
-        'semester_code',
         'semester_duration',
         'semester_description',
         'semester_year'

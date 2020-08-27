@@ -13,6 +13,7 @@ use Response;
 use App\Models\Course;
 use App\Models\Classes;
 use App\Models\Exam;
+use App\Models\Matiere;
 use File;
 use App\Models\ClassAssigning;
 
@@ -37,11 +38,11 @@ class ExamController extends AppBaseController
     {
         $exams = $this->examRepository->all();
 
-        $allCourses = Course::all();
+        $allMatieres = Matiere::all();
         $allClassAssignins = ClassAssigning::all();
 
 
-        return view('exams.index', compact('allCourses','allClassAssignins'))
+        return view('exams.index', compact('allMatieres','allClassAssignins'))
             ->with('exams', $exams);
     }
 
@@ -81,8 +82,7 @@ class ExamController extends AppBaseController
         $exam->description = $request->description;
         $exam->created_by = $request->created_by;
         $exam->filename = $fullPath;
-        $exam->course_id = $request->course_id;
-        $exam->class_id = $request->class_id;
+        $exam->matiere_id = $request->matiere_id;
 //  dd($input);
         $exam->save();
         // $exam = $this->examRepository->create($input);
@@ -123,8 +123,7 @@ class ExamController extends AppBaseController
     {
         $exam = $this->examRepository->find($id);
 
-        $allCourses = Course::all();
-        $allClasses = Classes::all();
+        $allMatieres = Matiere::all();
 
         if (empty($exam)) {
             Flash::error('Examen non trouvé');
@@ -132,7 +131,7 @@ class ExamController extends AppBaseController
             return redirect(route('exams.index'));
         }
 
-        return view('exams.edit',compact('allCourses','allClasses'))->with('exam', $exam);
+        return view('exams.edit',compact('allMatieres'))->with('exam', $exam);
     }
 
     /**

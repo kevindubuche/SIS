@@ -58,7 +58,7 @@ class AnneeController extends AppBaseController
 
         $annee = $this->anneeRepository->create($input);
 
-        Flash::success('Annee saved successfully.');
+        Flash::success('Année enregistrée avec succès.');
 
         return redirect(route('annees.index'));
     }
@@ -75,7 +75,7 @@ class AnneeController extends AppBaseController
         $annee = $this->anneeRepository->find($id);
 
         if (empty($annee)) {
-            Flash::error('Annee not found');
+            Flash::error('Année introuvable');
 
             return redirect(route('annees.index'));
         }
@@ -95,7 +95,7 @@ class AnneeController extends AppBaseController
         $annee = $this->anneeRepository->find($id);
 
         if (empty($annee)) {
-            Flash::error('Annee not found');
+            Flash::error('Année introuvable');
 
             return redirect(route('annees.index'));
         }
@@ -116,14 +116,14 @@ class AnneeController extends AppBaseController
         $annee = $this->anneeRepository->find($id);
 
         if (empty($annee)) {
-            Flash::error('Annee not found');
+            Flash::error('Année introuvable');
 
             return redirect(route('annees.index'));
         }
 
         $annee = $this->anneeRepository->update($request->all(), $id);
 
-        Flash::success('Annee updated successfully.');
+        Flash::success('Année modifiée avec succès.');
 
         return redirect(route('annees.index'));
     }
@@ -142,14 +142,14 @@ class AnneeController extends AppBaseController
         $annee = $this->anneeRepository->find($id);
 
         if (empty($annee)) {
-            Flash::error('Annee not found');
+            Flash::error('Année introuvable');
 
             return redirect(route('annees.index'));
         }
 
         $this->anneeRepository->delete($id);
 
-        Flash::success('Annee deleted successfully.');
+        Flash::success('Année supprimée succès.');
 
         return redirect(route('annees.index'));
     }

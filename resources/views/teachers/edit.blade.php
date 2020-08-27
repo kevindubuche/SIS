@@ -14,11 +14,13 @@
                
                    {!! Form::model($teacher, ['route' => ['teachers.update', $teacher->teacher_id], 'method' => 'patch',  'enctype'=>'multipart/form-data']) !!}
 
-                   <input type="hidden" name="user_id" id="user_id" value="{{Auth::id()}}" required>
+                   {{-- <input type="hidden" name="user_id" id="user_id" value="{{Auth::id()}}" required> --}}
                    <input type="hidden" name="dateRegistered" id="dateRegistered" 
                    value="{{date('Y-m-d')}}">
                  
-        <input type="hidden" name="user_id" id="user_id" value="{{Auth::id()}}" required>
+        <input type="hidden" name="user_id" id="user_id"
+         value="{{$teacher->user_id}}" 
+         required>
         <input type="hidden" name="dateRegistered" id="dateRegistered" 
         value="{{date('Y-m-d')}}">
 <!-- First Name Field -->

@@ -16,13 +16,6 @@
     {!! Form::text('class_name', null, ['class' => 'form-control', 'required']) !!}
 </div>
 
-<!-- Class Code Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('class_code', 'Code:') !!}
-    {!! Form::text('class_code', null, ['class' => 'form-control']) !!}
-</div>
-
-
 
 </div>
 <div class="modal-footer">

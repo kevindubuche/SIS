@@ -4,7 +4,7 @@
             <tr>
         <th></th>
         <th>Nom</th>
-        <th>Departément</th>
+        <th>Département</th>
         <th>Classe</th>
         <th>Sexe</th>
         <th>Email</th>

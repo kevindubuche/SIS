@@ -3,8 +3,9 @@
         <table id='myTable' class=' display   table table-bordered table-striped table-condensed'>
         <thead>
             <tr>
+                <th></th>
         <th>Nom du cours</th>
-        <th>Code du cours</th>
+        
         <th>Description</th>
         <th>Date de création</th>
         {{-- <th>Status</th> --}}
@@ -20,8 +21,13 @@
         <tbody>
         @foreach($courses as $course)
             <tr  id='rowC'  >
+                <td>
+
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                        <img   style="height:100%; width:100%;" src="{{asset('user_images/book.png')}}" > 
+                    </div>  
+                </td>
             <td>{{ $course->course_name }}</td>
-            <td>{{ $course->course_code }}</td>
             <td>{{ $course->description }}</td>
             <td>{{ $course->created_at->format('D. m Y') }}</td>
             <td>{{ $course->GetUser($course->created_by)->first_name }} {{ $course->GetUser($course->created_by)->last_name }}</td>
@@ -46,7 +52,7 @@
 
 
            
-            @if (Auth::user()->role == 2)
+            {{-- @if (Auth::user()->role == 2) --}}
         
             <td>
                 {!! Form::open(['route' => ['courses.destroy', $course->course_id], 'method' => 'delete']) !!}
@@ -57,7 +63,7 @@
                 </div>
                 {!! Form::close() !!} 
             </td>
-            @endif
+            {{-- @endif --}}
                
             </tr>
             <tr>

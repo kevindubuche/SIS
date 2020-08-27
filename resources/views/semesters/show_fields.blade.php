@@ -9,13 +9,6 @@
     <p>{{ $semester->semester_year }}</p>
 </div>
 
-
-<!-- Semester Code Field -->
-<div class="form-group">
-    {!! Form::label('semester_code', 'Code du semestre:') !!}
-    <p>{{ $semester->semester_code }}</p>
-</div>
-
 <!-- Semester Duration Field -->
 <div class="form-group">
     {!! Form::label('semester_duration', 'Duree:') !!}

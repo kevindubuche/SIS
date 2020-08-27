@@ -31,10 +31,10 @@ class Course extends Model
 
     public $fillable = [
         'course_name',
-        'course_code',
         'description',
-        'created_by'
-        // 'status'
+        'created_by',
+         'matiere_id',
+         'contenu'
     ];
 
     /**
@@ -45,10 +45,10 @@ class Course extends Model
     protected $casts = [
         'course_id' => 'integer',
         'course_name' => 'string',
-        'course_code' => 'string',
         'description' => 'string',
-        'created_by' => 'integer'
-        // 'status' => 'boolean'
+        'created_by' => 'integer',
+        'matiere_id' => 'integer',
+        'contenu' => 'string'
     ];
 
     /**
@@ -58,10 +58,9 @@ class Course extends Model
      */
     public static $rules = [
         'course_name' => 'required',
-        'course_code' => 'required',
-        'description' => 'required',
-        'created_by' => 'required'
-        // 'status' => 'required'
+        // 'description' => 'required',
+        'created_by' => 'required',
+         'matiere_id' => 'required'
     ];
 
     public  function GetUser($id){

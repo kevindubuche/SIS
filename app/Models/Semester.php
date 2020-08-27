@@ -31,7 +31,6 @@ class Semester extends Model
 
     public $fillable = [
         'semester_name',
-        'semester_code',
         'semester_duration',
         'semester_description',
         'semester_year'
@@ -45,7 +44,6 @@ class Semester extends Model
     protected $casts = [
         'semester_id' => 'integer',
         'semester_name' => 'string',
-        'semester_code' => 'string',
         'semester_duration' => 'string',
         'semester_description' => 'string',
         'semester_year' => 'string'
@@ -58,7 +56,6 @@ class Semester extends Model
      */
     public static $rules = [
         'semester_name' => 'required',
-        'semester_code' => 'required',
         'semester_duration' => 'required',
         'semester_description' => 'required',
         'semester_year' => 'required'

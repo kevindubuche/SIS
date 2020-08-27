@@ -33,16 +33,16 @@
 
 </head>
 <body 
-style="background-image: linear-gradient(#B3FFAB, #12fff7);"
+style="background-image: linear-gradient(#b89f12, #ffffff);"
 class="hold-transition login-page"
 >
 <div class="login-box">
     <div class="login-logo">
-        <a href="{{ url('/home') }}"><b>Connection</b> <br>I.F.A</a>
+        <a href="#"><b>I.F.A</b> <br>Connexion</a>
     </div>
 
     <!-- /.login-logo -->
-    <div class="login-box-body" style="  box-shadow: 5px 10px #f5eded;">
+    <div class="login-box-body" >
         <p class="login-box-msg">Connectez-vous pour commencer une session</p>
 
         <form method="post" action="{{ url('/login') }}">
@@ -78,13 +78,13 @@ class="hold-transition login-page"
                 </div>
                 <!-- /.col -->
                 <div class="col-xs-4">
-                    <button type="submit" class="btn btn-primary btn-block btn-flat"style="border-radius:25px;">Connection</button>
+                    <button type="submit" class="btn btn-primary btn-block btn-flat"style="border-radius:25px;">Connexion</button>
                 </div>
                 <!-- /.col -->
             </div>
         </form>
 
-        <a href="{{ url('/password/reset') }}">Mot de passe oublie</a><br>
+        <a href="{{ url('/password/reset') }}">Mot de passe oublié</a><br>
         {{-- <a href="{{ url('/register') }}" class="text-center">S'enregistrer comme membre</a> --}}
     </div>
     <!-- /.login-box-body -->

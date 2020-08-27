@@ -2,8 +2,7 @@
     <table id='myTable' class=' display   table table-bordered table-striped table-condensed'>
         <thead>
             <tr>
-        <th>Cours</th>
-        <th>Classe</th>
+        <th>Matiere</th>
         <th>Titre</th>
         <th>Description</th>
         <th>Date de création</th>
@@ -22,8 +21,7 @@
         ||
         (Auth::user()->role == 1))
             <tr>
-            <td>{{ $exam->InfoCourse->course_name }}</td>
-            <td>{{ $exam->InfoClass->class_name }}</td>
+            <td>{{ $exam->InfoMatiere->titre }}</td>
             <td>{{ $exam->title }}</td>
             <td>{{ $exam->description }}</td>
             <td>{{ $exam->created_at->format('D. m Y') }}</td>

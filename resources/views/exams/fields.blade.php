@@ -19,12 +19,13 @@
 </div> --}}
 
 <div class="form-group col-sm-6">
-    <select class="form-control" name="course_id" id="course_id" required>
-    <option value="0" selected="false" disabled="true">Cours </option>
-      @foreach($allCourses as $course)
+  <label>Matieres</label>
+    <select class="form-control" name="matiere_id" id="matiere_id" required>
+    <option value="0" selected="false" disabled="true">Matieres </option>
+      @foreach($allMatieres as $matiere)
      {{-- lap we only cours kel te creer yo sauf adm kap we tout cours yo --}}
-     @if ($course->created_by == Auth::user()->id || Auth::user()->role==1)
-     <option value="{{$course->course_id}}">{{$course->course_name}}</option>
+     @if ($matiere->teacher_id == Auth::user()->id || Auth::user()->role==1)
+     <option value="{{$matiere->matiere_id}}">{{$matiere->titre}}</option>
 @endif
 @endforeach
   </select>
@@ -39,7 +40,9 @@
       @endforeach
   </select>
 </div> --}}
-<div class="form-group col-sm-6">
+
+
+{{-- <div class="form-group col-sm-6">
   <select class="form-control" name="class_id" id="class_id" required>
       <option value="0" selected="false" disabled="true">Classe</option>
       @foreach($allClassAssignins as $class)
@@ -48,7 +51,9 @@
       @endif
       @endforeach
   </select>
-</div>
+</div> --}}
+
+
 {{-- <!-- Class Id Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('class_id', 'Class Id:') !!}

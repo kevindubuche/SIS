@@ -32,8 +32,7 @@ class Exam extends Model
 
 
     public $fillable = [
-        'course_id',
-        'class_id',
+        'matiere_id',
         'title',
         'description',
         'filename',
@@ -46,8 +45,7 @@ class Exam extends Model
      * @var array
      */
     protected $casts = [
-        'exam_id' => 'integer',
-        'course_id' => 'integer',
+        'matiere_id' => 'integer',
         'class_id' => 'integer',
         'title' => 'string',
         'description' => 'string',
@@ -61,13 +59,18 @@ class Exam extends Model
      * @var array
      */
     public static $rules = [
-        'course_id' => 'required',
-        'class_id' => 'required',
+        'matiere_id' => 'required',
         'title' => 'required',
         'description' => 'required',
         'filename' => 'required',
         'created_by' => 'required'
     ];
+
+    public function InfoMatiere()
+    {
+        return $this->belongsTo('App\Models\Matiere','matiere_id');
+    }
+
 
     public function InfoCourse()
     {

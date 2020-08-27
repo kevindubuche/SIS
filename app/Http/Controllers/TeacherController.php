@@ -63,7 +63,8 @@ class TeacherController extends AppBaseController
      */
     public function store(CreateTeacherRequest $request)
     {
-        $input = $request->all();
+        try{
+            $input = $request->all();
 
         // $teacher = $this->teacherRepository->create($input);
 
@@ -79,11 +80,10 @@ class TeacherController extends AppBaseController
 
         $save =$user->save();
         $user_id =DB::getPdo()->lastInsertId(); 
-     
+    //  dd($user_id);
  
         //AND NAP ADD TEACHER A AK ID USER A AS user_id
         if($save){
-
 
             //GESTION DE L'IMAGE
             // $profile_picture = $request->image;
@@ -97,11 +97,6 @@ class TeacherController extends AppBaseController
                 $image_name = $genarate_name.'.'.$image->getClientOriginalExtension();
                 
             }
-
-
-
-
-
 
             // $image = $request->file('image');
             // $image_name = rand(1111,9999).'.'.$image->getClientOriginalExtension();
@@ -128,16 +123,21 @@ class TeacherController extends AppBaseController
             $teacher->dateRegistered = $request->dateRegistered;
             $teacher->user_id = $user_id;
             $teacher->image = $image_name;
-            //  dd($teacher);
+            //   dd($teacher->user_id);
             $teacher->save();
 
         }
-
         //SEND MAIL WITH PASSWORD TO THE TEACHER
 
         Flash::success('Professeur enregistré avec succès');
 
         return redirect(route('teachers.index'));
+        }catch(\Illuminate\Database\QueryException $e){
+            //if email  exist before in db redirect with error messages
+            Flash::error('Email existant');
+            return redirect(route('teachers.index'));
+           }
+        
     }
 
     /**
@@ -192,61 +192,72 @@ class TeacherController extends AppBaseController
      */
     public function update($id, UpdateTeacherRequest $request)
     {
-        $teacher = $this->teacherRepository->find($id);
+        try{
+            $teacher = $this->teacherRepository->find($id);
 
-        if (empty($teacher)) {
-            Flash::error('Professeur non trouvé');
-
-            return redirect(route('teachers.index'));
-        }
-
-        // $teacher = $this->teacherRepository->update($request->all(), $id);
-
-        //CHECK IF THE IMAGE HAS CHANGED
+            //NAP SAVE USER A AVAN POU SI EMAIL LA TA DUPLIKE POU LI GENTAN EXIT
+            $user = array(
+              'first_name' => $request->first_name,
+              'last_name' => $request->last_name,
+              'email' => $request->email        
+              
+          );
+          User::findOrFail($teacher->user_id)->update($user);
+          //FIN UPDATE USER
+  
+          if (empty($teacher)) {
+              Flash::error('Professeur non trouvé');
+  
+              return redirect(route('teachers.index'));
+          }
+  
+          // $teacher = $this->teacherRepository->update($request->all(), $id);
+  
+          //CHECK IF THE IMAGE HAS CHANGED
+          // dd($teacher->user_id);
+          if($request->image != $teacher->image){
+              //DELETE OLD IMAGE
+              if( $teacher->image !='defaultAvatar.png' 
+            && $request->image != null ){
+                  
+              //    dd($request->image);
+                    File::delete(public_path().'/user_images/'.$teacher->image);
         
-        if($request->image != $teacher->image){
-            //DELETE OLD IMAGE
-            if( $teacher->image !='defaultAvatar.png' 
-          && $request->image != null ){
-                
-            //    dd($request->image);
-                  File::delete(public_path().'/user_images/'.$teacher->image);
-      
-            }
-        }
-
-        $image = $request->file('image');
-        
-        if($image ==null){
-            $image_name = $teacher->image;
+              }
+          }
+  
+          $image = $request->file('image');
           
-        }else{
-            $image_name = uniqid()."_".time().date("Ymd")."_IMG".'.'.$image->getClientOriginalExtension();
-            $image->move(public_path('user_images'), $image_name);
-
-        }
-
-        
-        
-
-        $teacher->fill($request->except(['token','image']));
-        
-        $teacher->image= $image_name ;
-        $teacher->save();
-
-
-        //update User table
-        $user = array(
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            // 'email' => $request->email        adm nan a  odifier nan user table la
+          if($image ==null){
+              $image_name = $teacher->image;
             
-        );
-        User::findOrFail($teacher->user_id)->update($user);
-
-        Flash::success('Professeur modifié avec succès.');
-
-        return redirect(route('teachers.index'));
+          }else{
+              $image_name = uniqid()."_".time().date("Ymd")."_IMG".'.'.$image->getClientOriginalExtension();
+              $image->move(public_path('user_images'), $image_name);
+  
+          }
+  
+          
+          //  dd($teacher->user_id);
+  
+          $teacher->fill($request->except(['token','image']));
+          
+          $teacher->image= $image_name ;
+          $teacher->save();
+  
+  
+  
+  
+          Flash::success('Professeur modifié avec succès.');
+  
+          return redirect(route('teachers.index'));
+            
+        }catch(\Illuminate\Database\QueryException $e){
+            //if email  exist before in db redirect with error messages
+            Flash::error('Email existant');
+            return redirect(route('teachers.index'));
+           }
+     
     }
 
     /**
@@ -263,7 +274,7 @@ class TeacherController extends AppBaseController
         $teacher = $this->teacherRepository->find($id);
 
         if (empty($teacher)) {
-            Flash::error('Teacher not found');
+            Flash::error('Professeur introuvable');
 
             return redirect(route('teachers.index'));
         }
@@ -273,7 +284,7 @@ class TeacherController extends AppBaseController
         }
         $this->teacherRepository->forcedelete($id);
 
-        Flash::success('Professeur supprime avec succes.');
+        Flash::success('Professeur supprimé avec succes.');
 
         return redirect(route('teachers.index'));
     }

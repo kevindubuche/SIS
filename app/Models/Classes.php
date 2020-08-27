@@ -28,8 +28,7 @@ class Classes extends Model
 
 
     public $fillable = [
-        'class_name',
-        'class_code'
+        'class_name'
     ];
 
     /**
@@ -39,8 +38,7 @@ class Classes extends Model
      */
     protected $casts = [
         'class_id' => 'integer',
-        'class_name' => 'string',
-        'class_code' => 'string'
+        'class_name' => 'string'
     ];
 
     /**
@@ -49,8 +47,7 @@ class Classes extends Model
      * @var array
      */
     public static $rules = [
-        'class_name' => 'required',
-        'class_code' => 'required'
+        'class_name' => 'required'
     ];
 
     

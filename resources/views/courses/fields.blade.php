@@ -31,17 +31,9 @@
     {!! Form::textarea('description', null, ['class' => 'form-control', 'cols'=>40, 'rows'=>2]) !!}
 </div>
 
-{{-- <!-- Status Field -->
-<div class="form-group ">
-    {!! Form::label('status', 'Status:') !!}
-    <label class="checkbox-inline">
-        {!! Form::hidden('status', 0) !!}
-        {!! Form::checkbox('status', '1', null) !!}
-    </label>
-</div> --}}
 
 
-<input type="file" name="filename" id="filename" required>
+<input type="file" name="filename" id="filename" >
 
 {{-- <button type="button" class="btn btn-primary" >Ajouter une vidéo</button> --}}
 
@@ -86,8 +78,6 @@
 </div>
 </div>
 </div>
-
-
 
 
 

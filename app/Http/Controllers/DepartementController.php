@@ -11,6 +11,7 @@ use Flash;
 use Response;
 
 use App\Models\Faculty;
+use App\Models\Departement;
 
 class DepartementController extends AppBaseController
 {
@@ -58,13 +59,21 @@ class DepartementController extends AppBaseController
      *
      * @return Response
      */
-    public function store(CreateDepartementRequest $request)
+    public function store(Request $request)
     {
-        $input = $request->all();
+        // $input = $request->all();
 
-        $departement = $this->departementRepository->create($input);
+         
+         $departement = new Departement;
+         $departement->departement_name = $request->departement_name;
+         $departement->departement_description = $request->departement_description;
+         
+ 
+         $departement->save();
 
-        Flash::success('Departement enregistré avec succes.');
+        // $departement = $this->departementRepository->create($input);
+
+        Flash::success('Département enregistré avec succès.');
 
         return redirect(route('departements.index'));
     }
@@ -81,7 +90,7 @@ class DepartementController extends AppBaseController
         $departement = $this->departementRepository->find($id);
 
         if (empty($departement)) {
-            Flash::error('Departement not found');
+            Flash::error('Département introuvable');
 
             return redirect(route('departements.index'));
         }
@@ -101,7 +110,7 @@ class DepartementController extends AppBaseController
         $departement = $this->departementRepository->find($id);
 
         if (empty($departement)) {
-            Flash::error('Departement not found');
+            Flash::error('Département introuvable');
 
             return redirect(route('departements.index'));
         }
@@ -122,14 +131,15 @@ class DepartementController extends AppBaseController
         $departement = $this->departementRepository->find($id);
 
         if (empty($departement)) {
-            Flash::error('Departement not found');
+            Flash::error('Département introuvable');
 
             return redirect(route('departements.index'));
         }
 
+     
         $departement = $this->departementRepository->update($request->all(), $id);
 
-        Flash::success('Departement updated successfully.');
+        Flash::success('Département modifié avec succès.');
 
         return redirect(route('departements.index'));
     }
@@ -148,14 +158,14 @@ class DepartementController extends AppBaseController
         $departement = $this->departementRepository->find($id);
 
         if (empty($departement)) {
-            Flash::error('Departement not found');
+            Flash::error('Département introuvable');
 
             return redirect(route('departements.index'));
         }
 
         $this->departementRepository->delete($id);
 
-        Flash::success('Departement deleted successfully.');
+        Flash::success('Département supprimé avec succès.');
 
         return redirect(route('departements.index'));
     }

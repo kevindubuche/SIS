@@ -91,53 +91,71 @@ class CourseController extends AppBaseController
      */
     public function store(Request $request)
     {
-        $input = $request->all();
-        // dd($input);
-        //GESTION DU FICHIER
-        $file = $request->file('filename');
-        $extension = $file->getClientOriginalExtension();
-        $filename = time().'.'.$extension;
-        $fullPath = $filename;
-
-        $request->file('filename')->move(
-            base_path() . '/public/course_files/', $filename
-        );
- 
-
-
-          //########### start upload to youtube
+        // try{
+            $input = $request->all();
+          
+            //GESTION DU FICHIER
+            if($request->file('filename')){
+                $file = $request->file('filename');
+                $extension = $file->getClientOriginalExtension();
+                $filename = time().'.'.$extension;
+                $fullPath = $filename;
+        
+                $request->file('filename')->move(
+                    base_path() . '/public/course_files/', $filename
+                );
+    
+            }
+        
+    
+    
+         
+            if($request->file('video')){
+            
+                //########### start upload to youtube
                 $video = Youtube::upload($request->file('video')->getPathName(), [
-                    'title'       => $request->input('title_video'),
-                    'description' => $request->input('description_video')
-                ]);
-                // dd($video);
-                // return "Video uploaded successfully. Video ID is ". $video->getVideoId();
-         //########### start upload to youtube
-
-
-
-
-        $cours = new Course;
-        $cours->course_name = $request->course_name;
-        $cours->course_code = $request->course_code;
-        $cours->description = $request->description;
-        $cours->created_by = $request->created_by;
-        $cours->videoID = $video->getVideoId();
-        $cours->filename = $fullPath;
-   
-//  dd($input);
-        $cours->save();
-
-
-      
-
-
+                  'title'       => $request->input('title_video'),
+                  'description' => $request->input('description_video')
+              ]);
+              // return "Video uploaded successfully. Video ID is ". $video->getVideoId();
+               //########### start upload to youtube
+  
+         }
+    
+            $cours = new Course;
+            $cours->course_name = $request->course_name;
+            $cours->description = $request->description;
+            $cours->created_by = $request->created_by;
+            $cours->matiere_id = $request->matiere_id;
+            $cours->contenu = $request->editordata;
+            
+            if($request->file('video')){
+  $cours->videoID = $video->getVideoId();
+      }
+      else{
+        $cours->videoID = ""; 
+      }
+      if($request->file('filename')){
+            $cours->filename = $fullPath;
+      }else{
+        $cours->filename = "";
+      }
        
-        // $course = $this->courseRepository->create($input);
-
-        Flash::success('Cours enregistre avec succes.');
-
-        return redirect(route('courses.index'));
+    //  dd($input);
+            $cours->save();
+    
+            // $course = $this->courseRepository->create($input);
+    
+            Flash::success('Cours enregistre avec succes.');
+    
+            return redirect()->back();
+      //  }
+        // catch(\Illuminate\Database\QueryException $e){
+        //     //if email  exist before in db redirect with error messages
+        //     Flash::error('Cours non enregistre, probleme de connection');
+        //     return redirect(route('courses.index'));
+        //    }
+    
     }
 
     /**
@@ -190,40 +208,69 @@ class CourseController extends AppBaseController
      */
     public function update($id, Request $request)
     {
-        
+        //    dd($request->editordata);
         $course = $this->courseRepository->find($id);
-
-       
         if (empty($course)) {
             Flash::error('Cours non trouve');
 
             return redirect(route('courses.index'));
         }
-        File::delete(public_path().'/course_files/'.$course->filename);
-       
-        $file = $request->file('filename');
-        $extension = $file->getClientOriginalExtension();
-        $filename = time().'.'.$extension;
-        $fullPath = $filename;
+           //GESTION DU FICHIER
+           if($request->file('filename')){
+               //nap delete ansyen document a
+            File::delete(public_path().'/course_files/'.$course->filename);
+            // nap jere nouvo a
+            $file = $request->file('filename');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time().'.'.$extension;
+            $fullPath = $filename;
+    
+            $request->file('filename')->move(
+                base_path() . '/public/course_files/', $filename
+            );
 
-        $request->file('filename')->move(
-            base_path() . '/public/course_files/', $filename
-        );
+        }
 
+        if($request->file('video')){
+            
+            //########### start upload to youtube
+            $video = Youtube::upload($request->file('video')->getPathName(), [
+              'title'       => $request->input('title_video'),
+              'description' => $request->input('description_video')
+          ]);
+          // return "Video uploaded successfully. Video ID is ". $video->getVideoId();
+           //########### start upload to youtube
+
+     }
+     
+     if($request->file('video')){
+        $videoID = $video->getVideoId();
+    
+            }
+            else{
+              $videoID = ""; 
+            }
+    
+            if($request->file('filename')){
+                $filename = $fullPath;
+          }else{
+            $filename = "";
+          }
         $newCourse = array(
             'course_name' => $request->course_name,
-            'course_code' => $request->course_code,
             'description' => $request->description,
             'created_by' => $request->created_by,
-            'filename' => $request->fullPath
+            'filename' => $filename,
+            'contenu' => $request->editordata,
+            'videoID' => $videoID
         );
-       
         Course::findOrFail($id)->update($newCourse);
         // $course = $this->courseRepository->update($request->all(), $id);
 
-        Flash::success('Cours modifie avec succes.');
+       
+        Flash::success('Cours modifié avec succes.');
 
-        return redirect(route('courses.index'));
+        return redirect(route('matieres.index'));
     }
 
     /**

@@ -17,8 +17,7 @@ class ExamRepository extends BaseRepository
      * @var array
      */
     protected $fieldSearchable = [
-        'course_id',
-        'class_id',
+        'matiere_id',
         'title',
         'description',
         'filename',

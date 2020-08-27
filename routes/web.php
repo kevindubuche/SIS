@@ -58,7 +58,7 @@ Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->middleware('verified');
 
-Route::group(['middleware' => ['ifLogin']], function(){
+Route::group(['middleware' => ['ifLogin','auth']], function(){
 
 Route::resource('classes', 'ClassesController');
 
@@ -125,8 +125,6 @@ Route::get('/pdf-download-class-assign', 'ClassAssigningController@PDFGenerator'
 
 Route::post('/userUpdatePassword','UserController@userUpdatePassword');
 
-});
-
 
 
 Route::resource('actuses', 'ActusController');
@@ -140,3 +138,9 @@ Route::resource('annees', 'AnneeController');
 Route::resource('actuAssignings', 'Actu_assigningController');
 
 Route::resource('soumissions', 'SoumissionController');
+
+Route::resource('matieres', 'MatiereController');
+});
+
+
+

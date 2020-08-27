@@ -10,11 +10,7 @@
     <p>{{ $departement->departement_name }}</p>
 </div>
 
-<!-- Departement Code Field -->
-<div class="form-group">
-    {!! Form::label('departement_code', 'Departement Code:') !!}
-    <p>{{ $departement->departement_code }}</p>
-</div>
+
 
 <!-- Departement Description Field -->
 <div class="form-group">

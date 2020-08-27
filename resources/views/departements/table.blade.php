@@ -4,7 +4,6 @@
             <tr>
                 {{-- <th>Faculty Id</th> --}}
         <th>Département</th>
-        <th>Code du departément</th>
         <th>Description</th>
     
         <th colspan="3">Action</th>
@@ -15,7 +14,6 @@
             <tr>
                 {{-- <td>{{ $departement->InfoFaculty->faculty_name }}</td> --}}
             <td>{{ $departement->departement_name }}</td>
-            <td>{{ $departement->departement_code }}</td>
             <td>{{ $departement->departement_description }}</td>
            
                 <td>

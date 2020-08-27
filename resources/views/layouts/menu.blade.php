@@ -7,10 +7,14 @@
     <a href="{{ route('actuses.index') }}"><i class="fa fa-tags"></i><span>Publications</span></a>
 </li>
 
-
-<li class="{{ Request::is('courses*') ? 'active' : '' }}">
-    <a href="{{ route('courses.index') }}"><i class="fa fa-book"></i><span>Cours</span></a>
+<li class="{{ Request::is('matieres*') ? 'active' : '' }}">
+    <a href="{{ route('matieres.index') }}"><i class="fa fa-book"></i><span>Matières</span></a>
 </li>
+
+
+{{-- <li class="{{ Request::is('courses*') ? 'active' : '' }}">
+    <a href="{{ route('courses.index') }}"><i class="fa fa-book"></i><span>Cours</span></a>
+</li> --}}
 
 
 <li class="treeview">

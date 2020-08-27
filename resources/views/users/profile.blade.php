@@ -108,7 +108,17 @@
               <strong><i class="fa fa-user margin-r-5"></i>Status matrimonial</strong>
 
               <p class="text-muted">
-                {{$user->status}}
+                @if ($user->statusmatrimonial==0)
+                Célibataire
+                    @elseif($user->statusmatrimonial==1)
+                     Fiancé(e) 
+                    @elseif($user->statusmatrimonial==2)
+                     Marié(e)  
+                    @elseif($user->statusmatrimonial==3)
+                     Divorcé(e)  
+                    @elseif($user->statusmatrimonial==4)
+                     Veuf(ve) 
+                    @endif
               </p>
 
               <hr>
@@ -129,7 +139,7 @@
 
               <strong><i class="fa fa-birthday-cake margin-r-5"></i> Date de naissance</strong>
 
-            <p>{{$user->dob}}</p>
+            <p>{{$user->dob->format('Y M D')}}</p>
             </div>
             <!-- /.box-body -->
           </div>
@@ -340,7 +350,7 @@
                                             <input type="email"
                                                 class="form-control"
                                                 id="inputName"
-                                                value="{{$user->dob}}"
+                                                value="{{$user->dob->format('Y M D')}}"
                                         readonly>
                                         </div>
                                     </div>

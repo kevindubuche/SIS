@@ -18,10 +18,10 @@ class CourseRepository extends BaseRepository
      */
     protected $fieldSearchable = [
         'course_name',
-        'course_code',
         'description',
-        'created_by'
-        // 'status'
+        'created_by',
+         'matiere_id',
+         'contenu'
     ];
     protected $primaryKey = 'course_id';
     /**

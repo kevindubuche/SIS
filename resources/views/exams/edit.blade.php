@@ -21,18 +21,19 @@
 
                 <input type="hidden" id="exam_id2" name="exam_id2">
 <div class="form-group col-sm-6">
-    <select class="form-control" name="course_id2" id="course_id2">
-    <option value="0" selected="true" disabled="true">Cours </option>
+    <label>Matieres</label>
+    <select class="form-control" name="matiere_id2" id="matiere_id2">
+    <option value="0" selected="true" disabled="true">Matieres </option>
 
-      @foreach($allCourses as $course)
-      @if ($course->created_by == Auth::user()->id || Auth::user()->role==1)
-      <option value="{{$course->course_id}}">{{$course->course_name}}</option>
+      @foreach($allMatieres as $matiere)
+      @if ($matiere->teacher_id == Auth::user()->id || Auth::user()->role==1)
+      <option value="{{$matiere->matiere_id}}">{{$matiere->titre}}</option>
 @endif
 @endforeach
   </select>
 </div>
 
-<div class="form-group col-sm-6">
+{{-- <div class="form-group col-sm-6">
     <select class="form-control" name="class_id2" id="class_id2">
     <option value="0" selected="true" disabled="true">Classe </option>
 
@@ -42,7 +43,7 @@
         @endif
         @endforeach
   </select>
-</div>
+</div> --}}
 
 <!-- Title Field -->
 <div class="form-group col-sm-6">

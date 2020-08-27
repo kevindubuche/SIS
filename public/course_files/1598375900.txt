@@ -1,0 +1,54 @@
+php artisan make:migration create_matieres_table --create=matieres
+
+php artisan infyom:scaffold Matiere --fromTable --tableName=matieres
+
+
+
+//////////
+php artisan serve --host 0.0.0.0 --port 8101
+///////
+$user->create(['first_name'=>'Kevin','last_name'=>'Dubuche','email'=>'kevindubuche@gmail.com', 'role'=>1,'password'=>Hash::make('password')  ] )
+
+$user=new User
+
+use Illuminate\Support\Facades\Hash
+
+use App\User
+
+php artisan tinker
+
+$user->create(['nom'=>'Kevin','prenom'=>'Dubuche','email'=>'kevindubuche@gmail.com','username'=>'kevindubuche', 'role'=>1,'password'=>Hash::make('password')  ] )
+
+/////////////
+to do:
+disable boutton send la leu ou fin send or save or edit
+
+/////////
+clean database//////
+	 	
+	TRUNCATE `actus`;	 	
+	TRUNCATE `admissions`;	  	
+	TRUNCATE `classes`;		 
+	TRUNCATE `class_assignings`;	 
+	TRUNCATE `class_schedulings`;	 
+	TRUNCATE `comments`;	 	
+	TRUNCATE `courses`;	 	
+	TRUNCATE `departements`;	
+	TRUNCATE `exams`; 	
+	TRUNCATE `failed_jobs`;	 	 	
+	TRUNCATE `migrations`;	 	
+	TRUNCATE `password_resets`;	 	
+	TRUNCATE `roles`;	 	
+	TRUNCATE `rolls`;	 
+	TRUNCATE `semesters`;	 	
+	TRUNCATE `statuses`;	 	
+	TRUNCATE `teachers`;	
+	TRUNCATE `youtube_access_tokens`;
+	TRUNCATE `actu_assignings`;
+	TRUNCATE `soumissions`;
+
+
+
+
+	 	
+	TRUNCATE `users`;	 	

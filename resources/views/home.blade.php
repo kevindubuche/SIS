@@ -60,22 +60,22 @@
             <!-- Application buttons -->
             <div class="box">
               <div class="box-header">
-                <h3 class="box-title">Institution Frere André : Access rapide</h3>
+                <h3 class="box-title">Institution Frère André : Access rapide</h3>
               </div>
               <div class="box-body">
-                    <p><code>Institution Frere André _ Foyer Eveil</code> I.F.A</p>
+                    <p><code>Institution Frère André _ Foyer Eveil</code> I.F.A</p>
                  
                          {{-- EVERYBODY CAN ACCESS --}}
                   <a class="btn btn-app col-md-2" href="{{ url('/home') }}">
                   <i class="fa fa-home"></i> Accueil
                   </a>
+                  <a class="btn btn-app col-md-2" href="{{ route('matieres.index') }}">
+                    <i class="fa fa-book"></i> Matières
+                    </a>
                   <a class="btn btn-app col-md-2" href="{{ route('actuses.index') }}">
                     <i class="fa fa-tags"></i> Publications
                     </a>
-                  <a class="btn btn-app col-md-2" href="{{ route('courses.index') }}">
-                    <span class="badge bg-purple">{{$totalCourses}}</span>
-                  <i class="fa fa-book"></i> Cours
-                  </a>
+                 
                     <a class="btn btn-app col-md-2" href="{{ route('classSchedulings.index') }}">
                     <i class="fa fa-calendar"></i> Horaire
                     </a>

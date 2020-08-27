@@ -34,14 +34,14 @@
 </head>
 <body 
 {{-- class="hold-transition login-page"  --}}
-style="background-image: linear-gradient(#B3FFAB, #12fff7);">
+style="background-image: linear-gradient(#b89f12, #ffffff);">
 <div class="login-box">
     <div class="login-logo">
-        <a href="{{ url('/home') }}"><b>Reinitialisation </b>I.F.A</a>
+        <a href="#"><b> I.F.A</b>Reinitialisation</a>
     </div>
 
     <!-- /.login-logo -->
-    <div class="login-box-body" style="  box-shadow: 5px 10px #f5eded;">
+    <div class="login-box-body" >
         <p class="login-box-msg">Veillez contacter votre administration.<br><br>La Direction</p>
         {{-- <p class="login-box-msg">Entrez votre email</p>
 

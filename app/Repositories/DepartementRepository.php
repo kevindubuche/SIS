@@ -19,7 +19,6 @@ class DepartementRepository extends BaseRepository
     protected $fieldSearchable = [
         // 'faculty_id',
         'departement_name',
-        'departement_code',
         'departement_description'
         
     ];

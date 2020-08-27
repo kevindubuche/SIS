@@ -58,16 +58,11 @@ class ClassesController extends AppBaseController
         // $input = $request->all();
 
         //verifier si class_code existe
-        $count = Classes::where('class_code',$request->class_code)->count();
-        if($count !=0){
-            Flash::error('Le code de la classe existe deja');
-            return redirect(route('classes.index'));
-        }
+       
 
         
         $class = new Classes;
         $class->class_name = $request->class_name;
-        $class->class_code = $request->class_code;
         
 
         $class->save();
@@ -135,11 +130,7 @@ class ClassesController extends AppBaseController
 
             return redirect(route('classes.index'));
         }
-        $count = Classes::where('class_code',$request->class_code)->count();
-        if($count !=0){
-            Flash::error('Le code de la classe existe deja');
-            return redirect(route('classes.index'));
-        }
+      
 
 
         $classes = $this->classesRepository->update($request->all(), $id);

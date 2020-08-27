@@ -7,7 +7,7 @@
     role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Ajouter un nouvel etudiant</h5>
+          <h5 class="modal-title" id="exampleModalLongTitle">Ajouter un nouvel étudiant</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -69,7 +69,16 @@
         required
         >
 </div>
-
+<!-- Phone Field -->
+<div class="form-group col-sm-4">
+    <label> Téléphone de l'élève</label>
+    <input type="text" 
+        name="phone"
+        id="phone" 
+        class="form-control "
+        placeholder="Téléphone"
+        >
+</div>
 
 <!-- fathter Name Field -->
 <div class="form-group col-sm-4">
@@ -143,7 +152,7 @@
 <div class="col-sm-4">
     <div class="form-group ">
         <fieldset>
-            <legend for="gender">Sexe</legend>
+            <legend for="gender">Sexe de l'élève</legend>
             <table style="width: 100%; margin-top:14px;">
                 <tr style="border-bottom: 1px solid #ccc">
                     <td>
@@ -155,7 +164,7 @@
                     <td>
                         <label>
                             <input type="radio" name="gender" id="gender" value="1">
-                            Feminin
+                            Féminin
                         </label>
                     </td>
                 </tr>
@@ -166,12 +175,7 @@
 
 <!-- Dob Field -->
 <div class="col-md-4">
-    <div class="form-group">
-        <div class="input-group">
             <label> Date de naissance</label>
-            <div class="form-group-addon">
-                <i class="fa fa-calendar teacherdob"></i>
-            </div>
             <input type="text"
                  name="dob"
                  id="dob"
@@ -180,26 +184,13 @@
                   autocomplete="off"
                   required
                   >
-        </div>
-    </div>
-
 </div>
 
  
-<!-- Phone Field -->
-<div class="form-group col-sm-4">
-    <label> Téléphone de l'élève</label>
-    <input type="text" 
-        name="phone"
-        id="phone" 
-        class="form-control "
-        placeholder="Téléphone"
-        >
-</div>
 
-<div class="form-group col-sm-12">
+
+<div class="form-group col-sm-4">
     <label>Religion</label>
-    {{-- {!! Form::label('start_time', 'Start time:') !!} --}}
     <input type="text" autocomplete="off" class="form-control" name="religion" id="religion" required >
 </div>
 
@@ -255,15 +246,12 @@
 <!-- Adress Field -->
 <div class="form-group col-sm-4">
    <b><i class="fa fa-map-marker"></i>Adresse</b>
-        
             <textarea placeholder="Entrer votre adresse ici"
             name="adress"
             id="adress"
             cols="40" rows="2"
             class="form-control text-capitalize">
             </textarea>
-      
-    
 </div>
    
 
@@ -304,22 +292,5 @@
     };
 </script>
 
-
- {{-- <script type="text/javascript">
-   
-$('#dobb').on('click', function(){
-    console.log('pppppppppppppppppppppppppppppppppp')
-})
-    
-    $('#dob').datepicker({
-        changeMonth:true,
-        changeYear:true,
-        dateFormat:'yy-mm-dd'
-    });
-
-    
-
-    
- </script> --}}
      
  @endpush

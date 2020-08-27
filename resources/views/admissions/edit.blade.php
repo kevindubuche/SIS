@@ -27,7 +27,7 @@
             
 
             <input type="hidden" name="user_id" id="user_id" 
-            value="{{Auth::id()}}" required>
+            value="{{$admission->user_id}}" required>
 <!-- First Name Field -->
 <div class="form-group col-sm-12">
     <label>Prenom</label>
@@ -59,7 +59,7 @@
     <input type="email" 
         name="email"
         id="email" 
-        class="form-control text-capitalize"
+        class="form-control "
         placeholder="Email"
         value="{{$admission->email}}"
         >
@@ -122,7 +122,7 @@
         class="form-control "
         placeholder="Nom de la mere"
         value="{{$admission->responsable_nom}}"
-        required
+      
         >
 </div>
 <!-- mother phone Field -->
@@ -194,33 +194,37 @@
 
 </div>
 
-
-
-@push('scripts')
-    {{-- <script type="text/javascript">
-        $('#dobb').datetimepicker({
-            format: 'YYYY-MM-DD HH:mm:ss',
-            useCurrent: true,
-            sideBySide: true
-        })
-    </script> --}}
-@endpush
-
-
-
  
 <!-- Phone Field -->
 <div class="form-group col-sm-12">
+    <label>Telephone</label>
     <input type="text" 
         name="phone"
         id="phone" 
-        class="form-control text-capitalize"
+        class="form-control "
         value="{{$admission->phone}}"
         >
 </div>
 
 <!-- departement_id Field -->
 <div class="form-group col-sm-12">
+    <label>Classe</label>
+    <select class="form-control" name="class_id" id="class_id">
+        <option value="0" selected="true"
+            disabled="true">Classe</option>
+            @foreach ($classes as $class)
+                 <option value="{{$class->class_id}}"
+                    {{$class->class_id == $admission->class_id ? 'selected' : ''}}
+                    >{{$class->class_name}}</option>
+            @endforeach
+          
+    </select>
+   
+</div>
+
+<!-- departement_id Field -->
+<div class="form-group col-sm-12">
+    <label>Departement</label>
     <select class="form-control" name="departement_id" id="departement_id">
         <option value="0" selected="true"
             disabled="true">Departement</option>
@@ -234,19 +238,7 @@
    
 </div>
 
-<!-- Faculty Field -->
-<div class="form-group col-sm-12">
-    <select class="form-control" name="faculty_id" id="faculty_id">
-        <option value="0" selected="true"
-            disabled="true">Faculte</option>
-            @foreach ($faculties as $fac)
-                 <option value="{{$fac->faculty_id}}"
-                    {{$fac->faculty_id == $admission->faculty_id ? 'selected' : ''}}
-                    >{{$fac->faculty_name}}</option>
-            @endforeach
-          
-    </select>
-</div>
+
 
 <!-- Image Field -->
 <div class="col-lg-12 col-md-12 col-sm-12">
@@ -261,7 +253,7 @@
                         {!!Html::image('user_images/'.$admission->image,
                         null,
                         ['class'=>'student.image', 'id'=>'showImage' , 'style'=>'width:200px; height:200px;'])!!}                       
-                        <input type="file" name="image" id="image" required
+                        <input type="file" name="image" id="image" 
                         accept="image/x-png, image/png,image/jpg,image/jpeg"
                         >
                     </td>

@@ -33,7 +33,6 @@ class Departement extends Model
     public $fillable = [
         // 'faculty_id',
         'departement_name',
-        'departement_code',
         'departement_description'
         
     ];
@@ -47,7 +46,6 @@ class Departement extends Model
         'departement_id' => 'integer',
         // 'faculty_id' => 'integer',
         'departement_name' => 'string',
-        'departement_code' => 'string',
         'departement_description' => 'string'
       
     ];
@@ -59,9 +57,8 @@ class Departement extends Model
      */
     public static $rules = [
         // 'faculty_id' => 'required',
-        'departement_name' => 'required',
-        'departement_code' => 'required',
-        'departement_description' => 'required'
+        'departement_name' => 'required'
+        // 'departement_description' => 'required'
        
     ];
 

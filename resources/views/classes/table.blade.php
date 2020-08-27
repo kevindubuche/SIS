@@ -3,7 +3,6 @@
         <thead>
             <tr>
                 <th>Nom de la classe</th>
-        <th>Code de la classe</th>
         @if(Auth::user()->role==1)
            <th colspan="3">Actions</th>
            @endif
@@ -13,7 +12,6 @@
         @foreach($classes as $classes)
             <tr>
                 <td>{{ $classes->class_name }}</td>
-            <td>{{ $classes->class_code }}</td>
             @if(Auth::user()->role==1)
                 <td>
                     {!! Form::open(['route' => ['classes.destroy', $classes->class_id], 'method' => 'delete']) !!}
