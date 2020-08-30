@@ -16,6 +16,7 @@ use DB;
 use App\Models\Actus;
 use App\Models\User;
 use App\Models\Admission;
+use App\Models\Teacher;
 
 class ActusController extends AppBaseController
 {
@@ -84,18 +85,18 @@ class ActusController extends AppBaseController
             ->select('actus.*')
             ->get();
 
-           $actuAdm = collect();
-           foreach($actuses as $actu){
-               if(IsAdm($actu->created_by)){
-                   $actuAdm->push($actu);
-               }
-           }
+        //    $actuAdm = collect();
+        //    foreach($actuses as $actu){
+        //        if(IsAdm($actu->created_by)){
+        //            $actuAdm->push($actu);
+        //        }
+        //    }
 
-           $actuses = $actuAdm->merge($actuTeacher);
+        //    $actuses = $actuAdm->merge($actuTeacher);
 
    
         return view('actuses.index')
-            ->with('actuses', $actuses);
+            ->with('actuses', $actuTeacher);
         }
     }
 
@@ -106,8 +107,14 @@ class ActusController extends AppBaseController
      */
     public function create()
     {
-        $classes = Classes::all();
-        return view('actuses.create', compact('classes'));
+        if(auth()->user()->role == 2){
+        $classes = Classes::join('class_assignings','class_assignings.class_id','=','classes.class_id')//qui sont dans l'horaire de l'etudiant
+        ->where('class_assignings.teacher_id',auth()->user()->id)->get();
+        // $classes = Classes::all();
+        return view('actuses.create', compact('classes')); 
+        }
+        return redirect()->back();
+      
     }
 
     /**
@@ -182,9 +189,12 @@ class ActusController extends AppBaseController
      * @return Response
      */
     public function edit($id)
-    {
+    {    if(auth()->user()->role == 2){
         $actus = $this->actusRepository->find($id);
-        $classes = Classes::all();
+    
+            $classes = Classes::join('class_assignings','class_assignings.class_id','=','classes.class_id')//qui sont dans l'horaire de l'etudiant
+            ->where('class_assignings.teacher_id',auth()->user()->id)->get();
+        // $classes = Classes::all();
 
         if (empty($actus)) {
             Flash::error('Actus not found');
@@ -193,6 +203,8 @@ class ActusController extends AppBaseController
         }
 
         return view('actuses.edit',compact('classes'))->with('actus', $actus);
+    }
+    return redirect()->back();
     }
 
     /**
@@ -210,7 +222,6 @@ class ActusController extends AppBaseController
 
         if( ! $request->multiclass){
             Flash::error('Classe incorecte');
-           
             return redirect()->back();
         }
 

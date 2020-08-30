@@ -139,7 +139,7 @@
 
               <strong><i class="fa fa-birthday-cake margin-r-5"></i> Date de naissance</strong>
 
-            <p>{{$user->dob->format('Y M D')}}</p>
+            <p>{{$user->dob}}</p>
             </div>
             <!-- /.box-body -->
           </div>
@@ -149,12 +149,12 @@
         <div class="col-md-9">
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
-              <li class="active"><a href="#activity" data-toggle="tab">Cours</a></li>
+              {{-- <li class="active"><a href="#activity" data-toggle="tab">Cours</a></li> --}}
               <li><a href="#timeline" data-toggle="tab">Details</a></li>
               <li><a href="#settings" data-toggle="tab">Reglages</a></li>
             </ul>
             <div class="tab-content">
-              <div class="active tab-pane" id="activity">
+              {{-- <div class="active tab-pane" id="activity">
                 <section class="content-header">
                   <h1>Mes cours</h1>
               </section>
@@ -162,15 +162,15 @@
                   @include('adminlte-templates::common.errors')
                   <div class="box box-primary">
                       <div class="box-body"><br><br>
-                         @if (Auth::user()->role != 3)
+                         @if (Auth::user()->role == 3)
                          
                         <div class="container">
                           <div class="row">
                             <div class="col-md-8">
-                                  @foreach ($schedules as $schedule)
+                                  @foreach ($matieres as $matiere)
                                     <div  class="btn  col-md-12" >
                                       <div style="background-color: rgb(172, 172, 172); border-radius:25px;" >
-                                        <i class="fa fa-book"></i> {{$schedule->InfoCourse->course_name}} <br>en 
+                                        <i class="fa fa-book"></i> {{$ma->InfoCourse->course_name}} <br>en 
                                         <b style="color: red">{{$schedule->InfoClass->class_name}}</b>
                                         <hr>
                                       </div>
@@ -203,7 +203,7 @@
                       </div>
                     </div>
                </div>
-              </div>
+              </div> --}}
               <div class="tab-pane" id="settings">
                   <section class="content-header">
                     <h1>
@@ -255,7 +255,7 @@
             </div>
         </div>
               <!-- /.tab-pane -->
-              <div class="tab-pane" id="timeline">
+              <div class="active tab-pane" id="timeline">
                 <!-- The timeline -->
                 {{-- ALL THE DETAILS ABOUT THE student --}}
                     <section class="content-header">
@@ -350,7 +350,7 @@
                                             <input type="email"
                                                 class="form-control"
                                                 id="inputName"
-                                                value="{{$user->dob->format('Y M D')}}"
+                                                value="{{$user->dob}}"
                                         readonly>
                                         </div>
                                     </div>

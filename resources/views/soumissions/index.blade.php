@@ -3,11 +3,11 @@
 @section('content')
     <section class="content-header">
         <h1 class="pull-left">Soumissions</h1>
-        {{-- @if (Auth::user()->role == 3) --}}
+        @if (Auth::user()->role == 3)
         <h1 class="pull-right">
             <a data-toggle="modal" data-target="#add-soumission-modal" class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" ><i class="fa fa-plus-circle">Ajouter une soumission</i></a> 
         </h1>
-        {{-- @endif --}}
+        @endif
     </section>
     <div class="content">
         <div class="clearfix"></div>

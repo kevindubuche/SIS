@@ -34,7 +34,8 @@ class Course extends Model
         'description',
         'created_by',
          'matiere_id',
-         'contenu'
+         'contenu',
+         'videoLink'
     ];
 
     /**

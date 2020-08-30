@@ -108,7 +108,7 @@ class AdmissionController extends AppBaseController
         $user->last_name =$request->last_name;
         $user->role = 3;
         $user->email = $request->email;
-        $password = 'qwerty123';//nou ka genere yon ran si nou vle
+        $password = 'password';//nou ka genere yon ran si nou vle
         $user->password = Hash::make( $password);
 
         // $user->save();

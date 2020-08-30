@@ -30,7 +30,7 @@
     {!! Form::textarea('description', null, ['class' => 'form-control', 'cols'=>40, 'rows'=>2 , 'maxlength'=>'250']) !!}
 </div>
 
-<div class="form-group  ">
+<div class="form-group ">
   <textarea id="my-summernote" name="editordata"></textarea>
 </div>
 
@@ -53,15 +53,18 @@
     </div>
   </div>
   <div class="box-body" style="">
-    <p><input type="text" name="title_video" placeholder="Entrer le titre de la video" /></p>
-    <p><textarea name="description_video" cols="30" rows="5" placeholder="Description de la video"></textarea></p>
-   
+    <div class="form-group ">
+    <label>Lien de la video</label>
+    <p><input type="text" name="videoLink" placeholder="Entrer le lien de la video" /></p>
+    </div>
+    {{-- <p><textarea name="description_video" cols="30" rows="5" placeholder="Description de la video"></textarea></p>
+    --}}
   </div>
   <!-- /.box-body -->
-  <div class="box-footer" style="">
+  {{-- <div class="box-footer" style="">
     <label>Importer video</label>
     <input type="file" name="video" accept="video/mp4,video/avi,video/mov,video/gif,video/wmv"/>
-  </div>
+  </div> --}}
   <!-- /.box-footer-->
 </div>
 

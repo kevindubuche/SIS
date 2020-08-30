@@ -41,8 +41,8 @@
                Pas de document
                 @endif
             </td>
-            @if( $course->videoID)
-            <td type="button"  data-toggle="modal" data-target="#{{ $course->videoID}}"><button class="btn btn-primary"> Regarder</button></td>
+            @if( $course->videoLink)
+            <td type="button"  data-toggle="modal" data-target="#{{ $course->course_id}}"><button class="btn btn-primary"> Regarder</button></td>
                 
             @else
             <td > Pas de vidéo</td>
@@ -62,7 +62,7 @@
             {{-- @endif --}}
                
             </tr>
-           <div class="modal fade" id="{{ $course->videoID }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+           <div class="modal fade" id="{{ $course->course_id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                           <div class="modal-content">
                             <div class="modal-header">
@@ -74,7 +74,7 @@
                               </button>
                             </div>
                             <div class="modal-body">
-                                <iframe width="100%" height="460" src="https://www.youtube.com/embed/{{$course->videoID}}" frameborder="0" allowfullscreen></iframe> 
+                                <iframe width="100%" height="460" src="https://www.youtube.com/embed/{{$course->videoLink}}" frameborder="0" allowfullscreen></iframe> 
                             </div>
                          <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -90,6 +90,7 @@
 
 @push('scripts')
 <script>
+
     $(document).ready(function()
     {
         $('#myTable').DataTable({  

@@ -1,127 +1,3 @@
-{{-- <!-- Roll No Field -->
-<div class="form-group">
-    {!! Form::label('roll_no', 'Roll No:') !!}
-    <p>{{ $admission->roll_no }}</p>
-</div>
-
-<!-- First Name Field -->
-<div class="form-group">
-    {!! Form::label('first_name', 'First Name:') !!}
-    <p>{{ $admission->first_name }}</p>
-</div>
-
-<!-- Last Name Field -->
-<div class="form-group">
-    {!! Form::label('last_name', 'Last Name:') !!}
-    <p>{{ $admission->last_name }}</p>
-</div>
-
-<!-- Father Name Field -->
-<div class="form-group">
-    {!! Form::label('father_name', 'Father Name:') !!}
-    <p>{{ $admission->father_name }}</p>
-</div>
-
-<!-- Father Phone Field -->
-<div class="form-group">
-    {!! Form::label('father_phone', 'Father Phone:') !!}
-    <p>{{ $admission->father_phone }}</p>
-</div>
-
-<!-- Mother Name Field -->
-<div class="form-group">
-    {!! Form::label('mother_name', 'Mother Name:') !!}
-    <p>{{ $admission->mother_name }}</p>
-</div>
-
-<!-- Mother Phone Field -->
-<div class="form-group">
-    {!! Form::label('mother_phone', 'Mother Phone:') !!}
-    <p>{{ $admission->mother_phone }}</p>
-</div>
-
-<!-- Gender Field -->
-<div class="form-group">
-    {!! Form::label('gender', 'Gender:') !!}
-    <p>{{ $admission->gender }}</p>
-</div>
-
-<!-- Email Field -->
-<div class="form-group">
-    {!! Form::label('email', 'Email:') !!}
-    <p>{{ $admission->email }}</p>
-</div>
-
-<!-- Dob Field -->
-<div class="form-group">
-    {!! Form::label('dob', 'Dob:') !!}
-    <p>{{ $admission->dob }}</p>
-</div>
-
-<!-- Phone Field -->
-<div class="form-group">
-    {!! Form::label('phone', 'Phone:') !!}
-    <p>{{ $admission->phone }}</p>
-</div>
-
-<!-- Adress Field -->
-<div class="form-group">
-    {!! Form::label('adress', 'Adress:') !!}
-    <p>{{ $admission->adress }}</p>
-</div>
-
-<!-- Status Field -->
-<div class="form-group">
-    {!! Form::label('status', 'Status:') !!}
-    <p>{{ $admission->status }}</p>
-</div>
-
-<!-- Dateregistered Field -->
-<div class="form-group">
-    {!! Form::label('dateRegistered', 'Dateregistered:') !!}
-    <p>{{ $admission->dateRegistered }}</p>
-</div>
-
-<!-- User Id Field -->
-<div class="form-group">
-    {!! Form::label('user_id', 'User Id:') !!}
-    <p>{{ $admission->user_id }}</p>
-</div>
-
-<!-- Class Id Field -->
-<div class="form-group">
-    {!! Form::label('class_id', 'Class Id:') !!}
-    <p>{{ $admission->class_id }}</p>
-</div>
-
-<!-- Image Field -->
-<div class="form-group">
-    {!! Form::label('image', 'Image:') !!}
-    <p>{{ $admission->image }}</p>
-</div>
- --}}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
  @extends('layouts.app')
@@ -186,7 +62,7 @@
             <h3 class="profile-username text-center">{{$admission->first_name}} {{$admission->last_name}}</h3>
                        <p class="text-muted text-center">
              
-                Professeur(e)
+                        Élève
               
               </p>
 
@@ -205,7 +81,7 @@
                 </li>
               </ul>
 
-              <a href="#timeline" data-toggle="tab" class="btn btn-primary btn-block"><b>Plus</b></a>
+              <a href="#timeline" data-toggle="tab" class="btn btn-primary btn-block"><b> </b></a>
             </div>
             <!-- /.box-body -->
           </div>
@@ -252,42 +128,14 @@
         <div class="col-md-9">
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
-              <li class="active"><a href="#activity" data-toggle="tab">Cours</a></li>
               <li><a href="#timeline" data-toggle="tab">Details</a></li>
               {{-- <li><a href="#settings" data-toggle="tab">Reglages</a></li> --}}
             </ul>
             <div class="tab-content">
-              <div class="active tab-pane" id="activity">
-                <section class="content-header">
-                  <h1>
-                    Ses cours
-                  </h1>
-              </section>
-              <div class="content">
-                  @include('adminlte-templates::common.errors')
-                  <div class="box box-primary">
-                      <div class="box-body"><br><br>
-                        <div class="container">
-                          <div class="row">
-                            <div class="col-md-8">
-                            
-                         @foreach ($schedules as $schedule)
-                          <a class="btn btn-app col-md-2" href="#">
-                          <i class="fa fa-book"></i> {{$schedule->InfoCourse->course_name}} en 
-                          <b style="color: red">{{$schedule->InfoClass->class_name}}</b>
-                          </a>
-                         @endforeach
-                  </div>
-                </div>
-           </div>
-                  
-                      </div>
-                    </div>
-               </div>
-              </div>
+             
         
               <!-- /.tab-pane -->
-              <div class="tab-pane" id="timeline">
+              <div class=" active tab-pane" id="timeline">
                 <!-- The timeline -->
                 {{-- ALL THE DETAILS ABOUT THE student --}}
                     <section class="content-header">
@@ -324,7 +172,18 @@
                                     readonly>
                                     </div>
                                 </div>
-                                
+                                <div class="form-group">
+                                  <label for="inputName"
+                                      class="col-sm-3 control-label">Classe</label>
+                                      <div class="col-sm-9">
+                                          <input type="classe"
+                                              class="form-control"
+                                              id="inputName"
+                                              value="{{$admission->InfoClass->class_name }}"
+                                      readonly>
+                                      </div>
+                                  </div>
+                                  
 
                                 <div class="form-group ">
                                     

@@ -14,8 +14,10 @@ use App\Models\Course;
 use App\Models\Classes;
 use App\Models\Exam;
 use App\Models\Matiere;
+use App\Models\Admission;
 use File;
 use App\Models\ClassAssigning;
+use App\Models\User;
 
 class ExamController extends AppBaseController
 {
@@ -37,13 +39,34 @@ class ExamController extends AppBaseController
     public function index(Request $request)
     {
         $exams = $this->examRepository->all();
-
+        $user = User::find(auth()->user()->id);
         $allMatieres = Matiere::all();
-        $allClassAssignins = ClassAssigning::all();
-
-
-        return view('exams.index', compact('allMatieres','allClassAssignins'))
+        // $allClassAssignins = ClassAssigning::all();
+        if($user->role == 1 ){
+            return view('exams.index', compact('allMatieres','allClassAssignins'))
             ->with('exams', $exams);
+        }
+           //teachers SEE only his courses
+           else  if($user->role == 2 ){
+            // dd('role 2');
+            $exams = Exam::where(['created_by'=> $user->id])->get();
+            return view('exams.index', compact('allMatieres'))
+            ->with('exams', $exams);
+        }
+        else  {
+            $student = Admission::where(['user_id'=> $user->id])->first();
+            $exams = Exam::join('matieres','matieres.matiere_id','=','exams.matiere_id')//qui sont dans l'horaire de l'etudiant
+            ->join('classes','classes.class_id','=','matieres.class_id')
+            ->where('classes.class_id',$student->class_id)
+           ->get();
+           return view('exams.index', compact('allMatieres'))
+           ->with('exams', $exams);
+        }
+
+       
+
+
+     
     }
 
     /**
@@ -146,6 +169,8 @@ class ExamController extends AppBaseController
     { 
         $old_exam = $this->examRepository->find($request->exam_id2);
      
+         if($request->file('filename') != null){
+             
          File::delete(public_path().'/exam_files/'.$old_exam->filename);
           
          $file = $request->file('filename');
@@ -157,6 +182,10 @@ class ExamController extends AppBaseController
              base_path() . '/public/exam_files/', $filename
          );
  
+         }else{
+            $fullPath = $old_exam->filename;
+         }
+     
         
         //  dd($request->all());
         $exam = array(

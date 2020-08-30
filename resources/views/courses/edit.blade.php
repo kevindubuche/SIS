@@ -56,20 +56,21 @@
   </div>
 </div>
 <div class="box-body" style="">
-  <label>Titre de la video</label>
-  <p><input type="text" name="title_video" placeholder="Entrer le titre de la video" 
-    @if($course->title_video)
-    value="{{$course->title_video}}"
-    @endif/></p>
-  <label>Description de la video</label>
+  <label>Lien de la video</label>
+  <p><input type="text" name="videoLink" placeholder="Entrer le titre de la video" 
+    @if($course->videoLink)
+    value="https://www.youtube.com/watch?v={{$course->videoLink}}"
+    @endif
+    /></p>
+  {{-- <label>Description de la video</label>
   <p><textarea name="description_video" cols="30" rows="5" placeholder="Description de la video"></textarea></p>
- 
+  --}}
 </div>
 <!-- /.box-body -->
-<div class="box-footer" style="">
+{{-- <div class="box-footer" style="">
   <label>Importer la video</label>
   <p><input type="file" name="video" accept="video/mp4,video/avi,video/mov,video/gif,video/wmv"/></p>
-</div>
+</div> --}}
 <!-- /.box-footer-->
 </div>
 </div>

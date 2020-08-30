@@ -8,18 +8,14 @@
         <th>Date de création</th>
         <th>Ajouté par</th>
         <th>Document</th>
-        @if(Auth::user()->role < 3)
+        @if(Auth::user()->role == 2)
                 <th >Action</th>
         @endif
             </tr>
         </thead>
         <tbody>
         @foreach($exams as $exam)
-        @if( ($exam->created_by == Auth::user()->id && Auth::user()->role ==2) //si se prof ki kreye l la
-        ||
-        (Auth::user()->role ==3 && $exam->class_id == $exam->GetConnectedStudent(Auth::user()->id)->class_id) //si se elev ki nan klas exam sa pou li a
-        ||
-        (Auth::user()->role == 1))
+      
             <tr>
             <td>{{ $exam->InfoMatiere->titre }}</td>
             <td>{{ $exam->title }}</td>
@@ -32,7 +28,7 @@
                         <button  >Afficher</button>
                 </a>
             </td>
-            @if(Auth::user()->role < 3)
+            @if(Auth::user()->role == 2)
                 <td>
                     {!! Form::open(['route' => ['exams.destroy', $exam->exam_id], 'method' => 'delete']) !!}
                     <div class='btn-group'>
@@ -53,7 +49,6 @@
                 </td>
                 @endif
             </tr>
-            @endif
         @endforeach
         </tbody>
     </table>

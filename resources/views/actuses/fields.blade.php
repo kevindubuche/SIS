@@ -29,11 +29,11 @@ value="{{Auth::id()}}" required>
             </tr>
         </thead>
         <tbody>
-            <label>Visible pour :</label>
+            <label>Adressé à :</label>
           @foreach($classes as $classe)
               <tr>
                 <td><input type="checkbox" name="multiclass[]" value="{{$classe->class_id}}" ></td>
-                <td>{{ $classe->class_name }}</td>
+                <td>{{ $classe->class_name }}</td> 
               </tr>
           @endforeach
         </tbody>

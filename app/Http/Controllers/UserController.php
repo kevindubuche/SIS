@@ -10,11 +10,13 @@ use Illuminate\Http\Request;
 use Flash;
 use Response;
 
-use App\Models\User;
+use App\User;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Teacher;
 use App\Models\Admission;
 use App\Models\ClassScheduling;
+
+
 
 class UserController extends AppBaseController
 {
@@ -35,7 +37,8 @@ class UserController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $users = $this->userRepository->all();
+         $users = $this->userRepository->all();
+        // $users = User::where('role','1')->get();
 
         return view('users.index')
             ->with('users', $users);
@@ -61,7 +64,7 @@ class UserController extends AppBaseController
     public function store(CreateUserRequest $request)
     {
         $input = $request->all();
-//  dd($input);
+        //  dd($input);
         $user = $this->userRepository->create($input);
 
         Flash::success('Utilisateur ajouté avec succès.');
@@ -173,21 +176,23 @@ class UserController extends AppBaseController
         $user = $this->userRepository->find($id);
 
         if (empty($user)) {
-            Flash::error('User not found');
+            Flash::error('Utilisateur non trouvé');
 
             return redirect(route('users.index'));
         }
 
-        $this->userRepository->delete($id);
+        $user->forcedelete($id);
 
-        Flash::success('User deleted successfully.');
+        Flash::success('Utilisateur supprimé avec succès.');
 
         return redirect(route('users.index'));
     }
 
     public function profile($id){
 
-        $schedules =ClassScheduling::where('created_by', $id)->get();
+       if($id != auth()->user()->id  ){
+           return redirect()->back();
+       }
         // dd($schedules);
         //CHECK IF IT IS A TEACHER , A STUDENT OR AN ADMIN
         $testUser = User::where(['id'=> $id])->first(); 
@@ -195,21 +200,18 @@ class UserController extends AppBaseController
          if($testUser->role == 1){
             $user = User::where('id', $id)->first();
         // dd($student);
-        return view('users.profile', compact('user', 'schedules'));
+        return view('users.profile', compact('user'));
         }
         //IF TEACHER
         if($testUser->role == 2){
             $user = Teacher::where('user_id', $id)->first();
         // dd($student);
-        return view('users.profile', compact('user', 'schedules'));
+        return view('users.profile', compact('user'));
         }
            //IF STUDENT
         elseif($testUser->role == 3){
-            $cours =ClassScheduling::all();
             $user = Admission::where('user_id', $id)->first();
-            // dd($student);
-        // dd($student);
-        return view('users.profile', compact('user', 'cours'));
+        return view('users.profile', compact('user'));
         }
         
 

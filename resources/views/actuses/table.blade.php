@@ -6,7 +6,7 @@
         <!-- Box Comment -->
         <div class="box box-widget">
           <div class="box-header with-border">
-            <h3 class="box-title">Publications</h3>
+            <h3 class="box-title">Messages</h3>
             <hr>
 
             @foreach ($actuses as $actu)

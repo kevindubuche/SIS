@@ -82,6 +82,13 @@ class Exam extends Model
         return $this->belongsTo('App\Models\Classes','class_id');
     }
 
+    public function GetClass($examID){
+        return Classes::join('matieres','matieres.class_id','=','classes.class_id')//qui sont dans l'horaire de l'etudiant
+        ->join('exams','exams.matiere_id','=','matieres.matiere_id')
+        ->where('exams.exam_id',$examID)->first();
+ 
+      
+    }
 
     
     public  function GetUser($id){

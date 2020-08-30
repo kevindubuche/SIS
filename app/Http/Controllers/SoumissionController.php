@@ -11,6 +11,7 @@ use Flash;
 use Response;
 use App\Models\Exam;
 use App\Models\Soumission;
+use App\Models\User;
 
 class SoumissionController extends AppBaseController
 {
@@ -34,8 +35,25 @@ class SoumissionController extends AppBaseController
         $soumissions = $this->soumissionRepository->all();
         $exams = Exam::all();
 
-        return view('soumissions.index', compact('exams'))
+        $user = User::find(auth()->user()->id);
+        if($user->role == 1 ){
+            return view('soumissions.index', compact('exams'))
             ->with('soumissions', $soumissions);
+        }
+         //eleves SEE only his soummisions
+         else  if($user->role == 3 ){
+            $soumissions = Soumission::where(['created_by'=> $user->id])->get();
+            return view('soumissions.index', compact('exams'))
+            ->with('soumissions', $soumissions);
+        }
+        else if ($user->role == 2 ) {
+          $soumissions = Soumission::join('exams','exams.exam_id','=','soumissions.exam_id')
+            ->where('exams.created_by',$user->id)
+           ->get();
+           return view('soumissions.index', compact('exams'))
+           ->with('soumissions', $soumissions);
+        }
+
     }
 
     /**

@@ -110,31 +110,35 @@ class CourseController extends AppBaseController
     
     
          
-            if($request->file('video')){
+        //     if($request->file('video')){
             
-                //########### start upload to youtube
-                $video = Youtube::upload($request->file('video')->getPathName(), [
-                  'title'       => $request->input('title_video'),
-                  'description' => $request->input('description_video')
-              ]);
-              // return "Video uploaded successfully. Video ID is ". $video->getVideoId();
-               //########### start upload to youtube
+        //         //########### start upload to youtube
+        //         $video = Youtube::upload($request->file('video')->getPathName(), [
+        //           'title'       => $request->input('title_video'),
+        //           'description' => $request->input('description_video')
+        //       ]);
+        //       // return "Video uploaded successfully. Video ID is ". $video->getVideoId();
+        //        //########### start upload to youtube
   
-         }
-    
+        //  }
+        $matches = array();
+        preg_match(' /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/', $request->videoLink, $matches);
+        $match = $matches && strlen($matches[2]) === 11 ? $matches[2] : null;
+
             $cours = new Course;
             $cours->course_name = $request->course_name;
             $cours->description = $request->description;
             $cours->created_by = $request->created_by;
             $cours->matiere_id = $request->matiere_id;
             $cours->contenu = $request->editordata;
+            $cours->videoLink = $match;
             
-            if($request->file('video')){
-  $cours->videoID = $video->getVideoId();
-      }
-      else{
-        $cours->videoID = ""; 
-      }
+//             if($request->file('video')){
+//   $cours->videoID = $request->link;
+//       }
+//       else{
+//         $cours->videoID = ""; 
+//       }
       if($request->file('filename')){
             $cours->filename = $fullPath;
       }else{
@@ -231,38 +235,45 @@ class CourseController extends AppBaseController
 
         }
 
-        if($request->file('video')){
+    //     if($request->file('video')){
             
-            //########### start upload to youtube
-            $video = Youtube::upload($request->file('video')->getPathName(), [
-              'title'       => $request->input('title_video'),
-              'description' => $request->input('description_video')
-          ]);
-          // return "Video uploaded successfully. Video ID is ". $video->getVideoId();
-           //########### start upload to youtube
+    //         //########### start upload to youtube
+    //         $video = Youtube::upload($request->file('video')->getPathName(), [
+    //           'title'       => $request->input('title_video'),
+    //           'description' => $request->input('description_video')
+    //       ]);
+    //       // return "Video uploaded successfully. Video ID is ". $video->getVideoId();
+    //        //########### start upload to youtube
 
-     }
+    //  }
      
-     if($request->file('video')){
-        $videoID = $video->getVideoId();
+    //  if($request->file('video')){
+    //     $videoID = $video->getVideoId();
     
-            }
-            else{
-              $videoID = ""; 
-            }
+    //         }
+    //         else{
+    //           $videoID = ""; 
+    //         }
     
+    $matches = array();
+    preg_match(' /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/', $request->videoLink, $matches);
+    $match = $matches && strlen($matches[2]) === 11 ? $matches[2] : null;
+
             if($request->file('filename')){
                 $filename = $fullPath;
           }else{
             $filename = "";
           }
+        //   dd($match);
         $newCourse = array(
             'course_name' => $request->course_name,
             'description' => $request->description,
             'created_by' => $request->created_by,
             'filename' => $filename,
             'contenu' => $request->editordata,
-            'videoID' => $videoID
+            'videoLink' => $match
+                   // $course = $this->courseRepository->update($request->all(), $id);
+
         );
         Course::findOrFail($id)->update($newCourse);
         // $course = $this->courseRepository->update($request->all(), $id);
@@ -287,14 +298,14 @@ class CourseController extends AppBaseController
         $course = $this->courseRepository->find($id);
 
         if (empty($course)) {
-            Flash::error('Course not found');
+            Flash::error('Cours introuvable');
 
             return redirect(route('courses.index'));
         }
 
         $this->courseRepository->delete($id);
 
-        Flash::success('Cours supprimee avec succes.');
+        Flash::success('Cours supprimée avec succes.');
 
         return redirect(route('courses.index'));
     }
