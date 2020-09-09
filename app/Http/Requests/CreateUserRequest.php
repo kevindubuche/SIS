@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Https\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Foundation\Https\FormRequest;
 use App\Models\User;
 
 class CreateUserRequest extends FormRequest
