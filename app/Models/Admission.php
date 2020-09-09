@@ -103,7 +103,7 @@ class Admission extends Model
         // 'roll_no' => 'required',
         'first_name' => 'required',
         'last_name' => 'required',
-        'father_name' => 'required',
+        // 'father_name' => 'required',
         // 'father_phone' => 'required',
         'mother_name' => 'required',
         // 'mother_phone' => 'required',

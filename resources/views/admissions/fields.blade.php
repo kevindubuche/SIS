@@ -88,7 +88,7 @@
         id="father_name" 
         class="form-control "
         placeholder="Nom du pere"
-        required
+        
         >
 </div>
 
