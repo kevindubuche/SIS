@@ -3,7 +3,7 @@
     @section('content')
         <section class="content-header">
             <h1>
-                Exam
+                Examen
             </h1>
         </section>
         <div class="content">
@@ -11,7 +11,7 @@
                 <div class="box-body">
                     <div class="row" style="padding-left: 20px">
                         @include('exams.show_fields')
-                        <a href="{{ route('exams.index') }}" class="btn btn-default">Back</a>
+                        <a href="{{ route('exams.index') }}" class="btn btn-default">Retour</a>
                     </div>
                 </div>
             </div>

@@ -79,7 +79,7 @@
                 </li>
               </ul>
 
-              <a href="#timeline" data-toggle="tab" class="btn btn-primary btn-block"><b>Plus</b></a>
+              <a href="#timeline" data-toggle="tab" class="btn btn-primary btn-block"><b> </b></a>
             </div>
             <!-- /.box-body -->
           </div>
@@ -137,43 +137,13 @@
         <div class="col-md-9">
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
-              <li class="active"><a href="#activity" data-toggle="tab">Cours</a></li>
               <li><a href="#timeline" data-toggle="tab">Details</a></li>
               {{-- <li><a href="#settings" data-toggle="tab">Reglages</a></li> --}}
             </ul>
             <div class="tab-content">
-              <div class="active tab-pane" id="activity">
-                <section class="content-header">
-                  <h1>
-                    Ses cours
-                  </h1>
-              </section>
-              <div class="content">
-                  @include('adminlte-templates::common.errors')
-                  <div class="box box-primary">
-                      <div class="box-body"><br><br>
-
-                        <div class="container">
-                          <div class="row">
-                            <div class="col-md-8">
-                            
-                         @foreach ($schedules as $schedule)
-                        <a class="btn btn-app col-md-2" href="#">
-                        <i class="fa fa-book"></i> {{$schedule->InfoCourse->course_name}} en 
-                        <b style="color: red">{{$schedule->InfoClass->class_name}}</b>
-                        </a>
-             
-                         @endforeach
-                  </div>
-                </div>
-           </div>
-                      </div>
-                    </div>
-               </div>
-              </div>
-        
+              
               <!-- /.tab-pane -->
-              <div class="tab-pane" id="timeline">
+              <div class="active tab-pane" id="timeline">
                 <!-- The timeline -->
                 {{-- ALL THE DETAILS ABOUT THE student --}}
                     <section class="content-header">

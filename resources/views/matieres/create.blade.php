@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@if (Auth::user()->role == 1) 
 @section('content')
     <section class="content-header">
         <h1>
@@ -20,4 +20,6 @@
             </div>
         </div>
     </div>
+
 @endsection
+    @endif

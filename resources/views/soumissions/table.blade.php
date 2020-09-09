@@ -2,7 +2,7 @@
     <table id='myTable' class=' display   table table-bordered table-striped table-condensed'>
         <thead>
             <tr>
-                <th>Examen</th>
+            <th>Examen</th>
         <th>Commentaire</th>
         <th>Date de création</th>
         <th>Document</th>
@@ -15,8 +15,7 @@
         <tbody>
         @foreach($soumissions as $soumission)
         {{-- si se elev --}}
-        @if(Auth::user()->role == 3)
-            @if($soumission->created_by == Auth::user()->id)
+     
                 <tr>
                     <td>{{ $soumission->InfoExam->title }}</td>
                 <td>{{ $soumission->description }}</td> 
@@ -26,8 +25,9 @@
                             <button  >Afficher</button>
                     </a>
                 </td>
-                <td>{{ $soumission->created_by }}</td>
-                    <td>
+                <td>{{ $soumission->GetUser($soumission->created_by)->first_name }} {{ $soumission->GetUser($soumission->created_by)->last_name }}</td>
+                @if(Auth::user()->role == 3)   
+                <td>
                         {!! Form::open(['route' => ['soumissions.destroy', $soumission->soumission_id], 'method' => 'delete']) !!}
                         <div class='btn-group'>
                             <a href="{{ route('soumissions.show', [$soumission->soumission_id]) }}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a>
@@ -36,42 +36,8 @@
                         </div>
                         {!! Form::close() !!}
                     </td>
+                    @endif
                 </tr>
-                @endif
-           
-            {{-- si se yon prof --}}
-            @elseif(Auth::user()->role == 2)
-                @if($soumission->GetExam->created_by == Auth::user()->id)
-                <tr>
-                    <td>{{ $soumission->InfoExamexam_id }}</td>
-                <td>{{ $soumission->description }}</td> 
-                <td>{{ $soumission->created_at->format('D. m Y') }}</td>
-                <td>
-                    <a href="/soumission_files/{{$soumission->filename}}" target='_blank'>   
-                            <button  >Afficher</button>
-                    </a>
-                </td>
-                <td>{{ $soumission->created_by }}</td>
-                
-                </tr>
-                @endif  
-                
-                {{-- si se admin --}}
-                @elseif(Auth::user()->role == 1)
-                <tr>
-                    <td>{{ $soumission->InfoExam->title }}</td>
-                <td>{{ $soumission->description }}</td> 
-                <td>{{ $soumission->created_at->format('D. m Y') }}</td>
-                <td>
-                    <a href="/soumission_files/{{$soumission->filename}}" target='_blank'>   
-                            <button  >Afficher</button>
-                    </a>
-                </td>
-                <td>{{ $soumission->created_by }}</td>
-                
-                </tr>
-
-            @endif
         @endforeach
         </tbody>
     </table>

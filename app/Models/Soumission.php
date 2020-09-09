@@ -70,5 +70,15 @@ protected $primaryKey ="soumission_id";
         return $this->belongsTo('App\Models\Exam','exam_id');
      }
      
+
+
+
+     public  function GetUser($id){
+        $user = User::where('users.id',$id)
+           ->first();
+       
+       return $user;
+    }
+
     
 }

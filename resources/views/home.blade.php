@@ -42,8 +42,8 @@
                     <!-- small box -->
                     <div class="small-box bg-green">
                         <div class="inner">
-                        <h3>{{$totalCourses}}</h3>
-                            <p>Total Cours</p>
+                        <h3>{{$totalMatieres}}</h3>
+                            <p>Total Matières</p>
                         </div>
                     </div>
                 </div>
@@ -66,19 +66,17 @@
                     <p><code>Institution Frère André _ Foyer Eveil</code> I.F.A</p>
                  
                          {{-- EVERYBODY CAN ACCESS --}}
-                  <a class="btn btn-app col-md-2" href="{{ url('/home') }}">
-                  <i class="fa fa-home"></i> Accueil
-                  </a>
+             
                   <a class="btn btn-app col-md-2" href="{{ route('matieres.index') }}">
                     <i class="fa fa-book"></i> Matières
                     </a>
                   <a class="btn btn-app col-md-2" href="{{ route('actuses.index') }}">
-                    <i class="fa fa-tags"></i> Publications
+                    <i class="fa fa-envelope"></i> Messages
                     </a>
                  
-                    <a class="btn btn-app col-md-2" href="{{ route('classSchedulings.index') }}">
+                    {{-- <a class="btn btn-app col-md-2" href="{{ route('classSchedulings.index') }}">
                     <i class="fa fa-calendar"></i> Horaire
-                    </a>
+                    </a> --}}
                     
                     
                   
@@ -117,10 +115,10 @@
                               <span class="badge bg-green">300</span>
                               <i class="fa  fa-clock-o"></i> Annee Academique
                               </a> --}}
-                              <a class="btn btn-app col-md-2" href="{{ route('roles.index') }}">
+                              {{-- <a class="btn btn-app col-md-2" href="{{ route('roles.index') }}">
                                 <span class="badge bg-green">{{$totalRoles}}</span>
                                 <i class="fa  fa-user-secret"></i> Roles
-                                </a>
+                                </a> --}}
 
                                 <a class="btn btn-app col-md-2" href="{{ route('teachers.index') }}">
                                   <span class="badge bg-green">{{$totalTeachers}}</span>
@@ -159,10 +157,10 @@
                 <!-- Box Comment -->
                 <div class="box box-widget">
                   <div class="box-header with-border">
-                    <a class="box-title"  href="{{ route('actuses.index') }}">Actualités</a>
+                    <a class="box-title"  href="{{ route('actuses.index') }}">Notifications</a>
                     <hr>
                     <?php $countActu = 0; ?>
-                    @foreach ($allActus as $actu)
+                    @foreach ($actuses as $actu)
                     <?php if($countActu == 2) break; ?>
                     <div class="user-block">
                       @if ($actu->GetUser($actu->created_by)->image)

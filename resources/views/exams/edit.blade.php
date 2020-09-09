@@ -57,7 +57,7 @@
     {!! Form::textarea('description2', null, ['class' => 'form-control']) !!}
 </div>
 
-<input type="file" name="filename" id="filename" required>
+<input type="file" name="filename" id="filename" >
 
 <div class="modal-footer">
     <button type="submit" class="btn btn-primary">Modifier</button>

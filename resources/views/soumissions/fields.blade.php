@@ -25,7 +25,7 @@
         @if(Auth::user()->role ==3)
             @foreach($exams as $exam)
             {{-- si classe exam nan se class elev la --}}
-            @if($exam->class_id == $exam->GetConnectedStudent(Auth::user()->id)->class_id)
+            @if($exam->GetClass($exam->exam_id)->class_id == $exam->GetConnectedStudent(Auth::user()->id)->class_id)
         <option value="{{$exam->exam_id}}">{{$exam->title}}</option>
         @endif
      

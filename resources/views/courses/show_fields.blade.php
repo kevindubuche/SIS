@@ -40,8 +40,8 @@
 <hr>
 </div>
 @endif
-@if($course->videoID)
+@if($course->videoLink)
 <div class="col-md-10">
-    <iframe width="100%" height="460" src="https://www.youtube.com/embed/{{$course->videoID}}" frameborder="0" allowfullscreen></iframe> 
+    <iframe width="100%" height="460" src="https://www.youtube.com/embed/{{$course->videoLink}}" frameborder="0" allowfullscreen></iframe> 
 </div>
 @endif
