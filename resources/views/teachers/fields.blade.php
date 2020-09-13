@@ -15,7 +15,7 @@
             value="{{date('Y-m-d')}}">
 <!-- First Name Field -->
 <div class="form-group col-sm-12">
-    <label>Prénom</label>
+    <label>Prénom*</label>
     <input type="text" 
         name="first_name"
         id="first_name" 
@@ -27,7 +27,7 @@
 
 <!-- Last Name Field -->
 <div class="form-group col-sm-12">
-    <label>Nom</label>
+    <label>Nom*</label>
     <input type="text" 
         name="last_name"
         id="last_name" 
@@ -41,7 +41,7 @@
 <div class="col-sm-12">
     <div class="form-group ">
         <fieldset>
-            <legend for="gender">Sexe</legend>
+            <legend for="gender">Sexe*</legend>
             <table style="width: 100%; margin-top:14px;">
                 <tr style="border-bottom: 1px solid #ccc">
                     <td>
@@ -66,7 +66,7 @@
 <div class="col-sm-12">
     <div class="form-group ">
         <fieldset>
-            <legend for="statusmatrimonial">Status matrimonial</legend>
+            <legend for="statusmatrimonial">Status matrimonial*</legend>
             <table style="width: 100%; margin-top:14px;">
                 <tr style="border-bottom: 1px solod #ccc">
                     <td>
@@ -77,7 +77,7 @@
                     </td>
                     <td>
                         <label>
-                            <input type="radio" name="statusmatrimonial" id="statusmatrimonial" value="1" required checked>
+                            <input type="radio" name="statusmatrimonial" id="statusmatrimonial" value="1" required >
                             Fiancé(e)
                         </label>
                     </td>
@@ -106,13 +106,11 @@
  </div>
    
 
-
-
 <!-- Dob Field -->
 <div class="col-md-12">
     <div class="form-group">
         <div class="input-group">
-            <label> Date de naissance</label>
+            <label> Date de naissance*</label>
             <input type="text"
                  name="dob"
                  id="dob"
@@ -128,7 +126,7 @@
 
 <!-- Phone Field -->
 <div class="form-group col-sm-12">
-    <label> Téléphone</label>
+    <label> Téléphone*</label>
     <input type="text" 
         name="phone"
         id="phone" 
@@ -141,7 +139,7 @@
 
 <!-- Email Field -->
 <div class="form-group col-sm-12">
-    <label>Email</label>
+    <label>Email*</label>
     <input type="text" 
         name="email"
         id="email" 
@@ -162,12 +160,18 @@
 </div>
 
 <div class="form-group col-sm-12">
-    <label>Religion</label>
+    <label>Date d'entrée en service</label>
+    <input type="text" autocomplete="off" class="form-control" name="date_entree_en_service" id="date_entree_en_service"  >
+</div>
+
+<div class="form-group col-sm-12">
+    <label>Religion*</label>
     <input type="text" autocomplete="off" class="form-control" name="religion" id="religion" required >
 </div>
 
 <!-- Course Id Field -->
 <div class="form-group col-sm-12">
+    <label>Option*</label>
     <select class="form-control" name="options" id="options" required>
         <option  disabled="true" selected="false" value="">Option</option>
         <option value="Jardinière">Jardinière</option>
@@ -239,7 +243,7 @@
 
  <script type="text/javascript">
    $('#dob').datetimepicker({
-        format:'YYYY-MM-DD',
+        format:'DD-MM-YYYY',
         useCurrent: false
     })
 

@@ -21,7 +21,8 @@ class CourseRepository extends BaseRepository
         'description',
         'created_by',
          'matiere_id',
-         'contenu'
+         'contenu',
+         'publier'
     ];
     protected $primaryKey = 'course_id';
     /**

@@ -73,9 +73,34 @@
 </div> --}}
 <!-- /.box-footer-->
 </div>
+
+@if(Auth::user()->role == 1)
+<div class="col-sm-4">
+  <div class="form-group " style="background-color: burlywood">
+      <fieldset>
+          <legend for="gender">Accepter la publication (Administrateur)*</legend>
+          <table style="width: 100%; margin-top:14px;">
+              <tr style="border-bottom: 1px solid #ccc">
+                  <td>
+                      <label>
+                          <input type="radio" name="publier" id="pubier" @if($course->publier ==0)  checked @endif value="0" >
+                         <strong style="color: red"> NON </strong>
+                      </label>
+                  </td>
+                  <td>
+                      <label>
+                          <input type="radio" name="publier" id="pubier" @if($course->publier ==1)checked @endif value="1" >
+                          <strong style="color: green"> OUI </strong>
+                      </label>
+                  </td>
+              </tr>
+          </table>
+      </fieldset>
+  </div>  
+</div>
 </div>
 
-
+@endif
 
 
 

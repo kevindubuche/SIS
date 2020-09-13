@@ -362,8 +362,8 @@
                                                         <input type="email"
                                                             class="form-control"
                                                             id="inputName"
-                                                            value="{{date("Y-m-d"),
-                                                        strtotime($admission->dateRegistered)}}"
+                                                            value="{{
+                                                        $admission->dateRegistered->format('d M. Y')}}"
                                                     readonly>
                                                     </div>
                                                 </div>

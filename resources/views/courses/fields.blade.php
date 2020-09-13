@@ -13,6 +13,7 @@
         <div class="modal-body">
 
         <input type="hidden" name="created_by" id="created_by" value=" {{ Auth::user()->id }}" >
+        <input type="hidden" name="publier" id="pubier" value="0" >
 <!-- Course Name Field -->
 <div class="form-group ">
     {!! Form::label('course_name', 'Nom du cours:') !!}

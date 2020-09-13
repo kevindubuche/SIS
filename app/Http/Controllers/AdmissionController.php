@@ -12,7 +12,6 @@ use Response;
 
 use App\Models\Admission;
 use App\Models\Roll;
-use App\Models\Departement;
 use App\Models\Classes;
 use App\Models\User;
 use App\Models\ClassScheduling;
@@ -45,7 +44,7 @@ class AdmissionController extends AppBaseController
         // $batches = Batch::all();
         // $faculties = Faculty::all();
 
-        $departements = Departement::all();
+        // $departements = Departement::all();
        
         $allClasses = Classes::all();
         // $rand_username_password = mt_rand(111609300011 .$student_id+ 1, 
@@ -57,14 +56,14 @@ class AdmissionController extends AppBaseController
 
         if($user->role == 1 ){
             return view('admissions.index',
-            compact('admissions', 'departements', 'allClasses'));
+            compact('admissions', 'allClasses'));
             }
          else  if($user->role == 2 ){
             $admissions = Admission::join('class_assignings','class_assignings.class_id','=','admissions.class_id')//qui sont dans l'horaire de l'etudiant
             ->where('teacher_id',$user->id)
            ->get();
            return view('admissions.index',
-           compact('admissions', 'departements', 'allClasses'));
+           compact('admissions', 'allClasses'));
            }
         
 
@@ -127,7 +126,7 @@ class AdmissionController extends AppBaseController
         $student->dob = $request->dob;
         $student->email = $request->email;
         $student->adress = $request->adress;
-        $student->departement_id = $request->departement_id;
+        // $student->departement_id = $request->departement_id;
          $student->religion = $request->religion;
         $student->class_id = $request->class_id;
         $student->dateregistered = date('Y-m-d');
@@ -222,7 +221,7 @@ class AdmissionController extends AppBaseController
     {
         $roll_id = Roll::max('roll_id');
         // $faculties = Faculty::all();
-        $departements = Departement::all();
+        // $departements = Departement::all();
         $classes = Classes::all();
        
         // $rand_username_password = mt_rand(111609300011 .$student_id+ 1, 
@@ -238,7 +237,7 @@ class AdmissionController extends AppBaseController
         }
 
         return view('admissions.edit',
-        compact( 'departements','classes'))
+        compact( 'classes'))
         ->with('admission', $admission);
     }
 

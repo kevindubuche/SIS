@@ -43,7 +43,7 @@
        
             <h1 >Institution Frère André <h1><h2> Foyer Eveil</h2>
             <p style="color: white;">Bienvenue dans votre école en ligne !<br> 
-              Connectez-vous pour conmmencer.</p>
+              Connectez-vous pour commencer.</p>
          
         
                 <div >

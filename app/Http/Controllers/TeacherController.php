@@ -122,6 +122,7 @@ class TeacherController extends AppBaseController
             $teacher->options = $request->options;
             $teacher->dateRegistered = $request->dateRegistered;
             $teacher->user_id = $user_id;
+            $teacher->date_entree_en_service =$request->date_entree_en_service;
             $teacher->image = $image_name;
             //   dd($teacher->user_id);
             $teacher->save();

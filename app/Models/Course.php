@@ -35,7 +35,8 @@ class Course extends Model
         'created_by',
          'matiere_id',
          'contenu',
-         'videoLink'
+         'videoLink',
+         'publier'
     ];
 
     /**
@@ -49,7 +50,8 @@ class Course extends Model
         'description' => 'string',
         'created_by' => 'integer',
         'matiere_id' => 'integer',
-        'contenu' => 'string'
+        'contenu' => 'string',
+        'publier'=> 'integer'
     ];
 
     /**
@@ -61,7 +63,8 @@ class Course extends Model
         'course_name' => 'required',
         // 'description' => 'required',
         'created_by' => 'required',
-         'matiere_id' => 'required'
+         'matiere_id' => 'required',
+         'publier'=> 'required'
     ];
 
     public  function GetUser($id){

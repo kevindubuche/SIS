@@ -63,13 +63,22 @@ class UserController extends AppBaseController
      */
     public function store(CreateUserRequest $request)
     {
+        try{
         $input = $request->all();
+        // dd($input);
+        $password = Hash::make( $input['password']);
+        $input['password'] = $password;
         //  dd($input);
         $user = $this->userRepository->create($input);
 
         Flash::success('Utilisateur ajouté avec succès.');
 
         return redirect(route('users.index'));
+    }catch(\Illuminate\Database\QueryException $e){
+        //if email  exist before in db redirect with error messages
+        Flash::error('Email existant');
+        return redirect(route('users.index'));
+       }
     }
 
     /**
@@ -111,6 +120,7 @@ class UserController extends AppBaseController
         }
 
         return view('users.edit')->with('user', $user);
+
     }
 
     /**
@@ -123,6 +133,7 @@ class UserController extends AppBaseController
      */
     public function update($id, Request $request)
     {
+        try{
         $input = $request->all();
         // $user = $this->userRepository->find($id);
 
@@ -160,6 +171,11 @@ class UserController extends AppBaseController
         Flash::success('Utilisateur modifié avec succès.');
 
         return redirect(route('users.index'));
+    }catch(\Illuminate\Database\QueryException $e){
+        //if email  exist before in db redirect with error messages
+        Flash::error('Email existant');
+        return redirect(route('users.index'));
+       }
     }
 
     /**

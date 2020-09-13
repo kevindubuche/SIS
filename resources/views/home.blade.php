@@ -21,7 +21,7 @@
                 </div>
           </div>
         </div>
-
+@if(Auth::user()->role != 2)
         <div class="col-md-4">
             <div class="row">
                 <div class="col-lg-10 col-xs-10">
@@ -35,6 +35,7 @@
                 </div>
           </div>
         </div>
+ @endif
 
         <div class="col-md-4">
             <div class="row">
@@ -107,10 +108,7 @@
                             <a class="btn btn-app col-md-2" href="{{ route('semesters.index') }}">
                             <i class="fa fa-calendar-times-o"></i> Etapes
                             </a>
-                              <a class="btn btn-app col-md-2" href="{{ route('departements.index') }}">
-                              <span class="badge bg-yellow">{{$totalDepartements}}</span>
-                              <i class="fa fa-code-fork"></i> Départements
-                              </a>
+                             
                               {{-- <a class="btn btn-app col-md-2" href="{{ route('academics.index') }}">
                               <span class="badge bg-green">300</span>
                               <i class="fa  fa-clock-o"></i> Annee Academique

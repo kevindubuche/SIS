@@ -140,7 +140,21 @@ Route::resource('actuAssignings', 'Actu_assigningController');
 Route::resource('soumissions', 'SoumissionController');
 
 Route::resource('matieres', 'MatiereController');
+
+
+Route::resource('quizQuestions', 'Quiz_questionController')->middleware('ifAdm');
+Route::resource('quizzes', 'QuizController');
+Route::post('/startQuiz','QuizController@startQuiz');
+Route::post('/endQuiz','QuizController@endQuiz');
+
+Route::post('noteQuizzes.store', 'NoteQuizController@store');
+
+Route::resource('noteQuizzes', 'NoteQuizController');
 });
+
+
+
+
 
 
 

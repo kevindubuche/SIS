@@ -123,10 +123,10 @@ class Admission extends Model
     // {
     //     return $this->belongsTo('App\Models\Faculty','faculty_id');
     // }
-    public function InfoDepartement()
-    {
-        return $this->belongsTo('App\Models\Departement','departement_id');
-    }
+    // public function InfoDepartement()
+    // {
+    //     return $this->belongsTo('App\Models\Departement','departement_id');
+    // }
     public function InfoClass()
     {
         return $this->belongsTo('App\Models\Classes','class_id');

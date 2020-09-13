@@ -131,6 +131,7 @@ class CourseController extends AppBaseController
             $cours->created_by = $request->created_by;
             $cours->matiere_id = $request->matiere_id;
             $cours->contenu = $request->editordata;
+            $cours->publier = $request->publier;
             $cours->videoLink = $match;
             
 //             if($request->file('video')){
@@ -212,7 +213,7 @@ class CourseController extends AppBaseController
      */
     public function update($id, Request $request)
     {
-        //    dd($request->editordata);
+           // dd($request->publier);
         $course = $this->courseRepository->find($id);
         if (empty($course)) {
             Flash::error('Cours non trouve');
@@ -271,6 +272,7 @@ class CourseController extends AppBaseController
             'created_by' => $request->created_by,
             'filename' => $filename,
             'contenu' => $request->editordata,
+            'publier' => $request->publier,
             'videoLink' => $match
                    // $course = $this->courseRepository->update($request->all(), $id);
 

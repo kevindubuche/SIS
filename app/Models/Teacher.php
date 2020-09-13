@@ -50,7 +50,8 @@ class Teacher extends Model
         'options',
         'nif',
         'niveau',
-        'image'
+        'image',
+        'date_entree_en_service'
     ];
 
     /**
@@ -74,7 +75,8 @@ class Teacher extends Model
         'nif' => 'string',
         'niveau' => 'string',
         'image' => 'string',
-        'statusmatrimonial' => 'integer'
+        'statusmatrimonial' => 'integer',
+        'date_entree_en_service'=> 'string'
     ];
 
     /**

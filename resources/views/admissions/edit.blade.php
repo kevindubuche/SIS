@@ -30,45 +30,48 @@
             value="{{$admission->user_id}}" required>
 <!-- First Name Field -->
 <div class="form-group col-sm-12">
-    <label>Prenom</label>
+    <label>Prénom*</label>
     <input type="text" 
         name="first_name"
         id="first_name" 
         class="form-control text-capitalize"
         placeholder="Prenom"
         value="{{$admission->first_name}}"
+        required
         >
 </div>
 
 
 <!-- Last fater name Field -->
 <div class="form-group col-sm-12">
-    <label>Nom</label>
+    <label>Nom*</label>
     <input type="text" 
         name="last_name"
         id="last_name" 
         class="form-control text-capitalize"
         placeholder="Nom"
         value="{{$admission->last_name}}"
+        required
         >
 </div>
 
 <!-- email phone Field -->
 <div class="form-group col-sm-12">
-    <label>Email</label>
+    <label>Email*</label>
     <input type="email" 
         name="email"
         id="email" 
         class="form-control "
         placeholder="Email"
         value="{{$admission->email}}"
+        required
         >
 </div>
 
 
 <!-- fathter Name Field -->
 <div class="form-group col-sm-12">
-    <label>Nom complet du pere</label>
+    <label>Nom complet du père</label>
     <input type="text" 
         name="father_name"
         id="father_name" 
@@ -80,7 +83,7 @@
 
 <!-- father phone Field -->
 <div class="form-group col-sm-12">
-    <label>Telephone du pere</label>
+    <label>Téléphone du père</label>
     <input type="text" 
         name="father_phone"
         id="father_phone" 
@@ -92,18 +95,19 @@
 
 <!-- mother Name Field -->
 <div class="form-group col-sm-12">
-    <label>Nom complet de la mere</label>
+    <label>Nom complet de la mère*</label>
     <input type="text" 
         name="mother_name"
         id="mother_name" 
         class="form-control text-capitalize"
         placeholder="Nom complet de la mere"
         value="{{$admission->mother_name}}"
+        required
         >
 </div>
 <!-- mother phone Field -->
 <div class="form-group col-sm-12">
-    <label>Telephone de la mere</label>
+    <label>Téléphone de la mère</label>
     <input type="text" 
         name="mother_phone"
         id="mother_phone" 
@@ -142,7 +146,7 @@
 <div class="col-sm-12">
     <div class="form-group ">
         <fieldset>
-            <legend for="gender">Sexe</legend>
+            <legend for="gender">Sexe*</legend>
             <table style="width: 100%; margin-top:14px;">
                 <tr style="border-bottom: 1px solid #ccc">
                     <td>
@@ -158,7 +162,7 @@
                             <input type="radio" name="gender" id="gender" value="1"
                             {{$admission->gender ==1 ? 'checked' :''}} >
                             
-                               Feminin
+                               Féminin
                         </label>
                     </td>
                 </tr>
@@ -169,7 +173,7 @@
 
  
  <div class="form-group col-sm-12">
-    <label>Religion</label>
+    <label>Religion*</label>
     {{-- {!! Form::label('start_time', 'Start time:') !!} --}}
     <input type="text" autocomplete="off" class="form-control" name="religion" id="religion" value="{{$admission->religion}}" required >
 </div>
@@ -177,7 +181,7 @@
 <!-- Dob Field -->
 <div class="col-md-12">
     <div class="form-group">
-        <label>Date de naissance</label>
+        <label>Date de naissance*</label>
         <div class="input-group">
             <div class="form-group-addon">
                 <i class="fa fa-calendar teacherdob"></i>
@@ -188,6 +192,7 @@
                   class="form-control text-capitalize"
                   placeholder="YY-MM-DD"
                   value="{{$admission->dob}}"
+                  required
                   >
         </div>
     </div>
@@ -197,7 +202,7 @@
  
 <!-- Phone Field -->
 <div class="form-group col-sm-12">
-    <label>Telephone</label>
+    <label>Téléphone</label>
     <input type="text" 
         name="phone"
         id="phone" 
@@ -208,8 +213,8 @@
 
 <!-- departement_id Field -->
 <div class="form-group col-sm-12">
-    <label>Classe</label>
-    <select class="form-control" name="class_id" id="class_id">
+    <label>Classe*</label>
+    <select class="form-control" name="class_id" id="class_id" required>
         <option value="0" selected="true"
             disabled="true">Classe</option>
             @foreach ($classes as $class)
@@ -223,7 +228,7 @@
 </div>
 
 <!-- departement_id Field -->
-<div class="form-group col-sm-12">
+{{-- <div class="form-group col-sm-12">
     <label>Departement</label>
     <select class="form-control" name="departement_id" id="departement_id">
         <option value="0" selected="true"
@@ -236,7 +241,7 @@
           
     </select>
    
-</div>
+</div> --}}
 
 
 

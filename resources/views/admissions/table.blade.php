@@ -4,7 +4,6 @@
             <tr>
         <th></th>
         <th>Nom</th>
-        <th>Département</th>
         <th>Classe</th>
         <th>Sexe</th>
         <th>Email</th>
@@ -25,7 +24,6 @@
                 style="border-radius:50%"/></td>
                 {{-- <td>{{ $admission->roll_no }}</td> --}}
             <td>{{ $admission->first_name }} {{ $admission->last_name }}</td>
-            <td>{{ $admission->InfoDepartement->departement_name }}</td>
             <td>{{ $admission->InfoClass->class_name }}</td>
             <td>@if($admission->gender ==0) Masculin @else Féminin @endif</td>
             <td>{{ $admission->email }}</td>

@@ -2,28 +2,25 @@
 
 namespace App\Repositories;
 
-use App\Models\Departement;
+use App\Models\NoteQuiz;
 use App\Repositories\BaseRepository;
 
 /**
- * Class DepartementRepository
+ * Class NoteQuizRepository
  * @package App\Repositories
- * @version June 29, 2020, 4:39 pm UTC
+ * @version September 12, 2020, 10:28 am UTC
 */
 
-class DepartementRepository extends BaseRepository
+class NoteQuizRepository extends BaseRepository
 {
     /**
      * @var array
      */
     protected $fieldSearchable = [
-        // 'faculty_id',
-        'departement_name',
-        'departement_description'
-        
+        'id_student',
+        'quiz_id',
+        'score'
     ];
-
-    protected $primaryKey ='departement_id';
 
     /**
      * Return searchable fields
@@ -40,6 +37,6 @@ class DepartementRepository extends BaseRepository
      **/
     public function model()
     {
-        return Departement::class;
+        return NoteQuiz::class;
     }
 }

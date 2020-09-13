@@ -11,7 +11,7 @@
         <th>Ajouté par</th>
         <th>Document</th>
         <th>Vidéo</th>
-        @if (Auth::user()->role == 2)
+        @if (Auth::user()->role != 3)
             <th >Actions</th>
         @endif
    
@@ -52,7 +52,7 @@
                 {!! Form::open(['route' => ['courses.destroy', $course->course_id], 'method' => 'delete']) !!}
                 <div class='btn-group'>
                     <a href="{{ route('courses.show', [$course->course_id]) }}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a>
-                    @if(Auth::user()->role == 2)
+                    @if(Auth::user()->role != 3)
                     <a href="{{ route('courses.edit', [$course->course_id]) }}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>
                     {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Vous etes sur?')"]) !!}
                     @endif

@@ -13,7 +13,6 @@ use App\Models\Role;
 use App\User;
 use App\Models\Classes;
 use App\Models\Exam;
-use App\Models\Departement;
 use App\Models\Matiere;
 
 class HomeController extends Controller
@@ -67,7 +66,7 @@ class HomeController extends Controller
         $totalUsers = User::get()->count();
         $totalClasses = Classes::get()->count();
         $totalExamens = Exam::get()->count();
-        $totalDepartements = Departement::get()->count();
+        // $totalDepartements = Departement::get()->count();
 
         $actuses = Actus::all();
           /// #######  start usefull function
@@ -136,6 +135,6 @@ class HomeController extends Controller
         
         return view('home', compact('actuses',
             'totalMatieres', 'totalStudents', 'totalTeachers','totalRoles','totalUsers',
-           'totalClasses','totalExamens','totalDepartements'));
+           'totalClasses','totalExamens'));
     }
 }

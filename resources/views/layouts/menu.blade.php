@@ -39,9 +39,7 @@
     </li>
 
   
-    <li class="{{ Request::is('departements*') ? 'active' : '' }}">
-        <a href="{{ route('departements.index') }}"><i class="fa fa-code-fork"></i><span>Départements</span></a>
-    </li>
+    
 
     <li class="{{ Request::is('classAssignings*') ? 'active' : '' }}">
         <a href="{{ route('classAssignings.index') }}"><i class="fa fa-exchange"></i><span>Assignations</span></a>
@@ -121,3 +119,18 @@
     <a href="{{ route('actuAssignings.index') }}"><i class="fa fa-edit"></i><span>Actu Assignings</span></a>
 </li>
  --}}
+
+ @if(Auth::user()->role == 1)
+<li class="{{ Request::is('quizQuestions*') ? 'active' : '' }}">
+    <a href="{{ route('quizQuestions.index') }}"><i class="fa fa-edit"></i><span>Quiz Questions</span></a>
+</li>
+@endif
+
+<li class="{{ Request::is('quizzes*') ? 'active' : '' }}">
+    <a href="{{ route('quizzes.index') }}"><i class="fa fa-edit"></i><span>Quizzes</span></a>
+</li>
+
+<li class="{{ Request::is('noteQuizzes*') ? 'active' : '' }}">
+    <a href="{{ route('noteQuizzes.index') }}"><i class="fa fa-edit"></i><span>Note Quizzes</span></a>
+</li>
+

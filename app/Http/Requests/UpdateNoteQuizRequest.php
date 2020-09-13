@@ -3,9 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Models\Departement;
+use App\Models\NoteQuiz;
 
-class UpdateDepartementRequest extends FormRequest
+class UpdateNoteQuizRequest extends FormRequest
 {
 
     /**
@@ -25,7 +25,7 @@ class UpdateDepartementRequest extends FormRequest
      */
     public function rules()
     {
-        $rules = Departement::$rules;
+        $rules = NoteQuiz::$rules;
         
         return $rules;
     }

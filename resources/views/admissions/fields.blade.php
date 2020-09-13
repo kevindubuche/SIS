@@ -24,7 +24,7 @@
             value="{{Auth::id()}}" required>
 <!-- First Name Field -->
 <div class="form-group col-sm-4">
-    <label>Prénom</label>
+    <label>Prénom*</label>
     <input type="text" 
         name="first_name"
         id="first_name" 
@@ -37,7 +37,7 @@
 
 <!-- Last fater name Field -->
 <div class="form-group col-sm-4">
-    <label>Nom</label>
+    <label>Nom*</label>
     <input type="text" 
         name="last_name"
         id="last_name" 
@@ -49,7 +49,7 @@
 
 <!-- Class Id Field -->
 <div class="form-group col-sm-4">
-    <label>Classe</label>
+    <label>Classe*</label>
     <select class="form-control" name="class_id" id="class_id" required>
         <option value="0" selected="true" disabled="true">Choisir classe</option>
         @foreach($allClasses as $class)
@@ -60,7 +60,7 @@
 
 <!-- email phone Field -->
 <div class="form-group col-sm-4">
-    <label>Email</label>
+    <label>Email*</label>
     <input type="email" 
         name="email"
         id="email" 
@@ -105,7 +105,7 @@
 
 <!-- mother Name Field -->
 <div class="form-group col-sm-4">
-    <label>Nom de la mère</label>
+    <label>Nom de la mère*</label>
     <input type="text" 
         name="mother_name"
         id="mother_name" 
@@ -152,7 +152,7 @@
 <div class="col-sm-4">
     <div class="form-group ">
         <fieldset>
-            <legend for="gender">Sexe de l'élève</legend>
+            <legend for="gender">Sexe de l'élève*</legend>
             <table style="width: 100%; margin-top:14px;">
                 <tr style="border-bottom: 1px solid #ccc">
                     <td>
@@ -175,7 +175,7 @@
 
 <!-- Dob Field -->
 <div class="col-md-4">
-            <label> Date de naissance</label>
+            <label> Date de naissance*</label>
             <input type="text"
                  name="dob"
                  id="dob"
@@ -190,11 +190,23 @@
 
 
 <div class="form-group col-sm-4">
-    <label>Religion</label>
+    <label>Religion*</label>
     <input type="text" autocomplete="off" class="form-control" name="religion" id="religion" required >
 </div>
 
-<!-- departement_id Field -->
+<!-- Adress Field -->
+<div class="form-group col-sm-4">
+    <b><i class="fa fa-map-marker"></i>Adresse</b>
+             <textarea placeholder="Entrer votre adresse ici"
+             name="adress"
+             id="adress"
+             cols="40" rows="2"
+             class="form-control text-capitalize">
+             </textarea>
+ </div>
+    
+ 
+{{-- <!-- departement_id Field -->
 <div class="form-group col-sm-4">
     <label> Département</label>
     <select class="form-control" name="departement_id" id="departement_id">
@@ -206,7 +218,7 @@
           
     </select>
    
-</div>
+</div> --}}
 
 
 
@@ -243,17 +255,6 @@
     </div>
 </div>
 
-<!-- Adress Field -->
-<div class="form-group col-sm-4">
-   <b><i class="fa fa-map-marker"></i>Adresse</b>
-            <textarea placeholder="Entrer votre adresse ici"
-            name="adress"
-            id="adress"
-            cols="40" rows="2"
-            class="form-control text-capitalize">
-            </textarea>
-</div>
-   
 
 
 <div class="modal-footer ">
