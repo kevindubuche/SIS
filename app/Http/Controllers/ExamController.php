@@ -57,7 +57,7 @@ class ExamController extends AppBaseController
             $student = Admission::where(['user_id'=> $user->id])->first();
             $exams = Exam::join('matieres','matieres.matiere_id','=','exams.matiere_id')//qui sont dans l'horaire de l'etudiant
             ->join('classes','classes.class_id','=','matieres.class_id')
-            ->where('classes.class_id',$student->class_id)
+            ->where(['classes.class_id'=>$student->class_id,'exams.publier'=>'1' ])
            ->get();
            return view('exams.index', compact('allMatieres'))
            ->with('exams', $exams);
@@ -167,8 +167,9 @@ class ExamController extends AppBaseController
      */
     public function update(Request $request)
     { 
+        // dd($request->all());
         $old_exam = $this->examRepository->find($request->exam_id2);
-     
+    //   dd($request->all());
          if($request->file('filename') != null){
              
          File::delete(public_path().'/exam_files/'.$old_exam->filename);
@@ -183,6 +184,7 @@ class ExamController extends AppBaseController
          );
  
          }else{
+            
             $fullPath = $old_exam->filename;
          }
      
@@ -193,7 +195,8 @@ class ExamController extends AppBaseController
             'course_id' => $request->course_id2,
             'title'=> $request->title2,
             'description'=> $request->description2,
-            'filename'=>$fullPath
+            'filename'=>$fullPath,
+            'publier' => $request->publier
         );
 
         // $exam = $this->examRepository->find($id);

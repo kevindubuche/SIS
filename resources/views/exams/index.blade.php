@@ -28,7 +28,7 @@
                        @include('exams.fields')
                    </form>
 
-                   @include('exams.edit')
+
             </div>
         </div>
         <div class="text-center">

@@ -55,16 +55,16 @@
   <div class="box-body" style="">
     <div class="form-group ">
     <label>Lien de la video</label>
-    <p><input type="text" name="videoLink" placeholder="Entrer le lien de la video" /></p>
+    <p><input type="text" name="title_video" placeholder="Entrer le tittre de la video" /></p>
     </div>
-    {{-- <p><textarea name="description_video" cols="30" rows="5" placeholder="Description de la video"></textarea></p>
-    --}}
+    <p><textarea name="description_video" cols="30" rows="5" placeholder="Description de la video"></textarea></p>
+   
   </div>
   <!-- /.box-body -->
-  {{-- <div class="box-footer" style="">
+  <div class="box-footer" style="">
     <label>Importer video</label>
     <input type="file" name="video" accept="video/mp4,video/avi,video/mov,video/gif,video/wmv"/>
-  </div> --}}
+  </div>
   <!-- /.box-footer-->
 </div>
 

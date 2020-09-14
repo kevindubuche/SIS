@@ -126,6 +126,7 @@
 </li>
 @endif
 
+@if(Auth::user()->role !=2)
 <li class="{{ Request::is('quizzes*') ? 'active' : '' }}">
     <a href="{{ route('quizzes.index') }}"><i class="fa fa-edit"></i><span>Quizzes</span></a>
 </li>
@@ -133,4 +134,4 @@
 <li class="{{ Request::is('noteQuizzes*') ? 'active' : '' }}">
     <a href="{{ route('noteQuizzes.index') }}"><i class="fa fa-edit"></i><span>Note Quizzes</span></a>
 </li>
-
+@endif

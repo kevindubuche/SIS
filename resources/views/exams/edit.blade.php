@@ -1,4 +1,4 @@
-
+{{-- 
 <div class="modal fade" id="edit-exam-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
@@ -45,70 +45,9 @@
   </select>
 </div> --}}
 
-<!-- Title Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('title2', 'Titre:') !!}
-    {!! Form::text('title2', null, ['class' => 'form-control']) !!}
-</div>
-
-<!-- Description Field -->
-<div class="form-group col-sm-12 col-lg-12">
-    {!! Form::label('description2', 'Description:') !!}
-    {!! Form::textarea('description2', null, ['class' => 'form-control']) !!}
-</div>
-
-<input type="file" name="filename" id="filename" >
-
-<div class="modal-footer">
-    <button type="submit" class="btn btn-primary">Modifier</button>
-</div>
-        </form>
 
 
-
-
-
-</div>
-
-</form>
-</div>
-</div>
-
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-{{-- @extends('layouts.app')
+ @extends('layouts.app')
 
 @section('content')
     <section class="content-header">
@@ -121,13 +60,14 @@
        <div class="box box-primary">
            <div class="box-body">
                <div class="row">
-                   {!! Form::model($exam, ['route' => ['exams.update', $exam->exam_id], 'method' => 'patch']) !!}
+                   {!! Form::model($exam, ['route' => ['exams.update', $exam->exam_id], 'method' => 'patch',
+                   'enctype'=>'multipart/form-data']) !!}
 
-                        @include('exams.fields')
+                        @include('exams.fieldsEdit')
 
                    {!! Form::close() !!}
                </div>
            </div>
        </div>
    </div>
-@endsection --}}
+@endsection 

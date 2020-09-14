@@ -56,21 +56,21 @@
   </div>
 </div>
 <div class="box-body" style="">
-  <label>Lien de la video</label>
+  <label>Titre de la video</label>
   <p><input type="text" name="videoLink" placeholder="Entrer le titre de la video" 
-    @if($course->videoLink)
+    {{-- @if($course->videoLink)
     value="https://www.youtube.com/watch?v={{$course->videoLink}}"
-    @endif
+    @endif --}}
     /></p>
-  {{-- <label>Description de la video</label>
-  <p><textarea name="description_video" cols="30" rows="5" placeholder="Description de la video"></textarea></p>
-  --}}
+ <label>Description de la video</label>
+  <p><textarea name="description_video" cols="30" rows="5" placeholder="Description de la video"></textarea></p> 
+  
 </div>
 <!-- /.box-body -->
-{{-- <div class="box-footer" style="">
+<div class="box-footer" style="">
   <label>Importer la video</label>
   <p><input type="file" name="video" accept="video/mp4,video/avi,video/mov,video/gif,video/wmv"/></p>
-</div> --}}
+</div>
 <!-- /.box-footer-->
 </div>
 
@@ -105,7 +105,7 @@
 
 
 <div class="modal-footer">
-  <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+  {{-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button> --}}
   {!! Form::submit('Modifier Cours', ['class' => 'btn btn-primary']) !!}
 </div>
 </div>

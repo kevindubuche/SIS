@@ -100,7 +100,14 @@ class MatiereController extends AppBaseController
     public function show($id)
     {
         $matiere = $this->matiereRepository->find($id);
-        $courses = Course::where(['matiere_id'=>$id, 'publier'=>'1'])->get();
+      
+        if(User::find(auth()->user()->role != 1)){
+            $courses = Course::where(['matiere_id'=>$id, 'publier'=>'1'])->get();
+        }
+        else{
+            $courses = Course::where(['matiere_id'=>$id])->get();
+        }
+      
 
         if (empty($matiere)) {
             Flash::error('Matière introuvable');

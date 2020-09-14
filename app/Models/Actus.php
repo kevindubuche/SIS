@@ -87,8 +87,5 @@ class Actus extends Model
     }
 
 
-    public function AllComments()
-    {
-        return $this->hasMany('App\Models\Comments','actu_id');
-    }
+  
 }

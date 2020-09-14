@@ -110,20 +110,20 @@ class CourseController extends AppBaseController
     
     
          
-        //     if($request->file('video')){
+            if($request->file('video')){
             
-        //         //########### start upload to youtube
-        //         $video = Youtube::upload($request->file('video')->getPathName(), [
-        //           'title'       => $request->input('title_video'),
-        //           'description' => $request->input('description_video')
-        //       ]);
-        //       // return "Video uploaded successfully. Video ID is ". $video->getVideoId();
-        //        //########### start upload to youtube
+                //########### start upload to youtube
+                $video = Youtube::upload($request->file('video')->getPathName(), [
+                  'title'       => $request->input('title_video'),
+                  'description' => $request->input('description_video')
+              ]);
+              // return "Video uploaded successfully. Video ID is ". $video->getVideoId();
+               //########### start upload to youtube
   
-        //  }
-        $matches = array();
-        preg_match(' /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/', $request->videoLink, $matches);
-        $match = $matches && strlen($matches[2]) === 11 ? $matches[2] : null;
+         }
+        // $matches = array();
+        // preg_match(' /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/', $request->videoLink, $matches);
+        // $match = $matches && strlen($matches[2]) === 11 ? $matches[2] : null;
 
             $cours = new Course;
             $cours->course_name = $request->course_name;
@@ -132,14 +132,15 @@ class CourseController extends AppBaseController
             $cours->matiere_id = $request->matiere_id;
             $cours->contenu = $request->editordata;
             $cours->publier = $request->publier;
-            $cours->videoLink = $match;
+            // $cours->videoLink = $match;
             
-//             if($request->file('video')){
-//   $cours->videoID = $request->link;
-//       }
-//       else{
-//         $cours->videoID = ""; 
-//       }
+            if($request->file('video')){
+  $cours->videoLink = $video->getVideoId();
+      }
+      else{
+        $cours->videoLink = ""; 
+      }
+
       if($request->file('filename')){
             $cours->filename = $fullPath;
       }else{
@@ -236,29 +237,29 @@ class CourseController extends AppBaseController
 
         }
 
-    //     if($request->file('video')){
+        if($request->file('video')){
             
-    //         //########### start upload to youtube
-    //         $video = Youtube::upload($request->file('video')->getPathName(), [
-    //           'title'       => $request->input('title_video'),
-    //           'description' => $request->input('description_video')
-    //       ]);
-    //       // return "Video uploaded successfully. Video ID is ". $video->getVideoId();
-    //        //########### start upload to youtube
+            //########### start upload to youtube
+            $video = Youtube::upload($request->file('video')->getPathName(), [
+              'title'       => $request->input('title_video'),
+              'description' => $request->input('description_video')
+          ]);
+          // return "Video uploaded successfully. Video ID is ". $video->getVideoId();
+           //########### start upload to youtube
 
-    //  }
+     }
      
-    //  if($request->file('video')){
-    //     $videoID = $video->getVideoId();
+     if($request->file('video')){
+        $videoID = $video->getVideoId();
     
-    //         }
-    //         else{
-    //           $videoID = ""; 
-    //         }
+            }
+            else{
+              $videoID = ""; 
+            }
     
-    $matches = array();
-    preg_match(' /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/', $request->videoLink, $matches);
-    $match = $matches && strlen($matches[2]) === 11 ? $matches[2] : null;
+    // $matches = array();
+    // preg_match(' /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/', $request->videoLink, $matches);
+    // $match = $matches && strlen($matches[2]) === 11 ? $matches[2] : null;
 
             if($request->file('filename')){
                 $filename = $fullPath;
@@ -273,7 +274,7 @@ class CourseController extends AppBaseController
             'filename' => $filename,
             'contenu' => $request->editordata,
             'publier' => $request->publier,
-            'videoLink' => $match
+            'videoLink' => $videoID
                    // $course = $this->courseRepository->update($request->all(), $id);
 
         );

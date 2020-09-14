@@ -36,7 +36,8 @@ class Exam extends Model
         'title',
         'description',
         'filename',
-        'created_by'
+        'created_by',
+        'publier'
     ];
 
     /**
@@ -50,7 +51,8 @@ class Exam extends Model
         'title' => 'string',
         'description' => 'string',
         'filename' => 'string',
-        'created_by' => 'integer'
+        'created_by' => 'integer',
+        'publier' => 'integer'
     ];
 
     /**
@@ -64,6 +66,7 @@ class Exam extends Model
         'description' => 'required',
         'filename' => 'required',
         'created_by' => 'required'
+        
     ];
 
     public function InfoMatiere()

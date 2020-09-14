@@ -11,6 +11,9 @@
         <th>Ajouté par</th>
         <th>Document</th>
         <th>Vidéo</th>
+        @if (Auth::user()->role == 1)
+            <th >Publié</th>
+        @endif
         @if (Auth::user()->role != 3)
             <th >Actions</th>
         @endif
@@ -47,7 +50,15 @@
             @else
             <td > Pas de vidéo</td>
             @endif
-        
+            @if (Auth::user()->role == 1)
+            <td >
+                @if($course->publier == 1)
+                <span class=" btn btn-success btn-sm glyphicon glyphicon-ok" ></span>
+                @else
+                <span class=" btn btn-danger btn-sm glyphicon glyphicon-remove" ></span>
+                @endif
+                 </td>
+            @endif
             <td>
                 {!! Form::open(['route' => ['courses.destroy', $course->course_id], 'method' => 'delete']) !!}
                 <div class='btn-group'>
@@ -86,7 +97,7 @@
         </tbody>
     </table>
 </div>
-
+</div>
 
 @push('scripts')
 <script>

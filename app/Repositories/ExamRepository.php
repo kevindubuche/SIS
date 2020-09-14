@@ -21,7 +21,8 @@ class ExamRepository extends BaseRepository
         'title',
         'description',
         'filename',
-        'created_by'
+        'created_by',
+        'publier'
     ];
     protected $primaryKey='exam_id';
     /**

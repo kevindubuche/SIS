@@ -107,10 +107,10 @@ class ActusController extends AppBaseController
      */
     public function create()
     {
-        if(auth()->user()->role == 2){
-        $classes = Classes::join('class_assignings','class_assignings.class_id','=','classes.class_id')//qui sont dans l'horaire de l'etudiant
-        ->where('class_assignings.teacher_id',auth()->user()->id)->get();
-        // $classes = Classes::all();
+        if(auth()->user()->role == 1){
+        // $classes = Classes::join('class_assignings','class_assignings.class_id','=','classes.class_id')//qui sont dans l'horaire de l'etudiant
+        // ->where('class_assignings.teacher_id',auth()->user()->id)->get();
+         $classes = Classes::all();
         return view('actuses.create', compact('classes')); 
         }
         return redirect()->back();
@@ -189,12 +189,12 @@ class ActusController extends AppBaseController
      * @return Response
      */
     public function edit($id)
-    {    if(auth()->user()->role == 2){
+    {    if(auth()->user()->role == 1){
         $actus = $this->actusRepository->find($id);
     
-            $classes = Classes::join('class_assignings','class_assignings.class_id','=','classes.class_id')//qui sont dans l'horaire de l'etudiant
-            ->where('class_assignings.teacher_id',auth()->user()->id)->get();
-        // $classes = Classes::all();
+            // $classes = Classes::join('class_assignings','class_assignings.class_id','=','classes.class_id')//qui sont dans l'horaire de l'etudiant
+            // ->where('class_assignings.teacher_id',auth()->user()->id)->get();
+         $classes = Classes::all();
 
         if (empty($actus)) {
             Flash::error('Actus not found');

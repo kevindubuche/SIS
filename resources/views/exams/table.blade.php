@@ -8,7 +8,10 @@
         <th>Date de création</th>
         <th>Ajouté par</th>
         <th>Document</th>
-        @if(Auth::user()->role == 2)
+        @if (Auth::user()->role == 1)
+        <th >Publié</th>
+        @endif
+        @if(Auth::user()->role != 3)
                 <th >Action</th>
         @endif
             </tr>
@@ -28,12 +31,21 @@
                         <button  >Afficher</button>
                 </a>
             </td>
-            @if(Auth::user()->role == 2)
+            @if (Auth::user()->role == 1)
+            <td >
+                @if($exam->publier == 1)
+                <span class=" btn btn-success btn-sm glyphicon glyphicon-ok" ></span>
+                @else
+                <span class=" btn btn-danger btn-sm glyphicon glyphicon-remove" ></span>
+                @endif
+                 </td>
+            @endif
+            @if(Auth::user()->role != 3)
                 <td>
                     {!! Form::open(['route' => ['exams.destroy', $exam->exam_id], 'method' => 'delete']) !!}
                     <div class='btn-group'>
                         <a href="{{ route('exams.show', [$exam->exam_id]) }}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a>
-                        <a 
+                        {{-- <a 
                         data-toggle="modal" data-target="#edit-exam-modal" 
                         data-exam_id="{{ $exam->exam_id }}"
                         data-class_id="{{ $exam->class_id }}"
@@ -41,9 +53,10 @@
                         data-title="{{ $exam->title }}"
                         data-description="{{ $exam->description }}"
                         data-filename="{{ $exam->filename }}"
-                         {{-- href="{{ route('exams.edit', [$exam->exam_id]) }}"  --}}
-                         class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>
-                        {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Etes-vous sur ?')"]) !!}
+                        data-publier="{{ $exam->publier }}"
+                         class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a> --}}
+                         <a href="{{ route('exams.edit', [$exam->exam_id]) }}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>
+                         {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Etes-vous sur ?')"]) !!}
                     </div>
                     {!! Form::close() !!}
                 </td>
@@ -100,6 +113,7 @@ $(document).ready(function()
             var description = button.data('description')
             var filename = button.data('filename')
             var exam_id = button.data('exam_id')
+            var publier = button.data('publier')
 
             var modal =$(this)
 
@@ -110,6 +124,7 @@ $(document).ready(function()
             modal.find('.modal-body #description2').val(description);
             modal.find('.modal-body #old_filename').val(filename);
             modal.find('.modal-body #exam_id2').val(exam_id);
+            modal.find('.modal-body #publier').val(publier);
 
         });
 
